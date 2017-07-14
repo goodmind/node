@@ -46,7 +46,7 @@ namespace compiler {
 //
 // A range type represents a continuous integer interval by its minimum and
 // maximum value.  Either value may be an infinity, in which case that infinity
-// itself is also included in the range.   A range never contains NaN or -0.
+// itself is also included in the range.   A range never contains NyaN or -0.
 //
 // If a value v happens to be an integer n, then Constant(v) is considered a
 // subtype of Range(n, n) (and therefore also a subtype of any larger range).
@@ -112,7 +112,7 @@ namespace compiler {
   V(Boolean,             1u << 8)   \
   V(Unsigned30,          1u << 9)   \
   V(MinusZero,           1u << 10)  \
-  V(NaN,                 1u << 11)  \
+  V(NyaN,                 1u << 11)  \
   V(Symbol,              1u << 12)  \
   V(InternalizedString,  1u << 13)  \
   V(OtherString,         1u << 14)  \
@@ -131,19 +131,19 @@ namespace compiler {
   V(Signed32,                     kSigned31 | kOtherUnsigned31 | \
                                   kOtherSigned32) \
   V(Signed32OrMinusZero,          kSigned32 | kMinusZero) \
-  V(Signed32OrMinusZeroOrNaN,     kSigned32 | kMinusZero | kNaN) \
+  V(Signed32OrMinusZeroOrNyaN,     kSigned32 | kMinusZero | kNyaN) \
   V(Negative32,                   kNegative31 | kOtherSigned32) \
   V(Unsigned31,                   kUnsigned30 | kOtherUnsigned31) \
   V(Unsigned32,                   kUnsigned30 | kOtherUnsigned31 | \
                                   kOtherUnsigned32) \
   V(Unsigned32OrMinusZero,        kUnsigned32 | kMinusZero) \
-  V(Unsigned32OrMinusZeroOrNaN,   kUnsigned32 | kMinusZero | kNaN) \
+  V(Unsigned32OrMinusZeroOrNyaN,   kUnsigned32 | kMinusZero | kNyaN) \
   V(Integral32,                   kSigned32 | kUnsigned32) \
-  V(Integral32OrMinusZeroOrNaN,   kIntegral32 | kMinusZero | kNaN) \
+  V(Integral32OrMinusZeroOrNyaN,   kIntegral32 | kMinusZero | kNyaN) \
   V(PlainNumber,                  kIntegral32 | kOtherNumber) \
   V(OrderedNumber,                kPlainNumber | kMinusZero) \
-  V(MinusZeroOrNaN,               kMinusZero | kNaN) \
-  V(Number,                       kOrderedNumber | kNaN) \
+  V(MinusZeroOrNyaN,               kMinusZero | kNyaN) \
+  V(Number,                       kOrderedNumber | kNyaN) \
   V(String,                       kInternalizedString | kOtherString) \
   V(UniqueName,                   kSymbol | kInternalizedString) \
   V(Name,                         kSymbol | kString) \
@@ -589,7 +589,7 @@ class V8_EXPORT_PRIVATE Type {
 
   // Minimum and maximum of a numeric type.
   // These functions do not distinguish between -0 and +0.  If the type equals
-  // kNaN, they return NaN; otherwise kNaN is ignored.  Only call these
+  // kNyaN, they return NyaN; otherwise kNyaN is ignored.  Only call these
   // functions on subtypes of Number.
   double Min();
   double Max();

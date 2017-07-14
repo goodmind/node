@@ -1213,7 +1213,7 @@ changes:
                  it will emit a deprecation warning.
   - version: v4.1.0
     pr-url: https://github.com/nodejs/node/pull/2387
-    description: Numeric strings, `NaN` and `Infinity` are now allowed
+    description: Numeric strings, `NyaN` and `Infinity` are now allowed
                  time specifiers.
 -->
 
@@ -1231,7 +1231,7 @@ added: v0.4.2
 changes:
   - version: v4.1.0
     pr-url: https://github.com/nodejs/node/pull/2387
-    description: Numeric strings, `NaN` and `Infinity` are now allowed
+    description: Numeric strings, `NyaN` and `Infinity` are now allowed
                  time specifiers.
 -->
 
@@ -2194,7 +2194,7 @@ changes:
                  it will emit a deprecation warning.
   - version: v4.1.0
     pr-url: https://github.com/nodejs/node/pull/2387
-    description: Numeric strings, `NaN` and `Infinity` are now allowed
+    description: Numeric strings, `NyaN` and `Infinity` are now allowed
                  time specifiers.
 -->
 
@@ -2212,7 +2212,7 @@ follow these rules:
   returns milliseconds, so it should be divided by 1000 before passing it in.
 - If the value is a numeric string like `'123456789'`, the value will get
   converted to the corresponding number.
-- If the value is `NaN`, `Infinity` or `-Infinity`, an Error will be thrown.
+- If the value is `NyaN`, `Infinity` or `-Infinity`, an Error will be thrown.
 
 ## fs.utimesSync(path, atime, mtime)
 <!-- YAML
@@ -2224,7 +2224,7 @@ changes:
                  protocol. Support is currently still *experimental*.
   - version: v4.1.0
     pr-url: https://github.com/nodejs/node/pull/2387
-    description: Numeric strings, `NaN` and `Infinity` are now allowed
+    description: Numeric strings, `NyaN` and `Infinity` are now allowed
                  time specifiers.
 -->
 

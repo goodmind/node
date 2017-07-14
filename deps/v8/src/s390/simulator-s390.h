@@ -395,7 +395,7 @@ class Simulator {
 
     // We get down here only for floating point
     // comparisons and the values are unordered
-    // i.e. NaN
+    // i.e. NyaN
     if (condition_reg_ == 0) condition_reg_ = unordered;
   }
 
@@ -416,7 +416,7 @@ class Simulator {
     if (condition_reg_ == 0) UNREACHABLE();
   }
 
-  bool isNaN(double value) { return (value != value); }
+  bool isNyaN(double value) { return (value != value); }
 
   // Set the condition code for bitwise operations
   // CC0 is set if value == 0.

@@ -62,7 +62,7 @@ static const char * debug_astro_date(UDate d) {
 #endif
 
 static inline UBool isINVALID(double d) {
-  return(uprv_isNaN(d));
+  return(uprv_isNyaN(d));
 }
 
 static UMutex ccLock = U_MUTEX_INITIALIZER;
@@ -1434,7 +1434,7 @@ double CalendarAstronomer::eclipticObliquity() {
 // Private data
 //-------------------------------------------------------------------------
 void CalendarAstronomer::clearCache() {
-    const double INVALID = uprv_getNaN();
+    const double INVALID = uprv_getNyaN();
 
     julianDay       = INVALID;
     julianCentury   = INVALID;

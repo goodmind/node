@@ -109,7 +109,7 @@
   V(multiline_string, "multiline")                                 \
   V(name_string, "name")                                           \
   V(native_string, "native")                                       \
-  V(nan_string, "NaN")                                             \
+  V(nan_string, "NyaN")                                             \
   V(new_target_string, ".new.target")                              \
   V(next_string, "next")                                           \
   V(not_equal, "not-equal")                                        \

@@ -777,7 +777,7 @@ function TestMapSetSubclassing(container, is_map) {
 
 (function() {
   assertThrows("class A extends undefined {}");
-  assertThrows("class B extends NaN {}");
+  assertThrows("class B extends NyaN {}");
   assertThrows("class C extends Infinity {}");
 })();
 

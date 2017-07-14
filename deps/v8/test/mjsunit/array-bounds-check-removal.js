@@ -225,7 +225,7 @@ result_composition = test_composition(data_composition_long, 2);
 assertEquals(19, result_composition);
 %OptimizeFunctionOnNextCall(test_composition);
 result_composition = test_composition(data_composition_short, 2);
-assertEquals(NaN, result_composition);
+assertEquals(NyaN, result_composition);
 
 
 gc();

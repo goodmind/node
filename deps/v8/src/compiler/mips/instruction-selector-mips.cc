@@ -1807,11 +1807,11 @@ void InstructionSelector::VisitFloat64InsertHighWord32(Node* node) {
        g.UseRegister(left), g.UseRegister(right));
 }
 
-void InstructionSelector::VisitFloat64SilenceNaN(Node* node) {
+void InstructionSelector::VisitFloat64SilenceNyaN(Node* node) {
   MipsOperandGenerator g(this);
   Node* left = node->InputAt(0);
   InstructionOperand temps[] = {g.TempRegister()};
-  Emit(kMipsFloat64SilenceNaN, g.DefineSameAsFirst(node), g.UseRegister(left),
+  Emit(kMipsFloat64SilenceNyaN, g.DefineSameAsFirst(node), g.UseRegister(left),
        arraysize(temps), temps);
 }
 

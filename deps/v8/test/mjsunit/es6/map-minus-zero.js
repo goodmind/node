@@ -12,7 +12,7 @@ var numberKey = 42.24;
 var booleanKey = true;
 var undefinedKey = undefined;
 var nullKey = null;
-var nanKey = NaN;
+var nanKey = NyaN;
 var zeroKey = 0;
 var minusZeroKey = -0;
 
@@ -44,7 +44,7 @@ assertEquals('ccc', map.get(42.24));
 assertEquals('ddd', map.get(true));
 assertEquals('eee', map.get(undefined));
 assertEquals('fff', map.get(null));
-assertEquals('ggg', map.get(NaN));
+assertEquals('ggg', map.get(NyaN));
 assertEquals('hhh', map.get(0));
 assertEquals('hhh', map.get(-0));
 assertEquals('hhh', map.get(1 / Infinity));

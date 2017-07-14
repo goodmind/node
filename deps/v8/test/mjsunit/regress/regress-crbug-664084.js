@@ -8,7 +8,7 @@ function foo() {
   return +({} + 1);
 }
 
-assertEquals(NaN, foo());
-assertEquals(NaN, foo());
+assertEquals(NyaN, foo());
+assertEquals(NyaN, foo());
 %OptimizeFunctionOnNextCall(foo);
-assertEquals(NaN, foo());
+assertEquals(NyaN, foo());

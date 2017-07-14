@@ -26,7 +26,7 @@ Test the JavaScript ToNumber operation.
 On success, you will see a series of "PASS" messages, followed by "TEST COMPLETE".
 
 
-PASS +undefined is NaN
+PASS +undefined is NyaN
 PASS +null is 0
 PASS +false is 0
 PASS +true is 1
@@ -35,36 +35,36 @@ PASS +'' is 0
 PASS +' ' is 0
 PASS +' 1' is 1
 PASS +'1 ' is 1
-PASS +'x1' is NaN
-PASS +'1x' is NaN
+PASS +'x1' is NyaN
+PASS +'1x' is NyaN
 PASS +'0x1' is 1
-PASS +'1x0' is NaN
-PASS +(nullCharacter + '1') is NaN
-PASS +('1' + nullCharacter) is NaN
-PASS +('1' + nullCharacter + '1') is NaN
-PASS +(nonASCIICharacter + '1') is NaN
-PASS +('1' + nonASCIICharacter) is NaN
-PASS +('1' + nonASCIICharacter + '1') is NaN
-PASS +('1' + nonASCIINonSpaceCharacter) is NaN
-PASS +(nonASCIINonSpaceCharacter + '1') is NaN
-PASS +('1' + nonASCIINonSpaceCharacter + '1') is NaN
-PASS +(illegalUTF16Sequence + '1') is NaN
-PASS +('1' + illegalUTF16Sequence) is NaN
-PASS +('1' + illegalUTF16Sequence + '1') is NaN
-PASS +'inf' is NaN
-PASS +'infinity' is NaN
-PASS +'Inf' is NaN
-PASS +'+inf' is NaN
-PASS +'+infinity' is NaN
-PASS +'+Inf' is NaN
-PASS +'-inf' is NaN
-PASS +'-infinity' is NaN
-PASS +'-Inf' is NaN
+PASS +'1x0' is NyaN
+PASS +(nullCharacter + '1') is NyaN
+PASS +('1' + nullCharacter) is NyaN
+PASS +('1' + nullCharacter + '1') is NyaN
+PASS +(nonASCIICharacter + '1') is NyaN
+PASS +('1' + nonASCIICharacter) is NyaN
+PASS +('1' + nonASCIICharacter + '1') is NyaN
+PASS +('1' + nonASCIINonSpaceCharacter) is NyaN
+PASS +(nonASCIINonSpaceCharacter + '1') is NyaN
+PASS +('1' + nonASCIINonSpaceCharacter + '1') is NyaN
+PASS +(illegalUTF16Sequence + '1') is NyaN
+PASS +('1' + illegalUTF16Sequence) is NyaN
+PASS +('1' + illegalUTF16Sequence + '1') is NyaN
+PASS +'inf' is NyaN
+PASS +'infinity' is NyaN
+PASS +'Inf' is NyaN
+PASS +'+inf' is NyaN
+PASS +'+infinity' is NyaN
+PASS +'+Inf' is NyaN
+PASS +'-inf' is NyaN
+PASS +'-infinity' is NyaN
+PASS +'-Inf' is NyaN
 PASS +'Infinity' is Infinity
 PASS +'+Infinity' is Infinity
 PASS +'-Infinity' is -Infinity
-PASS +'++1' is NaN
-PASS +'AB' is NaN
+PASS +'++1' is NyaN
+PASS +'AB' is NyaN
 PASS +'0xAB' is 171
 PASS +'1e1' is 10
 PASS +'1E1' is 10
@@ -140,30 +140,30 @@ PASS +('1' + hairSpace) is 1
 PASS +('1' + narrowNoBreakSpace) is 1
 PASS +('1' + mediumMathematicalSpace) is 1
 PASS +('1' + ideographicSpace) is 1
-PASS +('1' + tab + '1') is NaN
-PASS +('1' + nbsp + '1') is NaN
-PASS +('1' + ff + '1') is NaN
-PASS +('1' + vt + '1') is NaN
-PASS +('1' + cr + '1') is NaN
-PASS +('1' + lf + '1') is NaN
-PASS +('1' + ls + '1') is NaN
-PASS +('1' + ps + '1') is NaN
-PASS +('1' + oghamSpaceMark + '1') is NaN
-PASS +('1' + mongolianVowelSeparator + '1') is NaN
-PASS +('1' + enQuad + '1') is NaN
-PASS +('1' + emQuad + '1') is NaN
-PASS +('1' + enSpace + '1') is NaN
-PASS +('1' + emSpace + '1') is NaN
-PASS +('1' + threePerEmSpace + '1') is NaN
-PASS +('1' + fourPerEmSpace + '1') is NaN
-PASS +('1' + sixPerEmSpace + '1') is NaN
-PASS +('1' + figureSpace + '1') is NaN
-PASS +('1' + punctuationSpace + '1') is NaN
-PASS +('1' + thinSpace + '1') is NaN
-PASS +('1' + hairSpace + '1') is NaN
-PASS +('1' + narrowNoBreakSpace + '1') is NaN
-PASS +('1' + mediumMathematicalSpace + '1') is NaN
-PASS +('1' + ideographicSpace + '1') is NaN
+PASS +('1' + tab + '1') is NyaN
+PASS +('1' + nbsp + '1') is NyaN
+PASS +('1' + ff + '1') is NyaN
+PASS +('1' + vt + '1') is NyaN
+PASS +('1' + cr + '1') is NyaN
+PASS +('1' + lf + '1') is NyaN
+PASS +('1' + ls + '1') is NyaN
+PASS +('1' + ps + '1') is NyaN
+PASS +('1' + oghamSpaceMark + '1') is NyaN
+PASS +('1' + mongolianVowelSeparator + '1') is NyaN
+PASS +('1' + enQuad + '1') is NyaN
+PASS +('1' + emQuad + '1') is NyaN
+PASS +('1' + enSpace + '1') is NyaN
+PASS +('1' + emSpace + '1') is NyaN
+PASS +('1' + threePerEmSpace + '1') is NyaN
+PASS +('1' + fourPerEmSpace + '1') is NyaN
+PASS +('1' + sixPerEmSpace + '1') is NyaN
+PASS +('1' + figureSpace + '1') is NyaN
+PASS +('1' + punctuationSpace + '1') is NyaN
+PASS +('1' + thinSpace + '1') is NyaN
+PASS +('1' + hairSpace + '1') is NyaN
+PASS +('1' + narrowNoBreakSpace + '1') is NyaN
+PASS +('1' + mediumMathematicalSpace + '1') is NyaN
+PASS +('1' + ideographicSpace + '1') is NyaN
 PASS successfullyParsed is true
 
 TEST COMPLETE

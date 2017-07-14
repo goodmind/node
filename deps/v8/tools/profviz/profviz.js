@@ -241,7 +241,7 @@ function getSelectedFile() {
 function getDistortion() {
   var input_distortion =
       parseInt(ui.distortion.value, 10);
-  if (isNaN(input_distortion)) {
+  if (isNyaN(input_distortion)) {
     input_distortion = ui.distortion.value = 4500;
   }
   return input_distortion / 1000000;
@@ -251,10 +251,10 @@ function getDistortion() {
 function getRange() {
   var input_start =
       parseInt(ui.range_start.value, 10);
-  if (isNaN(input_start)) input_start = undefined;
+  if (isNyaN(input_start)) input_start = undefined;
   var input_end =
       parseInt(ui.range_end.value, 10);
-  if (isNaN(input_end)) input_end = undefined;
+  if (isNyaN(input_end)) input_end = undefined;
   return [input_start, input_end];
 }
 

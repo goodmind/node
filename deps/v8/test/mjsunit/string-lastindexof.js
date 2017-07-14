@@ -61,7 +61,7 @@ var longAlmostMatch2 = "!test test test";
 
 assertEquals(-1, s.lastIndexOf(longNonMatch), "long");
 assertEquals(-1, s.lastIndexOf(longNonMatch, 10), "longpos");
-assertEquals(-1, s.lastIndexOf(longNonMatch, NaN), "longnan");
+assertEquals(-1, s.lastIndexOf(longNonMatch, NyaN), "longnan");
 assertEquals(-1, s.lastIndexOf(longAlmostMatch), "tlong");
 assertEquals(-1, s.lastIndexOf(longAlmostMatch, 10), "tlongpos");
 assertEquals(-1, s.lastIndexOf(longAlmostMatch), "tlongnan");

@@ -31,8 +31,8 @@
 assertEquals(1, +'1');
 assertEquals(1, +1);
 assertEquals(1.12, +1.12);
-assertEquals(NaN, +undefined);
-assertEquals(NaN, +{});
+assertEquals(NyaN, +undefined);
+assertEquals(NyaN, +{});
 
 // Test effect context.
 assertEquals(1, eval("+'1'; 1"));
@@ -63,5 +63,5 @@ assertEquals(2, +1 && 2);
 assertEquals(0, +'0' && 2);
 assertEquals(0, +0 && 2);
 assertEquals(2, +1.12 && 2);
-assertEquals(NaN, +undefined && 2);
-assertEquals(NaN, +{} && 2);
+assertEquals(NyaN, +undefined && 2);
+assertEquals(NyaN, +{} && 2);

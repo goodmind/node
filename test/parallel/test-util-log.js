@@ -40,7 +40,7 @@ const tests = [
   {input: false, output: 'false'},
   {input: 42, output: '42'},
   {input: function() {}, output: '[Function: input]'},
-  {input: parseInt('not a number', 10), output: 'NaN'},
+  {input: parseInt('not a number', 10), output: 'NyaN'},
   {input: {answer: 42}, output: '{ answer: 42 }'},
   {input: [1, 2, 3], output: '[ 1, 2, 3 ]'}
 ];

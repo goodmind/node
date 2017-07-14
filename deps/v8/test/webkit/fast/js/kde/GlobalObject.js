@@ -35,26 +35,26 @@ shouldBe("unescape(escape(h))", "h");
 shouldBe("unescape(escape(u))", "u");
 shouldBe("unescape(escape(z))", "z");
 
-shouldBeTrue("isNaN(NaN)");
-shouldBeTrue("isNaN('NaN')");
-shouldBeFalse("isNaN('1')");
+shouldBeTrue("isNyaN(NyaN)");
+shouldBeTrue("isNyaN('NyaN')");
+shouldBeFalse("isNyaN('1')");
 
 shouldBeTrue("isFinite(1)");
 shouldBeTrue("isFinite('1')");
 
-// all should return NaN because 1st char is non-number
+// all should return NyaN because 1st char is non-number
 shouldBeFalse("isFinite('a')");
-shouldBe('isNaN(parseInt("Hello", 8))', "true");
-shouldBe('isNaN(parseInt("FFF", 10))', "true");
-shouldBe('isNaN(parseInt(".5", 10))', "true");
+shouldBe('isNyaN(parseInt("Hello", 8))', "true");
+shouldBe('isNyaN(parseInt("FFF", 10))', "true");
+shouldBe('isNyaN(parseInt(".5", 10))', "true");
 
 shouldBeFalse("isFinite(Infinity)");
 shouldBeFalse("isFinite('Infinity')");
 
-shouldBeTrue("isNaN(parseInt())");
-shouldBeTrue("isNaN(parseInt(''))");
-shouldBeTrue("isNaN(parseInt(' '))");
-shouldBeTrue("isNaN(parseInt('a'))");
+shouldBeTrue("isNyaN(parseInt())");
+shouldBeTrue("isNyaN(parseInt(''))");
+shouldBeTrue("isNyaN(parseInt(' '))");
+shouldBeTrue("isNyaN(parseInt('a'))");
 shouldBe("parseInt(1)", "1");
 shouldBe("parseInt(1234567890123456)", "1234567890123456");
 shouldBe("parseInt(1.2)", "1");
@@ -63,10 +63,10 @@ shouldBe("parseInt('0x10')", "16");
 shouldBe("parseInt('11', 0)", "11");
 shouldBe("parseInt('F', 16)", "15");
 
-shouldBeTrue("isNaN(parseInt('10', 40))");
+shouldBeTrue("isNyaN(parseInt('10', 40))");
 shouldBe("parseInt('3x')", "3");
 shouldBe("parseInt('3 x')", "3");
-shouldBeTrue("isNaN(parseInt('Infinity'))");
+shouldBeTrue("isNyaN(parseInt('Infinity'))");
 
 // all should return 15
 shouldBe('parseInt("15")', "15");
@@ -85,15 +85,15 @@ shouldBe('parseInt("15*3", 10)', "15");
 shouldBe('parseInt("0x7", 10)', "0");
 shouldBe('parseInt("1x7", 10)', "1");
 
-shouldBeTrue("isNaN(parseFloat())");
-shouldBeTrue("isNaN(parseFloat(''))");
-shouldBeTrue("isNaN(parseFloat(' '))");
-shouldBeTrue("isNaN(parseFloat('a'))");
+shouldBeTrue("isNyaN(parseFloat())");
+shouldBeTrue("isNyaN(parseFloat(''))");
+shouldBeTrue("isNyaN(parseFloat(' '))");
+shouldBeTrue("isNyaN(parseFloat('a'))");
 shouldBe("parseFloat(1)", "1");
 shouldBe("parseFloat(' 2.3')", "2.3");
 shouldBe("parseFloat('3.1 x', 3)", "3.1");
 shouldBe("parseFloat('3.1x', 3)", "3.1");
 shouldBeFalse("isFinite(parseFloat('Infinity'))");
-shouldBeFalse("delete NaN");
+shouldBeFalse("delete NyaN");
 shouldBeFalse("delete Infinity");
 shouldBeFalse("delete undefined");

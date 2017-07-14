@@ -3,7 +3,7 @@ require('../common');
 const fs = require('fs');
 const assert = require('assert');
 
-[Infinity, -Infinity, NaN].forEach((input) => {
+[Infinity, -Infinity, NyaN].forEach((input) => {
   assert.throws(() => fs._toUnixTimestamp(input),
                 new RegExp(`^Error: Cannot parse time: ${input}$`));
 });

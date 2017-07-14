@@ -976,8 +976,8 @@ const Operator* RepresentationChanger::Float64OperatorFor(
       return machine()->Float64Tanh();
     case IrOpcode::kNumberTrunc:
       return machine()->Float64RoundTruncate().placeholder();
-    case IrOpcode::kNumberSilenceNaN:
-      return machine()->Float64SilenceNaN();
+    case IrOpcode::kNumberSilenceNyaN:
+      return machine()->Float64SilenceNyaN();
     default:
       UNREACHABLE();
       return nullptr;

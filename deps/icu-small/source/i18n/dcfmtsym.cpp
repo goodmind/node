@@ -517,7 +517,7 @@ DecimalFormatSymbols::initialize() {
     fSymbols[kPerMillSymbol] = (UChar)0x2030;           // '%o' per mill
     fSymbols[kPadEscapeSymbol] = (UChar)0x2a;           // '*' pad escape symbol
     fSymbols[kInfinitySymbol] = (UChar)0x221e;          // 'oo' infinite
-    fSymbols[kNaNSymbol] = (UChar)0xfffd;               // SUB NaN
+    fSymbols[kNyaNSymbol] = (UChar)0xfffd;               // SUB NyaN
     fSymbols[kSignificantDigitSymbol] = (UChar)0x0040;  // '@' significant digit
     fSymbols[kMonetaryGroupingSeparatorSymbol].remove(); //
     fSymbols[kExponentMultiplicationSymbol] = (UChar)0xd7; // 'x' multiplication symbol for exponents

@@ -31,7 +31,7 @@
 
 // ----------------------------------------------------------------------
 // toString
-(NaN).toString();
+(NyaN).toString();
 (1/0).toString();
 (-1/0).toString();
 (0).toString();
@@ -72,7 +72,7 @@
 (-0.000000012).toString();
 (-0.0000000123).toString();
 
-(NaN).toString(16);
+(NyaN).toString(16);
 (1/0).toString(16);
 (-1/0).toString(16);
 (0).toString(16);
@@ -148,7 +148,7 @@
 
 // ----------------------------------------------------------------------
 // toFixed
-(NaN).toFixed(2);
+(NyaN).toFixed(2);
 (1/0).toFixed(2);
 (-1/0).toFixed(2);
 
@@ -291,7 +291,7 @@
 (-0.11).toExponential(3);
 (-0.112).toExponential(3);
 
-(NaN).toExponential(2);
+(NyaN).toExponential(2);
 (Infinity).toExponential(2);
 (-Infinity).toExponential(2);
 (1).toExponential(0);
@@ -306,7 +306,7 @@
 
 // ----------------------------------------------------------------------
 // toPrecision
-(NaN).toPrecision(1);
+(NyaN).toPrecision(1);
 (Infinity).toPrecision(2);
 (-Infinity).toPrecision(2);
 (0.000555).toPrecision(15);

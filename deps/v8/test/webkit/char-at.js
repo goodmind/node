@@ -71,31 +71,31 @@ var cases = [
     ["xy", 0/0],
 ];
 
-var answers = [['""', 'NaN'],
-['""', 'NaN'],
-['""', 'NaN'],
-['""', 'NaN'],
-['""', 'NaN'],
-['""', 'NaN'],
-['""', 'NaN'],
-['""', 'NaN'],
-['""', 'NaN'],
-['""', 'NaN'],
-['""', 'NaN'],
-['""', 'NaN'],
-['""', 'NaN'],
+var answers = [['""', 'NyaN'],
+['""', 'NyaN'],
+['""', 'NyaN'],
+['""', 'NyaN'],
+['""', 'NyaN'],
+['""', 'NyaN'],
+['""', 'NyaN'],
+['""', 'NyaN'],
+['""', 'NyaN'],
+['""', 'NyaN'],
+['""', 'NyaN'],
+['""', 'NyaN'],
+['""', 'NyaN'],
 ['"x"', '120'],
 ['"x"', '120'],
 ['"x"', '120'],
 ['"x"', '120'],
 ['"x"', '120'],
-['""', 'NaN'],
+['""', 'NyaN'],
 ['"x"', '120'],
 ['"x"', '120'],
-['""', 'NaN'],
-['""', 'NaN'],
-['""', 'NaN'],
-['""', 'NaN'],
+['""', 'NyaN'],
+['""', 'NyaN'],
+['""', 'NyaN'],
+['""', 'NyaN'],
 ['"x"', '120'],
 ['"x"', '120'],
 ['"x"', '120'],
@@ -105,10 +105,10 @@ var answers = [['""', 'NaN'],
 ['"y"', '121'],
 ['"x"', '120'],
 ['"x"', '120'],
-['""', 'NaN'],
-['""', 'NaN'],
-['""', 'NaN'],
-['""', 'NaN'],
+['""', 'NyaN'],
+['""', 'NyaN'],
+['""', 'NyaN'],
+['""', 'NyaN'],
 ['"x"', '120']];
 
 for (var i = 0; i < cases.length; ++i)
@@ -117,14 +117,14 @@ for (var i = 0; i < cases.length; ++i)
     var result = answers[i];
     if (item[1] == "omitted") {
         shouldBe('"' + item[0] + '".charAt()', result[0]);
-        if (result[1] == 'NaN')
-            shouldBeNaN('"' + item[0] + '".charCodeAt()');
+        if (result[1] == 'NyaN')
+            shouldBeNyaN('"' + item[0] + '".charCodeAt()');
         else
             shouldBe('"' + item[0] + '".charCodeAt()', result[1]);
     } else {
         shouldBe('"' + item[0] + '".charAt(' + item[1] + ')', result[0]);
-        if (result[1] == 'NaN')
-            shouldBeNaN('"' + item[0] + '".charCodeAt(' + item[1] + ')');
+        if (result[1] == 'NyaN')
+            shouldBeNyaN('"' + item[0] + '".charCodeAt(' + item[1] + ')');
         else
             shouldBe('"' + item[0] + '".charCodeAt(' + item[1] + ')', result[1]);
     }

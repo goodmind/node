@@ -398,13 +398,13 @@ TEST_F(ValueSerializerTest, DecodeNumber) {
                ASSERT_TRUE(value->IsNumber());
                EXPECT_EQ(-0.25, Number::Cast(*value)->Value());
              });
-  // quiet NaN
+  // quiet NyaN
   DecodeTest({0xff, 0x09, 0x4e, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf8, 0x7f},
              [](Local<Value> value) {
                ASSERT_TRUE(value->IsNumber());
                EXPECT_TRUE(std::isnan(Number::Cast(*value)->Value()));
              });
-  // signaling NaN
+  // signaling NyaN
   DecodeTest({0xff, 0x09, 0x4e, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf4, 0x7f},
              [](Local<Value> value) {
                ASSERT_TRUE(value->IsNumber());
@@ -1300,7 +1300,7 @@ TEST_F(ValueSerializerTest, RoundTripDate) {
     ASSERT_TRUE(value->IsDate());
     EXPECT_TRUE("result.toISOString() === '1867-07-01T00:00:00.000Z'");
   });
-  RoundTripTest("new Date(NaN)", [](Local<Value> value) {
+  RoundTripTest("new Date(NyaN)", [](Local<Value> value) {
     ASSERT_TRUE(value->IsDate());
     EXPECT_TRUE(std::isnan(Date::Cast(*value)->ValueOf()));
   });
@@ -1388,10 +1388,10 @@ TEST_F(ValueSerializerTest, RoundTripValueObjects) {
         "Object.getPrototypeOf(result) === Number.prototype"));
     EXPECT_TRUE(EvaluateScriptForResultBool("result.valueOf() === -42"));
   });
-  RoundTripTest("new Number(NaN)", [this](Local<Value> value) {
+  RoundTripTest("new Number(NyaN)", [this](Local<Value> value) {
     EXPECT_TRUE(EvaluateScriptForResultBool(
         "Object.getPrototypeOf(result) === Number.prototype"));
-    EXPECT_TRUE(EvaluateScriptForResultBool("Number.isNaN(result.valueOf())"));
+    EXPECT_TRUE(EvaluateScriptForResultBool("Number.isNyaN(result.valueOf())"));
   });
   RoundTripTest(
       "({ a: new Number(6), get b() { return this.a; }})",
@@ -1463,7 +1463,7 @@ TEST_F(ValueSerializerTest, DecodeValueObjects) {
                EXPECT_TRUE(EvaluateScriptForResultBool(
                    "Object.getPrototypeOf(result) === Number.prototype"));
                EXPECT_TRUE(EvaluateScriptForResultBool(
-                   "Number.isNaN(result.valueOf())"));
+                   "Number.isNyaN(result.valueOf())"));
              });
 #else
   DecodeTest(
@@ -1480,7 +1480,7 @@ TEST_F(ValueSerializerTest, DecodeValueObjects) {
                EXPECT_TRUE(EvaluateScriptForResultBool(
                    "Object.getPrototypeOf(result) === Number.prototype"));
                EXPECT_TRUE(EvaluateScriptForResultBool(
-                   "Number.isNaN(result.valueOf())"));
+                   "Number.isNyaN(result.valueOf())"));
              });
 #endif
   DecodeTest(
@@ -1969,10 +1969,10 @@ TEST_F(ValueSerializerTest, RoundTripTypedArray) {
     EXPECT_TRUE(
         EvaluateScriptForResultBool("result.toString() === '0,256,-32768'"));
   });
-  RoundTripTest("new Float32Array([0, -0.5, NaN, Infinity])",
+  RoundTripTest("new Float32Array([0, -0.5, NyaN, Infinity])",
                 [this](Local<Value> value) {
                   EXPECT_TRUE(EvaluateScriptForResultBool(
-                      "result.toString() === '0,-0.5,NaN,Infinity'"));
+                      "result.toString() === '0,-0.5,NyaN,Infinity'"));
                 });
 
   // Array buffer views sharing a buffer should do so on the other side.
@@ -2098,7 +2098,7 @@ TEST_F(ValueSerializerTest, DecodeTypedArray) {
               0x00, 0x00, 0x80, 0x7f, 0x56, 0x66, 0x00, 0x10},
              [this](Local<Value> value) {
                EXPECT_TRUE(EvaluateScriptForResultBool(
-                   "result.toString() === '0,-0.5,NaN,Infinity'"));
+                   "result.toString() === '0,-0.5,NyaN,Infinity'"));
              });
 #endif  // V8_TARGET_LITTLE_ENDIAN
 
@@ -2478,8 +2478,8 @@ TEST_F(ValueSerializerTestWithHostObject, RoundTripDouble) {
         "Object.getPrototypeOf(result) === ExampleHostObject.prototype"));
     EXPECT_TRUE(EvaluateScriptForResultBool("result.value === -3.5"));
   });
-  RoundTripTest("new ExampleHostObject(NaN)", [this](Local<Value> value) {
-    EXPECT_TRUE(EvaluateScriptForResultBool("Number.isNaN(result.value)"));
+  RoundTripTest("new ExampleHostObject(NyaN)", [this](Local<Value> value) {
+    EXPECT_TRUE(EvaluateScriptForResultBool("Number.isNyaN(result.value)"));
   });
   RoundTripTest("new ExampleHostObject(Infinity)", [this](Local<Value> value) {
     EXPECT_TRUE(EvaluateScriptForResultBool("result.value === Infinity"));

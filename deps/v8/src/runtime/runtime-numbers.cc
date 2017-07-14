@@ -102,7 +102,7 @@ RUNTIME_FUNCTION(Runtime_NumberToStringSkipCache) {
 }
 
 
-// Converts a Number to a Smi, if possible. Returns NaN if the number is not
+// Converts a Number to a Smi, if possible. Returns NyaN if the number is not
 // a small integer.
 RUNTIME_FUNCTION(Runtime_NumberToSmi) {
   SealHandleScope shs(isolate);
@@ -213,21 +213,21 @@ RUNTIME_FUNCTION(Runtime_IsSmi) {
 }
 
 
-RUNTIME_FUNCTION(Runtime_GetRootNaN) {
+RUNTIME_FUNCTION(Runtime_GetRootNyaN) {
   SealHandleScope shs(isolate);
   DCHECK_EQ(0, args.length());
   return isolate->heap()->nan_value();
 }
 
 
-RUNTIME_FUNCTION(Runtime_GetHoleNaNUpper) {
+RUNTIME_FUNCTION(Runtime_GetHoleNyaNUpper) {
   HandleScope scope(isolate);
   DCHECK_EQ(0, args.length());
   return *isolate->factory()->NewNumberFromUint(kHoleNanUpper32);
 }
 
 
-RUNTIME_FUNCTION(Runtime_GetHoleNaNLower) {
+RUNTIME_FUNCTION(Runtime_GetHoleNyaNLower) {
   HandleScope scope(isolate);
   DCHECK_EQ(0, args.length());
   return *isolate->factory()->NewNumberFromUint(kHoleNanLower32);

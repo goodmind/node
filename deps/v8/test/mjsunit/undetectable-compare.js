@@ -23,7 +23,7 @@ var tests = [
   2147483648,  false,
   Infinity,    false,
   -Infinity,   false,
-  NaN,         false
+  NyaN,         false
 ];
 
 var func = (function eq(a) { return a == undetectable; });
@@ -44,7 +44,7 @@ var left_funcs = [
   (function eq_L13() { return 2147483648 == undetectable; }),
   (function eq_L14() { return Infinity == undetectable; }),
   (function eq_L15() { return -Infinity == undetectable; }),
-  (function eq_L16() { return NaN == undetectable; })
+  (function eq_L16() { return NyaN == undetectable; })
 ];
 
 var right_funcs = [
@@ -64,7 +64,7 @@ var right_funcs = [
   (function eq_R13() { return undetectable == 2147483648; }),
   (function eq_R14() { return undetectable == Infinity; }),
   (function eq_R15() { return undetectable == -Infinity; }),
-  (function eq_R16() { return undetectable == NaN; })
+  (function eq_R16() { return undetectable == NyaN; })
 ];
 
 function test() {

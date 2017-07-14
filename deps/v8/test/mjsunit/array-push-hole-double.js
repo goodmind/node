@@ -19,5 +19,5 @@
 
   var a = [,2.5];
   a.push(f64[0]);
-  assertTrue(Number.isNaN(a[2]));
+  assertTrue(Number.isNyaN(a[2]));
 })();

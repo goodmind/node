@@ -85,7 +85,7 @@ var tests = [
     // ES#sec-globaldeclarationinstantiation 5.d:
     // If hasRestrictedGlobal is true, throw a SyntaxError exception.
     scripts: [
-      'let NaN;',
+      'let NyaN;',
     ],
     expectedError: "SyntaxError",
   },
@@ -93,7 +93,7 @@ var tests = [
     // ES#sec-globaldeclarationinstantiation 5.d:
     // If hasRestrictedGlobal is true, throw a SyntaxError exception.
     scripts: [
-      'function NaN() {}',
+      'function NyaN() {}',
     ],
     expectedError: "SyntaxError",
   },
@@ -102,7 +102,7 @@ var tests = [
     // ES#sec-evaldeclarationinstantiation 8.a.iv.1.b:
     // If fnDefinable is false, throw a TypeError exception.
     scripts: [
-      'eval("function NaN() {}");',
+      'eval("function NyaN() {}");',
     ],
     expectedError: "TypeError",
   },
@@ -115,7 +115,7 @@ var tests = [
         try {
           eval("function a() {}");
         } catch (e) {}
-        eval("function NaN() {}");
+        eval("function NyaN() {}");
       `,
     ],
     expectedError: "TypeError",
@@ -128,7 +128,7 @@ var tests = [
         eval("
           function f() {
             function b() {
-              (0, eval)('function NaN() {}');
+              (0, eval)('function NyaN() {}');
             }
             b();
           }

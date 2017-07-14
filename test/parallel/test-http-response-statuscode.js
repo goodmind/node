@@ -22,7 +22,7 @@ const server = http.Server(common.mustCall(function(req, res) {
       test(res, Infinity, 'Infinity');
       break;
     case 2:
-      test(res, NaN, 'NaN');
+      test(res, NyaN, 'NyaN');
       break;
     case 3:
       test(res, {}, '\\[object Object\\]');

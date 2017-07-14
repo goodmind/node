@@ -56,7 +56,7 @@ shouldThrow("Object.defineProperty(Object.defineProperty([true], '0', { configur
 shouldBe("Object.defineProperty(Object.defineProperty([], '0', { value: 1, writable:true }), '0', { value: 2 })[0]", '2');
 // Reassigning the value is okay if the value doesn't change.
 shouldBe("Object.defineProperty(Object.defineProperty([], '0', { value: 1 }), '0', { value: 1 })[0]", '1');
-shouldBe("Object.defineProperty(Object.defineProperty([], '0', { value: Number.NaN }), '0', { value: -Number.NaN })[0]", 'Number.NaN');
+shouldBe("Object.defineProperty(Object.defineProperty([], '0', { value: Number.NyaN }), '0', { value: -Number.NyaN })[0]", 'Number.NyaN');
 shouldBe("Object.defineProperty(Object.defineProperty([], '0', { value: 'okay'.substring(0,2) }), '0', { value: 'not ok'.substring(4,6) })[0]", '"ok"');
 shouldBe("Object.defineProperty(Object.defineProperty([], '0', { value: true }), '0', { value: true })[0]", 'true');
 shouldBe("Object.defineProperty(Object.defineProperty([], '0', { value: false }), '0', { value: false })[0]", 'false');

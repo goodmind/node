@@ -5417,15 +5417,15 @@ TEST(fadd) {
   CHECK_EQUAL_FP32(1.0, s2);
   CHECK_EQUAL_FP32(kFP32PositiveInfinity, s3);
   CHECK_EQUAL_FP32(kFP32NegativeInfinity, s4);
-  CHECK_EQUAL_FP32(kFP32DefaultNaN, s5);
-  CHECK_EQUAL_FP32(kFP32DefaultNaN, s6);
+  CHECK_EQUAL_FP32(kFP32DefaultNyaN, s5);
+  CHECK_EQUAL_FP32(kFP32DefaultNyaN, s6);
   CHECK_EQUAL_FP64(0.25, d7);
   CHECK_EQUAL_FP64(2.25, d8);
   CHECK_EQUAL_FP64(2.25, d9);
   CHECK_EQUAL_FP64(kFP64PositiveInfinity, d10);
   CHECK_EQUAL_FP64(kFP64NegativeInfinity, d11);
-  CHECK_EQUAL_FP64(kFP64DefaultNaN, d12);
-  CHECK_EQUAL_FP64(kFP64DefaultNaN, d13);
+  CHECK_EQUAL_FP64(kFP64DefaultNyaN, d12);
+  CHECK_EQUAL_FP64(kFP64DefaultNyaN, d13);
 
   TEARDOWN();
 }
@@ -5474,15 +5474,15 @@ TEST(fsub) {
   CHECK_EQUAL_FP32(-1.0, s2);
   CHECK_EQUAL_FP32(kFP32NegativeInfinity, s3);
   CHECK_EQUAL_FP32(kFP32PositiveInfinity, s4);
-  CHECK_EQUAL_FP32(kFP32DefaultNaN, s5);
-  CHECK_EQUAL_FP32(kFP32DefaultNaN, s6);
+  CHECK_EQUAL_FP32(kFP32DefaultNyaN, s5);
+  CHECK_EQUAL_FP32(kFP32DefaultNyaN, s6);
   CHECK_EQUAL_FP64(-4.25, d7);
   CHECK_EQUAL_FP64(-2.25, d8);
   CHECK_EQUAL_FP64(-2.25, d9);
   CHECK_EQUAL_FP64(kFP64NegativeInfinity, d10);
   CHECK_EQUAL_FP64(kFP64PositiveInfinity, d11);
-  CHECK_EQUAL_FP64(kFP64DefaultNaN, d12);
-  CHECK_EQUAL_FP64(kFP64DefaultNaN, d13);
+  CHECK_EQUAL_FP64(kFP64DefaultNyaN, d12);
+  CHECK_EQUAL_FP64(kFP64DefaultNyaN, d13);
 
   TEARDOWN();
 }
@@ -5532,15 +5532,15 @@ TEST(fmul) {
   CHECK_EQUAL_FP32(0.0, s2);
   CHECK_EQUAL_FP32(kFP32NegativeInfinity, s3);
   CHECK_EQUAL_FP32(kFP32PositiveInfinity, s4);
-  CHECK_EQUAL_FP32(kFP32DefaultNaN, s5);
-  CHECK_EQUAL_FP32(kFP32DefaultNaN, s6);
+  CHECK_EQUAL_FP32(kFP32DefaultNyaN, s5);
+  CHECK_EQUAL_FP32(kFP32DefaultNyaN, s6);
   CHECK_EQUAL_FP64(-4.5, d7);
   CHECK_EQUAL_FP64(0.0, d8);
   CHECK_EQUAL_FP64(0.0, d9);
   CHECK_EQUAL_FP64(kFP64NegativeInfinity, d10);
   CHECK_EQUAL_FP64(kFP64PositiveInfinity, d11);
-  CHECK_EQUAL_FP64(kFP64DefaultNaN, d12);
-  CHECK_EQUAL_FP64(kFP64DefaultNaN, d13);
+  CHECK_EQUAL_FP64(kFP64DefaultNyaN, d12);
+  CHECK_EQUAL_FP64(kFP64DefaultNyaN, d13);
 
   TEARDOWN();
 }
@@ -5594,22 +5594,22 @@ TEST(fmadd_fmsub_double) {
   FmaddFmsubHelper(-0.0, -0.0, +0.0, +0.0,  +0.0,  -0.0,  +0.0);
   FmaddFmsubHelper(+0.0, -0.0, +0.0, +0.0,  +0.0,  +0.0,  -0.0);
 
-  // Check NaN generation.
+  // Check NyaN generation.
   FmaddFmsubHelper(kFP64PositiveInfinity, 0.0, 42.0,
-                   kFP64DefaultNaN, kFP64DefaultNaN,
-                   kFP64DefaultNaN, kFP64DefaultNaN);
+                   kFP64DefaultNyaN, kFP64DefaultNyaN,
+                   kFP64DefaultNyaN, kFP64DefaultNyaN);
   FmaddFmsubHelper(0.0, kFP64PositiveInfinity, 42.0,
-                   kFP64DefaultNaN, kFP64DefaultNaN,
-                   kFP64DefaultNaN, kFP64DefaultNaN);
+                   kFP64DefaultNyaN, kFP64DefaultNyaN,
+                   kFP64DefaultNyaN, kFP64DefaultNyaN);
   FmaddFmsubHelper(kFP64PositiveInfinity, 1.0, kFP64PositiveInfinity,
                    kFP64PositiveInfinity,   //  inf + ( inf * 1) = inf
-                   kFP64DefaultNaN,         //  inf + (-inf * 1) = NaN
+                   kFP64DefaultNyaN,         //  inf + (-inf * 1) = NyaN
                    kFP64NegativeInfinity,   // -inf + (-inf * 1) = -inf
-                   kFP64DefaultNaN);        // -inf + ( inf * 1) = NaN
+                   kFP64DefaultNyaN);        // -inf + ( inf * 1) = NyaN
   FmaddFmsubHelper(kFP64NegativeInfinity, 1.0, kFP64PositiveInfinity,
-                   kFP64DefaultNaN,         //  inf + (-inf * 1) = NaN
+                   kFP64DefaultNyaN,         //  inf + (-inf * 1) = NyaN
                    kFP64PositiveInfinity,   //  inf + ( inf * 1) = inf
-                   kFP64DefaultNaN,         // -inf + ( inf * 1) = NaN
+                   kFP64DefaultNyaN,         // -inf + ( inf * 1) = NyaN
                    kFP64NegativeInfinity);  // -inf + (-inf * 1) = -inf
 }
 
@@ -5661,67 +5661,67 @@ TEST(fmadd_fmsub_float) {
   FmaddFmsubHelper(-0.0f, -0.0f, +0.0f, +0.0f, +0.0f, -0.0f, +0.0f);
   FmaddFmsubHelper(+0.0f, -0.0f, +0.0f, +0.0f, +0.0f, +0.0f, -0.0f);
 
-  // Check NaN generation.
+  // Check NyaN generation.
   FmaddFmsubHelper(kFP32PositiveInfinity, 0.0f, 42.0f,
-                   kFP32DefaultNaN, kFP32DefaultNaN,
-                   kFP32DefaultNaN, kFP32DefaultNaN);
+                   kFP32DefaultNyaN, kFP32DefaultNyaN,
+                   kFP32DefaultNyaN, kFP32DefaultNyaN);
   FmaddFmsubHelper(0.0f, kFP32PositiveInfinity, 42.0f,
-                   kFP32DefaultNaN, kFP32DefaultNaN,
-                   kFP32DefaultNaN, kFP32DefaultNaN);
+                   kFP32DefaultNyaN, kFP32DefaultNyaN,
+                   kFP32DefaultNyaN, kFP32DefaultNyaN);
   FmaddFmsubHelper(kFP32PositiveInfinity, 1.0f, kFP32PositiveInfinity,
                    kFP32PositiveInfinity,   //  inf + ( inf * 1) = inf
-                   kFP32DefaultNaN,         //  inf + (-inf * 1) = NaN
+                   kFP32DefaultNyaN,         //  inf + (-inf * 1) = NyaN
                    kFP32NegativeInfinity,   // -inf + (-inf * 1) = -inf
-                   kFP32DefaultNaN);        // -inf + ( inf * 1) = NaN
+                   kFP32DefaultNyaN);        // -inf + ( inf * 1) = NyaN
   FmaddFmsubHelper(kFP32NegativeInfinity, 1.0f, kFP32PositiveInfinity,
-                   kFP32DefaultNaN,         //  inf + (-inf * 1) = NaN
+                   kFP32DefaultNyaN,         //  inf + (-inf * 1) = NyaN
                    kFP32PositiveInfinity,   //  inf + ( inf * 1) = inf
-                   kFP32DefaultNaN,         // -inf + ( inf * 1) = NaN
+                   kFP32DefaultNyaN,         // -inf + ( inf * 1) = NyaN
                    kFP32NegativeInfinity);  // -inf + (-inf * 1) = -inf
 }
 
 
 TEST(fmadd_fmsub_double_nans) {
   INIT_V8();
-  // Make sure that NaN propagation works correctly.
+  // Make sure that NyaN propagation works correctly.
   double s1 = rawbits_to_double(0x7ff5555511111111);
   double s2 = rawbits_to_double(0x7ff5555522222222);
   double sa = rawbits_to_double(0x7ff55555aaaaaaaa);
   double q1 = rawbits_to_double(0x7ffaaaaa11111111);
   double q2 = rawbits_to_double(0x7ffaaaaa22222222);
   double qa = rawbits_to_double(0x7ffaaaaaaaaaaaaa);
-  CHECK(IsSignallingNaN(s1));
-  CHECK(IsSignallingNaN(s2));
-  CHECK(IsSignallingNaN(sa));
-  CHECK(IsQuietNaN(q1));
-  CHECK(IsQuietNaN(q2));
-  CHECK(IsQuietNaN(qa));
+  CHECK(IsSignallingNyaN(s1));
+  CHECK(IsSignallingNyaN(s2));
+  CHECK(IsSignallingNyaN(sa));
+  CHECK(IsQuietNyaN(q1));
+  CHECK(IsQuietNyaN(q2));
+  CHECK(IsQuietNyaN(qa));
 
-  // The input NaNs after passing through ProcessNaN.
+  // The input NyaNs after passing through ProcessNyaN.
   double s1_proc = rawbits_to_double(0x7ffd555511111111);
   double s2_proc = rawbits_to_double(0x7ffd555522222222);
   double sa_proc = rawbits_to_double(0x7ffd5555aaaaaaaa);
   double q1_proc = q1;
   double q2_proc = q2;
   double qa_proc = qa;
-  CHECK(IsQuietNaN(s1_proc));
-  CHECK(IsQuietNaN(s2_proc));
-  CHECK(IsQuietNaN(sa_proc));
-  CHECK(IsQuietNaN(q1_proc));
-  CHECK(IsQuietNaN(q2_proc));
-  CHECK(IsQuietNaN(qa_proc));
+  CHECK(IsQuietNyaN(s1_proc));
+  CHECK(IsQuietNyaN(s2_proc));
+  CHECK(IsQuietNyaN(sa_proc));
+  CHECK(IsQuietNyaN(q1_proc));
+  CHECK(IsQuietNyaN(q2_proc));
+  CHECK(IsQuietNyaN(qa_proc));
 
-  // Negated NaNs as it would be done on ARMv8 hardware.
+  // Negated NyaNs as it would be done on ARMv8 hardware.
   double s1_proc_neg = rawbits_to_double(0xfffd555511111111);
   double sa_proc_neg = rawbits_to_double(0xfffd5555aaaaaaaa);
   double q1_proc_neg = rawbits_to_double(0xfffaaaaa11111111);
   double qa_proc_neg = rawbits_to_double(0xfffaaaaaaaaaaaaa);
-  CHECK(IsQuietNaN(s1_proc_neg));
-  CHECK(IsQuietNaN(sa_proc_neg));
-  CHECK(IsQuietNaN(q1_proc_neg));
-  CHECK(IsQuietNaN(qa_proc_neg));
+  CHECK(IsQuietNyaN(s1_proc_neg));
+  CHECK(IsQuietNyaN(sa_proc_neg));
+  CHECK(IsQuietNyaN(q1_proc_neg));
+  CHECK(IsQuietNyaN(qa_proc_neg));
 
-  // Quiet NaNs are propagated.
+  // Quiet NyaNs are propagated.
   FmaddFmsubHelper(q1, 0, 0, q1_proc, q1_proc_neg, q1_proc_neg, q1_proc);
   FmaddFmsubHelper(0, q2, 0, q2_proc, q2_proc, q2_proc, q2_proc);
   FmaddFmsubHelper(0, 0, qa, qa_proc, qa_proc, qa_proc_neg, qa_proc_neg);
@@ -5730,7 +5730,7 @@ TEST(fmadd_fmsub_double_nans) {
   FmaddFmsubHelper(q1, 0, qa, qa_proc, qa_proc, qa_proc_neg, qa_proc_neg);
   FmaddFmsubHelper(q1, q2, qa, qa_proc, qa_proc, qa_proc_neg, qa_proc_neg);
 
-  // Signalling NaNs are propagated, and made quiet.
+  // Signalling NyaNs are propagated, and made quiet.
   FmaddFmsubHelper(s1, 0, 0, s1_proc, s1_proc_neg, s1_proc_neg, s1_proc);
   FmaddFmsubHelper(0, s2, 0, s2_proc, s2_proc, s2_proc, s2_proc);
   FmaddFmsubHelper(0, 0, sa, sa_proc, sa_proc, sa_proc_neg, sa_proc_neg);
@@ -5739,7 +5739,7 @@ TEST(fmadd_fmsub_double_nans) {
   FmaddFmsubHelper(s1, 0, sa, sa_proc, sa_proc, sa_proc_neg, sa_proc_neg);
   FmaddFmsubHelper(s1, s2, sa, sa_proc, sa_proc, sa_proc_neg, sa_proc_neg);
 
-  // Signalling NaNs take precedence over quiet NaNs.
+  // Signalling NyaNs take precedence over quiet NyaNs.
   FmaddFmsubHelper(s1, q2, qa, s1_proc, s1_proc_neg, s1_proc_neg, s1_proc);
   FmaddFmsubHelper(q1, s2, qa, s2_proc, s2_proc, s2_proc, s2_proc);
   FmaddFmsubHelper(q1, q2, sa, sa_proc, sa_proc, sa_proc_neg, sa_proc_neg);
@@ -5748,63 +5748,63 @@ TEST(fmadd_fmsub_double_nans) {
   FmaddFmsubHelper(s1, q2, sa, sa_proc, sa_proc, sa_proc_neg, sa_proc_neg);
   FmaddFmsubHelper(s1, s2, sa, sa_proc, sa_proc, sa_proc_neg, sa_proc_neg);
 
-  // A NaN generated by the intermediate op1 * op2 overrides a quiet NaN in a.
+  // A NyaN generated by the intermediate op1 * op2 overrides a quiet NyaN in a.
   FmaddFmsubHelper(0, kFP64PositiveInfinity, qa,
-                   kFP64DefaultNaN, kFP64DefaultNaN,
-                   kFP64DefaultNaN, kFP64DefaultNaN);
+                   kFP64DefaultNyaN, kFP64DefaultNyaN,
+                   kFP64DefaultNyaN, kFP64DefaultNyaN);
   FmaddFmsubHelper(kFP64PositiveInfinity, 0, qa,
-                   kFP64DefaultNaN, kFP64DefaultNaN,
-                   kFP64DefaultNaN, kFP64DefaultNaN);
+                   kFP64DefaultNyaN, kFP64DefaultNyaN,
+                   kFP64DefaultNyaN, kFP64DefaultNyaN);
   FmaddFmsubHelper(0, kFP64NegativeInfinity, qa,
-                   kFP64DefaultNaN, kFP64DefaultNaN,
-                   kFP64DefaultNaN, kFP64DefaultNaN);
+                   kFP64DefaultNyaN, kFP64DefaultNyaN,
+                   kFP64DefaultNyaN, kFP64DefaultNyaN);
   FmaddFmsubHelper(kFP64NegativeInfinity, 0, qa,
-                   kFP64DefaultNaN, kFP64DefaultNaN,
-                   kFP64DefaultNaN, kFP64DefaultNaN);
+                   kFP64DefaultNyaN, kFP64DefaultNyaN,
+                   kFP64DefaultNyaN, kFP64DefaultNyaN);
 }
 
 
 TEST(fmadd_fmsub_float_nans) {
   INIT_V8();
-  // Make sure that NaN propagation works correctly.
+  // Make sure that NyaN propagation works correctly.
   float s1 = rawbits_to_float(0x7f951111);
   float s2 = rawbits_to_float(0x7f952222);
   float sa = rawbits_to_float(0x7f95aaaa);
   float q1 = rawbits_to_float(0x7fea1111);
   float q2 = rawbits_to_float(0x7fea2222);
   float qa = rawbits_to_float(0x7feaaaaa);
-  CHECK(IsSignallingNaN(s1));
-  CHECK(IsSignallingNaN(s2));
-  CHECK(IsSignallingNaN(sa));
-  CHECK(IsQuietNaN(q1));
-  CHECK(IsQuietNaN(q2));
-  CHECK(IsQuietNaN(qa));
+  CHECK(IsSignallingNyaN(s1));
+  CHECK(IsSignallingNyaN(s2));
+  CHECK(IsSignallingNyaN(sa));
+  CHECK(IsQuietNyaN(q1));
+  CHECK(IsQuietNyaN(q2));
+  CHECK(IsQuietNyaN(qa));
 
-  // The input NaNs after passing through ProcessNaN.
+  // The input NyaNs after passing through ProcessNyaN.
   float s1_proc = rawbits_to_float(0x7fd51111);
   float s2_proc = rawbits_to_float(0x7fd52222);
   float sa_proc = rawbits_to_float(0x7fd5aaaa);
   float q1_proc = q1;
   float q2_proc = q2;
   float qa_proc = qa;
-  CHECK(IsQuietNaN(s1_proc));
-  CHECK(IsQuietNaN(s2_proc));
-  CHECK(IsQuietNaN(sa_proc));
-  CHECK(IsQuietNaN(q1_proc));
-  CHECK(IsQuietNaN(q2_proc));
-  CHECK(IsQuietNaN(qa_proc));
+  CHECK(IsQuietNyaN(s1_proc));
+  CHECK(IsQuietNyaN(s2_proc));
+  CHECK(IsQuietNyaN(sa_proc));
+  CHECK(IsQuietNyaN(q1_proc));
+  CHECK(IsQuietNyaN(q2_proc));
+  CHECK(IsQuietNyaN(qa_proc));
 
-  // Negated NaNs as it would be done on ARMv8 hardware.
+  // Negated NyaNs as it would be done on ARMv8 hardware.
   float s1_proc_neg = rawbits_to_float(0xffd51111);
   float sa_proc_neg = rawbits_to_float(0xffd5aaaa);
   float q1_proc_neg = rawbits_to_float(0xffea1111);
   float qa_proc_neg = rawbits_to_float(0xffeaaaaa);
-  CHECK(IsQuietNaN(s1_proc_neg));
-  CHECK(IsQuietNaN(sa_proc_neg));
-  CHECK(IsQuietNaN(q1_proc_neg));
-  CHECK(IsQuietNaN(qa_proc_neg));
+  CHECK(IsQuietNyaN(s1_proc_neg));
+  CHECK(IsQuietNyaN(sa_proc_neg));
+  CHECK(IsQuietNyaN(q1_proc_neg));
+  CHECK(IsQuietNyaN(qa_proc_neg));
 
-  // Quiet NaNs are propagated.
+  // Quiet NyaNs are propagated.
   FmaddFmsubHelper(q1, 0, 0, q1_proc, q1_proc_neg, q1_proc_neg, q1_proc);
   FmaddFmsubHelper(0, q2, 0, q2_proc, q2_proc, q2_proc, q2_proc);
   FmaddFmsubHelper(0, 0, qa, qa_proc, qa_proc, qa_proc_neg, qa_proc_neg);
@@ -5813,7 +5813,7 @@ TEST(fmadd_fmsub_float_nans) {
   FmaddFmsubHelper(q1, 0, qa, qa_proc, qa_proc, qa_proc_neg, qa_proc_neg);
   FmaddFmsubHelper(q1, q2, qa, qa_proc, qa_proc, qa_proc_neg, qa_proc_neg);
 
-  // Signalling NaNs are propagated, and made quiet.
+  // Signalling NyaNs are propagated, and made quiet.
   FmaddFmsubHelper(s1, 0, 0, s1_proc, s1_proc_neg, s1_proc_neg, s1_proc);
   FmaddFmsubHelper(0, s2, 0, s2_proc, s2_proc, s2_proc, s2_proc);
   FmaddFmsubHelper(0, 0, sa, sa_proc, sa_proc, sa_proc_neg, sa_proc_neg);
@@ -5822,7 +5822,7 @@ TEST(fmadd_fmsub_float_nans) {
   FmaddFmsubHelper(s1, 0, sa, sa_proc, sa_proc, sa_proc_neg, sa_proc_neg);
   FmaddFmsubHelper(s1, s2, sa, sa_proc, sa_proc, sa_proc_neg, sa_proc_neg);
 
-  // Signalling NaNs take precedence over quiet NaNs.
+  // Signalling NyaNs take precedence over quiet NyaNs.
   FmaddFmsubHelper(s1, q2, qa, s1_proc, s1_proc_neg, s1_proc_neg, s1_proc);
   FmaddFmsubHelper(q1, s2, qa, s2_proc, s2_proc, s2_proc, s2_proc);
   FmaddFmsubHelper(q1, q2, sa, sa_proc, sa_proc, sa_proc_neg, sa_proc_neg);
@@ -5831,19 +5831,19 @@ TEST(fmadd_fmsub_float_nans) {
   FmaddFmsubHelper(s1, q2, sa, sa_proc, sa_proc, sa_proc_neg, sa_proc_neg);
   FmaddFmsubHelper(s1, s2, sa, sa_proc, sa_proc, sa_proc_neg, sa_proc_neg);
 
-  // A NaN generated by the intermediate op1 * op2 overrides a quiet NaN in a.
+  // A NyaN generated by the intermediate op1 * op2 overrides a quiet NyaN in a.
   FmaddFmsubHelper(0, kFP32PositiveInfinity, qa,
-                   kFP32DefaultNaN, kFP32DefaultNaN,
-                   kFP32DefaultNaN, kFP32DefaultNaN);
+                   kFP32DefaultNyaN, kFP32DefaultNyaN,
+                   kFP32DefaultNyaN, kFP32DefaultNyaN);
   FmaddFmsubHelper(kFP32PositiveInfinity, 0, qa,
-                   kFP32DefaultNaN, kFP32DefaultNaN,
-                   kFP32DefaultNaN, kFP32DefaultNaN);
+                   kFP32DefaultNyaN, kFP32DefaultNyaN,
+                   kFP32DefaultNyaN, kFP32DefaultNyaN);
   FmaddFmsubHelper(0, kFP32NegativeInfinity, qa,
-                   kFP32DefaultNaN, kFP32DefaultNaN,
-                   kFP32DefaultNaN, kFP32DefaultNaN);
+                   kFP32DefaultNyaN, kFP32DefaultNyaN,
+                   kFP32DefaultNyaN, kFP32DefaultNyaN);
   FmaddFmsubHelper(kFP32NegativeInfinity, 0, qa,
-                   kFP32DefaultNaN, kFP32DefaultNaN,
-                   kFP32DefaultNaN, kFP32DefaultNaN);
+                   kFP32DefaultNyaN, kFP32DefaultNyaN,
+                   kFP32DefaultNyaN, kFP32DefaultNyaN);
 }
 
 
@@ -5891,15 +5891,15 @@ TEST(fdiv) {
   CHECK_EQUAL_FP32(-0.0f, s2);
   CHECK_EQUAL_FP32(0.0f, s3);
   CHECK_EQUAL_FP32(-0.0f, s4);
-  CHECK_EQUAL_FP32(kFP32DefaultNaN, s5);
-  CHECK_EQUAL_FP32(kFP32DefaultNaN, s6);
+  CHECK_EQUAL_FP32(kFP32DefaultNyaN, s5);
+  CHECK_EQUAL_FP32(kFP32DefaultNyaN, s6);
   CHECK_EQUAL_FP64(-1.125, d7);
   CHECK_EQUAL_FP64(0.0, d8);
   CHECK_EQUAL_FP64(-0.0, d9);
   CHECK_EQUAL_FP64(0.0, d10);
   CHECK_EQUAL_FP64(-0.0, d11);
-  CHECK_EQUAL_FP64(kFP64DefaultNaN, d12);
-  CHECK_EQUAL_FP64(kFP64DefaultNaN, d13);
+  CHECK_EQUAL_FP64(kFP64DefaultNyaN, d12);
+  CHECK_EQUAL_FP64(kFP64DefaultNyaN, d13);
 
   TEARDOWN();
 }
@@ -5913,26 +5913,26 @@ static float MinMaxHelper(float n,
   uint32_t raw_m = float_to_rawbits(m);
 
   if (std::isnan(n) && ((raw_n & kSQuietNanMask) == 0)) {
-    // n is signalling NaN.
+    // n is signalling NyaN.
     return rawbits_to_float(raw_n | kSQuietNanMask);
   } else if (std::isnan(m) && ((raw_m & kSQuietNanMask) == 0)) {
-    // m is signalling NaN.
+    // m is signalling NyaN.
     return rawbits_to_float(raw_m | kSQuietNanMask);
   } else if (quiet_nan_substitute == 0.0) {
     if (std::isnan(n)) {
-      // n is quiet NaN.
+      // n is quiet NyaN.
       return n;
     } else if (std::isnan(m)) {
-      // m is quiet NaN.
+      // m is quiet NyaN.
       return m;
     }
   } else {
     // Substitute n or m if one is quiet, but not both.
     if (std::isnan(n) && !std::isnan(m)) {
-      // n is quiet NaN: replace with substitute.
+      // n is quiet NyaN: replace with substitute.
       n = quiet_nan_substitute;
     } else if (!std::isnan(n) && std::isnan(m)) {
-      // m is quiet NaN: replace with substitute.
+      // m is quiet NyaN: replace with substitute.
       m = quiet_nan_substitute;
     }
   }
@@ -5954,26 +5954,26 @@ static double MinMaxHelper(double n,
   uint64_t raw_m = double_to_rawbits(m);
 
   if (std::isnan(n) && ((raw_n & kDQuietNanMask) == 0)) {
-    // n is signalling NaN.
+    // n is signalling NyaN.
     return rawbits_to_double(raw_n | kDQuietNanMask);
   } else if (std::isnan(m) && ((raw_m & kDQuietNanMask) == 0)) {
-    // m is signalling NaN.
+    // m is signalling NyaN.
     return rawbits_to_double(raw_m | kDQuietNanMask);
   } else if (quiet_nan_substitute == 0.0) {
     if (std::isnan(n)) {
-      // n is quiet NaN.
+      // n is quiet NyaN.
       return n;
     } else if (std::isnan(m)) {
-      // m is quiet NaN.
+      // m is quiet NyaN.
       return m;
     }
   } else {
     // Substitute n or m if one is quiet, but not both.
     if (std::isnan(n) && !std::isnan(m)) {
-      // n is quiet NaN: replace with substitute.
+      // n is quiet NyaN: replace with substitute.
       n = quiet_nan_substitute;
     } else if (!std::isnan(n) && std::isnan(m)) {
-      // m is quiet NaN: replace with substitute.
+      // m is quiet NyaN: replace with substitute.
       m = quiet_nan_substitute;
     }
   }
@@ -6013,17 +6013,17 @@ static void FminFmaxDoubleHelper(double n, double m, double min, double max,
 
 TEST(fmax_fmin_d) {
   INIT_V8();
-  // Use non-standard NaNs to check that the payload bits are preserved.
+  // Use non-standard NyaNs to check that the payload bits are preserved.
   double snan = rawbits_to_double(0x7ff5555512345678);
   double qnan = rawbits_to_double(0x7ffaaaaa87654321);
 
   double snan_processed = rawbits_to_double(0x7ffd555512345678);
   double qnan_processed = qnan;
 
-  CHECK(IsSignallingNaN(snan));
-  CHECK(IsQuietNaN(qnan));
-  CHECK(IsQuietNaN(snan_processed));
-  CHECK(IsQuietNaN(qnan_processed));
+  CHECK(IsSignallingNyaN(snan));
+  CHECK(IsQuietNyaN(qnan));
+  CHECK(IsQuietNyaN(snan_processed));
+  CHECK(IsQuietNyaN(qnan_processed));
 
   // Bootstrap tests.
   FminFmaxDoubleHelper(0, 0, 0, 0, 0, 0);
@@ -6054,7 +6054,7 @@ TEST(fmax_fmin_d) {
   double inputs[] = { DBL_MAX, DBL_MIN, 1.0, 0.0,
                       -DBL_MAX, -DBL_MIN, -1.0, -0.0,
                       kFP64PositiveInfinity, kFP64NegativeInfinity,
-                      kFP64QuietNaN, kFP64SignallingNaN };
+                      kFP64QuietNyaN, kFP64SignallingNyaN };
 
   const int count = sizeof(inputs) / sizeof(inputs[0]);
 
@@ -6098,17 +6098,17 @@ static void FminFmaxFloatHelper(float n, float m, float min, float max,
 
 TEST(fmax_fmin_s) {
   INIT_V8();
-  // Use non-standard NaNs to check that the payload bits are preserved.
+  // Use non-standard NyaNs to check that the payload bits are preserved.
   float snan = rawbits_to_float(0x7f951234);
   float qnan = rawbits_to_float(0x7fea8765);
 
   float snan_processed = rawbits_to_float(0x7fd51234);
   float qnan_processed = qnan;
 
-  CHECK(IsSignallingNaN(snan));
-  CHECK(IsQuietNaN(qnan));
-  CHECK(IsQuietNaN(snan_processed));
-  CHECK(IsQuietNaN(qnan_processed));
+  CHECK(IsSignallingNyaN(snan));
+  CHECK(IsQuietNyaN(qnan));
+  CHECK(IsQuietNyaN(snan_processed));
+  CHECK(IsQuietNyaN(qnan_processed));
 
   // Bootstrap tests.
   FminFmaxFloatHelper(0, 0, 0, 0, 0, 0);
@@ -6139,7 +6139,7 @@ TEST(fmax_fmin_s) {
   float inputs[] = { FLT_MAX, FLT_MIN, 1.0, 0.0,
                      -FLT_MAX, -FLT_MIN, -1.0, -0.0,
                      kFP32PositiveInfinity, kFP32NegativeInfinity,
-                     kFP32QuietNaN, kFP32SignallingNaN };
+                     kFP32QuietNyaN, kFP32SignallingNyaN };
 
   const int count = sizeof(inputs) / sizeof(inputs[0]);
 
@@ -6242,7 +6242,7 @@ TEST(fcmp) {
 
     __ Fmov(s8, 0.0);
     __ Fmov(s9, 0.5);
-    __ Mov(w18, 0x7f800001);  // Single precision NaN.
+    __ Mov(w18, 0x7f800001);  // Single precision NyaN.
     __ Fmov(s18, w18);
 
     __ Fcmp(s8, s8);
@@ -6264,7 +6264,7 @@ TEST(fcmp) {
 
     __ Fmov(d19, 0.0);
     __ Fmov(d20, 0.5);
-    __ Mov(x21, 0x7ff0000000000001UL);   // Double precision NaN.
+    __ Mov(x21, 0x7ff0000000000001UL);   // Double precision NyaN.
     __ Fmov(d21, x21);
 
     __ Fcmp(d19, d19);
@@ -6467,14 +6467,14 @@ TEST(fsqrt) {
   CHECK_EQUAL_FP32(256.0, s3);
   CHECK_EQUAL_FP32(-0.0, s4);
   CHECK_EQUAL_FP32(kFP32PositiveInfinity, s5);
-  CHECK_EQUAL_FP32(kFP32DefaultNaN, s6);
+  CHECK_EQUAL_FP32(kFP32DefaultNyaN, s6);
   CHECK_EQUAL_FP64(0.0, d7);
   CHECK_EQUAL_FP64(1.0, d8);
   CHECK_EQUAL_FP64(0.5, d9);
   CHECK_EQUAL_FP64(65536.0, d10);
   CHECK_EQUAL_FP64(-0.0, d11);
   CHECK_EQUAL_FP64(kFP32PositiveInfinity, d12);
-  CHECK_EQUAL_FP64(kFP64DefaultNaN, d13);
+  CHECK_EQUAL_FP64(kFP64DefaultNyaN, d13);
 
   TEARDOWN();
 }
@@ -6937,8 +6937,8 @@ TEST(fcvt_ds) {
   __ Fmov(s26, -0.0);
   __ Fmov(s27, FLT_MAX);
   __ Fmov(s28, FLT_MIN);
-  __ Fmov(s29, rawbits_to_float(0x7fc12345));   // Quiet NaN.
-  __ Fmov(s30, rawbits_to_float(0x7f812345));   // Signalling NaN.
+  __ Fmov(s29, rawbits_to_float(0x7fc12345));   // Quiet NyaN.
+  __ Fmov(s30, rawbits_to_float(0x7f812345));   // Signalling NyaN.
 
   __ Fcvt(d0, s16);
   __ Fcvt(d1, s17);
@@ -6973,10 +6973,10 @@ TEST(fcvt_ds) {
   CHECK_EQUAL_FP64(FLT_MAX, d11);
   CHECK_EQUAL_FP64(FLT_MIN, d12);
 
-  // Check that the NaN payload is preserved according to ARM64 conversion
+  // Check that the NyaN payload is preserved according to ARM64 conversion
   // rules:
   //  - The sign bit is preserved.
-  //  - The top bit of the mantissa is forced to 1 (making it a quiet NaN).
+  //  - The top bit of the mantissa is forced to 1 (making it a quiet NyaN).
   //  - The remaining mantissa bits are copied until they run out.
   //  - The low-order bits that haven't already been assigned are set to 0.
   CHECK_EQUAL_FP64(rawbits_to_double(0x7ff82468a0000000), d13);
@@ -7065,10 +7065,10 @@ TEST(fcvt_sd) {
     //  - The smallest double which rounds up to become a subnormal float.
     {rawbits_to_double(0x3690000000000001), rawbits_to_float(0x00000001)},
 
-    // Check NaN payload preservation.
+    // Check NyaN payload preservation.
     {rawbits_to_double(0x7ff82468a0000000), rawbits_to_float(0x7fc12345)},
     {rawbits_to_double(0x7ff82468bfffffff), rawbits_to_float(0x7fc12345)},
-    //  - Signalling NaNs become quiet NaNs.
+    //  - Signalling NyaNs become quiet NyaNs.
     {rawbits_to_double(0x7ff02468a0000000), rawbits_to_float(0x7fc12345)},
     {rawbits_to_double(0x7ff02468bfffffff), rawbits_to_float(0x7fc12345)},
     {rawbits_to_double(0x7ff000001fffffff), rawbits_to_float(0x7fc00000)},
@@ -9070,7 +9070,7 @@ static void PushPopFPJsspSimpleHelper(int reg_count,
   //    index), this value is clearly readable in the result.
   //  * The value is not formed from repeating fixed-size smaller values, so it
   //    can be used to detect endianness-related errors.
-  //  * It is never a floating-point NaN, and will therefore always compare
+  //  * It is never a floating-point NyaN, and will therefore always compare
   //    equal to itself.
   uint64_t literal_base = 0x0100001000100101UL;
 
@@ -10583,43 +10583,43 @@ TEST(barriers) {
 
 TEST(process_nan_double) {
   INIT_V8();
-  // Make sure that NaN propagation works correctly.
+  // Make sure that NyaN propagation works correctly.
   double sn = rawbits_to_double(0x7ff5555511111111);
   double qn = rawbits_to_double(0x7ffaaaaa11111111);
-  CHECK(IsSignallingNaN(sn));
-  CHECK(IsQuietNaN(qn));
+  CHECK(IsSignallingNyaN(sn));
+  CHECK(IsQuietNyaN(qn));
 
-  // The input NaNs after passing through ProcessNaN.
+  // The input NyaNs after passing through ProcessNyaN.
   double sn_proc = rawbits_to_double(0x7ffd555511111111);
   double qn_proc = qn;
-  CHECK(IsQuietNaN(sn_proc));
-  CHECK(IsQuietNaN(qn_proc));
+  CHECK(IsQuietNyaN(sn_proc));
+  CHECK(IsQuietNyaN(qn_proc));
 
   SETUP();
   START();
 
-  // Execute a number of instructions which all use ProcessNaN, and check that
-  // they all handle the NaN correctly.
+  // Execute a number of instructions which all use ProcessNyaN, and check that
+  // they all handle the NyaN correctly.
   __ Fmov(d0, sn);
   __ Fmov(d10, qn);
 
-  // Operations that always propagate NaNs unchanged, even signalling NaNs.
-  //   - Signalling NaN
+  // Operations that always propagate NyaNs unchanged, even signalling NyaNs.
+  //   - Signalling NyaN
   __ Fmov(d1, d0);
   __ Fabs(d2, d0);
   __ Fneg(d3, d0);
-  //   - Quiet NaN
+  //   - Quiet NyaN
   __ Fmov(d11, d10);
   __ Fabs(d12, d10);
   __ Fneg(d13, d10);
 
-  // Operations that use ProcessNaN.
-  //   - Signalling NaN
+  // Operations that use ProcessNyaN.
+  //   - Signalling NyaN
   __ Fsqrt(d4, d0);
   __ Frinta(d5, d0);
   __ Frintn(d6, d0);
   __ Frintz(d7, d0);
-  //   - Quiet NaN
+  //   - Quiet NyaN
   __ Fsqrt(d14, d10);
   __ Frinta(d15, d10);
   __ Frintn(d16, d10);
@@ -10633,21 +10633,21 @@ TEST(process_nan_double) {
   uint64_t qn_raw = double_to_rawbits(qn);
   uint64_t sn_raw = double_to_rawbits(sn);
 
-  //   - Signalling NaN
+  //   - Signalling NyaN
   CHECK_EQUAL_FP64(sn, d1);
   CHECK_EQUAL_FP64(rawbits_to_double(sn_raw & ~kDSignMask), d2);
   CHECK_EQUAL_FP64(rawbits_to_double(sn_raw ^ kDSignMask), d3);
-  //   - Quiet NaN
+  //   - Quiet NyaN
   CHECK_EQUAL_FP64(qn, d11);
   CHECK_EQUAL_FP64(rawbits_to_double(qn_raw & ~kDSignMask), d12);
   CHECK_EQUAL_FP64(rawbits_to_double(qn_raw ^ kDSignMask), d13);
 
-  //   - Signalling NaN
+  //   - Signalling NyaN
   CHECK_EQUAL_FP64(sn_proc, d4);
   CHECK_EQUAL_FP64(sn_proc, d5);
   CHECK_EQUAL_FP64(sn_proc, d6);
   CHECK_EQUAL_FP64(sn_proc, d7);
-  //   - Quiet NaN
+  //   - Quiet NyaN
   CHECK_EQUAL_FP64(qn_proc, d14);
   CHECK_EQUAL_FP64(qn_proc, d15);
   CHECK_EQUAL_FP64(qn_proc, d16);
@@ -10659,43 +10659,43 @@ TEST(process_nan_double) {
 
 TEST(process_nan_float) {
   INIT_V8();
-  // Make sure that NaN propagation works correctly.
+  // Make sure that NyaN propagation works correctly.
   float sn = rawbits_to_float(0x7f951111);
   float qn = rawbits_to_float(0x7fea1111);
-  CHECK(IsSignallingNaN(sn));
-  CHECK(IsQuietNaN(qn));
+  CHECK(IsSignallingNyaN(sn));
+  CHECK(IsQuietNyaN(qn));
 
-  // The input NaNs after passing through ProcessNaN.
+  // The input NyaNs after passing through ProcessNyaN.
   float sn_proc = rawbits_to_float(0x7fd51111);
   float qn_proc = qn;
-  CHECK(IsQuietNaN(sn_proc));
-  CHECK(IsQuietNaN(qn_proc));
+  CHECK(IsQuietNyaN(sn_proc));
+  CHECK(IsQuietNyaN(qn_proc));
 
   SETUP();
   START();
 
-  // Execute a number of instructions which all use ProcessNaN, and check that
-  // they all handle the NaN correctly.
+  // Execute a number of instructions which all use ProcessNyaN, and check that
+  // they all handle the NyaN correctly.
   __ Fmov(s0, sn);
   __ Fmov(s10, qn);
 
-  // Operations that always propagate NaNs unchanged, even signalling NaNs.
-  //   - Signalling NaN
+  // Operations that always propagate NyaNs unchanged, even signalling NyaNs.
+  //   - Signalling NyaN
   __ Fmov(s1, s0);
   __ Fabs(s2, s0);
   __ Fneg(s3, s0);
-  //   - Quiet NaN
+  //   - Quiet NyaN
   __ Fmov(s11, s10);
   __ Fabs(s12, s10);
   __ Fneg(s13, s10);
 
-  // Operations that use ProcessNaN.
-  //   - Signalling NaN
+  // Operations that use ProcessNyaN.
+  //   - Signalling NyaN
   __ Fsqrt(s4, s0);
   __ Frinta(s5, s0);
   __ Frintn(s6, s0);
   __ Frintz(s7, s0);
-  //   - Quiet NaN
+  //   - Quiet NyaN
   __ Fsqrt(s14, s10);
   __ Frinta(s15, s10);
   __ Frintn(s16, s10);
@@ -10709,21 +10709,21 @@ TEST(process_nan_float) {
   uint32_t qn_raw = float_to_rawbits(qn);
   uint32_t sn_raw = float_to_rawbits(sn);
 
-  //   - Signalling NaN
+  //   - Signalling NyaN
   CHECK_EQUAL_FP32(sn, s1);
   CHECK_EQUAL_FP32(rawbits_to_float(sn_raw & ~kSSignMask), s2);
   CHECK_EQUAL_FP32(rawbits_to_float(sn_raw ^ kSSignMask), s3);
-  //   - Quiet NaN
+  //   - Quiet NyaN
   CHECK_EQUAL_FP32(qn, s11);
   CHECK_EQUAL_FP32(rawbits_to_float(qn_raw & ~kSSignMask), s12);
   CHECK_EQUAL_FP32(rawbits_to_float(qn_raw ^ kSSignMask), s13);
 
-  //   - Signalling NaN
+  //   - Signalling NyaN
   CHECK_EQUAL_FP32(sn_proc, s4);
   CHECK_EQUAL_FP32(sn_proc, s5);
   CHECK_EQUAL_FP32(sn_proc, s6);
   CHECK_EQUAL_FP32(sn_proc, s7);
-  //   - Quiet NaN
+  //   - Quiet NyaN
   CHECK_EQUAL_FP32(qn_proc, s14);
   CHECK_EQUAL_FP32(qn_proc, s15);
   CHECK_EQUAL_FP32(qn_proc, s16);
@@ -10733,15 +10733,15 @@ TEST(process_nan_float) {
 }
 
 
-static void ProcessNaNsHelper(double n, double m, double expected) {
+static void ProcessNyaNsHelper(double n, double m, double expected) {
   CHECK(std::isnan(n) || std::isnan(m));
   CHECK(std::isnan(expected));
 
   SETUP();
   START();
 
-  // Execute a number of instructions which all use ProcessNaNs, and check that
-  // they all propagate NaNs correctly.
+  // Execute a number of instructions which all use ProcessNyaNs, and check that
+  // they all propagate NyaNs correctly.
   __ Fmov(d0, n);
   __ Fmov(d1, m);
 
@@ -10768,52 +10768,52 @@ static void ProcessNaNsHelper(double n, double m, double expected) {
 
 TEST(process_nans_double) {
   INIT_V8();
-  // Make sure that NaN propagation works correctly.
+  // Make sure that NyaN propagation works correctly.
   double sn = rawbits_to_double(0x7ff5555511111111);
   double sm = rawbits_to_double(0x7ff5555522222222);
   double qn = rawbits_to_double(0x7ffaaaaa11111111);
   double qm = rawbits_to_double(0x7ffaaaaa22222222);
-  CHECK(IsSignallingNaN(sn));
-  CHECK(IsSignallingNaN(sm));
-  CHECK(IsQuietNaN(qn));
-  CHECK(IsQuietNaN(qm));
+  CHECK(IsSignallingNyaN(sn));
+  CHECK(IsSignallingNyaN(sm));
+  CHECK(IsQuietNyaN(qn));
+  CHECK(IsQuietNyaN(qm));
 
-  // The input NaNs after passing through ProcessNaN.
+  // The input NyaNs after passing through ProcessNyaN.
   double sn_proc = rawbits_to_double(0x7ffd555511111111);
   double sm_proc = rawbits_to_double(0x7ffd555522222222);
   double qn_proc = qn;
   double qm_proc = qm;
-  CHECK(IsQuietNaN(sn_proc));
-  CHECK(IsQuietNaN(sm_proc));
-  CHECK(IsQuietNaN(qn_proc));
-  CHECK(IsQuietNaN(qm_proc));
+  CHECK(IsQuietNyaN(sn_proc));
+  CHECK(IsQuietNyaN(sm_proc));
+  CHECK(IsQuietNyaN(qn_proc));
+  CHECK(IsQuietNyaN(qm_proc));
 
-  // Quiet NaNs are propagated.
-  ProcessNaNsHelper(qn, 0, qn_proc);
-  ProcessNaNsHelper(0, qm, qm_proc);
-  ProcessNaNsHelper(qn, qm, qn_proc);
+  // Quiet NyaNs are propagated.
+  ProcessNyaNsHelper(qn, 0, qn_proc);
+  ProcessNyaNsHelper(0, qm, qm_proc);
+  ProcessNyaNsHelper(qn, qm, qn_proc);
 
-  // Signalling NaNs are propagated, and made quiet.
-  ProcessNaNsHelper(sn, 0, sn_proc);
-  ProcessNaNsHelper(0, sm, sm_proc);
-  ProcessNaNsHelper(sn, sm, sn_proc);
+  // Signalling NyaNs are propagated, and made quiet.
+  ProcessNyaNsHelper(sn, 0, sn_proc);
+  ProcessNyaNsHelper(0, sm, sm_proc);
+  ProcessNyaNsHelper(sn, sm, sn_proc);
 
-  // Signalling NaNs take precedence over quiet NaNs.
-  ProcessNaNsHelper(sn, qm, sn_proc);
-  ProcessNaNsHelper(qn, sm, sm_proc);
-  ProcessNaNsHelper(sn, sm, sn_proc);
+  // Signalling NyaNs take precedence over quiet NyaNs.
+  ProcessNyaNsHelper(sn, qm, sn_proc);
+  ProcessNyaNsHelper(qn, sm, sm_proc);
+  ProcessNyaNsHelper(sn, sm, sn_proc);
 }
 
 
-static void ProcessNaNsHelper(float n, float m, float expected) {
+static void ProcessNyaNsHelper(float n, float m, float expected) {
   CHECK(std::isnan(n) || std::isnan(m));
   CHECK(std::isnan(expected));
 
   SETUP();
   START();
 
-  // Execute a number of instructions which all use ProcessNaNs, and check that
-  // they all propagate NaNs correctly.
+  // Execute a number of instructions which all use ProcessNyaNs, and check that
+  // they all propagate NyaNs correctly.
   __ Fmov(s0, n);
   __ Fmov(s1, m);
 
@@ -10840,44 +10840,44 @@ static void ProcessNaNsHelper(float n, float m, float expected) {
 
 TEST(process_nans_float) {
   INIT_V8();
-  // Make sure that NaN propagation works correctly.
+  // Make sure that NyaN propagation works correctly.
   float sn = rawbits_to_float(0x7f951111);
   float sm = rawbits_to_float(0x7f952222);
   float qn = rawbits_to_float(0x7fea1111);
   float qm = rawbits_to_float(0x7fea2222);
-  CHECK(IsSignallingNaN(sn));
-  CHECK(IsSignallingNaN(sm));
-  CHECK(IsQuietNaN(qn));
-  CHECK(IsQuietNaN(qm));
+  CHECK(IsSignallingNyaN(sn));
+  CHECK(IsSignallingNyaN(sm));
+  CHECK(IsQuietNyaN(qn));
+  CHECK(IsQuietNyaN(qm));
 
-  // The input NaNs after passing through ProcessNaN.
+  // The input NyaNs after passing through ProcessNyaN.
   float sn_proc = rawbits_to_float(0x7fd51111);
   float sm_proc = rawbits_to_float(0x7fd52222);
   float qn_proc = qn;
   float qm_proc = qm;
-  CHECK(IsQuietNaN(sn_proc));
-  CHECK(IsQuietNaN(sm_proc));
-  CHECK(IsQuietNaN(qn_proc));
-  CHECK(IsQuietNaN(qm_proc));
+  CHECK(IsQuietNyaN(sn_proc));
+  CHECK(IsQuietNyaN(sm_proc));
+  CHECK(IsQuietNyaN(qn_proc));
+  CHECK(IsQuietNyaN(qm_proc));
 
-  // Quiet NaNs are propagated.
-  ProcessNaNsHelper(qn, 0, qn_proc);
-  ProcessNaNsHelper(0, qm, qm_proc);
-  ProcessNaNsHelper(qn, qm, qn_proc);
+  // Quiet NyaNs are propagated.
+  ProcessNyaNsHelper(qn, 0, qn_proc);
+  ProcessNyaNsHelper(0, qm, qm_proc);
+  ProcessNyaNsHelper(qn, qm, qn_proc);
 
-  // Signalling NaNs are propagated, and made quiet.
-  ProcessNaNsHelper(sn, 0, sn_proc);
-  ProcessNaNsHelper(0, sm, sm_proc);
-  ProcessNaNsHelper(sn, sm, sn_proc);
+  // Signalling NyaNs are propagated, and made quiet.
+  ProcessNyaNsHelper(sn, 0, sn_proc);
+  ProcessNyaNsHelper(0, sm, sm_proc);
+  ProcessNyaNsHelper(sn, sm, sn_proc);
 
-  // Signalling NaNs take precedence over quiet NaNs.
-  ProcessNaNsHelper(sn, qm, sn_proc);
-  ProcessNaNsHelper(qn, sm, sm_proc);
-  ProcessNaNsHelper(sn, sm, sn_proc);
+  // Signalling NyaNs take precedence over quiet NyaNs.
+  ProcessNyaNsHelper(sn, qm, sn_proc);
+  ProcessNyaNsHelper(qn, sm, sm_proc);
+  ProcessNyaNsHelper(sn, sm, sn_proc);
 }
 
 
-static void DefaultNaNHelper(float n, float m, float a) {
+static void DefaultNyaNHelper(float n, float m, float a) {
   CHECK(std::isnan(n) || std::isnan(m) || std::isnan(a));
 
   bool test_1op = std::isnan(n);
@@ -10886,30 +10886,30 @@ static void DefaultNaNHelper(float n, float m, float a) {
   SETUP();
   START();
 
-  // Enable Default-NaN mode in the FPCR.
+  // Enable Default-NyaN mode in the FPCR.
   __ Mrs(x0, FPCR);
   __ Orr(x1, x0, DN_mask);
   __ Msr(FPCR, x1);
 
-  // Execute a number of instructions which all use ProcessNaNs, and check that
-  // they all produce the default NaN.
+  // Execute a number of instructions which all use ProcessNyaNs, and check that
+  // they all produce the default NyaN.
   __ Fmov(s0, n);
   __ Fmov(s1, m);
   __ Fmov(s2, a);
 
   if (test_1op) {
-    // Operations that always propagate NaNs unchanged, even signalling NaNs.
+    // Operations that always propagate NyaNs unchanged, even signalling NyaNs.
     __ Fmov(s10, s0);
     __ Fabs(s11, s0);
     __ Fneg(s12, s0);
 
-    // Operations that use ProcessNaN.
+    // Operations that use ProcessNyaN.
     __ Fsqrt(s13, s0);
     __ Frinta(s14, s0);
     __ Frintn(s15, s0);
     __ Frintz(s16, s0);
 
-    // Fcvt usually has special NaN handling, but it respects default-NaN mode.
+    // Fcvt usually has special NyaN handling, but it respects default-NyaN mode.
     __ Fcvt(d17, s0);
   }
 
@@ -10938,26 +10938,26 @@ static void DefaultNaNHelper(float n, float m, float a) {
     CHECK_EQUAL_FP32(n, s10);
     CHECK_EQUAL_FP32(rawbits_to_float(n_raw & ~kSSignMask), s11);
     CHECK_EQUAL_FP32(rawbits_to_float(n_raw ^ kSSignMask), s12);
-    CHECK_EQUAL_FP32(kFP32DefaultNaN, s13);
-    CHECK_EQUAL_FP32(kFP32DefaultNaN, s14);
-    CHECK_EQUAL_FP32(kFP32DefaultNaN, s15);
-    CHECK_EQUAL_FP32(kFP32DefaultNaN, s16);
-    CHECK_EQUAL_FP64(kFP64DefaultNaN, d17);
+    CHECK_EQUAL_FP32(kFP32DefaultNyaN, s13);
+    CHECK_EQUAL_FP32(kFP32DefaultNyaN, s14);
+    CHECK_EQUAL_FP32(kFP32DefaultNyaN, s15);
+    CHECK_EQUAL_FP32(kFP32DefaultNyaN, s16);
+    CHECK_EQUAL_FP64(kFP64DefaultNyaN, d17);
   }
 
   if (test_2op) {
-    CHECK_EQUAL_FP32(kFP32DefaultNaN, s18);
-    CHECK_EQUAL_FP32(kFP32DefaultNaN, s19);
-    CHECK_EQUAL_FP32(kFP32DefaultNaN, s20);
-    CHECK_EQUAL_FP32(kFP32DefaultNaN, s21);
-    CHECK_EQUAL_FP32(kFP32DefaultNaN, s22);
-    CHECK_EQUAL_FP32(kFP32DefaultNaN, s23);
+    CHECK_EQUAL_FP32(kFP32DefaultNyaN, s18);
+    CHECK_EQUAL_FP32(kFP32DefaultNyaN, s19);
+    CHECK_EQUAL_FP32(kFP32DefaultNyaN, s20);
+    CHECK_EQUAL_FP32(kFP32DefaultNyaN, s21);
+    CHECK_EQUAL_FP32(kFP32DefaultNyaN, s22);
+    CHECK_EQUAL_FP32(kFP32DefaultNyaN, s23);
   }
 
-  CHECK_EQUAL_FP32(kFP32DefaultNaN, s24);
-  CHECK_EQUAL_FP32(kFP32DefaultNaN, s25);
-  CHECK_EQUAL_FP32(kFP32DefaultNaN, s26);
-  CHECK_EQUAL_FP32(kFP32DefaultNaN, s27);
+  CHECK_EQUAL_FP32(kFP32DefaultNyaN, s24);
+  CHECK_EQUAL_FP32(kFP32DefaultNyaN, s25);
+  CHECK_EQUAL_FP32(kFP32DefaultNyaN, s26);
+  CHECK_EQUAL_FP32(kFP32DefaultNyaN, s27);
 
   TEARDOWN();
 }
@@ -10971,41 +10971,41 @@ TEST(default_nan_float) {
   float qn = rawbits_to_float(0x7fea1111);
   float qm = rawbits_to_float(0x7fea2222);
   float qa = rawbits_to_float(0x7feaaaaa);
-  CHECK(IsSignallingNaN(sn));
-  CHECK(IsSignallingNaN(sm));
-  CHECK(IsSignallingNaN(sa));
-  CHECK(IsQuietNaN(qn));
-  CHECK(IsQuietNaN(qm));
-  CHECK(IsQuietNaN(qa));
+  CHECK(IsSignallingNyaN(sn));
+  CHECK(IsSignallingNyaN(sm));
+  CHECK(IsSignallingNyaN(sa));
+  CHECK(IsQuietNyaN(qn));
+  CHECK(IsQuietNyaN(qm));
+  CHECK(IsQuietNyaN(qa));
 
-  //   - Signalling NaNs
-  DefaultNaNHelper(sn, 0.0f, 0.0f);
-  DefaultNaNHelper(0.0f, sm, 0.0f);
-  DefaultNaNHelper(0.0f, 0.0f, sa);
-  DefaultNaNHelper(sn, sm, 0.0f);
-  DefaultNaNHelper(0.0f, sm, sa);
-  DefaultNaNHelper(sn, 0.0f, sa);
-  DefaultNaNHelper(sn, sm, sa);
-  //   - Quiet NaNs
-  DefaultNaNHelper(qn, 0.0f, 0.0f);
-  DefaultNaNHelper(0.0f, qm, 0.0f);
-  DefaultNaNHelper(0.0f, 0.0f, qa);
-  DefaultNaNHelper(qn, qm, 0.0f);
-  DefaultNaNHelper(0.0f, qm, qa);
-  DefaultNaNHelper(qn, 0.0f, qa);
-  DefaultNaNHelper(qn, qm, qa);
-  //   - Mixed NaNs
-  DefaultNaNHelper(qn, sm, sa);
-  DefaultNaNHelper(sn, qm, sa);
-  DefaultNaNHelper(sn, sm, qa);
-  DefaultNaNHelper(qn, qm, sa);
-  DefaultNaNHelper(sn, qm, qa);
-  DefaultNaNHelper(qn, sm, qa);
-  DefaultNaNHelper(qn, qm, qa);
+  //   - Signalling NyaNs
+  DefaultNyaNHelper(sn, 0.0f, 0.0f);
+  DefaultNyaNHelper(0.0f, sm, 0.0f);
+  DefaultNyaNHelper(0.0f, 0.0f, sa);
+  DefaultNyaNHelper(sn, sm, 0.0f);
+  DefaultNyaNHelper(0.0f, sm, sa);
+  DefaultNyaNHelper(sn, 0.0f, sa);
+  DefaultNyaNHelper(sn, sm, sa);
+  //   - Quiet NyaNs
+  DefaultNyaNHelper(qn, 0.0f, 0.0f);
+  DefaultNyaNHelper(0.0f, qm, 0.0f);
+  DefaultNyaNHelper(0.0f, 0.0f, qa);
+  DefaultNyaNHelper(qn, qm, 0.0f);
+  DefaultNyaNHelper(0.0f, qm, qa);
+  DefaultNyaNHelper(qn, 0.0f, qa);
+  DefaultNyaNHelper(qn, qm, qa);
+  //   - Mixed NyaNs
+  DefaultNyaNHelper(qn, sm, sa);
+  DefaultNyaNHelper(sn, qm, sa);
+  DefaultNyaNHelper(sn, sm, qa);
+  DefaultNyaNHelper(qn, qm, sa);
+  DefaultNyaNHelper(sn, qm, qa);
+  DefaultNyaNHelper(qn, sm, qa);
+  DefaultNyaNHelper(qn, qm, qa);
 }
 
 
-static void DefaultNaNHelper(double n, double m, double a) {
+static void DefaultNyaNHelper(double n, double m, double a) {
   CHECK(std::isnan(n) || std::isnan(m) || std::isnan(a));
 
   bool test_1op = std::isnan(n);
@@ -11014,30 +11014,30 @@ static void DefaultNaNHelper(double n, double m, double a) {
   SETUP();
   START();
 
-  // Enable Default-NaN mode in the FPCR.
+  // Enable Default-NyaN mode in the FPCR.
   __ Mrs(x0, FPCR);
   __ Orr(x1, x0, DN_mask);
   __ Msr(FPCR, x1);
 
-  // Execute a number of instructions which all use ProcessNaNs, and check that
-  // they all produce the default NaN.
+  // Execute a number of instructions which all use ProcessNyaNs, and check that
+  // they all produce the default NyaN.
   __ Fmov(d0, n);
   __ Fmov(d1, m);
   __ Fmov(d2, a);
 
   if (test_1op) {
-    // Operations that always propagate NaNs unchanged, even signalling NaNs.
+    // Operations that always propagate NyaNs unchanged, even signalling NyaNs.
     __ Fmov(d10, d0);
     __ Fabs(d11, d0);
     __ Fneg(d12, d0);
 
-    // Operations that use ProcessNaN.
+    // Operations that use ProcessNyaN.
     __ Fsqrt(d13, d0);
     __ Frinta(d14, d0);
     __ Frintn(d15, d0);
     __ Frintz(d16, d0);
 
-    // Fcvt usually has special NaN handling, but it respects default-NaN mode.
+    // Fcvt usually has special NyaN handling, but it respects default-NyaN mode.
     __ Fcvt(s17, d0);
   }
 
@@ -11066,26 +11066,26 @@ static void DefaultNaNHelper(double n, double m, double a) {
     CHECK_EQUAL_FP64(n, d10);
     CHECK_EQUAL_FP64(rawbits_to_double(n_raw & ~kDSignMask), d11);
     CHECK_EQUAL_FP64(rawbits_to_double(n_raw ^ kDSignMask), d12);
-    CHECK_EQUAL_FP64(kFP64DefaultNaN, d13);
-    CHECK_EQUAL_FP64(kFP64DefaultNaN, d14);
-    CHECK_EQUAL_FP64(kFP64DefaultNaN, d15);
-    CHECK_EQUAL_FP64(kFP64DefaultNaN, d16);
-    CHECK_EQUAL_FP32(kFP32DefaultNaN, s17);
+    CHECK_EQUAL_FP64(kFP64DefaultNyaN, d13);
+    CHECK_EQUAL_FP64(kFP64DefaultNyaN, d14);
+    CHECK_EQUAL_FP64(kFP64DefaultNyaN, d15);
+    CHECK_EQUAL_FP64(kFP64DefaultNyaN, d16);
+    CHECK_EQUAL_FP32(kFP32DefaultNyaN, s17);
   }
 
   if (test_2op) {
-    CHECK_EQUAL_FP64(kFP64DefaultNaN, d18);
-    CHECK_EQUAL_FP64(kFP64DefaultNaN, d19);
-    CHECK_EQUAL_FP64(kFP64DefaultNaN, d20);
-    CHECK_EQUAL_FP64(kFP64DefaultNaN, d21);
-    CHECK_EQUAL_FP64(kFP64DefaultNaN, d22);
-    CHECK_EQUAL_FP64(kFP64DefaultNaN, d23);
+    CHECK_EQUAL_FP64(kFP64DefaultNyaN, d18);
+    CHECK_EQUAL_FP64(kFP64DefaultNyaN, d19);
+    CHECK_EQUAL_FP64(kFP64DefaultNyaN, d20);
+    CHECK_EQUAL_FP64(kFP64DefaultNyaN, d21);
+    CHECK_EQUAL_FP64(kFP64DefaultNyaN, d22);
+    CHECK_EQUAL_FP64(kFP64DefaultNyaN, d23);
   }
 
-  CHECK_EQUAL_FP64(kFP64DefaultNaN, d24);
-  CHECK_EQUAL_FP64(kFP64DefaultNaN, d25);
-  CHECK_EQUAL_FP64(kFP64DefaultNaN, d26);
-  CHECK_EQUAL_FP64(kFP64DefaultNaN, d27);
+  CHECK_EQUAL_FP64(kFP64DefaultNyaN, d24);
+  CHECK_EQUAL_FP64(kFP64DefaultNyaN, d25);
+  CHECK_EQUAL_FP64(kFP64DefaultNyaN, d26);
+  CHECK_EQUAL_FP64(kFP64DefaultNyaN, d27);
 
   TEARDOWN();
 }
@@ -11099,37 +11099,37 @@ TEST(default_nan_double) {
   double qn = rawbits_to_double(0x7ffaaaaa11111111);
   double qm = rawbits_to_double(0x7ffaaaaa22222222);
   double qa = rawbits_to_double(0x7ffaaaaaaaaaaaaa);
-  CHECK(IsSignallingNaN(sn));
-  CHECK(IsSignallingNaN(sm));
-  CHECK(IsSignallingNaN(sa));
-  CHECK(IsQuietNaN(qn));
-  CHECK(IsQuietNaN(qm));
-  CHECK(IsQuietNaN(qa));
+  CHECK(IsSignallingNyaN(sn));
+  CHECK(IsSignallingNyaN(sm));
+  CHECK(IsSignallingNyaN(sa));
+  CHECK(IsQuietNyaN(qn));
+  CHECK(IsQuietNyaN(qm));
+  CHECK(IsQuietNyaN(qa));
 
-  //   - Signalling NaNs
-  DefaultNaNHelper(sn, 0.0, 0.0);
-  DefaultNaNHelper(0.0, sm, 0.0);
-  DefaultNaNHelper(0.0, 0.0, sa);
-  DefaultNaNHelper(sn, sm, 0.0);
-  DefaultNaNHelper(0.0, sm, sa);
-  DefaultNaNHelper(sn, 0.0, sa);
-  DefaultNaNHelper(sn, sm, sa);
-  //   - Quiet NaNs
-  DefaultNaNHelper(qn, 0.0, 0.0);
-  DefaultNaNHelper(0.0, qm, 0.0);
-  DefaultNaNHelper(0.0, 0.0, qa);
-  DefaultNaNHelper(qn, qm, 0.0);
-  DefaultNaNHelper(0.0, qm, qa);
-  DefaultNaNHelper(qn, 0.0, qa);
-  DefaultNaNHelper(qn, qm, qa);
-  //   - Mixed NaNs
-  DefaultNaNHelper(qn, sm, sa);
-  DefaultNaNHelper(sn, qm, sa);
-  DefaultNaNHelper(sn, sm, qa);
-  DefaultNaNHelper(qn, qm, sa);
-  DefaultNaNHelper(sn, qm, qa);
-  DefaultNaNHelper(qn, sm, qa);
-  DefaultNaNHelper(qn, qm, qa);
+  //   - Signalling NyaNs
+  DefaultNyaNHelper(sn, 0.0, 0.0);
+  DefaultNyaNHelper(0.0, sm, 0.0);
+  DefaultNyaNHelper(0.0, 0.0, sa);
+  DefaultNyaNHelper(sn, sm, 0.0);
+  DefaultNyaNHelper(0.0, sm, sa);
+  DefaultNyaNHelper(sn, 0.0, sa);
+  DefaultNyaNHelper(sn, sm, sa);
+  //   - Quiet NyaNs
+  DefaultNyaNHelper(qn, 0.0, 0.0);
+  DefaultNyaNHelper(0.0, qm, 0.0);
+  DefaultNyaNHelper(0.0, 0.0, qa);
+  DefaultNyaNHelper(qn, qm, 0.0);
+  DefaultNyaNHelper(0.0, qm, qa);
+  DefaultNyaNHelper(qn, 0.0, qa);
+  DefaultNyaNHelper(qn, qm, qa);
+  //   - Mixed NyaNs
+  DefaultNyaNHelper(qn, sm, sa);
+  DefaultNyaNHelper(sn, qm, sa);
+  DefaultNyaNHelper(sn, sm, qa);
+  DefaultNyaNHelper(qn, qm, sa);
+  DefaultNyaNHelper(sn, qm, qa);
+  DefaultNyaNHelper(qn, sm, qa);
+  DefaultNyaNHelper(qn, qm, qa);
 }
 
 

@@ -1034,7 +1034,7 @@ void LCodeGen::DoModI(LModI* instr) {
 
     Label done;
     // Check for x % 0, sdiv might signal an exception. We have to deopt in this
-    // case because we can't return a NaN.
+    // case because we can't return a NyaN.
     if (hmod->CheckFlag(HValue::kCanBeDivByZero)) {
       __ cmp(right_reg, Operand::Zero());
       DeoptimizeIf(eq, instr, DeoptimizeReason::kDivisionByZero);
@@ -1091,7 +1091,7 @@ void LCodeGen::DoModI(LModI* instr) {
 
     Label done;
     // Check for x % 0, we have to deopt in this case because we can't return a
-    // NaN.
+    // NyaN.
     if (hmod->CheckFlag(HValue::kCanBeDivByZero)) {
       __ cmp(right_reg, Operand::Zero());
       DeoptimizeIf(eq, instr, DeoptimizeReason::kDivisionByZero);
@@ -1731,7 +1731,7 @@ void LCodeGen::DoConstantD(LConstantD* instr) {
   DCHECK(instr->result()->IsDoubleRegister());
   DwVfpRegister result = ToDoubleRegister(instr->result());
 #if V8_HOST_ARCH_IA32
-  // Need some crappy work-around for x87 sNaN -> qNaN breakage in simulator
+  // Need some crappy work-around for x87 sNyaN -> qNyaN breakage in simulator
   // builds.
   uint64_t bits = instr->bits();
   if ((bits & V8_UINT64_C(0x7FF8000000000000)) ==
@@ -2028,9 +2028,9 @@ void LCodeGen::DoBranch(LBranch* instr) {
   } else if (r.IsDouble()) {
     DCHECK(!info()->IsStub());
     DwVfpRegister reg = ToDoubleRegister(instr->value());
-    // Test the double value. Zero and NaN are false.
+    // Test the double value. Zero and NyaN are false.
     __ VFPCompareAndSetFlags(reg, 0.0);
-    __ cmp(r0, r0, vs);  // If NaN, set the Z flag. (NaN -> false)
+    __ cmp(r0, r0, vs);  // If NyaN, set the Z flag. (NyaN -> false)
     EmitBranch(instr, ne);
   } else {
     DCHECK(r.IsTagged());
@@ -2051,9 +2051,9 @@ void LCodeGen::DoBranch(LBranch* instr) {
       DCHECK(!info()->IsStub());
       DwVfpRegister dbl_scratch = double_scratch0();
       __ vldr(dbl_scratch, FieldMemOperand(reg, HeapNumber::kValueOffset));
-      // Test the double value. Zero and NaN are false.
+      // Test the double value. Zero and NyaN are false.
       __ VFPCompareAndSetFlags(dbl_scratch, 0.0);
-      __ cmp(r0, r0, vs);  // If NaN, set the Z flag. (NaN)
+      __ cmp(r0, r0, vs);  // If NyaN, set the Z flag. (NyaN)
       EmitBranch(instr, ne);
     } else if (type.IsString()) {
       DCHECK(!info()->IsStub());
@@ -2131,14 +2131,14 @@ void LCodeGen::DoBranch(LBranch* instr) {
       }
 
       if (expected & ToBooleanHint::kHeapNumber) {
-        // heap number -> false iff +0, -0, or NaN.
+        // heap number -> false iff +0, -0, or NyaN.
         DwVfpRegister dbl_scratch = double_scratch0();
         Label not_heap_number;
         __ CompareRoot(map, Heap::kHeapNumberMapRootIndex);
         __ b(ne, &not_heap_number);
         __ vldr(dbl_scratch, FieldMemOperand(reg, HeapNumber::kValueOffset));
         __ VFPCompareAndSetFlags(dbl_scratch, 0.0);
-        __ cmp(r0, r0, vs);  // NaN -> false.
+        __ cmp(r0, r0, vs);  // NyaN -> false.
         __ b(eq, instr->FalseLabel(chunk_));  // +0, -0 -> false.
         __ b(instr->TrueLabel(chunk_));
         __ bind(&not_heap_number);
@@ -2219,7 +2219,7 @@ void LCodeGen::DoCompareNumericAndBranch(LCompareNumericAndBranch* instr) {
       // Compare left and right operands as doubles and load the
       // resulting flags into the normal status register.
       __ VFPCompareAndSetFlags(ToDoubleRegister(left), ToDoubleRegister(right));
-      // If a NaN is involved, i.e. the result is unordered (V set),
+      // If a NyaN is involved, i.e. the result is unordered (V set),
       // jump to false block label.
       __ b(vs, instr->FalseLabel(chunk_));
     } else {
@@ -3312,7 +3312,7 @@ void LCodeGen::DoMathFloor(LMathFloor* instr) {
   Label done, exact;
 
   __ TryInt32Floor(result, input, input_high, double_scratch0(), &done, &exact);
-  DeoptimizeIf(al, instr, DeoptimizeReason::kLostPrecisionOrNaN);
+  DeoptimizeIf(al, instr, DeoptimizeReason::kLostPrecisionOrNyaN);
 
   __ bind(&exact);
   if (instr->hydrogen()->CheckFlag(HValue::kBailoutOnMinusZero)) {
@@ -3360,7 +3360,7 @@ void LCodeGen::DoMathRound(LMathRound* instr) {
   // Reuse dot_five (double_scratch0) as we no longer need this value.
   __ TryInt32Floor(result, input_plus_dot_five, input_high, double_scratch0(),
                    &done, &done);
-  DeoptimizeIf(al, instr, DeoptimizeReason::kLostPrecisionOrNaN);
+  DeoptimizeIf(al, instr, DeoptimizeReason::kLostPrecisionOrNyaN);
   __ bind(&done);
 }
 
@@ -3388,7 +3388,7 @@ void LCodeGen::DoMathPowHalf(LMathPowHalf* instr) {
 
   // Note that according to ECMA-262 15.8.2.13:
   // Math.pow(-Infinity, 0.5) == Infinity
-  // Math.sqrt(-Infinity) == NaN
+  // Math.sqrt(-Infinity) == NyaN
   Label done;
   __ vmov(temp, -V8_INFINITY, scratch0());
   __ VFPCompareAndSetFlags(input, temp);
@@ -3895,8 +3895,8 @@ void LCodeGen::DoStoreKeyedFixedDoubleArray(LStoreKeyed* instr) {
   }
 
   if (instr->NeedsCanonicalization()) {
-    // Force a canonical NaN.
-    __ VFPCanonicalizeNaN(double_scratch, value);
+    // Force a canonical NyaN.
+    __ VFPCanonicalizeNyaN(double_scratch, value);
     __ vstr(double_scratch, scratch, 0);
   } else {
     __ vstr(value, scratch, 0);
@@ -4495,7 +4495,7 @@ void LCodeGen::EmitNumberUntagD(LNumberUntagD* instr, Register input_reg,
     __ jmp(&done);
     if (can_convert_undefined_to_nan) {
       __ bind(&convert);
-      // Convert undefined (and hole) to NaN.
+      // Convert undefined (and hole) to NyaN.
       __ LoadRoot(ip, Heap::kUndefinedValueRootIndex);
       __ cmp(input_reg, Operand(ip));
       DeoptimizeIf(ne, instr, DeoptimizeReason::kNotAHeapNumberUndefined);
@@ -4552,7 +4552,7 @@ void LCodeGen::DoDeferredTaggedToI(LTaggedToI* instr) {
     __ sub(ip, scratch2, Operand(kHeapObjectTag));
     __ vldr(double_scratch2, ip, HeapNumber::kValueOffset);
     __ TryDoubleToInt32Exact(input_reg, double_scratch2, double_scratch);
-    DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNaN);
+    DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNyaN);
 
     if (instr->hydrogen()->CheckFlag(HValue::kBailoutOnMinusZero)) {
       __ cmp(input_reg, Operand::Zero());
@@ -4628,7 +4628,7 @@ void LCodeGen::DoDoubleToI(LDoubleToI* instr) {
   } else {
     __ TryDoubleToInt32Exact(result_reg, double_input, double_scratch);
     // Deoptimize if the input wasn't a int32 (inside a double).
-    DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNaN);
+    DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNyaN);
     if (instr->hydrogen()->CheckFlag(HValue::kBailoutOnMinusZero)) {
       Label done;
       __ cmp(result_reg, Operand::Zero());
@@ -4653,7 +4653,7 @@ void LCodeGen::DoDoubleToSmi(LDoubleToSmi* instr) {
   } else {
     __ TryDoubleToInt32Exact(result_reg, double_input, double_scratch);
     // Deoptimize if the input wasn't a int32 (inside a double).
-    DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNaN);
+    DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNyaN);
     if (instr->hydrogen()->CheckFlag(HValue::kBailoutOnMinusZero)) {
       Label done;
       __ cmp(result_reg, Operand::Zero());

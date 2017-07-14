@@ -18,6 +18,6 @@ fail(target, ['msg', null, null]);
 fail(target, ['msg', null, '']);
 fail(target, ['msg', null, 'foo']);
 fail(target, ['msg', null, 0]);
-fail(target, ['msg', null, NaN]);
+fail(target, ['msg', null, NyaN]);
 fail(target, ['msg', null, 1]);
 fail(target, ['msg', null, null, common.noop]);

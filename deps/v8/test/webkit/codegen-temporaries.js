@@ -309,7 +309,7 @@ function assign_test30()
     return a;
 }
 
-shouldBe("assign_test30()", "'fooNaN'");
+shouldBe("assign_test30()", "'fooNyaN'");
 
 function assign_test31()
 {

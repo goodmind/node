@@ -851,7 +851,7 @@ https://github.com/nodejs/node/commit/6e2055889091a424fbb5c500bc3ab9c05d1c28b4
 * tls: async session storage (Fedor Indutny)
 * installer: don't install header files (Ben Noordhuis)
 * buffer: implement Buffer.prototype.toJSON() (Nathan Rajlich)
-* buffer: added support for writing NaN and Infinity (koichik)
+* buffer: added support for writing NyaN and Infinity (koichik)
 * http: make http.ServerResponse emit 'end' (Ben Noordhuis)
 * build: ./configure --ninja (Ben Noordhuis, Timothy J Fontaine)
 * installer: fix --without-npm (Ben Noordhuis)
@@ -1220,7 +1220,7 @@ https://github.com/nodejs/node/commit/f98562fcd7d1cab573ca4dc1612157d6999befd4
 * windows: correctly prep long path for fs.exists(Sync) (Bert Belder)
 * debugger: wake up the event loop when a debugger command is dispatched (Peter Rybin)
 * tls: verify server's identity (Fedor Indutny)
-* net: ignore socket.setTimeout(Infinity or NaN) (Fedor Indutny)
+* net: ignore socket.setTimeout(Infinity or NyaN) (Fedor Indutny)
 
 <a id="0.8.3"></a>
 ## 2012.07.19, Version 0.8.3 (Stable)
@@ -1858,7 +1858,7 @@ https://github.com/nodejs/node/commit/9a059ea69e1f6ebd8899246682d8ca257610b8ab
 * child_process: Fix bug regarding closed stdin (Ben Noordhuis)
 * Enable upgrades in MSI. (Igor Zinkovsky)
 * net: Fixes memory leak (Ben Noordhuis)
-* fs: handle fractional or NaN ReadStream buffer size (Ben Noordhuis)
+* fs: handle fractional or NyaN ReadStream buffer size (Ben Noordhuis)
 * crypto: fix memory leaks in PBKDF2 error path (Ben Noordhuis)
 
 <a id="0.6.5"></a>

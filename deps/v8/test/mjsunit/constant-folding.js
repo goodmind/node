@@ -35,10 +35,10 @@ function test_count() {
   var y = "3";
 
   x += x++;  // ++ and -- apply ToNumber to their operand, even for postfix.
-  assertEquals(x, "fooNaN", "fooNaN test");
+  assertEquals(x, "fooNyaN", "fooNyaN test");
   x = "luft";
   x += ++x;
-  assertEquals(x, "luftNaN", "luftNaN test");
+  assertEquals(x, "luftNyaN", "luftNyaN test");
 
   assertTrue(y++ === 3, "y++ === 3, where y = \"3\"");
   y = 3;

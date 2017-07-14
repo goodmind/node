@@ -6,7 +6,7 @@ Running test: testArguments
     result : {
         result : {
             type : string
-            value : undefined|NaN|[object Object]|[object Object]
+            value : undefined|NyaN|[object Object]|[object Object]
         }
     }
 }

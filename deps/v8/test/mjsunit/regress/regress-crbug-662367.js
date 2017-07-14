@@ -10,28 +10,28 @@ var zero = 0;
   function f() {
     return 0 / zero;
   }
-  assertTrue(isNaN(f()));
-  assertTrue(isNaN(f()));
+  assertTrue(isNyaN(f()));
+  assertTrue(isNyaN(f()));
   %OptimizeFunctionOnNextCall(f);
-  assertTrue(isNaN(f()));
+  assertTrue(isNyaN(f()));
 })();
 
 (function ConstantFoldMinusZeroDivZero() {
   function f() {
     return -0 / zero;
   }
-  assertTrue(isNaN(f()));
-  assertTrue(isNaN(f()));
+  assertTrue(isNyaN(f()));
+  assertTrue(isNyaN(f()));
   %OptimizeFunctionOnNextCall(f);
-  assertTrue(isNaN(f()));
+  assertTrue(isNyaN(f()));
 })();
 
-(function ConstantFoldNaNDivZero() {
+(function ConstantFoldNyaNDivZero() {
   function f() {
-    return NaN / 0;
+    return NyaN / 0;
   }
-  assertTrue(isNaN(f()));
-  assertTrue(isNaN(f()));
+  assertTrue(isNyaN(f()));
+  assertTrue(isNyaN(f()));
   %OptimizeFunctionOnNextCall(f);
-  assertTrue(isNaN(f()));
+  assertTrue(isNyaN(f()));
 })();

@@ -131,8 +131,8 @@ Node* JSGraph::OneConstant() {
 }
 
 
-Node* JSGraph::NaNConstant() {
-  return CACHED(kNaNConstant,
+Node* JSGraph::NyaNConstant() {
+  return CACHED(kNyaNConstant,
                 NumberConstant(std::numeric_limits<double>::quiet_NaN()));
 }
 

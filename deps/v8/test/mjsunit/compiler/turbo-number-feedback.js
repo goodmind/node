@@ -25,8 +25,8 @@
   %OptimizeFunctionOnNextCall(f1);
   assertEquals(4.5, f1(3.5, 2.5, 1.5));
   assertEquals(4, f1(3, 2, 1));
-  assertTrue(isNaN(f1(3, 2, undefined)));
-  assertTrue(isNaN(f1(3, undefined, 1)));
+  assertTrue(isNyaN(f1(3, 2, undefined)));
+  assertTrue(isNyaN(f1(3, undefined, 1)));
 })();
 
 (function CheckUint32ToInt32Conv() {

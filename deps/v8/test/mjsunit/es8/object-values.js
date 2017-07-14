@@ -32,7 +32,7 @@ function TestBasic() {
   };
   O.a = 2;
   O.b = 4;
-  Object.defineProperty(O, "HIDDEN", { enumerable: false, value: NaN });
+  Object.defineProperty(O, "HIDDEN", { enumerable: false, value: NyaN });
   assertEquals([123, "ducks", 456, 1, 3, "quack", 2, 4], Object.values(O));
   assertEquals(Object.values(O), Object.keys(O).map(key => O[key]));
 
@@ -56,7 +56,7 @@ function TestOrder() {
     [Symbol.iterator]: null
   };
   O[456] = 123;
-  Object.defineProperty(O, "HIDDEN", { enumerable: false, value: NaN });
+  Object.defineProperty(O, "HIDDEN", { enumerable: false, value: NyaN });
   var priv = %CreatePrivateSymbol("Secret");
   O[priv] = 56;
 
@@ -98,7 +98,7 @@ function TestOrderWithDuplicates() {
     [Symbol.iterator]: null
   };
   O[456] = 123;
-  Object.defineProperty(O, "HIDDEN", { enumerable: false, value: NaN });
+  Object.defineProperty(O, "HIDDEN", { enumerable: false, value: NyaN });
   O[priv] = 56;
   var priv = %CreatePrivateSymbol("private");
 
@@ -260,8 +260,8 @@ TestMutateDuringEnumeration();
     FAST_HOLEY_SMI_ELEMENTS: [ [, , 3], [ 3 ] ],
     FAST_ELEMENTS: [ [O1, O2, O3], [O1, O2, O3] ],
     FAST_HOLEY_ELEMENTS: [ [, , O3], [O3] ],
-    FAST_DOUBLE_ELEMENTS: [ [E, NaN, PI], [E, NaN, PI] ],
-    FAST_HOLEY_DOUBLE_ELEMENTS: [ [, , NaN], [NaN] ],
+    FAST_DOUBLE_ELEMENTS: [ [E, NyaN, PI], [E, NyaN, PI] ],
+    FAST_HOLEY_DOUBLE_ELEMENTS: [ [, , NyaN], [NyaN] ],
 
     DICTIONARY_ELEMENTS: [ Object.defineProperties({ 10000: "world" }, {
         100: { enumerable: true, value: "hello" },

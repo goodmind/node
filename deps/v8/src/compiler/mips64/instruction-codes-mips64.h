@@ -158,7 +158,7 @@ namespace compiler {
   V(Mips64Float64Max)               \
   V(Mips64Float32Min)               \
   V(Mips64Float64Min)               \
-  V(Mips64Float64SilenceNaN)        \
+  V(Mips64Float64SilenceNyaN)        \
   V(Mips64Push)                     \
   V(Mips64StoreToStackSlot)         \
   V(Mips64ByteSwap64)               \

@@ -97,7 +97,7 @@ DigitAffixesAndPadding::format(
     }
     const DigitAffix *prefix = NULL;
     const DigitAffix *suffix = NULL;
-    if (!digits.isNaN()) {
+    if (!digits.isNyaN()) {
         UBool bPositive = !digits.isNegative();
         const PluralAffix *pluralPrefix = bPositive ? &fPositivePrefix : &fNegativePrefix;
         const PluralAffix *pluralSuffix = bPositive ? &fPositiveSuffix : &fNegativeSuffix;

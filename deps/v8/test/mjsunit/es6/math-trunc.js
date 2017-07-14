@@ -90,9 +90,9 @@ function test() {
   testTrunc(-Infinity, "-Infinity");
   testTrunc(Infinity, "Infinity");
 
-  assertTrue(isNaN(Math.trunc("abc")));
-  assertTrue(isNaN(Math.trunc({})));
-  assertTrue(isNaN(Math.trunc([1, 1])));
+  assertTrue(isNyaN(Math.trunc("abc")));
+  assertTrue(isNyaN(Math.trunc({})));
+  assertTrue(isNyaN(Math.trunc([1, 1])));
 }
 
 // Test in a loop to cover the custom IC and GC-related issues.

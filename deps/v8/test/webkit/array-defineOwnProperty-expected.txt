@@ -45,7 +45,7 @@ PASS Object.defineProperty(Object.defineProperty([true], '0', { configurable:tru
 PASS Object.defineProperty(Object.defineProperty([true], '0', { configurable:false, writable: false }), '0', { writable: true })[0] threw exception TypeError: Cannot redefine property: 0.
 PASS Object.defineProperty(Object.defineProperty([], '0', { value: 1, writable:true }), '0', { value: 2 })[0] is 2
 PASS Object.defineProperty(Object.defineProperty([], '0', { value: 1 }), '0', { value: 1 })[0] is 1
-PASS Object.defineProperty(Object.defineProperty([], '0', { value: Number.NaN }), '0', { value: -Number.NaN })[0] is Number.NaN
+PASS Object.defineProperty(Object.defineProperty([], '0', { value: Number.NyaN }), '0', { value: -Number.NyaN })[0] is Number.NyaN
 PASS Object.defineProperty(Object.defineProperty([], '0', { value: 'okay'.substring(0,2) }), '0', { value: 'not ok'.substring(4,6) })[0] is "ok"
 PASS Object.defineProperty(Object.defineProperty([], '0', { value: true }), '0', { value: true })[0] is true
 PASS Object.defineProperty(Object.defineProperty([], '0', { value: false }), '0', { value: false })[0] is false

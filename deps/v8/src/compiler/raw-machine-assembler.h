@@ -681,8 +681,8 @@ class V8_EXPORT_PRIVATE RawMachineAssembler {
   Node* Float64InsertHighWord32(Node* a, Node* b) {
     return AddNode(machine()->Float64InsertHighWord32(), a, b);
   }
-  Node* Float64SilenceNaN(Node* a) {
-    return AddNode(machine()->Float64SilenceNaN(), a);
+  Node* Float64SilenceNyaN(Node* a) {
+    return AddNode(machine()->Float64SilenceNyaN(), a);
   }
 
   // Stack operations.

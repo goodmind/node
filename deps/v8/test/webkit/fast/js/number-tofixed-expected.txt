@@ -77,7 +77,7 @@ PASS (1234.567).toFixed(posInf) threw exception RangeError: toFixed() digits arg
 PASS (1234.567).toFixed(negInf) threw exception RangeError: toFixed() digits argument must be between 0 and 20.
 PASS posInf.toFixed() is "Infinity"
 PASS negInf.toFixed() is "-Infinity"
-PASS nan.toFixed() is "NaN"
+PASS nan.toFixed() is "NyaN"
 PASS successfullyParsed is true
 
 TEST COMPLETE

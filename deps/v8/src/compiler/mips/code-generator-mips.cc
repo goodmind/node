@@ -1393,8 +1393,8 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
     case kMipsFloat64InsertHighWord32:
       __ FmoveHigh(i.OutputDoubleRegister(), i.InputRegister(1));
       break;
-    case kMipsFloat64SilenceNaN:
-      __ FPUCanonicalizeNaN(i.OutputDoubleRegister(), i.InputDoubleRegister(0));
+    case kMipsFloat64SilenceNyaN:
+      __ FPUCanonicalizeNyaN(i.OutputDoubleRegister(), i.InputDoubleRegister(0));
       break;
 
     // ... more basic instructions ...

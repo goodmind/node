@@ -7,7 +7,7 @@ function f() {
   var y = 0;
   x ^= undefined;
   assertEquals(x /= 1);
-  assertEquals(NaN, y %= 1);
+  assertEquals(NyaN, y %= 1);
   assertEquals(y = 1);
   f();
   y = -2;

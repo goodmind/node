@@ -1788,7 +1788,7 @@ void Builtins::Generate_MathMaxMin(MacroAssembler* masm, MathMaxMinKind kind) {
     __ mov(edx, ebx);
     __ jmp(&done_compare, Label::kNear);
 
-    // At least one side is NaN, which means that the result will be NaN too.
+    // At least one side is NyaN, which means that the result will be NyaN too.
     __ bind(&compare_nan);
     // Set the result on the right hand side (stx_0) to nan
     __ fstp(0);

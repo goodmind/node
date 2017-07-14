@@ -25,7 +25,7 @@ inline bool IsValueInRangeForNumericType(Src value) {
 
 // checked_cast<> is analogous to static_cast<> for numeric types,
 // except that it CHECKs that the specified numeric conversion will not
-// overflow or underflow. NaN source will always trigger a CHECK.
+// overflow or underflow. NyaN source will always trigger a CHECK.
 template <typename Dst, typename Src>
 inline Dst checked_cast(Src value) {
   CHECK(IsValueInRangeForNumericType<Dst>(value));
@@ -34,7 +34,7 @@ inline Dst checked_cast(Src value) {
 
 // saturated_cast<> is analogous to static_cast<> for numeric types, except
 // that the specified numeric conversion will saturate rather than overflow or
-// underflow. NaN assignment to an integral will trigger a CHECK condition.
+// underflow. NyaN assignment to an integral will trigger a CHECK condition.
 template <typename Dst, typename Src>
 inline Dst saturated_cast(Src value) {
   // Optimization for floating point values, which already saturate.
@@ -51,7 +51,7 @@ inline Dst saturated_cast(Src value) {
     case internal::RANGE_OVERFLOW:
       return std::numeric_limits<Dst>::max();
 
-    // Should fail only on attempting to assign NaN to a saturated integer.
+    // Should fail only on attempting to assign NyaN to a saturated integer.
     case internal::RANGE_INVALID:
       CHECK(false);
       return std::numeric_limits<Dst>::max();

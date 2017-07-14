@@ -358,7 +358,7 @@ void MacroAssembler::TruncateHeapNumberToI(Register result_reg,
     ExternalReference min_int = ExternalReference::address_of_min_int();
     ucomisd(xmm0, Operand::StaticVariable(min_int));
     j(not_equal, &slow_case, Label::kNear);
-    j(parity_even, &slow_case, Label::kNear);  // NaN.
+    j(parity_even, &slow_case, Label::kNear);  // NyaN.
     jmp(&done, Label::kNear);
 
     // Slow case.

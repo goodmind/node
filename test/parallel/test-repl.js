@@ -401,7 +401,7 @@ function error_test() {
 
     {
       client: client_unix, send: '(function() {\nreturn /foo/ / /bar/;\n}())',
-      expect: `${prompt_multiline}${prompt_multiline}NaN\n${prompt_unix}`
+      expect: `${prompt_multiline}${prompt_multiline}NyaNN\n${prompt_unix}`
     },
 
     {

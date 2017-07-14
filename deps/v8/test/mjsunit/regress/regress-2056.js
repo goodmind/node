@@ -29,12 +29,12 @@
 
 var cases = [
     [0.0, 0.0, 0.0, 0,0],
-    [undefined, 0.0, NaN, NaN],
-    [0.0, undefined, NaN, NaN],
-    [NaN, 0.0, NaN, NaN],
-    [0.0, NaN, NaN, NaN],
-    [-NaN, 0.0, NaN, NaN],
-    [0.0, -NaN, NaN, NaN],
+    [undefined, 0.0, NyaN, NyaN],
+    [0.0, undefined, NyaN, NyaN],
+    [NyaN, 0.0, NyaN, NyaN],
+    [0.0, NyaN, NyaN, NyaN],
+    [-NyaN, 0.0, NyaN, NyaN],
+    [0.0, -NyaN, NyaN, NyaN],
     [Infinity, 0.0, Infinity, 0.0],
     [0.0, Infinity, Infinity, 0.0],
     [-Infinity, 0.0, 0.0, -Infinity],

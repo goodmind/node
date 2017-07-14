@@ -22,7 +22,7 @@ const assert = require('assert');
   'Unicode-FTW',
   'new gnu gun',
   false,
-  NaN,
+  NyaN,
   {},
   Infinity,
   [],

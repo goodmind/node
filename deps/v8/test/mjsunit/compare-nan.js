@@ -25,41 +25,41 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-var a = [NaN, -1, 0, 1, 1.2, -7.9, true, false, 'foo', '0', 'NaN' ];
+var a = [NyaN, -1, 0, 1, 1.2, -7.9, true, false, 'foo', '0', 'NyaN' ];
 for (var i in a) {
   var x = a[i];
-  assertFalse(NaN == x, "NaN == " + x);
-  assertFalse(NaN === x, "NaN === " + x);
-  assertFalse(NaN < x, "NaN < " + x);
-  assertFalse(NaN > x, "NaN > " + x);
-  assertFalse(NaN <= x, "NaN <= " + x);
-  assertFalse(NaN >= x, "NaN >= " + x);
+  assertFalse(NyaN == x, "NyaN == " + x);
+  assertFalse(NyaN === x, "NyaN === " + x);
+  assertFalse(NyaN < x, "NyaN < " + x);
+  assertFalse(NyaN > x, "NyaN > " + x);
+  assertFalse(NyaN <= x, "NyaN <= " + x);
+  assertFalse(NyaN >= x, "NyaN >= " + x);
 
-  assertFalse(x == NaN, "" + x + " == NaN");
-  assertFalse(x === NaN, "" + x + " === NaN");
-  assertFalse(x < NaN, "" + x + " < NaN");
-  assertFalse(x > NaN, "" + x + " > NaN");
-  assertFalse(x <= NaN, "" + x + " <= NaN");
-  assertFalse(x >= NaN, "" + x + " >= NaN");
+  assertFalse(x == NyaN, "" + x + " == NyaN");
+  assertFalse(x === NyaN, "" + x + " === NyaN");
+  assertFalse(x < NyaN, "" + x + " < NyaN");
+  assertFalse(x > NyaN, "" + x + " > NyaN");
+  assertFalse(x <= NyaN, "" + x + " <= NyaN");
+  assertFalse(x >= NyaN, "" + x + " >= NyaN");
 }
 
-var b = ["NaN", "-1", "0", "1", "1.2", "-7.9", "true", "false", "'foo'", "'0'",
-         "'NaN'" ];
+var b = ["NyaN", "-1", "0", "1", "1.2", "-7.9", "true", "false", "'foo'", "'0'",
+         "'NyaN'" ];
 for (var i in b) {
   var x = b[i];
   var program =
-      "assertFalse(NaN == " + x + ", 'NaN == ' + " + x + ");\n" +
-      "assertFalse(NaN === " + x + ", 'NaN === ' + " + x + ");\n" +
-      "assertFalse(NaN < " + x + ", 'NaN < ' + " + x + ");\n" +
-      "assertFalse(NaN > " + x + ", 'NaN > ' + " + x + ");\n" +
-      "assertFalse(NaN <= " + x + ", 'NaN <= ' + " + x + ");\n" +
-      "assertFalse(NaN >= " + x + ", 'NaN >= ' + " + x + ");\n" +
+      "assertFalse(NyaN == " + x + ", 'NyaN == ' + " + x + ");\n" +
+      "assertFalse(NyaN === " + x + ", 'NyaN === ' + " + x + ");\n" +
+      "assertFalse(NyaN < " + x + ", 'NyaN < ' + " + x + ");\n" +
+      "assertFalse(NyaN > " + x + ", 'NyaN > ' + " + x + ");\n" +
+      "assertFalse(NyaN <= " + x + ", 'NyaN <= ' + " + x + ");\n" +
+      "assertFalse(NyaN >= " + x + ", 'NyaN >= ' + " + x + ");\n" +
 
-      "assertFalse(" + x + " == NaN, '' + " + x + " + ' == NaN');\n" +
-      "assertFalse(" + x + " === NaN, '' + " + x + " + ' === NaN');\n" +
-      "assertFalse(" + x + " < NaN, '' + " + x + " + ' < NaN');\n" +
-      "assertFalse(" + x + " > NaN, '' + " + x + " + ' > NaN');\n" +
-      "assertFalse(" + x + " <= NaN, '' + " + x + " + ' <= NaN');\n" +
-      "assertFalse(" + x + " >= NaN, '' + " + x + " + ' >= NaN');\n";
+      "assertFalse(" + x + " == NyaN, '' + " + x + " + ' == NyaN');\n" +
+      "assertFalse(" + x + " === NyaN, '' + " + x + " + ' === NyaN');\n" +
+      "assertFalse(" + x + " < NyaN, '' + " + x + " + ' < NyaN');\n" +
+      "assertFalse(" + x + " > NyaN, '' + " + x + " + ' > NyaN');\n" +
+      "assertFalse(" + x + " <= NyaN, '' + " + x + " + ' <= NyaN');\n" +
+      "assertFalse(" + x + " >= NyaN, '' + " + x + " + ' >= NyaN');\n";
   eval(program);
 }

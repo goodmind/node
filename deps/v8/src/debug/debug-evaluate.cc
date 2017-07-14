@@ -453,7 +453,7 @@ bool BuiltinHasNoSideEffect(Builtins::Name id) {
     case Builtins::kNumberConstructor:
     case Builtins::kNumberIsFinite:
     case Builtins::kNumberIsInteger:
-    case Builtins::kNumberIsNaN:
+    case Builtins::kNumberIsNyaN:
     case Builtins::kNumberIsSafeInteger:
     case Builtins::kNumberParseFloat:
     case Builtins::kNumberParseInt:

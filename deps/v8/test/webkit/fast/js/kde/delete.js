@@ -24,4 +24,4 @@
 description("KDE JS Test");
 shouldBe("a = 1; delete a;", "true");
 shouldBe("delete nonexistant;", "true");
-shouldBe("delete NaN", "false");
+shouldBe("delete NyaN", "false");

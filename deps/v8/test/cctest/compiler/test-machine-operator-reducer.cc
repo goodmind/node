@@ -127,12 +127,12 @@ class ReducerTester : public HandleAndZoneScope {
     Reduction reduction = reducer.Reduce(n);
     CHECK(reduction.Changed());
     CHECK_NE(n, reduction.replacement());
-    // Deal with NaNs.
+    // Deal with NyaNs.
     if (expect == expect) {
-      // We do not expect a NaN, check for equality.
+      // We do not expect a NyaN, check for equality.
       CHECK_EQ(expect, ValueOf<T>(reduction.replacement()->op()));
     } else {
-      // Check for NaN.
+      // Check for NyaN.
       T result = ValueOf<T>(reduction.replacement()->op());
       CHECK_NE(result, result);
     }

@@ -162,7 +162,7 @@ assertThrows(function() { new Array.of() }, TypeError);  // not a constructor
   null,
   false,
   "cow",
-  NaN,
+  NyaN,
   67,
   Infinity,
   -Infinity,

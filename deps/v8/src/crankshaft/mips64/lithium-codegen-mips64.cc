@@ -1008,7 +1008,7 @@ void LCodeGen::DoModI(LModI* instr) {
 
   Label done;
   // Check for x % 0, we have to deopt in this case because we can't return a
-  // NaN.
+  // NyaN.
   if (hmod->CheckFlag(HValue::kCanBeDivByZero)) {
     DeoptimizeIf(eq, instr, DeoptimizeReason::kDivisionByZero, right_reg,
                  Operand(zero_reg));
@@ -2051,7 +2051,7 @@ void LCodeGen::DoBranch(LBranch* instr) {
   } else if (r.IsDouble()) {
     DCHECK(!info()->IsStub());
     DoubleRegister reg = ToDoubleRegister(instr->value());
-    // Test the double value. Zero and NaN are false.
+    // Test the double value. Zero and NyaN are false.
     EmitBranchF(instr, ogl, reg, kDoubleRegZero);
   } else {
     DCHECK(r.IsTagged());
@@ -2071,7 +2071,7 @@ void LCodeGen::DoBranch(LBranch* instr) {
       DCHECK(!info()->IsStub());
       DoubleRegister dbl_scratch = double_scratch0();
       __ ldc1(dbl_scratch, FieldMemOperand(reg, HeapNumber::kValueOffset));
-      // Test the double value. Zero and NaN are false.
+      // Test the double value. Zero and NyaN are false.
       EmitBranchF(instr, ogl, dbl_scratch, kDoubleRegZero);
     } else if (type.IsString()) {
       DCHECK(!info()->IsStub());
@@ -2147,7 +2147,7 @@ void LCodeGen::DoBranch(LBranch* instr) {
       }
 
       if (expected & ToBooleanHint::kHeapNumber) {
-        // heap number -> false iff +0, -0, or NaN.
+        // heap number -> false iff +0, -0, or NyaN.
         DoubleRegister dbl_scratch = double_scratch0();
         Label not_heap_number;
         __ LoadRoot(at, Heap::kHeapNumberMapRootIndex);
@@ -2238,7 +2238,7 @@ void LCodeGen::DoCompareNumericAndBranch(LCompareNumericAndBranch* instr) {
       FPURegister left_reg = ToDoubleRegister(left);
       FPURegister right_reg = ToDoubleRegister(right);
 
-      // If a NaN is involved, i.e. the result is unordered,
+      // If a NyaN is involved, i.e. the result is unordered,
       // jump to false block label.
       __ BranchF(NULL, instr->FalseLabel(chunk_), eq,
                  left_reg, right_reg);
@@ -3452,7 +3452,7 @@ void LCodeGen::DoMathFloor(LMathFloor* instr) {
                      except_flag);
 
   // Deopt if the operation did not succeed.
-  DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNaN, except_flag,
+  DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNyaN, except_flag,
                Operand(zero_reg));
 
   if (instr->hydrogen()->CheckFlag(HValue::kBailoutOnMinusZero)) {
@@ -3533,7 +3533,7 @@ void LCodeGen::DoMathRound(LMathRound* instr) {
                      double_scratch1,
                      except_flag);
 
-  DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNaN, except_flag,
+  DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNyaN, except_flag,
                Operand(zero_reg));
 
   if (instr->hydrogen()->CheckFlag(HValue::kBailoutOnMinusZero)) {
@@ -3573,7 +3573,7 @@ void LCodeGen::DoMathPowHalf(LMathPowHalf* instr) {
 
   // Note that according to ECMA-262 15.8.2.13:
   // Math.pow(-Infinity, 0.5) == Infinity
-  // Math.sqrt(-Infinity) == NaN
+  // Math.sqrt(-Infinity) == NyaN
   Label done;
   __ Move(temp, static_cast<double>(-V8_INFINITY));
   // Set up Infinity.
@@ -4083,7 +4083,7 @@ void LCodeGen::DoStoreKeyedFixedDoubleArray(LStoreKeyed* instr) {
   }
 
   if (instr->NeedsCanonicalization()) {
-    __ FPUCanonicalizeNaN(double_scratch, value);
+    __ FPUCanonicalizeNyaN(double_scratch, value);
     __ sdc1(double_scratch, MemOperand(scratch, 0));
   } else {
     __ sdc1(value, MemOperand(scratch, 0));
@@ -4659,7 +4659,7 @@ void LCodeGen::EmitNumberUntagD(LNumberUntagD* instr, Register input_reg,
     __ Branch(&done);
     if (can_convert_undefined_to_nan) {
       __ bind(&convert);
-      // Convert undefined (and hole) to NaN.
+      // Convert undefined (and hole) to NyaN.
       __ LoadRoot(at, Heap::kUndefinedValueRootIndex);
       DeoptimizeIf(ne, instr, DeoptimizeReason::kNotAHeapNumberUndefined,
                    input_reg, Operand(at));
@@ -4725,7 +4725,7 @@ void LCodeGen::DoDeferredTaggedToI(LTaggedToI* instr) {
                        except_flag,
                        kCheckForInexactConversion);
 
-    DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNaN, except_flag,
+    DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNyaN, except_flag,
                  Operand(zero_reg));
 
     if (instr->hydrogen()->CheckFlag(HValue::kBailoutOnMinusZero)) {
@@ -4810,7 +4810,7 @@ void LCodeGen::DoDoubleToI(LDoubleToI* instr) {
                        kCheckForInexactConversion);
 
     // Deopt if the operation did not succeed (except_flag != 0).
-    DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNaN, except_flag,
+    DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNyaN, except_flag,
                  Operand(zero_reg));
 
     if (instr->hydrogen()->CheckFlag(HValue::kBailoutOnMinusZero)) {
@@ -4845,7 +4845,7 @@ void LCodeGen::DoDoubleToSmi(LDoubleToSmi* instr) {
                        kCheckForInexactConversion);
 
     // Deopt if the operation did not succeed (except_flag != 0).
-    DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNaN, except_flag,
+    DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNyaN, except_flag,
                  Operand(zero_reg));
 
     if (instr->hydrogen()->CheckFlag(HValue::kBailoutOnMinusZero)) {

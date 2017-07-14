@@ -92,7 +92,7 @@ const int32_t kInt32Values[] = {
     1866841746, 2032089723, 2147483647};
 
 
-const double kNaNs[] = {-std::numeric_limits<double>::quiet_NaN(),
+const double kNyaNs[] = {-std::numeric_limits<double>::quiet_NaN(),
                         std::numeric_limits<double>::quiet_NaN(),
                         bit_cast<double>(V8_UINT64_C(0x7FFFFFFFFFFFFFFF)),
                         bit_cast<double>(V8_UINT64_C(0xFFFFFFFFFFFFFFFF))};
@@ -255,8 +255,8 @@ TEST_F(SimplifiedOperatorReducerTest, ChangeTaggedToFloat64WithConstant) {
 }
 
 
-TEST_F(SimplifiedOperatorReducerTest, ChangeTaggedToFloat64WithNaNConstant) {
-  TRACED_FOREACH(double, nan, kNaNs) {
+TEST_F(SimplifiedOperatorReducerTest, ChangeTaggedToFloat64WithNyaNConstant) {
+  TRACED_FOREACH(double, nan, kNyaNs) {
     Reduction reduction = Reduce(graph()->NewNode(
         simplified()->ChangeTaggedToFloat64(), NumberConstant(nan)));
     ASSERT_TRUE(reduction.Changed());

@@ -30,10 +30,10 @@ array[101] = obj;
 %DebugPrint(array);
 
 // FAST_DOUBLE_ELEMENTS
-array = [1.1, 2.2, 3.3, 3.3, 3.3, NaN];
+array = [1.1, 2.2, 3.3, 3.3, 3.3, NyaN];
 %DebugPrint(array);
-array.push(NaN);
-array.push(NaN);
+array.push(NyaN);
+array.push(NyaN);
 %DebugPrint(array);
 
 // FAST_HOLEY_DOUBLE_ELEMENTS

@@ -33,9 +33,9 @@ var f = m.f;
 var g = m.g;
 var h = m.h;
 
-assertTrue(isNaN(f(NaN)));
-assertTrue(isNaN(f(undefined)));
-assertTrue(isNaN(f(function() {})));
+assertTrue(isNyaN(f(NyaN)));
+assertTrue(isNyaN(f(undefined)));
+assertTrue(isNyaN(f(function() {})));
 
 assertEquals("Infinity", String(1/f(0)));
 assertEquals("Infinity", String(1/f(-0)));

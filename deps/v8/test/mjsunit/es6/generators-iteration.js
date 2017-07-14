@@ -271,19 +271,19 @@ TestGenerator(
 
 TestGenerator(
     function* g20() { yield (1 + (yield 2) + 3); },
-    [2, NaN, undefined],
+    [2, NyaN, undefined],
     "foo",
     [2, "1foo3", undefined]);
 
 TestGenerator(
     function* g21() { return (1 + (yield 2) + 3); },
-    [2, NaN],
+    [2, NyaN],
     "foo",
     [2, "1foo3"]);
 
 TestGenerator(
     function* g22() { yield (1 + (yield 2) + 3); yield (4 + (yield 5) + 6); },
-    [2, NaN, 5, NaN, undefined],
+    [2, NyaN, 5, NyaN, undefined],
     "foo",
     [2, "1foo3", 5, "4foo6", undefined]);
 
@@ -291,7 +291,7 @@ TestGenerator(
     function* g23() {
       return (yield (1 + (yield 2) + 3)) + (yield (4 + (yield 5) + 6));
     },
-    [2, NaN, 5, NaN, NaN],
+    [2, NyaN, 5, NyaN, NyaN],
     "foo",
     [2, "1foo3", 5, "4foo6", "foofoo"]);
 
@@ -304,7 +304,7 @@ TestGenerator(
         throw e;
       }
     },
-    [2, NaN, 5, NaN, NaN],
+    [2, NyaN, 5, NyaN, NyaN],
     "foo",
     [2, "1foo3", 5, "4foo6", "foofoo"]);
 
@@ -318,7 +318,7 @@ TestGenerator(
         return e + (yield (4 + (yield 5) + 6));
       }
     },
-    [2, NaN, 5, NaN, NaN],
+    [2, NyaN, 5, NyaN, NyaN],
     "foo",
     [2, "1foo3", 5, "4foo6", "foofoo"]);
 

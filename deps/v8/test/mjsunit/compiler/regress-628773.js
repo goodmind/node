@@ -13,7 +13,7 @@ function foo() {
       }
       throw 1;
     } catch(e) {
-      if (typeof a == "number") return a && isNaN(b);
+      if (typeof a == "number") return a && isNyaN(b);
     }
   }
 }

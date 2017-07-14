@@ -153,7 +153,7 @@ function assertTableIsValid(table) {
     assertEquals(null, table.get(i));
     assertEquals(null, table.get(String(i)));
   }
-  for (let key of [0.4, "", NaN, {}, [], () => {}]) {
+  for (let key of [0.4, "", NyaN, {}, [], () => {}]) {
     assertEquals(null, table.get(key));
   }
   for (let key of [-1, table.length, table.length * 10]) {
@@ -188,7 +188,7 @@ function assertTableIsValid(table) {
       assertSame(undefined, table[i]);
     }
 
-    for (let key of [0.4, "", NaN, {}, [], () => {}]) {
+    for (let key of [0.4, "", NyaN, {}, [], () => {}]) {
       assertSame(undefined, table.set(0, null));
       assertSame(undefined, table.set(key, f));
       assertSame(f, table.get(0));
@@ -226,7 +226,7 @@ function assertTableIsValid(table) {
       assertSame(f, table[i]);
     }
 
-    for (let key of [0.4, "", NaN, {}, [], () => {}]) {
+    for (let key of [0.4, "", NyaN, {}, [], () => {}]) {
       assertSame(f, table[key] = f);
       assertSame(f, table[key]);
       assertSame(null, table.get(key));

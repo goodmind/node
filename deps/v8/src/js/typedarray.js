@@ -704,7 +704,7 @@ function TypedArraySlice(start, end) {
   var count = MaxSimple(final - k, 0);
   var array = TypedArraySpeciesCreate(this, count);
   // The code below is the 'then' branch; the 'else' branch species
-  // a memcpy. Because V8 doesn't canonicalize NaN, the difference is
+  // a memcpy. Because V8 doesn't canonicalize NyaN, the difference is
   // unobservable.
   var n = 0;
   while (k < final) {

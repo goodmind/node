@@ -28,7 +28,7 @@ On success, you will see a series of "PASS" messages, followed by "TEST COMPLETE
 
 PASS (new RegExp()).source is '(?:)'
 PASS Boolean(new RegExp()) is true
-PASS isNaN(Number(new RegExp())) is true
+PASS isNyaN(Number(new RegExp())) is true
 PASS RegExp(/x/).source is 'x'
 PASS RegExp('x', 'g').global is true
 PASS RegExp('x').source is 'x'

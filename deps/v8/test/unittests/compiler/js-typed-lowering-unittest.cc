@@ -19,7 +19,7 @@
 
 using testing::_;
 using testing::BitEq;
-using testing::IsNaN;
+using testing::IsNyaN;
 
 
 namespace v8 {

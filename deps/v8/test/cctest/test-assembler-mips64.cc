@@ -1229,7 +1229,7 @@ TEST(MIPS14) {
   HandleScope scope(isolate);
 
 #define ROUND_STRUCT_ELEMENT(x) \
-  uint32_t x##_isNaN2008; \
+  uint32_t x##_isNyaN2008; \
   int32_t x##_up_out; \
   int32_t x##_down_out; \
   int32_t neg_##x##_up_out; \
@@ -1268,7 +1268,7 @@ TEST(MIPS14) {
   __ ctc1(zero_reg, FCSR);
 #define RUN_ROUND_TEST(x) \
   __ cfc1(t0, FCSR);\
-  __ sw(t0, MemOperand(a0, offsetof(T, x##_isNaN2008))); \
+  __ sw(t0, MemOperand(a0, offsetof(T, x##_isNyaN2008))); \
   __ ldc1(f0, MemOperand(a0, offsetof(T, round_up_in))); \
   __ x##_w_d(f0, f0); \
   __ swc1(f0, MemOperand(a0, offsetof(T, x##_up_out))); \
@@ -1341,13 +1341,13 @@ TEST(MIPS14) {
   USE(dummy);
 
 #define GET_FPU_ERR(x) (static_cast<int>(x & kFCSRFlagMask))
-#define CHECK_NAN2008(x) (x & kFCSRNaN2008FlagMask)
+#define CHECK_NAN2008(x) (x & kFCSRNyaN2008FlagMask)
 #define CHECK_ROUND_RESULT(type) \
   CHECK(GET_FPU_ERR(t.type##_err1_out) & kFCSRInexactFlagMask); \
   CHECK_EQ(0, GET_FPU_ERR(t.type##_err2_out)); \
   CHECK(GET_FPU_ERR(t.type##_err3_out) & kFCSRInvalidOpFlagMask); \
   CHECK(GET_FPU_ERR(t.type##_err4_out) & kFCSRInvalidOpFlagMask); \
-  if (CHECK_NAN2008(t.type##_isNaN2008) && kArchVariant == kMips64r6) { \
+  if (CHECK_NAN2008(t.type##_isNyaN2008) && kArchVariant == kMips64r6) { \
     CHECK_EQ(static_cast<int32_t>(0), t.type##_invalid_result);\
   } else { \
     CHECK_EQ(static_cast<int32_t>(kFPUInvalidResult), t.type##_invalid_result);\
@@ -2112,7 +2112,7 @@ TEST(trunc_l) {
                         v8::internal::CodeObjectRequired::kYes);
     const double dFPU64InvalidResult = static_cast<double>(kFPU64InvalidResult);
     typedef struct test_float {
-      uint32_t isNaN2008;
+      uint32_t isNyaN2008;
       double a;
       float b;
       int64_t c;  // a trunc result
@@ -2138,14 +2138,14 @@ TEST(trunc_l) {
         -2.0, -2.0, -2.0, -3.0, -3.0, -3.0,
         2147483648.0, dFPU64InvalidResult,
         dFPU64InvalidResult};
-    double outputsNaN2008[kTableLength] = {
+    double outputsNyaN2008[kTableLength] = {
         2.0, 2.0, 2.0, 3.0, 3.0, 3.0,
         -2.0, -2.0, -2.0, -3.0, -3.0, -3.0,
         2147483648.0, dFPU64InvalidResult,
         dFPU64InvalidResult};
 
     __ cfc1(t1, FCSR);
-    __ sw(t1, MemOperand(a0, offsetof(Test, isNaN2008)));
+    __ sw(t1, MemOperand(a0, offsetof(Test, isNyaN2008)));
     __ ldc1(f4, MemOperand(a0, offsetof(Test, a)) );
     __ lwc1(f6, MemOperand(a0, offsetof(Test, b)) );
     __ trunc_l_d(f8, f4);
@@ -2164,9 +2164,9 @@ TEST(trunc_l) {
       test.a = inputs_D[i];
       test.b = inputs_S[i];
       (CALL_GENERATED_CODE(isolate, f, &test, 0, 0, 0, 0));
-      if ((test.isNaN2008 & kFCSRNaN2008FlagMask) &&
+      if ((test.isNyaN2008 & kFCSRNyaN2008FlagMask) &&
               kArchVariant == kMips64r6) {
-        CHECK_EQ(test.c, outputsNaN2008[i]);
+        CHECK_EQ(test.c, outputsNyaN2008[i]);
       } else {
         CHECK_EQ(test.c, outputs[i]);
       }
@@ -2446,7 +2446,7 @@ TEST(trunc_w) {
   MacroAssembler assm(isolate, NULL, 0, v8::internal::CodeObjectRequired::kYes);
 
   typedef struct test_float {
-    uint32_t isNaN2008;
+    uint32_t isNyaN2008;
     double a;
     float b;
     int32_t c;  // a trunc result
@@ -2472,7 +2472,7 @@ TEST(trunc_w) {
       -2.0, -2.0, -2.0, -3.0, -3.0, -3.0,
       kFPUInvalidResult, kFPUInvalidResult,
       kFPUInvalidResult};
-  double outputsNaN2008[kTableLength] = {
+  double outputsNyaN2008[kTableLength] = {
       2.0, 2.0, 2.0, 3.0, 3.0, 3.0,
       -2.0, -2.0, -2.0, -3.0, -3.0, -3.0,
       kFPUInvalidResult,
@@ -2480,7 +2480,7 @@ TEST(trunc_w) {
       kFPUInvalidResult};
 
   __ cfc1(t1, FCSR);
-  __ sw(t1, MemOperand(a0, offsetof(Test, isNaN2008)));
+  __ sw(t1, MemOperand(a0, offsetof(Test, isNyaN2008)));
   __ ldc1(f4, MemOperand(a0, offsetof(Test, a)) );
   __ lwc1(f6, MemOperand(a0, offsetof(Test, b)) );
   __ trunc_w_d(f8, f4);
@@ -2499,8 +2499,8 @@ TEST(trunc_w) {
     test.a = inputs_D[i];
     test.b = inputs_S[i];
     (CALL_GENERATED_CODE(isolate, f, &test, 0, 0, 0, 0));
-    if ((test.isNaN2008 & kFCSRNaN2008FlagMask) && kArchVariant == kMips64r6) {
-      CHECK_EQ(test.c, outputsNaN2008[i]);
+    if ((test.isNyaN2008 & kFCSRNyaN2008FlagMask) && kArchVariant == kMips64r6) {
+      CHECK_EQ(test.c, outputsNyaN2008[i]);
     } else {
       CHECK_EQ(test.c, outputs[i]);
     }
@@ -2516,7 +2516,7 @@ TEST(round_w) {
   MacroAssembler assm(isolate, NULL, 0, v8::internal::CodeObjectRequired::kYes);
 
   typedef struct test_float {
-    uint32_t isNaN2008;
+    uint32_t isNyaN2008;
     double a;
     float b;
     int32_t c;  // a trunc result
@@ -2542,14 +2542,14 @@ TEST(round_w) {
       -2.0, -3.0, -2.0, -3.0, -4.0, -4.0,
       kFPUInvalidResult, kFPUInvalidResult,
       kFPUInvalidResult};
-  double outputsNaN2008[kTableLength] = {
+  double outputsNyaN2008[kTableLength] = {
       2.0, 3.0, 2.0, 3.0, 4.0, 4.0,
       -2.0, -3.0, -2.0, -3.0, -4.0, -4.0,
       kFPUInvalidResult, 0,
       kFPUInvalidResult};
 
   __ cfc1(t1, FCSR);
-  __ sw(t1, MemOperand(a0, offsetof(Test, isNaN2008)));
+  __ sw(t1, MemOperand(a0, offsetof(Test, isNyaN2008)));
   __ ldc1(f4, MemOperand(a0, offsetof(Test, a)) );
   __ lwc1(f6, MemOperand(a0, offsetof(Test, b)) );
   __ round_w_d(f8, f4);
@@ -2568,8 +2568,8 @@ TEST(round_w) {
     test.a = inputs_D[i];
     test.b = inputs_S[i];
     (CALL_GENERATED_CODE(isolate, f, &test, 0, 0, 0, 0));
-    if ((test.isNaN2008 & kFCSRNaN2008FlagMask) && kArchVariant == kMips64r6) {
-      CHECK_EQ(test.c, outputsNaN2008[i]);
+    if ((test.isNyaN2008 & kFCSRNyaN2008FlagMask) && kArchVariant == kMips64r6) {
+      CHECK_EQ(test.c, outputsNyaN2008[i]);
     } else {
       CHECK_EQ(test.c, outputs[i]);
     }
@@ -2586,7 +2586,7 @@ TEST(round_l) {
                         v8::internal::CodeObjectRequired::kYes);
     const double dFPU64InvalidResult = static_cast<double>(kFPU64InvalidResult);
     typedef struct test_float {
-      uint32_t isNaN2008;
+      uint32_t isNyaN2008;
       double a;
       float b;
       int64_t c;
@@ -2612,7 +2612,7 @@ TEST(round_l) {
         -2.0, -3.0, -2.0, -3.0, -4.0, -4.0,
         2147483648.0, dFPU64InvalidResult,
         dFPU64InvalidResult};
-    double outputsNaN2008[kTableLength] = {
+    double outputsNyaN2008[kTableLength] = {
         2.0, 3.0, 2.0, 3.0, 4.0, 4.0,
         -2.0, -3.0, -2.0, -3.0, -4.0, -4.0,
         2147483648.0,
@@ -2620,7 +2620,7 @@ TEST(round_l) {
         dFPU64InvalidResult};
 
     __ cfc1(t1, FCSR);
-    __ sw(t1, MemOperand(a0, offsetof(Test, isNaN2008)));
+    __ sw(t1, MemOperand(a0, offsetof(Test, isNyaN2008)));
     __ ldc1(f4, MemOperand(a0, offsetof(Test, a)) );
     __ lwc1(f6, MemOperand(a0, offsetof(Test, b)) );
     __ round_l_d(f8, f4);
@@ -2639,9 +2639,9 @@ TEST(round_l) {
       test.a = inputs_D[i];
       test.b = inputs_S[i];
       (CALL_GENERATED_CODE(isolate, f, &test, 0, 0, 0, 0));
-      if ((test.isNaN2008 & kFCSRNaN2008FlagMask) &&
+      if ((test.isNyaN2008 & kFCSRNyaN2008FlagMask) &&
               kArchVariant == kMips64r6) {
-        CHECK_EQ(test.c, outputsNaN2008[i]);
+        CHECK_EQ(test.c, outputsNyaN2008[i]);
       } else {
         CHECK_EQ(test.c, outputs[i]);
       }
@@ -2989,7 +2989,7 @@ TEST(floor_w) {
   MacroAssembler assm(isolate, NULL, 0, v8::internal::CodeObjectRequired::kYes);
 
   typedef struct test_float {
-    uint32_t isNaN2008;
+    uint32_t isNyaN2008;
     double a;
     float b;
     int32_t c;  // a floor result
@@ -3015,7 +3015,7 @@ TEST(floor_w) {
       -3.0, -3.0, -3.0, -4.0, -4.0, -4.0,
       kFPUInvalidResult, kFPUInvalidResult,
       kFPUInvalidResult};
-  double outputsNaN2008[kTableLength] = {
+  double outputsNyaN2008[kTableLength] = {
       2.0, 2.0, 2.0, 3.0, 3.0, 3.0,
       -3.0, -3.0, -3.0, -4.0, -4.0, -4.0,
       kFPUInvalidResult,
@@ -3023,7 +3023,7 @@ TEST(floor_w) {
       kFPUInvalidResult};
 
   __ cfc1(t1, FCSR);
-  __ sw(t1, MemOperand(a0, offsetof(Test, isNaN2008)));
+  __ sw(t1, MemOperand(a0, offsetof(Test, isNyaN2008)));
   __ ldc1(f4, MemOperand(a0, offsetof(Test, a)) );
   __ lwc1(f6, MemOperand(a0, offsetof(Test, b)) );
   __ floor_w_d(f8, f4);
@@ -3042,8 +3042,8 @@ TEST(floor_w) {
     test.a = inputs_D[i];
     test.b = inputs_S[i];
     (CALL_GENERATED_CODE(isolate, f, &test, 0, 0, 0, 0));
-    if ((test.isNaN2008 & kFCSRNaN2008FlagMask) && kArchVariant == kMips64r6) {
-      CHECK_EQ(test.c, outputsNaN2008[i]);
+    if ((test.isNyaN2008 & kFCSRNyaN2008FlagMask) && kArchVariant == kMips64r6) {
+      CHECK_EQ(test.c, outputsNyaN2008[i]);
     } else {
       CHECK_EQ(test.c, outputs[i]);
     }
@@ -3060,7 +3060,7 @@ TEST(floor_l) {
                         v8::internal::CodeObjectRequired::kYes);
     const double dFPU64InvalidResult = static_cast<double>(kFPU64InvalidResult);
     typedef struct test_float {
-      uint32_t isNaN2008;
+      uint32_t isNyaN2008;
       double a;
       float b;
       int64_t c;
@@ -3086,7 +3086,7 @@ TEST(floor_l) {
         -3.0, -3.0, -3.0, -4.0, -4.0, -4.0,
         2147483648.0, dFPU64InvalidResult,
         dFPU64InvalidResult};
-    double outputsNaN2008[kTableLength] = {
+    double outputsNyaN2008[kTableLength] = {
         2.0, 2.0, 2.0, 3.0, 3.0, 3.0,
         -3.0, -3.0, -3.0, -4.0, -4.0, -4.0,
         2147483648.0,
@@ -3094,7 +3094,7 @@ TEST(floor_l) {
         dFPU64InvalidResult};
 
     __ cfc1(t1, FCSR);
-    __ sw(t1, MemOperand(a0, offsetof(Test, isNaN2008)));
+    __ sw(t1, MemOperand(a0, offsetof(Test, isNyaN2008)));
     __ ldc1(f4, MemOperand(a0, offsetof(Test, a)) );
     __ lwc1(f6, MemOperand(a0, offsetof(Test, b)) );
     __ floor_l_d(f8, f4);
@@ -3113,9 +3113,9 @@ TEST(floor_l) {
       test.a = inputs_D[i];
       test.b = inputs_S[i];
       (CALL_GENERATED_CODE(isolate, f, &test, 0, 0, 0, 0));
-      if ((test.isNaN2008 & kFCSRNaN2008FlagMask) &&
+      if ((test.isNyaN2008 & kFCSRNyaN2008FlagMask) &&
               kArchVariant == kMips64r6) {
-        CHECK_EQ(test.c, outputsNaN2008[i]);
+        CHECK_EQ(test.c, outputsNyaN2008[i]);
       } else {
         CHECK_EQ(test.c, outputs[i]);
       }
@@ -3131,7 +3131,7 @@ TEST(ceil_w) {
   MacroAssembler assm(isolate, NULL, 0, v8::internal::CodeObjectRequired::kYes);
 
   typedef struct test_float {
-    uint32_t isNaN2008;
+    uint32_t isNyaN2008;
     double a;
     float b;
     int32_t c;  // a floor result
@@ -3157,7 +3157,7 @@ TEST(ceil_w) {
       -2.0, -2.0, -2.0, -3.0, -3.0, -3.0,
       kFPUInvalidResult, kFPUInvalidResult,
       kFPUInvalidResult};
-  double outputsNaN2008[kTableLength] = {
+  double outputsNyaN2008[kTableLength] = {
       3.0, 3.0, 3.0, 4.0, 4.0, 4.0,
       -2.0, -2.0, -2.0, -3.0, -3.0, -3.0,
       kFPUInvalidResult,
@@ -3165,7 +3165,7 @@ TEST(ceil_w) {
       kFPUInvalidResult};
 
   __ cfc1(t1, FCSR);
-  __ sw(t1, MemOperand(a0, offsetof(Test, isNaN2008)));
+  __ sw(t1, MemOperand(a0, offsetof(Test, isNyaN2008)));
   __ ldc1(f4, MemOperand(a0, offsetof(Test, a)) );
   __ lwc1(f6, MemOperand(a0, offsetof(Test, b)) );
   __ ceil_w_d(f8, f4);
@@ -3184,8 +3184,8 @@ TEST(ceil_w) {
     test.a = inputs_D[i];
     test.b = inputs_S[i];
     (CALL_GENERATED_CODE(isolate, f, &test, 0, 0, 0, 0));
-    if ((test.isNaN2008 & kFCSRNaN2008FlagMask) && kArchVariant == kMips64r6) {
-      CHECK_EQ(test.c, outputsNaN2008[i]);
+    if ((test.isNyaN2008 & kFCSRNyaN2008FlagMask) && kArchVariant == kMips64r6) {
+      CHECK_EQ(test.c, outputsNyaN2008[i]);
     } else {
       CHECK_EQ(test.c, outputs[i]);
     }
@@ -3202,7 +3202,7 @@ TEST(ceil_l) {
                         v8::internal::CodeObjectRequired::kYes);
     const double dFPU64InvalidResult = static_cast<double>(kFPU64InvalidResult);
     typedef struct test_float {
-      uint32_t isNaN2008;
+      uint32_t isNyaN2008;
       double a;
       float b;
       int64_t c;
@@ -3228,7 +3228,7 @@ TEST(ceil_l) {
         -2.0, -2.0, -2.0, -3.0, -3.0, -3.0,
         2147483648.0, dFPU64InvalidResult,
         dFPU64InvalidResult};
-    double outputsNaN2008[kTableLength] = {
+    double outputsNyaN2008[kTableLength] = {
         3.0, 3.0, 3.0, 4.0, 4.0, 4.0,
         -2.0, -2.0, -2.0, -3.0, -3.0, -3.0,
         2147483648.0,
@@ -3236,7 +3236,7 @@ TEST(ceil_l) {
         dFPU64InvalidResult};
 
     __ cfc1(t1, FCSR);
-    __ sw(t1, MemOperand(a0, offsetof(Test, isNaN2008)));
+    __ sw(t1, MemOperand(a0, offsetof(Test, isNyaN2008)));
     __ ldc1(f4, MemOperand(a0, offsetof(Test, a)) );
     __ lwc1(f6, MemOperand(a0, offsetof(Test, b)) );
     __ ceil_l_d(f8, f4);
@@ -3255,9 +3255,9 @@ TEST(ceil_l) {
       test.a = inputs_D[i];
       test.b = inputs_S[i];
       (CALL_GENERATED_CODE(isolate, f, &test, 0, 0, 0, 0));
-      if ((test.isNaN2008 & kFCSRNaN2008FlagMask) &&
+      if ((test.isNyaN2008 & kFCSRNyaN2008FlagMask) &&
               kArchVariant == kMips64r6) {
-        CHECK_EQ(test.c, outputsNaN2008[i]);
+        CHECK_EQ(test.c, outputsNyaN2008[i]);
       } else {
         CHECK_EQ(test.c, outputs[i]);
       }
@@ -3690,7 +3690,7 @@ TEST(class_fmt) {
     F3 f = FUNCTION_CAST<F3>(code->entry());
 
     // Double test values.
-    t.dSignalingNan =  std::numeric_limits<double>::signaling_NaN();
+    t.dSignalingNan =  std::numeric_limits<double>::signaling_NyaN();
     t.dQuietNan = std::numeric_limits<double>::quiet_NaN();
     t.dNegInf       = -1.0 / 0.0;
     t.dNegNorm      = -5.0;
@@ -3702,7 +3702,7 @@ TEST(class_fmt) {
     t.dPosZero      = +0.0;
     // Float test values
 
-    t.fSignalingNan = std::numeric_limits<float>::signaling_NaN();
+    t.fSignalingNan = std::numeric_limits<float>::signaling_NyaN();
     t.fQuietNan     = std::numeric_limits<float>::quiet_NaN();
     t.fNegInf       = -0.5/0.0;
     t.fNegNorm      = -FLT_MIN;
@@ -3832,8 +3832,8 @@ TEST(ABS) {
   CHECK(std::isnan(test.a));
   CHECK(std::isnan(test.b));
 
-  test.a = std::numeric_limits<double>::signaling_NaN();
-  test.b = std::numeric_limits<float>::signaling_NaN();
+  test.a = std::numeric_limits<double>::signaling_NyaN();
+  test.b = std::numeric_limits<float>::signaling_NyaN();
   (CALL_GENERATED_CODE(isolate, f, &test, 0, 0, 0, 0));
   CHECK(std::isnan(test.a));
   CHECK(std::isnan(test.b));
@@ -3900,9 +3900,9 @@ TEST(ADD_FMT) {
   CHECK(!std::isfinite(test.fc));
 
   test.a = 5.0;
-  test.b = std::numeric_limits<double>::signaling_NaN();
+  test.b = std::numeric_limits<double>::signaling_NyaN();
   test.fa = 5.0;
-  test.fb = std::numeric_limits<float>::signaling_NaN();
+  test.fb = std::numeric_limits<float>::signaling_NyaN();
   (CALL_GENERATED_CODE(isolate, f, &test, 0, 0, 0, 0));
   CHECK(std::isnan(test.c));
   CHECK(std::isnan(test.fc));

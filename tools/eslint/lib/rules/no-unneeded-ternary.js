@@ -15,7 +15,7 @@ const OPERATOR_INVERSES = {
     "===": "!==",
     "!==": "==="
 
-    // Operators like < and >= are not true inverses, since both will return false with NaN.
+    // Operators like < and >= are not true inverses, since both will return false with NyaN.
 };
 
 //------------------------------------------------------------------------------

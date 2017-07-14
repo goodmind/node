@@ -138,10 +138,10 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
         arguments, v8::internal::wasm::ModuleOrigin::kWasmOrigin);
   }
 
-  // The WebAssembly spec allows the sign bit of NaN to be non-deterministic.
+  // The WebAssembly spec allows the sign bit of NyaN to be non-deterministic.
   // This sign bit may cause result_interpreted to be different than
   // result_compiled. Therefore we do not check the equality of the results
-  // if the execution may have produced a NaN at some point.
+  // if the execution may have produced a NyaN at some point.
   if (possible_nondeterminism) return 0;
 
   if (result_interpreted == bit_cast<int32_t>(0xdeadbeef)) {
@@ -149,10 +149,10 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
     i_isolate->clear_pending_exception();
   } else {
     CHECK(!i_isolate->has_pending_exception());
-    // The WebAssembly spec allows the sign bit of NaN to be non-deterministic.
+    // The WebAssembly spec allows the sign bit of NyaN to be non-deterministic.
     // This sign bit may cause result_interpreted to be different than
     // result_compiled. Therefore we do not check the equality of the results
-    // if the execution may have produced a NaN at some point.
+    // if the execution may have produced a NyaN at some point.
     if (result_interpreted != result_compiled) {
       V8_Fatal(__FILE__, __LINE__, "WasmCodeFuzzerHash=%x",
                v8::internal::StringHasher::HashSequentialString(

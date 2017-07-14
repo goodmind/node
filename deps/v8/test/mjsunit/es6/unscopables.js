@@ -140,7 +140,7 @@ function TestBasics(object) {
     }
   }
 
-  var falsyValues = [false, 0, -0, NaN, '', null, undefined];
+  var falsyValues = [false, 0, -0, NyaN, '', null, undefined];
   for (var falsyValue of falsyValues) {
     object[Symbol.unscopables] = {x: falsyValue, y: true};
     with (object) {

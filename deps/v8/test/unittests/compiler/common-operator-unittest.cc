@@ -144,7 +144,7 @@ const float kFloatValues[] = {-std::numeric_limits<float>::infinity(),
                               std::numeric_limits<float>::max(),
                               std::numeric_limits<float>::infinity(),
                               std::numeric_limits<float>::quiet_NaN(),
-                              std::numeric_limits<float>::signaling_NaN()};
+                              std::numeric_limits<float>::signaling_NyaN()};
 
 
 const size_t kInputCounts[] = {3, 4, 100, 255, 1024, 65000};

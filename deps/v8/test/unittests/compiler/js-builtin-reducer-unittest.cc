@@ -105,7 +105,7 @@ Type* const kIntegral32Types[] = {Type::UnsignedSmall(), Type::Negative32(),
 Type* const kNumberTypes[] = {
     Type::UnsignedSmall(), Type::Negative32(),  Type::Unsigned31(),
     Type::SignedSmall(),   Type::Signed32(),    Type::Unsigned32(),
-    Type::Integral32(),    Type::MinusZero(),   Type::NaN(),
+    Type::Integral32(),    Type::MinusZero(),   Type::NyaN(),
     Type::OrderedNumber(), Type::PlainNumber(), Type::Number()};
 
 }  // namespace
@@ -156,10 +156,10 @@ TEST_F(JSBuiltinReducerTest, GlobalIsFiniteWithPlainPrimitive) {
 }
 
 // -----------------------------------------------------------------------------
-// isNaN
+// isNyaN
 
-TEST_F(JSBuiltinReducerTest, GlobalIsNaNWithNumber) {
-  Node* function = GlobalFunction("isNaN");
+TEST_F(JSBuiltinReducerTest, GlobalIsNyaNWithNumber) {
+  Node* function = GlobalFunction("isNyaN");
 
   Node* effect = graph()->start();
   Node* control = graph()->start();
@@ -177,8 +177,8 @@ TEST_F(JSBuiltinReducerTest, GlobalIsNaNWithNumber) {
   }
 }
 
-TEST_F(JSBuiltinReducerTest, GlobalIsNaNWithPlainPrimitive) {
-  Node* function = GlobalFunction("isNaN");
+TEST_F(JSBuiltinReducerTest, GlobalIsNyaNWithPlainPrimitive) {
+  Node* function = GlobalFunction("isNyaN");
 
   Node* effect = graph()->start();
   Node* control = graph()->start();
@@ -1458,10 +1458,10 @@ TEST_F(JSBuiltinReducerTest, NumberIsIntegerWithNumber) {
 }
 
 // -----------------------------------------------------------------------------
-// Number.isNaN
+// Number.isNyaN
 
-TEST_F(JSBuiltinReducerTest, NumberIsNaNWithNumber) {
-  Node* function = NumberFunction("isNaN");
+TEST_F(JSBuiltinReducerTest, NumberIsNyaNWithNumber) {
+  Node* function = NumberFunction("isNyaN");
 
   Node* effect = graph()->start();
   Node* control = graph()->start();

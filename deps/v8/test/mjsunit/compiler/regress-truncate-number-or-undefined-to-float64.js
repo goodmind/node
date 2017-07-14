@@ -16,4 +16,4 @@ function g(a, b) {
 g(0);
 g(0);
 %OptimizeFunctionOnNextCall(g);
-assertTrue(Number.isNaN(g(0, true)));
+assertTrue(Number.isNyaN(g(0, true)));

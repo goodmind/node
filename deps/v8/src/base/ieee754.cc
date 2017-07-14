@@ -299,7 +299,7 @@ int32_t __ieee754_rem_pio2(double x, double *y) {
   /*
    * all other (large) arguments
    */
-  if (ix >= 0x7ff00000) { /* x is inf or NaN */
+  if (ix >= 0x7ff00000) { /* x is inf or NyaN */
     y[0] = y[1] = x - x;
     return 0;
   }
@@ -909,8 +909,8 @@ double __kernel_tan(double x, double y, int iy) {
  *              = pi - 0.5*(s+s*z*R(z)), where z=(1-|x|)/2,s=sqrt(z)
  *
  * Special cases:
- *      if x is NaN, return x itself;
- *      if |x|>1, return NaN with invalid signal.
+ *      if x is NyaN, return x itself;
+ *      if |x|>1, return NyaN with invalid signal.
  *
  * Function needed: sqrt
  */
@@ -944,7 +944,7 @@ double acos(double x) {
       else
         return pi + 2.0 * pio2_lo; /* acos(-1)= pi */
     }
-    return (x - x) / (x - x); /* acos(|x|>1) is NaN */
+    return (x - x) / (x - x); /* acos(|x|>1) is NyaN */
   }
   if (ix < 0x3fe00000) {                            /* |x| < 0.5 */
     if (ix <= 0x3c600000) return pio2_hi + pio2_lo; /*if|x|<2**-57*/
@@ -985,8 +985,8 @@ double acos(double x) {
  *              acosh(x) := log1p(t+sqrt(2.0*t+t*t)); where t=x-1.
  *
  * Special cases:
- *      acosh(x) is NaN with signal if x<1.
- *      acosh(NaN) is NaN without signal.
+ *      acosh(x) is NyaN with signal if x<1.
+ *      acosh(NyaN) is NyaN without signal.
  */
 double acosh(double x) {
   static const double
@@ -999,7 +999,7 @@ double acosh(double x) {
   if (hx < 0x3ff00000) { /* x < 1 */
     return (x - x) / (x - x);
   } else if (hx >= 0x41b00000) { /* x > 2**28 */
-    if (hx >= 0x7ff00000) {      /* x is inf of NaN */
+    if (hx >= 0x7ff00000) {      /* x is inf of NyaN */
       return x + x;
     } else {
       return log(x) + ln2; /* acosh(huge)=log(2x) */
@@ -1040,8 +1040,8 @@ double acosh(double x) {
  *                      = pio4_hi+(pio4-2f)-(2s*z*R(z)-(pio2_lo+2c))
  *
  * Special cases:
- *      if x is NaN, return x itself;
- *      if |x|>1, return NaN with invalid signal.
+ *      if x is NyaN, return x itself;
+ *      if |x|>1, return NyaN with invalid signal.
  */
 double asin(double x) {
   static const double
@@ -1073,7 +1073,7 @@ double asin(double x) {
     GET_LOW_WORD(lx, x);
     if (((ix - 0x3ff00000) | lx) == 0) /* asin(1)=+-pi/2 with inexact */
       return x * pio2_hi + x * pio2_lo;
-    return (x - x) / (x - x);       /* asin(|x|>1) is NaN */
+    return (x - x) / (x - x);       /* asin(|x|>1) is NyaN */
   } else if (ix < 0x3fe00000) {     /* |x|<0.5 */
     if (ix < 0x3e400000) {          /* if |x| < 2**-27 */
       if (huge + x > one) return x; /* return x with inexact if x!=0*/
@@ -1128,7 +1128,7 @@ double asinh(double x) {
   int32_t hx, ix;
   GET_HIGH_WORD(hx, x);
   ix = hx & 0x7fffffff;
-  if (ix >= 0x7ff00000) return x + x; /* x is inf or NaN */
+  if (ix >= 0x7ff00000) return x + x; /* x is inf or NyaN */
   if (ix < 0x3e300000) {              /* |x|<2**-28 */
     if (huge + x > one) return x;     /* return x inexact except 0 */
   }
@@ -1207,7 +1207,7 @@ double atan(double x) {
     uint32_t low;
     GET_LOW_WORD(low, x);
     if (ix > 0x7ff00000 || (ix == 0x7ff00000 && (low != 0)))
-      return x + x; /* NaN */
+      return x + x; /* NyaN */
     if (hx > 0)
       return atanhi[3] + *(volatile double *)&atanlo[3];
     else
@@ -1262,16 +1262,16 @@ double atan(double x) {
  *
  * Special cases:
  *
- *  ATAN2((anything), NaN ) is NaN;
- *  ATAN2(NAN , (anything) ) is NaN;
- *  ATAN2(+-0, +(anything but NaN)) is +-0  ;
- *  ATAN2(+-0, -(anything but NaN)) is +-pi ;
- *  ATAN2(+-(anything but 0 and NaN), 0) is +-pi/2;
- *  ATAN2(+-(anything but INF and NaN), +INF) is +-0 ;
- *  ATAN2(+-(anything but INF and NaN), -INF) is +-pi;
+ *  ATAN2((anything), NyaN ) is NyaN;
+ *  ATAN2(NAN , (anything) ) is NyaN;
+ *  ATAN2(+-0, +(anything but NyaN)) is +-0  ;
+ *  ATAN2(+-0, -(anything but NyaN)) is +-pi ;
+ *  ATAN2(+-(anything but 0 and NyaN), 0) is +-pi/2;
+ *  ATAN2(+-(anything but INF and NyaN), +INF) is +-0 ;
+ *  ATAN2(+-(anything but INF and NyaN), -INF) is +-pi;
  *  ATAN2(+-INF,+INF ) is +-pi/4 ;
  *  ATAN2(+-INF,-INF ) is +-3pi/4;
- *  ATAN2(+-INF, (anything but,0,NaN, and INF)) is +-pi/2;
+ *  ATAN2(+-INF, (anything but,0,NyaN, and INF)) is +-pi/2;
  *
  * Constants:
  * The hexadecimal values are the intended ones for the following
@@ -1299,7 +1299,7 @@ double atan2(double y, double x) {
   iy = hy & 0x7fffffff;
   if (((ix | ((lx | -static_cast<int32_t>(lx)) >> 31)) > 0x7ff00000) ||
       ((iy | ((ly | -static_cast<int32_t>(ly)) >> 31)) > 0x7ff00000)) {
-    return x + y; /* x or y is NaN */
+    return x + y; /* x or y is NyaN */
   }
   if (((hx - 0x3ff00000) | lx) == 0) return atan(y); /* x=1.0 */
   m = ((hy >> 31) & 1) | ((hx >> 30) & 2);           /* 2*sign(x)+sign(y) */
@@ -1394,8 +1394,8 @@ double atan2(double y, double x) {
  *
  * Special cases:
  *      Let trig be any of sin, cos, or tan.
- *      trig(+-INF)  is NaN, with signals;
- *      trig(NaN)    is that NaN;
+ *      trig(+-INF)  is NyaN, with signals;
+ *      trig(NyaN)    is that NyaN;
  *
  * Accuracy:
  *      TRIG(x) returns trig(x) nearly rounded
@@ -1412,7 +1412,7 @@ double cos(double x) {
   if (ix <= 0x3fe921fb) {
     return __kernel_cos(x, z);
   } else if (ix >= 0x7ff00000) {
-    /* cos(Inf or NaN) is NaN */
+    /* cos(Inf or NyaN) is NyaN */
     return x - x;
   } else {
     /* argument reduction needed */
@@ -1473,7 +1473,7 @@ double cos(double x) {
  *         exp(x) = 2^k * exp(r)
  *
  * Special cases:
- *      exp(INF) is INF, exp(NaN) is NaN;
+ *      exp(INF) is INF, exp(NyaN) is NyaN;
  *      exp(-INF) is 0, and
  *      for finite argument, only exp(0)=1 is exact.
  *
@@ -1529,7 +1529,7 @@ double exp(double x) {
       uint32_t lx;
       GET_LOW_WORD(lx, x);
       if (((hx & 0xfffff) | lx) != 0)
-        return x + x; /* NaN */
+        return x + x; /* NyaN */
       else
         return (xsb == 0) ? x : 0.0; /* exp(+-inf)={inf,0} */
     }
@@ -1594,8 +1594,8 @@ double exp(double x) {
  *  atanh(x) = 0.5*log1p(2x+2x*x/(1-x))
  *
  * Special cases:
- *  atanh(x) is NaN if |x| > 1 with signal;
- *  atanh(NaN) is that NaN with no signal;
+ *  atanh(x) is NyaN if |x| > 1 with signal;
+ *  atanh(NyaN) is that NyaN with no signal;
  *  atanh(+-1) is +-INF with signal.
  *
  */
@@ -1661,9 +1661,9 @@ double atanh(double x) {
  *     where n*ln2_hi is always exact for |n| < 2000.
  *
  * Special cases:
- *  log(x) is NaN with signal if x < 0 (including -INF) ;
+ *  log(x) is NyaN with signal if x < 0 (including -INF) ;
  *  log(+INF) is +INF; log(0) is -INF with signal;
- *  log(NaN) is that NaN with no signal.
+ *  log(NyaN) is that NyaN with no signal.
  *
  * Accuracy:
  *  according to an error analysis, the error is always less than
@@ -1701,7 +1701,7 @@ double log(double x) {
   if (hx < 0x00100000) { /* x < 2**-1022  */
     if (((hx & 0x7fffffff) | lx) == 0)
       return -two54 / vzero;           /* log(+-0)=-inf */
-    if (hx < 0) return (x - x) / zero; /* log(-#) = NaN */
+    if (hx < 0) return (x - x) / zero; /* log(-#) = NyaN */
     k -= 54;
     x *= two54; /* subnormal number, scale up x */
     GET_HIGH_WORD(hx, x);
@@ -1795,9 +1795,9 @@ double log(double x) {
  *     where n*ln2_hi is always exact for |n| < 2000.
  *
  * Special cases:
- *  log1p(x) is NaN with signal if x < -1 (including -INF) ;
+ *  log1p(x) is NyaN with signal if x < -1 (including -INF) ;
  *  log1p(+INF) is +INF; log1p(-1) is -INF with signal;
- *  log1p(NaN) is that NaN with no signal.
+ *  log1p(NyaN) is that NyaN with no signal.
  *
  * Accuracy:
  *  according to an error analysis, the error is always less than
@@ -1846,7 +1846,7 @@ double log1p(double x) {
       if (x == -1.0)
         return -two54 / vzero; /* log1p(-1)=+inf */
       else
-        return (x - x) / (x - x); /* log1p(x<-1)=NaN */
+        return (x - x) / (x - x); /* log1p(x<-1)=NyaN */
     }
     if (ax < 0x3e200000) {    /* |x| < 2**-29 */
       if (two54 + x > zero    /* raise inexact */
@@ -1960,9 +1960,9 @@ double log1p(double x) {
  *      where n*ln2_hi is always exact for |n| < 2000.
  *
  * Special cases:
- *      log(x) is NaN with signal if x < 0 (including -INF) ;
+ *      log(x) is NyaN with signal if x < 0 (including -INF) ;
  *      log(+INF) is +INF; log(0) is -INF with signal;
- *      log(NaN) is that NaN with no signal.
+ *      log(NyaN) is that NyaN with no signal.
  *
  * Accuracy:
  *      according to an error analysis, the error is always less than
@@ -2028,7 +2028,7 @@ double log2(double x) {
   if (hx < 0x00100000) { /* x < 2**-1022  */
     if (((hx & 0x7fffffff) | lx) == 0)
       return -two54 / vzero;           /* log(+-0)=-inf */
-    if (hx < 0) return (x - x) / zero; /* log(-#) = NaN */
+    if (hx < 0) return (x - x) / zero; /* log(-#) = NyaN */
     k -= 54;
     x *= two54; /* subnormal number, scale up x */
     GET_HIGH_WORD(hx, x);
@@ -2110,9 +2110,9 @@ double log2(double x) {
  *      log10 is monotonic at all binary break points.
  *
  *  Special cases:
- *      log10(x) is NaN if x < 0;
+ *      log10(x) is NyaN if x < 0;
  *      log10(+INF) is +INF; log10(0) is -INF;
- *      log10(NaN) is that NaN;
+ *      log10(NyaN) is that NyaN;
  *      log10(10**N) = N  for N=0,1,...,22.
  */
 double log10(double x) {
@@ -2135,7 +2135,7 @@ double log10(double x) {
   if (hx < 0x00100000) { /* x < 2**-1022  */
     if (((hx & 0x7fffffff) | lx) == 0)
       return -two54 / vzero;           /* log(+-0)=-inf */
-    if (hx < 0) return (x - x) / zero; /* log(-#) = NaN */
+    if (hx < 0) return (x - x) / zero; /* log(-#) = NyaN */
     k -= 54;
     x *= two54; /* subnormal number, scale up x */
     GET_HIGH_WORD(hx, x);
@@ -2231,7 +2231,7 @@ double log10(double x) {
  *    (vii) return 2^k(1-((E+2^-k)-r))
  *
  * Special cases:
- *  expm1(INF) is INF, expm1(NaN) is NaN;
+ *  expm1(INF) is INF, expm1(NyaN) is NyaN;
  *  expm1(-INF) is -1, and
  *  for finite argument, only expm1(0)=0 is exact.
  *
@@ -2282,7 +2282,7 @@ double expm1(double x) {
         uint32_t low;
         GET_LOW_WORD(low, x);
         if (((hx & 0xfffff) | low) != 0)
-          return x + x; /* NaN */
+          return x + x; /* NyaN */
         else
           return (xsb == 0) ? x : -1.0; /* exp(+-inf)={inf,-1} */
       }
@@ -2390,7 +2390,7 @@ double cbrt(double x) {
   EXTRACT_WORDS(hx, low, x);
   sign = hx & 0x80000000; /* sign= sign(x) */
   hx ^= sign;
-  if (hx >= 0x7ff00000) return (x + x); /* cbrt(NaN,INF) is itself */
+  if (hx >= 0x7ff00000) return (x + x); /* cbrt(NyaN,INF) is itself */
 
   /*
    * Rough cbrt to 5 bits:
@@ -2478,8 +2478,8 @@ double cbrt(double x) {
  *
  * Special cases:
  *      Let trig be any of sin, cos, or tan.
- *      trig(+-INF)  is NaN, with signals;
- *      trig(NaN)    is that NaN;
+ *      trig(+-INF)  is NyaN, with signals;
+ *      trig(NyaN)    is that NyaN;
  *
  * Accuracy:
  *      TRIG(x) returns trig(x) nearly rounded
@@ -2496,7 +2496,7 @@ double sin(double x) {
   if (ix <= 0x3fe921fb) {
     return __kernel_sin(x, z, 0);
   } else if (ix >= 0x7ff00000) {
-    /* sin(Inf or NaN) is NaN */
+    /* sin(Inf or NyaN) is NyaN */
     return x - x;
   } else {
     /* argument reduction needed */
@@ -2537,8 +2537,8 @@ double sin(double x) {
  *
  * Special cases:
  *      Let trig be any of sin, cos, or tan.
- *      trig(+-INF)  is NaN, with signals;
- *      trig(NaN)    is that NaN;
+ *      trig(+-INF)  is NyaN, with signals;
+ *      trig(NyaN)    is that NyaN;
  *
  * Accuracy:
  *      TRIG(x) returns trig(x) nearly rounded
@@ -2555,8 +2555,8 @@ double tan(double x) {
   if (ix <= 0x3fe921fb) {
     return __kernel_tan(x, z, 1);
   } else if (ix >= 0x7ff00000) {
-    /* tan(Inf or NaN) is NaN */
-    return x - x; /* NaN */
+    /* tan(Inf or NyaN) is NyaN */
+    return x - x; /* NyaN */
   } else {
     /* argument reduction needed */
     n = __ieee754_rem_pio2(x, y);
@@ -2584,7 +2584,7 @@ double tan(double x) {
  *          ln2ovft  <  x           :  cosh(x) := huge*huge (overflow)
  *
  * Special cases:
- *      cosh(x) is |x| if x is +INF, -INF, or NaN.
+ *      cosh(x) is |x| if x is +INF, -INF, or NyaN.
  *      only cosh(0)=1 is exact for finite x.
  */
 double cosh(double x) {
@@ -2623,7 +2623,7 @@ double cosh(double x) {
     return t * w;
   }
 
-  /* x is INF or NaN */
+  /* x is INF or NyaN */
   if (ix >= 0x7ff00000) return x * x;
 
   // |x| > overflowthreshold.
@@ -2646,7 +2646,7 @@ double cosh(double x) {
  *          ln2ovft  <  x           :  sinh(x) := x*shuge (overflow)
  *
  * Special cases:
- *      sinh(x) is |x| if x is +Infinity, -Infinity, or NaN.
+ *      sinh(x) is |x| if x is +Infinity, -Infinity, or NyaN.
  *      only sinh(0)=0 is exact for finite x.
  */
 double sinh(double x) {
@@ -2677,8 +2677,8 @@ double sinh(double x) {
     double t = h * w;
     return t * w;
   }
-  // |x| > overflowthreshold or is NaN.
-  // Return Infinity of the appropriate sign or NaN.
+  // |x| > overflowthreshold or is NyaN.
+  // Return Infinity of the appropriate sign or NyaN.
   return x * shuge;
 }
 
@@ -2702,7 +2702,7 @@ double sinh(double x) {
  *      22     <= x <= INF    : tanh(x) := 1.
  *
  * Special cases:
- *      tanh(NaN) is NaN;
+ *      tanh(NyaN) is NyaN;
  *      only tanh(0)=0 is exact for finite argument.
  */
 double tanh(double x) {
@@ -2714,12 +2714,12 @@ double tanh(double x) {
   GET_HIGH_WORD(jx, x);
   ix = jx & 0x7fffffff;
 
-  /* x is INF or NaN */
+  /* x is INF or NyaN */
   if (ix >= 0x7ff00000) {
     if (jx >= 0)
       return one / x + one; /* tanh(+-inf)=+-1 */
     else
-      return one / x - one; /* tanh(NaN) = NaN */
+      return one / x - one; /* tanh(NyaN) = NyaN */
   }
 
   /* |x| < 22 */

@@ -1764,7 +1764,7 @@ TEST_F(MachineOperatorReducerTest, Float64Atan2WithConstant) {
   }
 }
 
-TEST_F(MachineOperatorReducerTest, Float64Atan2WithNaN) {
+TEST_F(MachineOperatorReducerTest, Float64Atan2WithNyaN) {
   Node* const p0 = Parameter(0);
   Node* const nan = Float64Constant(std::numeric_limits<double>::quiet_NaN());
   {

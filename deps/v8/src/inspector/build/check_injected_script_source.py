@@ -52,7 +52,7 @@ def validate_injected_script(fileName):
     ])
 
     global_functions = "|".join([
-        "eval", "uneval", "isFinite", "isNaN", "parseFloat", "parseInt", "decodeURI", "decodeURIComponent",
+        "eval", "uneval", "isFinite", "isNyaN", "parseFloat", "parseInt", "decodeURI", "decodeURIComponent",
         "encodeURI", "encodeURIComponent", "escape", "unescape", "Map", "Set"
     ])
 

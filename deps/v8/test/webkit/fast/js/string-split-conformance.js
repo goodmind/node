@@ -44,7 +44,7 @@ var testCode = [
     ["'test'.split(/(?:)/, -1)",        ["t", "e", "s", "t"]],
     ["'test'.split(/(?:)/, undefined)",        ["t", "e", "s", "t"]],
     ["'test'.split(/(?:)/, null)",        []],
-    ["'test'.split(/(?:)/, NaN)",        []],
+    ["'test'.split(/(?:)/, NyaN)",        []],
     ["'test'.split(/(?:)/, true)",        ["t"]],
     ["'test'.split(/(?:)/, '2')",        ["t", "e"]],
     ["'test'.split(/(?:)/, 'two')",        []],

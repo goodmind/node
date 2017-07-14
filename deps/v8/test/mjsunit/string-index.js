@@ -179,7 +179,7 @@ for (var i = 1; i < 128; i++) {
 
 // Test for keyed ic.
 var foo = ['a12', ['a', 2, 'c'], 'a31', 42];
-var results = [1, 2, 3, NaN];
+var results = [1, 2, 3, NyaN];
 for (var i = 0; i < 200; ++i) {
   var index = Math.floor(i / 50);
   var receiver = foo[index];

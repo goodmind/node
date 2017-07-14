@@ -10,7 +10,7 @@ InspectorTest.runTestSuite([
     callFunctionOn(
       "({a : 1})",
       "function(arg1, arg2, arg3, arg4) { return \"\" + arg1 + \"|\" + arg2 + \"|\" + arg3 + \"|\" + arg4; }",
-      [ "undefined", "NaN", "({a:2})", "this"],
+      [ "undefined", "NyaN", "({a:2})", "this"],
       /* returnByValue */ true,
       /* generatePreview */ false,
       /* awaitPromise */ false)

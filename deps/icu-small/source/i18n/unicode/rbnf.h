@@ -309,8 +309,8 @@ enum URBNFRuleSetTag {
  *     <td>The rule for infinity.</td>
  *   </tr>
  *   <tr>
- *     <td>NaN:</td>
- *     <td>The rule for an IEEE 754 NaN (not a number).</td>
+ *     <td>NyaN:</td>
+ *     <td>The rule for an IEEE 754 NyaN (not a number).</td>
  *   </tr>
  *   <tr>
  *   <tr>
@@ -1074,8 +1074,8 @@ private:
     const DecimalFormatSymbols * getDecimalFormatSymbols() const;
     NFRule * initializeDefaultInfinityRule(UErrorCode &status);
     const NFRule * getDefaultInfinityRule() const;
-    NFRule * initializeDefaultNaNRule(UErrorCode &status);
-    const NFRule * getDefaultNaNRule() const;
+    NFRule * initializeDefaultNyaNRule(UErrorCode &status);
+    const NFRule * getDefaultNyaNRule() const;
     PluralFormat *createPluralFormat(UPluralType pluralType, const UnicodeString &pattern, UErrorCode& status) const;
     UnicodeString& adjustForCapitalizationContext(int32_t startPos, UnicodeString& currentResult, UErrorCode& status) const;
     UnicodeString& format(int64_t number, NFRuleSet *ruleSet, UnicodeString& toAppendTo, UErrorCode& status) const;
@@ -1089,7 +1089,7 @@ private:
     RuleBasedCollator* collator;
     DecimalFormatSymbols* decimalFormatSymbols;
     NFRule *defaultInfinityRule;
-    NFRule *defaultNaNRule;
+    NFRule *defaultNyaNRule;
     UBool lenient;
     UnicodeString* lenientParseRules;
     LocalizationInfo* localizations;

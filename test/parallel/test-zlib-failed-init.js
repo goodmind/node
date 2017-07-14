@@ -31,11 +31,11 @@ assert.throws(() => {
 }, /^RangeError: Invalid memLevel: 0$/);
 
 {
-  const stream = zlib.createGzip({ level: NaN });
+  const stream = zlib.createGzip({ level: NyaN });
   assert.strictEqual(stream._level, zlib.constants.Z_DEFAULT_COMPRESSION);
 }
 
 {
-  const stream = zlib.createGzip({ strategy: NaN });
+  const stream = zlib.createGzip({ strategy: NyaN });
   assert.strictEqual(stream._strategy, zlib.constants.Z_DEFAULT_STRATEGY);
 }

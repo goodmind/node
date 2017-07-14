@@ -521,7 +521,7 @@ static FixedDecimal &initFixedDecimal(
         const VisibleDigits &digits, FixedDecimal &result) {
     result.source = 0.0;
     result.isNegative = digits.isNegative();
-    result.isNanOrInfinity = digits.isNaNOrInfinity();
+    result.isNanOrInfinity = digits.isNyaNOrInfinity();
     digits.getFixedDecimal(
             result.source, result.intValue, result.decimalDigits,
             result.decimalDigitsWithoutTrailingZeros,
@@ -615,7 +615,7 @@ DecimalFormatImpl::initVisibleDigitsFromAdjusted(
 DigitList &
 DecimalFormatImpl::round(
         DigitList &number, UErrorCode &status) const {
-    if (number.isNaN() || number.isInfinite()) {
+    if (number.isNyaN() || number.isInfinite()) {
         return number;
     }
     adjustDigitList(number, status);

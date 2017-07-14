@@ -22,7 +22,7 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 description(
-"Tests what happens in the Baseline JIT if we load from a Float32 array that contains a weirdly formatted NaN."
+"Tests what happens in the Baseline JIT if we load from a Float32 array that contains a weirdly formatted NyaN."
 );
 
 var buffer = new ArrayBuffer(4);
@@ -36,7 +36,7 @@ debug(int32View[0]);
 
 for (var i = 0; i < 100; ++i) {
     debug(floatView[0]);
-    shouldBe("\"\" + floatView[0]", "\"NaN\"");
+    shouldBe("\"\" + floatView[0]", "\"NyaN\"");
 }
 
 debug("I didn't crash, which is a good thing.");

@@ -4,8 +4,8 @@
 
 // Flags: --allow-natives-syntax
 
-assertEquals(0, %ToLength(NaN));
-assertEquals(0, %_ToLength(NaN));
+assertEquals(0, %ToLength(NyaN));
+assertEquals(0, %_ToLength(NyaN));
 
 assertEquals(0, %ToLength(-Infinity));
 assertEquals(0, %_ToLength(-Infinity));

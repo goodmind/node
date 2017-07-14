@@ -25,17 +25,17 @@ description(
 "This test checks that n % 0 doesn't crash with a floating-point exception."
 );
 
-shouldBe("2 % 0", "NaN");
+shouldBe("2 % 0", "NyaN");
 
 var n = 2;
-shouldBe("n % 0", "NaN");
+shouldBe("n % 0", "NyaN");
 
 function f()
 {
     return 2 % 0;
 }
 
-shouldBe("f()", "NaN");
+shouldBe("f()", "NyaN");
 
 function g()
 {
@@ -43,7 +43,7 @@ function g()
     return n % 0;
 }
 
-shouldBe("g()", "NaN");
+shouldBe("g()", "NyaN");
 
 // Test that reusing a floating point value after use in a modulus works correctly.
 function nonSpeculativeModReuseInner(argument, o1, o2)

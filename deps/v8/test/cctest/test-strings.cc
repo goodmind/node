@@ -1355,7 +1355,7 @@ TEST(RobustSubStringStub) {
   CheckException("%_SubString(short,     5,        2);");
   // Special HeapNumbers.
   CheckException("%_SubString(short,     1, Infinity);");
-  CheckException("%_SubString(short,   NaN,        5);");
+  CheckException("%_SubString(short,   NyaN,        5);");
   // String arguments.
   CheckException("%_SubString(short,    '2',     '5');");
   // Ordinary HeapNumbers can be handled (in runtime).
@@ -1370,7 +1370,7 @@ TEST(RobustSubStringStub) {
   CheckException("%_SubString(long,    17,        2);");
   // Special HeapNumbers.
   CheckException("%_SubString(long,     1, Infinity);");
-  CheckException("%_SubString(long,   NaN,       17);");
+  CheckException("%_SubString(long,   NyaN,       17);");
   // String arguments.
   CheckException("%_SubString(long,    '2',    '17');");
   // Ordinary HeapNumbers within bounds can be handled (in runtime).

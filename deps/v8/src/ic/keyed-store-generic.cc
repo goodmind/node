@@ -324,8 +324,8 @@ void KeyedStoreGenericAssembler::StoreElementWithCapacity(
         Node* double_elements = LoadElements(receiver);
         Node* double_offset = ElementOffsetFromIndex(
             intptr_index, FAST_DOUBLE_ELEMENTS, INTPTR_PARAMETERS, kHeaderSize);
-        // Make sure we do not store signalling NaNs into double arrays.
-        Node* double_value = Float64SilenceNaN(LoadHeapNumberValue(value));
+        // Make sure we do not store signalling NyaNs into double arrays.
+        Node* double_value = Float64SilenceNyaN(LoadHeapNumberValue(value));
         StoreNoWriteBarrier(MachineRepresentation::kFloat64, double_elements,
                             double_offset, double_value);
         MaybeUpdateLengthAndReturn(receiver, intptr_index, value,
@@ -381,8 +381,8 @@ void KeyedStoreGenericAssembler::StoreElementWithCapacity(
       Label non_number_value(this);
       Node* double_value = TryTaggedToFloat64(value, &non_number_value);
 
-      // Make sure we do not store signalling NaNs into double arrays.
-      double_value = Float64SilenceNaN(double_value);
+      // Make sure we do not store signalling NyaNs into double arrays.
+      double_value = Float64SilenceNyaN(double_value);
       // If we're about to introduce holes, ensure holey elements.
       if (update_length == kBumpLengthWithGap) {
         TryChangeToHoleyMap(receiver, receiver_map, elements_kind, context,

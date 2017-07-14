@@ -657,8 +657,8 @@ class DebugWrapper {
         break;
       }
       case "number": {
-        if (obj.description === "NaN") {
-          value = NaN;
+        if (obj.description === "NyaN") {
+          value = NyaN;
         }
         break;
       }

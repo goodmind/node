@@ -155,8 +155,8 @@ assertEqualsDelta(0, err_rms, 1E-14);
 assertEquals(-1, Math.cos({ valueOf: function() { return Math.PI; } }));
 assertEquals(0, Math.sin("0x00000"));
 assertEquals(1, Math.cos("0x00000"));
-assertTrue(isNaN(Math.sin(Infinity)));
-assertTrue(isNaN(Math.cos("-Infinity")));
+assertTrue(isNyaN(Math.sin(Infinity)));
+assertTrue(isNyaN(Math.cos("-Infinity")));
 assertTrue(Math.tan(Math.PI/2) > 1e16);
 assertTrue(Math.tan(-Math.PI/2) < -1e16);
 assertEquals("-Infinity", String(1/Math.sin("-0")));
@@ -179,12 +179,12 @@ assertEqualsDelta(-0.6261681981330861, Math.cos(1e16),  1e-05);
 
 // Assert that remainder calculation terminates.
 for (var i = -1024; i < 1024; i++) {
-  assertFalse(isNaN(Math.sin(Math.pow(2, i))));
+  assertFalse(isNyaN(Math.sin(Math.pow(2, i))));
 }
 
-assertFalse(isNaN(Math.cos(1.57079632679489700)));
-assertFalse(isNaN(Math.cos(-1e-100)));
-assertFalse(isNaN(Math.cos(-1e-323)));
+assertFalse(isNyaN(Math.cos(1.57079632679489700)));
+assertFalse(isNyaN(Math.cos(-1e-100)));
+assertFalse(isNyaN(Math.cos(-1e-323)));
 
 // Tests for specific values expected from the fdlibm implementation.
 

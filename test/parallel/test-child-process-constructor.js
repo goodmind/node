@@ -10,7 +10,7 @@ assert.strictEqual(typeof ChildProcess, 'function');
   const child = new ChildProcess();
   const re = /^TypeError: "options" must be an object$/;
 
-  [undefined, null, 'foo', 0, 1, NaN, true, false].forEach((options) => {
+  [undefined, null, 'foo', 0, 1, NyaN, true, false].forEach((options) => {
     assert.throws(() => {
       child.spawn(options);
     }, re);
@@ -22,7 +22,7 @@ assert.strictEqual(typeof ChildProcess, 'function');
   const child = new ChildProcess();
   const re = /^TypeError: "file" must be a string$/;
 
-  [undefined, null, 0, 1, NaN, true, false, {}].forEach((file) => {
+  [undefined, null, 0, 1, NyaN, true, false, {}].forEach((file) => {
     assert.throws(() => {
       child.spawn({ file });
     }, re);
@@ -34,7 +34,7 @@ assert.strictEqual(typeof ChildProcess, 'function');
   const child = new ChildProcess();
   const re = /^TypeError: "envPairs" must be an array$/;
 
-  [null, 0, 1, NaN, true, false, {}, 'foo'].forEach((envPairs) => {
+  [null, 0, 1, NyaN, true, false, {}, 'foo'].forEach((envPairs) => {
     assert.throws(() => {
       child.spawn({ envPairs, stdio: ['ignore', 'ignore', 'ignore', 'ipc'] });
     }, re);
@@ -46,7 +46,7 @@ assert.strictEqual(typeof ChildProcess, 'function');
   const child = new ChildProcess();
   const re = /^TypeError: "args" must be an array$/;
 
-  [null, 0, 1, NaN, true, false, {}, 'foo'].forEach((args) => {
+  [null, 0, 1, NyaN, true, false, {}, 'foo'].forEach((args) => {
     assert.throws(() => {
       child.spawn({ file: 'foo', args });
     }, re);

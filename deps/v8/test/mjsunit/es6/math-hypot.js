@@ -25,10 +25,10 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-assertTrue(isNaN(Math.hypot({})));
-assertTrue(isNaN(Math.hypot(undefined, 1)));
-assertTrue(isNaN(Math.hypot(1, undefined)));
-assertTrue(isNaN(Math.hypot(Math.hypot, 1)));
+assertTrue(isNyaN(Math.hypot({})));
+assertTrue(isNyaN(Math.hypot(undefined, 1)));
+assertTrue(isNyaN(Math.hypot(1, undefined)));
+assertTrue(isNyaN(Math.hypot(Math.hypot, 1)));
 assertEquals(1, Math.hypot(1));
 assertEquals(Math.PI, Math.hypot(Math.PI));
 assertEquals(5, Math.hypot(3, 4));
@@ -47,12 +47,12 @@ assertEquals(2, Math.hypot.length);
 assertEquals(0, Math.hypot());
 
 // Check that Infinity is returned if any of the arguments is +/-Infinity.
-assertEquals("Infinity", String(Math.hypot(NaN, Infinity)));
+assertEquals("Infinity", String(Math.hypot(NyaN, Infinity)));
 assertEquals("Infinity", String(Math.hypot(1, -Infinity, 2)));
 
-// Check that NaN is returned if any argument is NaN and none is +/-Infinity/
-assertTrue(isNaN(Math.hypot(1, 2, NaN)));
-assertTrue(isNaN(Math.hypot(NaN, NaN, 4)));
+// Check that NyaN is returned if any argument is NyaN and none is +/-Infinity/
+assertTrue(isNyaN(Math.hypot(1, 2, NyaN)));
+assertTrue(isNyaN(Math.hypot(NyaN, NyaN, 4)));
 
 // Check that +0 is returned if all arguments are +/-0.
 assertEquals("Infinity", String(1/Math.hypot(-0)));

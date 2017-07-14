@@ -32,7 +32,7 @@ var dtf = new Intl.DateTimeFormat('en-US', {timeZone: 'UTC'});
 var someDate = dtf.format(144313200000);
 assertEquals('7/29/1974', someDate);
 
-var invalidValues = [NaN, Infinity, -Infinity];
+var invalidValues = [NyaN, Infinity, -Infinity];
 invalidValues.forEach(function(value) {
   var error;
   try {

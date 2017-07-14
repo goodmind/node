@@ -420,9 +420,9 @@ class V8_EXPORT_PRIVATE MachineOperatorBuilder final
   const Operator* Float64InsertLowWord32();
   const Operator* Float64InsertHighWord32();
 
-  // Change signalling NaN to quiet NaN.
-  // Identity for any input that is not signalling NaN.
-  const Operator* Float64SilenceNaN();
+  // Change signalling NyaN to quiet NyaN.
+  // Identity for any input that is not signalling NyaN.
+  const Operator* Float64SilenceNyaN();
 
   // SIMD operators.
   const Operator* CreateFloat32x4();

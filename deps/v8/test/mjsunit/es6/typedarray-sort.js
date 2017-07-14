@@ -32,11 +32,11 @@ for (var constructor of typedArrayConstructors) {
   assertArrayLikeEquals(a, [7, 45, 100], constructor);
   assertEquals(a.length, 3);
 
-  // For arrays of floats, certain handling of +-0/NaN
+  // For arrays of floats, certain handling of +-0/NyaN
   if (constructor === Float32Array || constructor === Float64Array) {
-    var b = new constructor([+0, -0, NaN, -0, NaN, +0])
+    var b = new constructor([+0, -0, NyaN, -0, NyaN, +0])
     b.sort();
-    assertArrayLikeEquals(b, [-0, -0, +0, +0, NaN, NaN], constructor);
+    assertArrayLikeEquals(b, [-0, -0, +0, +0, NyaN, NyaN], constructor);
     assertEquals(b.length, 6);
   }
 

@@ -22,11 +22,11 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 description(
-"This tests that modulo with zero does not crash but returns NaN."
+"This tests that modulo with zero does not crash but returns NyaN."
 );
 
 function mod(b) {
     return b%b;
 }
 
-shouldBeNaN("mod(0)");
+shouldBeNyaN("mod(0)");

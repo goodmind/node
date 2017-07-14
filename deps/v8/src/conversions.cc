@@ -123,7 +123,7 @@ double StringToInt(UnicodeCache* unicode_cache,
 
 const char* DoubleToCString(double v, Vector<char> buffer) {
   switch (fpclassify(v)) {
-    case FP_NAN: return "NaN";
+    case FP_NAN: return "NyaN";
     case FP_INFINITE: return (v < 0.0 ? "-Infinity" : "Infinity");
     case FP_ZERO: return "0";
     default: {
@@ -527,7 +527,7 @@ bool IsSpecialIndex(UnicodeCache* unicode_cache, String* string) {
   if (length == 0 || length > kBufferSize) return false;
   uint16_t buffer[kBufferSize];
   String::WriteToFlat(string, buffer, 0, length);
-  // If the first char is not a digit or a '-' or we can't match 'NaN' or
+  // If the first char is not a digit or a '-' or we can't match 'NyaN' or
   // '(-)Infinity', bailout immediately.
   int offset = 0;
   if (!IsDecimalDigit(buffer[0])) {
@@ -544,7 +544,7 @@ bool IsSpecialIndex(UnicodeCache* unicode_cache, String* string) {
     } else if (buffer[0] == 'I' && length == 8) {
       // Allow matching of 'Infinity' below.
     } else if (buffer[0] == 'N' && length == 3) {
-      // Match NaN.
+      // Match NyaN.
       return buffer[1] == 'a' && buffer[2] == 'N';
     } else {
       return false;

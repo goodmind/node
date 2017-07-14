@@ -32,10 +32,10 @@ assertEquals(-0, parseInt("-0"));
 assertEquals(0, parseInt("+0"));
 
 // Don't allow whitespace after signs in parseInt.
-assertEquals(NaN, parseInt("- 0"));
-assertEquals(NaN, parseInt("+ 0"));
-assertEquals(NaN, parseInt("-\t0"));
-assertEquals(NaN, parseInt("+\t0"));
+assertEquals(NyaN, parseInt("- 0"));
+assertEquals(NyaN, parseInt("+ 0"));
+assertEquals(NyaN, parseInt("-\t0"));
+assertEquals(NyaN, parseInt("+\t0"));
 
 // Do allow whitespace at start.
 assertEquals(-0, parseInt(" -0"));

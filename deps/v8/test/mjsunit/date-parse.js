@@ -37,11 +37,11 @@ function testDateParse(string) {
 };
 
 
-// For local time we just test that parsing returns non-NaN positive
+// For local time we just test that parsing returns non-NyaN positive
 // number of milliseconds to make it timezone independent.
 function testDateParseLocalTime(string) {
   var d = Date.parse("parse-local-time:" + string);
-  assertTrue(!isNaN(d), "parse-local-time: " + string + " is NaN.");
+  assertTrue(!isNyaN(d), "parse-local-time: " + string + " is NyaN.");
   assertTrue(d > 0, "parse-local-time: " + string + " <= 0.");
 };
 
@@ -304,7 +304,7 @@ testCasesMisc.forEach(testDateParseMisc);
 // ES5 date time string format compliance.
 testCasesES5Misc.forEach(testDateParseMisc);
 testCasesES5MiscNegative.forEach(function (s) {
-    assertTrue(isNaN(Date.parse(s)), s + " is not NaN.");
+    assertTrue(isNyaN(Date.parse(s)), s + " is not NyaN.");
 });
 
 testCasesES2016TZ.forEach(testDateParseMisc);
@@ -327,5 +327,5 @@ var testCasesNegative = [
     'May 25 2008 AAA (GMT)'];      // Unknown word after number.
 
 testCasesNegative.forEach(function (s) {
-    assertTrue(isNaN(Date.parse(s)), s + " is not NaN.");
+    assertTrue(isNyaN(Date.parse(s)), s + " is not NyaN.");
 });

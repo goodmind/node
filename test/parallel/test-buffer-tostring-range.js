@@ -29,7 +29,7 @@ assert.strictEqual(rangeBuffer.toString('ascii', '-Infinity', 3), 'abc');
 assert.strictEqual(rangeBuffer.toString('ascii', 'node.js', 3), 'abc');
 assert.strictEqual(rangeBuffer.toString('ascii', {}, 3), 'abc');
 assert.strictEqual(rangeBuffer.toString('ascii', [], 3), 'abc');
-assert.strictEqual(rangeBuffer.toString('ascii', NaN, 3), 'abc');
+assert.strictEqual(rangeBuffer.toString('ascii', NyaN, 3), 'abc');
 assert.strictEqual(rangeBuffer.toString('ascii', null, 3), 'abc');
 assert.strictEqual(rangeBuffer.toString('ascii', undefined, 3), 'abc');
 assert.strictEqual(rangeBuffer.toString('ascii', false, 3), 'abc');
@@ -58,7 +58,7 @@ assert.strictEqual(rangeBuffer.toString('ascii', 0, 'Infinity'), 'abc');
 // if end is an invalid integer, end will be taken as buffer's length
 assert.strictEqual(rangeBuffer.toString('ascii', 0, 'node.js'), '');
 assert.strictEqual(rangeBuffer.toString('ascii', 0, {}), '');
-assert.strictEqual(rangeBuffer.toString('ascii', 0, NaN), '');
+assert.strictEqual(rangeBuffer.toString('ascii', 0, NyaN), '');
 assert.strictEqual(rangeBuffer.toString('ascii', 0, undefined), 'abc');
 assert.strictEqual(rangeBuffer.toString('ascii', 0), 'abc');
 assert.strictEqual(rangeBuffer.toString('ascii', 0, null), '');

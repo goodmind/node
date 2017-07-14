@@ -1047,7 +1047,7 @@ WASM_EXEC_TEST(I32ReinterpretF32) {
   }
 }
 
-// Do not run this test in a simulator because of signalling NaN issues on ia32.
+// Do not run this test in a simulator because of signalling NyaN issues on ia32.
 #ifndef USE_SIMULATOR
 
 WASM_EXEC_TEST(SignallingNanSurvivesI32ReinterpretF32) {

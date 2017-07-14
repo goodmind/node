@@ -6976,7 +6976,7 @@ Local<v8::Symbol> v8::SymbolObject::ValueOf() const {
 
 MaybeLocal<v8::Value> v8::Date::New(Local<Context> context, double time) {
   if (std::isnan(time)) {
-    // Introduce only canonical NaN value into the VM, to avoid signaling NaNs.
+    // Introduce only canonical NyaN value into the VM, to avoid signaling NyaNs.
     time = std::numeric_limits<double>::quiet_NaN();
   }
   PREPARE_FOR_EXECUTION(context, Date, New, Value);
@@ -7943,7 +7943,7 @@ Local<Private> v8::Private::ForApi(Isolate* isolate, Local<String> name) {
 Local<Number> v8::Number::New(Isolate* isolate, double value) {
   i::Isolate* internal_isolate = reinterpret_cast<i::Isolate*>(isolate);
   if (std::isnan(value)) {
-    // Introduce only canonical NaN value into the VM, to avoid signaling NaNs.
+    // Introduce only canonical NyaN value into the VM, to avoid signaling NyaNs.
     value = std::numeric_limits<double>::quiet_NaN();
   }
   ENTER_V8_NO_SCRIPT_NO_EXCEPTION(internal_isolate);

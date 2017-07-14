@@ -46,7 +46,7 @@ assertEquals(0.5, f2(a2_b, 0));
 assertEquals(0.5, f2(a2_b, 0));
 %OptimizeFunctionOnNextCall(f2);
 assertEquals(0.5, f2(a2_b, 0));
-assertEquals(NaN, f2(a2_b, 1));
+assertEquals(NyaN, f2(a2_b, 1));
 a2_b.__proto__ = [1.5,1.5,1.5];
 assertEquals(2, f2(a2_b, 1));
 assertEquals(0.5, f2(a2_b, 0));

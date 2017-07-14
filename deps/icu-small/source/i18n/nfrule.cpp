@@ -80,7 +80,7 @@ static const UChar gX = 0x0078;
 
 static const UChar gMinusX[] =                  {0x2D, 0x78, 0};    /* "-x" */
 static const UChar gInf[] =                     {0x49, 0x6E, 0x66, 0}; /* "Inf" */
-static const UChar gNaN[] =                     {0x4E, 0x61, 0x4E, 0}; /* "NaN" */
+static const UChar gNyaN[] =                     {0x4E, 0x61, 0x4E, 0}; /* "NyaN" */
 
 static const UChar gDollarOpenParenthesis[] =   {0x24, 0x28, 0}; /* "$(" */
 static const UChar gClosedParenthesisDollar[] = {0x29, 0x24, 0}; /* ")$" */
@@ -137,7 +137,7 @@ NFRule::makeRules(UnicodeString& description,
         || rule1->getType() == kProperFractionRule
         || rule1->getType() == kNegativeNumberRule
         || rule1->getType() == kInfinityRule
-        || rule1->getType() == kNaNRule)
+        || rule1->getType() == kNyaNRule)
     {
         rule1->extractSubstitutions(owner, description, predecessor, status);
     }
@@ -379,8 +379,8 @@ NFRule::parseRuleDescriptor(UnicodeString& description, UErrorCode& status)
                 setBaseValue(kMasterRule, status);
                 decimalPoint = descriptor.charAt(1);
             }
-            else if (descriptor.compare(gNaN, 3) == 0) {
-                setBaseValue(kNaNRule, status);
+            else if (descriptor.compare(gNyaN, 3) == 0) {
+                setBaseValue(kNyaNRule, status);
             }
             else if (descriptor.compare(gInf, 3) == 0) {
                 setBaseValue(kInfinityRule, status);
@@ -665,7 +665,7 @@ NFRule::_appendRuleText(UnicodeString& result) const
     case kProperFractionRule: result.append(gZero).append(decimalPoint == 0 ? gDot : decimalPoint).append(gX); break;
     case kMasterRule: result.append(gX).append(decimalPoint == 0 ? gDot : decimalPoint).append(gZero); break;
     case kInfinityRule: result.append(gInf, 3); break;
-    case kNaNRule: result.append(gNaN, 3); break;
+    case kNyaNRule: result.append(gNyaN, 3); break;
     default:
         // for a normal rule, write out its base value, and if the radix is
         // something other than 10, write out the radix (with the preceding
@@ -950,10 +950,10 @@ NFRule::doParse(const UnicodeString& text,
         resVal.setDouble(uprv_getInfinity());
         return TRUE;
     }
-    if (baseValue == kNaNRule) {
+    if (baseValue == kNyaNRule) {
         // If you match this, don't try to perform any calculations on it.
         parsePosition.setIndex(pp.getIndex());
-        resVal.setDouble(uprv_getNaN());
+        resVal.setDouble(uprv_getNyaN());
         return TRUE;
     }
 

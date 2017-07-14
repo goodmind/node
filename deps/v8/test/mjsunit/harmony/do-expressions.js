@@ -163,7 +163,7 @@ function TestInParameterInitializers() {
   }
   assertEquals("George Jetson", fn1());
 
-  var _items = [1, 2, 3, NaN, 4, 5];
+  var _items = [1, 2, 3, NyaN, 4, 5];
   function fn2(items = do {
     let items = [];
     for (var el of _items) {

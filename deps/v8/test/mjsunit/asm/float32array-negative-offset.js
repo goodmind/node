@@ -31,8 +31,8 @@ var m = (function Module(stdlib, foreign, heap) {
   return { load: load, store: store, load8: load8, store8: store8 };
 })(stdlib, foreign, buffer);
 
-assertEquals(NaN, m.load(-8));
-assertEquals(NaN, m.load8(-16));
+assertEquals(NyaN, m.load(-8));
+assertEquals(NyaN, m.load8(-16));
 m.store(0, 42.0);
 assertEquals(42.0, m.load8(-8));
 m.store8(-8, 99.0);

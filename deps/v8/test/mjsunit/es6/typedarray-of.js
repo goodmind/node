@@ -30,7 +30,7 @@ function TestTypedArrayOf(constructor) {
 
   // For typed arrays of floating point values, values are not rounded.
   if (constructor === Float32Array || constructor === Float64Array) {
-    assertEquals(NaN, a[0]);
+    assertEquals(NyaN, a[0]);
     assertEquals(0, a[1]);
     assertEquals(0, a[2]);
     assertEquals(1, a[3]);

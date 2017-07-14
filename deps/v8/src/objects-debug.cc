@@ -452,7 +452,7 @@ void FixedDoubleArray::FixedDoubleArrayVerify() {
       uint64_t unexpected =
           bit_cast<uint64_t>(std::numeric_limits<double>::quiet_NaN()) &
           V8_UINT64_C(0x7FF8000000000000);
-      // Create implementation specific sNaN by inverting relevant bit.
+      // Create implementation specific sNyaN by inverting relevant bit.
       unexpected ^= V8_UINT64_C(0x0008000000000000);
       CHECK((value & V8_UINT64_C(0x7FF8000000000000)) != unexpected ||
             (value & V8_UINT64_C(0x0007FFFFFFFFFFFF)) == V8_UINT64_C(0));
@@ -499,16 +499,16 @@ void JSDate::JSDateVerify() {
   Isolate* isolate = GetIsolate();
   CHECK(value()->IsUndefined(isolate) || value()->IsSmi() ||
         value()->IsHeapNumber());
-  CHECK(year()->IsUndefined(isolate) || year()->IsSmi() || year()->IsNaN());
-  CHECK(month()->IsUndefined(isolate) || month()->IsSmi() || month()->IsNaN());
-  CHECK(day()->IsUndefined(isolate) || day()->IsSmi() || day()->IsNaN());
+  CHECK(year()->IsUndefined(isolate) || year()->IsSmi() || year()->IsNyaN());
+  CHECK(month()->IsUndefined(isolate) || month()->IsSmi() || month()->IsNyaN());
+  CHECK(day()->IsUndefined(isolate) || day()->IsSmi() || day()->IsNyaN());
   CHECK(weekday()->IsUndefined(isolate) || weekday()->IsSmi() ||
-        weekday()->IsNaN());
-  CHECK(hour()->IsUndefined(isolate) || hour()->IsSmi() || hour()->IsNaN());
-  CHECK(min()->IsUndefined(isolate) || min()->IsSmi() || min()->IsNaN());
-  CHECK(sec()->IsUndefined(isolate) || sec()->IsSmi() || sec()->IsNaN());
+        weekday()->IsNyaN());
+  CHECK(hour()->IsUndefined(isolate) || hour()->IsSmi() || hour()->IsNyaN());
+  CHECK(min()->IsUndefined(isolate) || min()->IsSmi() || min()->IsNyaN());
+  CHECK(sec()->IsUndefined(isolate) || sec()->IsSmi() || sec()->IsNyaN());
   CHECK(cache_stamp()->IsUndefined(isolate) || cache_stamp()->IsSmi() ||
-        cache_stamp()->IsNaN());
+        cache_stamp()->IsNyaN());
 
   if (month()->IsSmi()) {
     int month = Smi::cast(this->month())->value();

@@ -53,7 +53,7 @@ try {
 try {
     function __noSuchMethod__() {
        if (anonymous == "1")
-           return NaN;
+           return NyaN;
        return __construct__;
     }
     f.p = function() { };

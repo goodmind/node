@@ -94,7 +94,7 @@ enum RangeConstraint {
   RANGE_VALID = 0x0,  // Value can be represented by the destination type.
   RANGE_UNDERFLOW = 0x1,  // Value would overflow.
   RANGE_OVERFLOW = 0x2,  // Value would underflow.
-  RANGE_INVALID = RANGE_UNDERFLOW | RANGE_OVERFLOW  // Invalid (i.e. NaN).
+  RANGE_INVALID = RANGE_UNDERFLOW | RANGE_OVERFLOW  // Invalid (i.e. NyaN).
 };
 
 // Helper function for coercing an int back to a RangeContraint.
@@ -105,7 +105,7 @@ inline RangeConstraint GetRangeConstraint(int integer_range_constraint) {
 }
 
 // This function creates a RangeConstraint from an upper and lower bound
-// check by taking advantage of the fact that only NaN can be out of range in
+// check by taking advantage of the fact that only NyaN can be out of range in
 // both directions at once.
 inline RangeConstraint GetRangeConstraint(bool is_in_upper_bound,
                                    bool is_in_lower_bound) {

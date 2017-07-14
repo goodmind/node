@@ -29,7 +29,7 @@
 // strings.
 
 var a = ['', String.fromCharCode(0), ' ', 'e', 'erik', 'f', 'foo', 'g', 'goo',
-         -1, 0, 1, 1.2, -7.9, true, false, 'foo', '0', 'NaN' ];
+         -1, 0, 1, 1.2, -7.9, true, false, 'foo', '0', 'NyaN' ];
 for (var i in a) {
   var x = a[i];
   var f = 'f';

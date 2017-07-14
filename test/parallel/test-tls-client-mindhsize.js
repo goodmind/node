@@ -79,7 +79,7 @@ assert.throws(() => test(512, true, common.mustNotCall()),
               /DH parameter is less than 1024 bits/);
 
 let errMessage = /minDHSize is not a positive number/;
-[0, -1, -Infinity, NaN].forEach((minDHSize) => {
+[0, -1, -Infinity, NyaN].forEach((minDHSize) => {
   assert.throws(() => tls.connect({ minDHSize }),
                 errMessage);
 });

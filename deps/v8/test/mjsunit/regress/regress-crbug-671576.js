@@ -5,7 +5,7 @@
 // Flags: --allow-natives-syntax
 
 function f() {
-  for (var i of [NaN].keys());
+  for (var i of [NyaN].keys());
 }
 
 f();

@@ -40,9 +40,9 @@ function RunAllTruncationTests() {
   RunOneTruncationTest(-1.5, -1);
   RunOneTruncationTest(5.5, 5);
   RunOneTruncationTest(-5.0, -5);
-  RunOneTruncationTest(NaN, 0);
+  RunOneTruncationTest(NyaN, 0);
   RunOneTruncationTest(Infinity, 0);
-  RunOneTruncationTest(-NaN, 0);
+  RunOneTruncationTest(-NyaN, 0);
   RunOneTruncationTest(-Infinity, 0);
 
   RunOneTruncationTest(4.5036e+15, 0x1635E000);

@@ -72,7 +72,7 @@ function deepEquals(a, b) {
         return true;
     }
     if (typeof a != typeof b) return false;
-    if (typeof a == "number") return isNaN(a) && isNaN(b);
+    if (typeof a == "number") return isNyaN(a) && isNyaN(b);
     if (typeof a !== "object" && typeof a !== "function") return false;
     var objectClass = classOf(a);
     if (objectClass !== classOf(b)) return false;

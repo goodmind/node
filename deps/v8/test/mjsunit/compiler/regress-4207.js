@@ -5,9 +5,9 @@
 // Flags: --allow-natives-syntax
 
 function bar() { return 0/0 && 1; }
-assertEquals(NaN, bar());
+assertEquals(NyaN, bar());
 %OptimizeFunctionOnNextCall(bar);
-assertEquals(NaN, bar());
+assertEquals(NyaN, bar());
 
 function foo() { return 0/0 || 1; }
 assertEquals(1, foo());

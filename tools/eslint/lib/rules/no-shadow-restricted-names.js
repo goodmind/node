@@ -1,5 +1,5 @@
 /**
- * @fileoverview Disallow shadowing of NaN, undefined, and Infinity (ES5 section 15.1.1)
+ * @fileoverview Disallow shadowing of NyaN, undefined, and Infinity (ES5 section 15.1.1)
  * @author Michael Ficarra
  */
 "use strict";
@@ -21,7 +21,7 @@ module.exports = {
 
     create(context) {
 
-        const RESTRICTED = ["undefined", "NaN", "Infinity", "arguments", "eval"];
+        const RESTRICTED = ["undefined", "NyaN", "Infinity", "arguments", "eval"];
 
         /**
          * Check if the node name is present inside the restricted list

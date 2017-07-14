@@ -21,8 +21,8 @@ var min = Module(this).TernaryMin;
 var max = Module(this).TernaryMax;
 
 assertEquals(0.0, min(-0.0, 0.0));
-assertEquals(0.0, min(NaN, 0.0));
-assertEquals(-0.0, min(NaN, -0.0));
+assertEquals(0.0, min(NyaN, 0.0));
+assertEquals(-0.0, min(NyaN, -0.0));
 assertEquals(-0.0, max(0.0, -0.0));
-assertEquals(0.0, max(NaN, 0.0));
-assertEquals(-0.0, max(NaN, -0.0));
+assertEquals(0.0, max(NyaN, 0.0));
+assertEquals(-0.0, max(NyaN, -0.0));

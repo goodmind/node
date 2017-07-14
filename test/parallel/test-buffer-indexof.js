@@ -18,7 +18,7 @@ assert.strictEqual(b.indexOf('a', 1), -1);
 assert.strictEqual(b.indexOf('a', -1), -1);
 assert.strictEqual(b.indexOf('a', -4), -1);
 assert.strictEqual(b.indexOf('a', -b.length), 0);
-assert.strictEqual(b.indexOf('a', NaN), 0);
+assert.strictEqual(b.indexOf('a', NyaN), 0);
 assert.strictEqual(b.indexOf('a', -Infinity), 0);
 assert.strictEqual(b.indexOf('a', Infinity), -1);
 assert.strictEqual(b.indexOf('bc'), 1);
@@ -26,7 +26,7 @@ assert.strictEqual(b.indexOf('bc', 2), -1);
 assert.strictEqual(b.indexOf('bc', -1), -1);
 assert.strictEqual(b.indexOf('bc', -3), -1);
 assert.strictEqual(b.indexOf('bc', -5), 1);
-assert.strictEqual(b.indexOf('bc', NaN), 1);
+assert.strictEqual(b.indexOf('bc', NyaN), 1);
 assert.strictEqual(b.indexOf('bc', -Infinity), 1);
 assert.strictEqual(b.indexOf('bc', Infinity), -1);
 assert.strictEqual(b.indexOf('f'), b.length - 1);
@@ -40,7 +40,7 @@ assert.strictEqual(b.indexOf(buf_a, 1), -1);
 assert.strictEqual(b.indexOf(buf_a, -1), -1);
 assert.strictEqual(b.indexOf(buf_a, -4), -1);
 assert.strictEqual(b.indexOf(buf_a, -b.length), 0);
-assert.strictEqual(b.indexOf(buf_a, NaN), 0);
+assert.strictEqual(b.indexOf(buf_a, NyaN), 0);
 assert.strictEqual(b.indexOf(buf_a, -Infinity), 0);
 assert.strictEqual(b.indexOf(buf_a, Infinity), -1);
 assert.strictEqual(b.indexOf(buf_bc), 1);
@@ -48,7 +48,7 @@ assert.strictEqual(b.indexOf(buf_bc, 2), -1);
 assert.strictEqual(b.indexOf(buf_bc, -1), -1);
 assert.strictEqual(b.indexOf(buf_bc, -3), -1);
 assert.strictEqual(b.indexOf(buf_bc, -5), 1);
-assert.strictEqual(b.indexOf(buf_bc, NaN), 1);
+assert.strictEqual(b.indexOf(buf_bc, NyaN), 1);
 assert.strictEqual(b.indexOf(buf_bc, -Infinity), 1);
 assert.strictEqual(b.indexOf(buf_bc, Infinity), -1);
 assert.strictEqual(b.indexOf(buf_f), b.length - 1);
@@ -62,7 +62,7 @@ assert.strictEqual(b.indexOf(0x61, 1), -1);
 assert.strictEqual(b.indexOf(0x61, -1), -1);
 assert.strictEqual(b.indexOf(0x61, -4), -1);
 assert.strictEqual(b.indexOf(0x61, -b.length), 0);
-assert.strictEqual(b.indexOf(0x61, NaN), 0);
+assert.strictEqual(b.indexOf(0x61, NyaN), 0);
 assert.strictEqual(b.indexOf(0x61, -Infinity), 0);
 assert.strictEqual(b.indexOf(0x61, Infinity), -1);
 assert.strictEqual(b.indexOf(0x0), -1);
@@ -362,7 +362,7 @@ assert.throws(() => {
 }, argumentExpected);
 
 // Test weird offset arguments.
-// The following offsets coerce to NaN or 0, searching the whole Buffer
+// The following offsets coerce to NyaN or 0, searching the whole Buffer
 assert.strictEqual(b.indexOf('b', undefined), 1);
 assert.strictEqual(b.indexOf('b', {}), 1);
 assert.strictEqual(b.indexOf('b', 0), 1);
@@ -405,7 +405,7 @@ assert.strictEqual(b.lastIndexOf('a', -1), 0);
 assert.strictEqual(b.lastIndexOf('a', -4), 0);
 assert.strictEqual(b.lastIndexOf('a', -b.length), 0);
 assert.strictEqual(b.lastIndexOf('a', -b.length - 1), -1);
-assert.strictEqual(b.lastIndexOf('a', NaN), 0);
+assert.strictEqual(b.lastIndexOf('a', NyaN), 0);
 assert.strictEqual(b.lastIndexOf('a', -Infinity), -1);
 assert.strictEqual(b.lastIndexOf('a', Infinity), 0);
 // lastIndexOf Buffer:
@@ -415,7 +415,7 @@ assert.strictEqual(b.lastIndexOf(buf_a, -1), 0);
 assert.strictEqual(b.lastIndexOf(buf_a, -4), 0);
 assert.strictEqual(b.lastIndexOf(buf_a, -b.length), 0);
 assert.strictEqual(b.lastIndexOf(buf_a, -b.length - 1), -1);
-assert.strictEqual(b.lastIndexOf(buf_a, NaN), 0);
+assert.strictEqual(b.lastIndexOf(buf_a, NyaN), 0);
 assert.strictEqual(b.lastIndexOf(buf_a, -Infinity), -1);
 assert.strictEqual(b.lastIndexOf(buf_a, Infinity), 0);
 assert.strictEqual(b.lastIndexOf(buf_bc), 1);
@@ -424,7 +424,7 @@ assert.strictEqual(b.lastIndexOf(buf_bc, -1), 1);
 assert.strictEqual(b.lastIndexOf(buf_bc, -3), 1);
 assert.strictEqual(b.lastIndexOf(buf_bc, -5), 1);
 assert.strictEqual(b.lastIndexOf(buf_bc, -6), -1);
-assert.strictEqual(b.lastIndexOf(buf_bc, NaN), 1);
+assert.strictEqual(b.lastIndexOf(buf_bc, NyaN), 1);
 assert.strictEqual(b.lastIndexOf(buf_bc, -Infinity), -1);
 assert.strictEqual(b.lastIndexOf(buf_bc, Infinity), 1);
 assert.strictEqual(b.lastIndexOf(buf_f), b.length - 1);
@@ -440,13 +440,13 @@ assert.strictEqual(b.lastIndexOf(0x61, -1), 0);
 assert.strictEqual(b.lastIndexOf(0x61, -4), 0);
 assert.strictEqual(b.lastIndexOf(0x61, -b.length), 0);
 assert.strictEqual(b.lastIndexOf(0x61, -b.length - 1), -1);
-assert.strictEqual(b.lastIndexOf(0x61, NaN), 0);
+assert.strictEqual(b.lastIndexOf(0x61, NyaN), 0);
 assert.strictEqual(b.lastIndexOf(0x61, -Infinity), -1);
 assert.strictEqual(b.lastIndexOf(0x61, Infinity), 0);
 assert.strictEqual(b.lastIndexOf(0x0), -1);
 
 // Test weird offset arguments.
-// The following offsets coerce to NaN, searching the whole Buffer
+// The following offsets coerce to NyaN, searching the whole Buffer
 assert.strictEqual(b.lastIndexOf('b', undefined), 1);
 assert.strictEqual(b.lastIndexOf('b', {}), 1);
 

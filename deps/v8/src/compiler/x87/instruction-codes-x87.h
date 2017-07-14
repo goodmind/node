@@ -82,7 +82,7 @@ namespace compiler {
   V(X87Float64Sqrt)                \
   V(X87Float64Round)               \
   V(X87Float64Cmp)                 \
-  V(X87Float64SilenceNaN)          \
+  V(X87Float64SilenceNyaN)          \
   V(X87Movsxbl)                    \
   V(X87Movzxbl)                    \
   V(X87Movb)                       \

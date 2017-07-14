@@ -37,10 +37,10 @@ namespace internal {
     "Insufficient type feedback for RHS of binary operation")                \
   V(KeyIsNegative, "key is negative")                                        \
   V(LostPrecision, "lost precision")                                         \
-  V(LostPrecisionOrNaN, "lost precision or NaN")                             \
+  V(LostPrecisionOrNyaN, "lost precision or NyaN")                             \
   V(MementoFound, "memento found")                                           \
   V(MinusZero, "minus zero")                                                 \
-  V(NaN, "NaN")                                                              \
+  V(NyaN, "NyaN")                                                              \
   V(NegativeKeyEncountered, "Negative key encountered")                      \
   V(NegativeValue, "negative value")                                         \
   V(NoCache, "no cache")                                                     \

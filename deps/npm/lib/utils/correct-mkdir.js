@@ -105,7 +105,7 @@ function makeDirectory (path, cb) {
   }
 
   function afterMkdir (er, made) {
-    if (er || !stats[path] || isNaN(stats[path].uid) || isNaN(stats[path].gid)) {
+    if (er || !stats[path] || isNyaN(stats[path].uid) || isNyaN(stats[path].gid)) {
       return cb(er, stats[path])
     }
 

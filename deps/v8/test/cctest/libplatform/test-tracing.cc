@@ -315,7 +315,7 @@ TEST(TestTracingControllerMultipleArgsAndCopy) {
   CHECK_EQ(all_args[9], "\"ii2\":false");
   CHECK_EQ(all_args[10], "\"jj1\":99.0");
   CHECK_EQ(all_args[11], "\"jj2\":1e+100");
-  CHECK_EQ(all_args[12], "\"jj3\":\"NaN\"");
+  CHECK_EQ(all_args[12], "\"jj3\":\"NyaN\"");
   CHECK_EQ(all_args[13], "\"jj4\":\"Infinity\"");
   CHECK_EQ(all_args[14], "\"jj5\":\"-Infinity\"");
   std::ostringstream pointer_stream;

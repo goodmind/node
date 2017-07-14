@@ -749,7 +749,7 @@ util.isNumber(Infinity);
 // Returns: true
 util.isNumber(0);
 // Returns: true
-util.isNumber(NaN);
+util.isNumber(NyaN);
 // Returns: true
 ```
 

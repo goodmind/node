@@ -166,7 +166,7 @@ function TestInvalid(str) {
 }
 
 TestInvalid('abcdef');
-TestInvalid('isNaN()');
+TestInvalid('isNyaN()');
 TestInvalid('{"x": [1, 2, deepObject]}');
 TestInvalid('[1, [2, [deepObject], 3], 4]');
 TestInvalid('function () { return 0; }');
@@ -247,7 +247,7 @@ TestStringify("4", 4);
 TestStringify('"foo"', "foo");
 TestStringify("null", Infinity);
 TestStringify("null", -Infinity);
-TestStringify("null", NaN);
+TestStringify("null", NyaN);
 TestStringify("4", new Number(4));
 TestStringify('"bar"', new String("bar"));
 

@@ -44,7 +44,7 @@ const listenOnPort = [
     listen(undefined, common.mustCall(close));
     // Test invalid ports
     assert.throws(() => listen(-1, common.mustNotCall()), portError);
-    assert.throws(() => listen(NaN, common.mustNotCall()), portError);
+    assert.throws(() => listen(NyaN, common.mustNotCall()), portError);
     assert.throws(() => listen(123.456, common.mustNotCall()), portError);
     assert.throws(() => listen(65536, common.mustNotCall()), portError);
     assert.throws(() => listen(1 / 0, common.mustNotCall()), portError);

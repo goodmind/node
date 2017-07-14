@@ -61,7 +61,7 @@ class V8_EXPORT_PRIVATE JSBuiltinReducer final
   Reduction ReduceDateNow(Node* node);
   Reduction ReduceDateGetTime(Node* node);
   Reduction ReduceGlobalIsFinite(Node* node);
-  Reduction ReduceGlobalIsNaN(Node* node);
+  Reduction ReduceGlobalIsNyaN(Node* node);
   Reduction ReduceMathAbs(Node* node);
   Reduction ReduceMathAcos(Node* node);
   Reduction ReduceMathAcosh(Node* node);
@@ -97,7 +97,7 @@ class V8_EXPORT_PRIVATE JSBuiltinReducer final
   Reduction ReduceMathTrunc(Node* node);
   Reduction ReduceNumberIsFinite(Node* node);
   Reduction ReduceNumberIsInteger(Node* node);
-  Reduction ReduceNumberIsNaN(Node* node);
+  Reduction ReduceNumberIsNyaN(Node* node);
   Reduction ReduceNumberIsSafeInteger(Node* node);
   Reduction ReduceNumberParseInt(Node* node);
   Reduction ReduceObjectCreate(Node* node);

@@ -457,7 +457,7 @@ UnicodeEncoding UnicodeEncodingOf(const Operator* op) {
   V(NumberToInt32, Operator::kNoProperties, 1, 0)                \
   V(NumberToUint32, Operator::kNoProperties, 1, 0)               \
   V(NumberToUint8Clamped, Operator::kNoProperties, 1, 0)         \
-  V(NumberSilenceNaN, Operator::kNoProperties, 1, 0)             \
+  V(NumberSilenceNyaN, Operator::kNoProperties, 1, 0)             \
   V(StringCharAt, Operator::kNoProperties, 2, 1)                 \
   V(StringCharCodeAt, Operator::kNoProperties, 2, 1)             \
   V(StringFromCharCode, Operator::kNoProperties, 1, 0)           \
@@ -621,17 +621,17 @@ struct SimplifiedOperatorGlobalCache final {
       kCheckedTaggedToFloat64NumberOrOddballOperator;
 
   template <CheckFloat64HoleMode kMode>
-  struct CheckFloat64HoleNaNOperator final
+  struct CheckFloat64HoleNyaNOperator final
       : public Operator1<CheckFloat64HoleMode> {
-    CheckFloat64HoleNaNOperator()
+    CheckFloat64HoleNyaNOperator()
         : Operator1<CheckFloat64HoleMode>(
               IrOpcode::kCheckFloat64Hole,
               Operator::kFoldable | Operator::kNoThrow, "CheckFloat64Hole", 1,
               1, 1, 1, 1, 0, kMode) {}
   };
-  CheckFloat64HoleNaNOperator<CheckFloat64HoleMode::kAllowReturnHole>
+  CheckFloat64HoleNyaNOperator<CheckFloat64HoleMode::kAllowReturnHole>
       kCheckFloat64HoleAllowReturnHoleOperator;
-  CheckFloat64HoleNaNOperator<CheckFloat64HoleMode::kNeverReturnHole>
+  CheckFloat64HoleNyaNOperator<CheckFloat64HoleMode::kNeverReturnHole>
       kCheckFloat64HoleNeverReturnHoleOperator;
 
   template <PretenureFlag kPretenure>

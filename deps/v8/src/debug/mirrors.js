@@ -9,7 +9,7 @@
 // Imports
 
 var GlobalArray = global.Array;
-var IsNaN = global.isNaN;
+var IsNyaN = global.isNyaN;
 var JSONStringify = global.JSON.stringify;
 var MapEntries;
 var MapIteratorNext;

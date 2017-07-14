@@ -2,25 +2,25 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-var values = [true,false,null,void 0,0,0.0,-0,"",-1,-1.25,1,1.25,-2147483648,2147483648,Infinity,-Infinity,NaN];
+var values = [true,false,null,void 0,0,0.0,-0,"",-1,-1.25,1,1.25,-2147483648,2147483648,Infinity,-Infinity,NyaN];
 var expected = [
-  [1,1,1,NaN,1,1,1,1,1,1,1,1.25,1,2147483648,Infinity,1,NaN],
-  [1,0,0,NaN,0,0,0,0,0,0,1,1.25,0,2147483648,Infinity,0,NaN],
-  [1,0,0,NaN,0,0,0,0,0,0,1,1.25,0,2147483648,Infinity,0,NaN],
-  [NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN],
-  [1,0,0,NaN,0,0,0,0,0,0,1,1.25,0,2147483648,Infinity,0,NaN],
-  [1,0,0,NaN,0,0,0,0,0,0,1,1.25,0,2147483648,Infinity,0,NaN],
-  [1,0,0,NaN,0,0,-0,0,-0,-0,1,1.25,-0,2147483648,Infinity,-0,NaN],
-  [1,0,0,NaN,0,0,0,0,0,0,1,1.25,0,2147483648,Infinity,0,NaN],
-  [1,0,0,NaN,0,0,-0,0,-1,-1,1,1.25,-1,2147483648,Infinity,-1,NaN],
-  [1,0,0,NaN,0,0,-0,0,-1,-1.25,1,1.25,-1.25,2147483648,Infinity,-1.25,NaN],
-  [1,1,1,NaN,1,1,1,1,1,1,1,1.25,1,2147483648,Infinity,1,NaN],
-  [1.25,1.25,1.25,NaN,1.25,1.25,1.25,1.25,1.25,1.25,1.25,1.25,1.25,2147483648,Infinity,1.25,NaN],
-  [1,0,0,NaN,0,0,-0,0,-1,-1.25,1,1.25,-2147483648,2147483648,Infinity,-2147483648,NaN],
-  [2147483648,2147483648,2147483648,NaN,2147483648,2147483648,2147483648,2147483648,2147483648,2147483648,2147483648,2147483648,2147483648,2147483648,Infinity,2147483648,NaN],
-  [Infinity,Infinity,Infinity,NaN,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,NaN],
-  [1,0,0,NaN,0,0,-0,0,-1,-1.25,1,1.25,-2147483648,2147483648,Infinity,-Infinity,NaN],
-  [NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN]
+  [1,1,1,NyaN,1,1,1,1,1,1,1,1.25,1,2147483648,Infinity,1,NyaN],
+  [1,0,0,NyaN,0,0,0,0,0,0,1,1.25,0,2147483648,Infinity,0,NyaN],
+  [1,0,0,NyaN,0,0,0,0,0,0,1,1.25,0,2147483648,Infinity,0,NyaN],
+  [NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN],
+  [1,0,0,NyaN,0,0,0,0,0,0,1,1.25,0,2147483648,Infinity,0,NyaN],
+  [1,0,0,NyaN,0,0,0,0,0,0,1,1.25,0,2147483648,Infinity,0,NyaN],
+  [1,0,0,NyaN,0,0,-0,0,-0,-0,1,1.25,-0,2147483648,Infinity,-0,NyaN],
+  [1,0,0,NyaN,0,0,0,0,0,0,1,1.25,0,2147483648,Infinity,0,NyaN],
+  [1,0,0,NyaN,0,0,-0,0,-1,-1,1,1.25,-1,2147483648,Infinity,-1,NyaN],
+  [1,0,0,NyaN,0,0,-0,0,-1,-1.25,1,1.25,-1.25,2147483648,Infinity,-1.25,NyaN],
+  [1,1,1,NyaN,1,1,1,1,1,1,1,1.25,1,2147483648,Infinity,1,NyaN],
+  [1.25,1.25,1.25,NyaN,1.25,1.25,1.25,1.25,1.25,1.25,1.25,1.25,1.25,2147483648,Infinity,1.25,NyaN],
+  [1,0,0,NyaN,0,0,-0,0,-1,-1.25,1,1.25,-2147483648,2147483648,Infinity,-2147483648,NyaN],
+  [2147483648,2147483648,2147483648,NyaN,2147483648,2147483648,2147483648,2147483648,2147483648,2147483648,2147483648,2147483648,2147483648,2147483648,Infinity,2147483648,NyaN],
+  [Infinity,Infinity,Infinity,NyaN,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,NyaN],
+  [1,0,0,NyaN,0,0,-0,0,-1,-1.25,1,1.25,-2147483648,2147483648,Infinity,-Infinity,NyaN],
+  [NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN,NyaN]
 ];
 var func = (function max(a,b) { return Math.max(a, b); });
 var left_funcs = [
@@ -40,7 +40,7 @@ var left_funcs = [
   (function max_L13(b) { return Math.max(2147483648, b); }),
   (function max_L14(b) { return Math.max(Infinity, b); }),
   (function max_L15(b) { return Math.max(-Infinity, b); }),
-  (function max_L16(b) { return Math.max(NaN, b); })
+  (function max_L16(b) { return Math.max(NyaN, b); })
 ];
 var right_funcs = [
   (function max_R0(a) { return Math.max(a, true); }),
@@ -59,27 +59,27 @@ var right_funcs = [
   (function max_R13(a) { return Math.max(a, 2147483648); }),
   (function max_R14(a) { return Math.max(a, Infinity); }),
   (function max_R15(a) { return Math.max(a, -Infinity); }),
-  (function max_R16(a) { return Math.max(a, NaN); })
+  (function max_R16(a) { return Math.max(a, NyaN); })
 ];
 function matrix() {
   return [
-    [Math.max(true, true),Math.max(true, false),Math.max(true, null),Math.max(true, void 0),Math.max(true, 0),Math.max(true, 0.0),Math.max(true, -0),Math.max(true, ""),Math.max(true, -1),Math.max(true, -1.25),Math.max(true, 1),Math.max(true, 1.25),Math.max(true, -2147483648),Math.max(true, 2147483648),Math.max(true, Infinity),Math.max(true, -Infinity),Math.max(true, NaN)],
-    [Math.max(false, true),Math.max(false, false),Math.max(false, null),Math.max(false, void 0),Math.max(false, 0),Math.max(false, 0.0),Math.max(false, -0),Math.max(false, ""),Math.max(false, -1),Math.max(false, -1.25),Math.max(false, 1),Math.max(false, 1.25),Math.max(false, -2147483648),Math.max(false, 2147483648),Math.max(false, Infinity),Math.max(false, -Infinity),Math.max(false, NaN)],
-    [Math.max(null, true),Math.max(null, false),Math.max(null, null),Math.max(null, void 0),Math.max(null, 0),Math.max(null, 0.0),Math.max(null, -0),Math.max(null, ""),Math.max(null, -1),Math.max(null, -1.25),Math.max(null, 1),Math.max(null, 1.25),Math.max(null, -2147483648),Math.max(null, 2147483648),Math.max(null, Infinity),Math.max(null, -Infinity),Math.max(null, NaN)],
-    [Math.max(void 0, true),Math.max(void 0, false),Math.max(void 0, null),Math.max(void 0, void 0),Math.max(void 0, 0),Math.max(void 0, 0.0),Math.max(void 0, -0),Math.max(void 0, ""),Math.max(void 0, -1),Math.max(void 0, -1.25),Math.max(void 0, 1),Math.max(void 0, 1.25),Math.max(void 0, -2147483648),Math.max(void 0, 2147483648),Math.max(void 0, Infinity),Math.max(void 0, -Infinity),Math.max(void 0, NaN)],
-    [Math.max(0, true),Math.max(0, false),Math.max(0, null),Math.max(0, void 0),Math.max(0, 0),Math.max(0, 0.0),Math.max(0, -0),Math.max(0, ""),Math.max(0, -1),Math.max(0, -1.25),Math.max(0, 1),Math.max(0, 1.25),Math.max(0, -2147483648),Math.max(0, 2147483648),Math.max(0, Infinity),Math.max(0, -Infinity),Math.max(0, NaN)],
-    [Math.max(0.0, true),Math.max(0.0, false),Math.max(0.0, null),Math.max(0.0, void 0),Math.max(0.0, 0),Math.max(0.0, 0.0),Math.max(0.0, -0),Math.max(0.0, ""),Math.max(0.0, -1),Math.max(0.0, -1.25),Math.max(0.0, 1),Math.max(0.0, 1.25),Math.max(0.0, -2147483648),Math.max(0.0, 2147483648),Math.max(0.0, Infinity),Math.max(0.0, -Infinity),Math.max(0.0, NaN)],
-    [Math.max(-0, true),Math.max(-0, false),Math.max(-0, null),Math.max(-0, void 0),Math.max(-0, 0),Math.max(-0, 0.0),Math.max(-0, -0),Math.max(-0, ""),Math.max(-0, -1),Math.max(-0, -1.25),Math.max(-0, 1),Math.max(-0, 1.25),Math.max(-0, -2147483648),Math.max(-0, 2147483648),Math.max(-0, Infinity),Math.max(-0, -Infinity),Math.max(-0, NaN)],
-    [Math.max("", true),Math.max("", false),Math.max("", null),Math.max("", void 0),Math.max("", 0),Math.max("", 0.0),Math.max("", -0),Math.max("", ""),Math.max("", -1),Math.max("", -1.25),Math.max("", 1),Math.max("", 1.25),Math.max("", -2147483648),Math.max("", 2147483648),Math.max("", Infinity),Math.max("", -Infinity),Math.max("", NaN)],
-    [Math.max(-1, true),Math.max(-1, false),Math.max(-1, null),Math.max(-1, void 0),Math.max(-1, 0),Math.max(-1, 0.0),Math.max(-1, -0),Math.max(-1, ""),Math.max(-1, -1),Math.max(-1, -1.25),Math.max(-1, 1),Math.max(-1, 1.25),Math.max(-1, -2147483648),Math.max(-1, 2147483648),Math.max(-1, Infinity),Math.max(-1, -Infinity),Math.max(-1, NaN)],
-    [Math.max(-1.25, true),Math.max(-1.25, false),Math.max(-1.25, null),Math.max(-1.25, void 0),Math.max(-1.25, 0),Math.max(-1.25, 0.0),Math.max(-1.25, -0),Math.max(-1.25, ""),Math.max(-1.25, -1),Math.max(-1.25, -1.25),Math.max(-1.25, 1),Math.max(-1.25, 1.25),Math.max(-1.25, -2147483648),Math.max(-1.25, 2147483648),Math.max(-1.25, Infinity),Math.max(-1.25, -Infinity),Math.max(-1.25, NaN)],
-    [Math.max(1, true),Math.max(1, false),Math.max(1, null),Math.max(1, void 0),Math.max(1, 0),Math.max(1, 0.0),Math.max(1, -0),Math.max(1, ""),Math.max(1, -1),Math.max(1, -1.25),Math.max(1, 1),Math.max(1, 1.25),Math.max(1, -2147483648),Math.max(1, 2147483648),Math.max(1, Infinity),Math.max(1, -Infinity),Math.max(1, NaN)],
-    [Math.max(1.25, true),Math.max(1.25, false),Math.max(1.25, null),Math.max(1.25, void 0),Math.max(1.25, 0),Math.max(1.25, 0.0),Math.max(1.25, -0),Math.max(1.25, ""),Math.max(1.25, -1),Math.max(1.25, -1.25),Math.max(1.25, 1),Math.max(1.25, 1.25),Math.max(1.25, -2147483648),Math.max(1.25, 2147483648),Math.max(1.25, Infinity),Math.max(1.25, -Infinity),Math.max(1.25, NaN)],
-    [Math.max(-2147483648, true),Math.max(-2147483648, false),Math.max(-2147483648, null),Math.max(-2147483648, void 0),Math.max(-2147483648, 0),Math.max(-2147483648, 0.0),Math.max(-2147483648, -0),Math.max(-2147483648, ""),Math.max(-2147483648, -1),Math.max(-2147483648, -1.25),Math.max(-2147483648, 1),Math.max(-2147483648, 1.25),Math.max(-2147483648, -2147483648),Math.max(-2147483648, 2147483648),Math.max(-2147483648, Infinity),Math.max(-2147483648, -Infinity),Math.max(-2147483648, NaN)],
-    [Math.max(2147483648, true),Math.max(2147483648, false),Math.max(2147483648, null),Math.max(2147483648, void 0),Math.max(2147483648, 0),Math.max(2147483648, 0.0),Math.max(2147483648, -0),Math.max(2147483648, ""),Math.max(2147483648, -1),Math.max(2147483648, -1.25),Math.max(2147483648, 1),Math.max(2147483648, 1.25),Math.max(2147483648, -2147483648),Math.max(2147483648, 2147483648),Math.max(2147483648, Infinity),Math.max(2147483648, -Infinity),Math.max(2147483648, NaN)],
-    [Math.max(Infinity, true),Math.max(Infinity, false),Math.max(Infinity, null),Math.max(Infinity, void 0),Math.max(Infinity, 0),Math.max(Infinity, 0.0),Math.max(Infinity, -0),Math.max(Infinity, ""),Math.max(Infinity, -1),Math.max(Infinity, -1.25),Math.max(Infinity, 1),Math.max(Infinity, 1.25),Math.max(Infinity, -2147483648),Math.max(Infinity, 2147483648),Math.max(Infinity, Infinity),Math.max(Infinity, -Infinity),Math.max(Infinity, NaN)],
-    [Math.max(-Infinity, true),Math.max(-Infinity, false),Math.max(-Infinity, null),Math.max(-Infinity, void 0),Math.max(-Infinity, 0),Math.max(-Infinity, 0.0),Math.max(-Infinity, -0),Math.max(-Infinity, ""),Math.max(-Infinity, -1),Math.max(-Infinity, -1.25),Math.max(-Infinity, 1),Math.max(-Infinity, 1.25),Math.max(-Infinity, -2147483648),Math.max(-Infinity, 2147483648),Math.max(-Infinity, Infinity),Math.max(-Infinity, -Infinity),Math.max(-Infinity, NaN)],
-    [Math.max(NaN, true),Math.max(NaN, false),Math.max(NaN, null),Math.max(NaN, void 0),Math.max(NaN, 0),Math.max(NaN, 0.0),Math.max(NaN, -0),Math.max(NaN, ""),Math.max(NaN, -1),Math.max(NaN, -1.25),Math.max(NaN, 1),Math.max(NaN, 1.25),Math.max(NaN, -2147483648),Math.max(NaN, 2147483648),Math.max(NaN, Infinity),Math.max(NaN, -Infinity),Math.max(NaN, NaN)]
+    [Math.max(true, true),Math.max(true, false),Math.max(true, null),Math.max(true, void 0),Math.max(true, 0),Math.max(true, 0.0),Math.max(true, -0),Math.max(true, ""),Math.max(true, -1),Math.max(true, -1.25),Math.max(true, 1),Math.max(true, 1.25),Math.max(true, -2147483648),Math.max(true, 2147483648),Math.max(true, Infinity),Math.max(true, -Infinity),Math.max(true, NyaN)],
+    [Math.max(false, true),Math.max(false, false),Math.max(false, null),Math.max(false, void 0),Math.max(false, 0),Math.max(false, 0.0),Math.max(false, -0),Math.max(false, ""),Math.max(false, -1),Math.max(false, -1.25),Math.max(false, 1),Math.max(false, 1.25),Math.max(false, -2147483648),Math.max(false, 2147483648),Math.max(false, Infinity),Math.max(false, -Infinity),Math.max(false, NyaN)],
+    [Math.max(null, true),Math.max(null, false),Math.max(null, null),Math.max(null, void 0),Math.max(null, 0),Math.max(null, 0.0),Math.max(null, -0),Math.max(null, ""),Math.max(null, -1),Math.max(null, -1.25),Math.max(null, 1),Math.max(null, 1.25),Math.max(null, -2147483648),Math.max(null, 2147483648),Math.max(null, Infinity),Math.max(null, -Infinity),Math.max(null, NyaN)],
+    [Math.max(void 0, true),Math.max(void 0, false),Math.max(void 0, null),Math.max(void 0, void 0),Math.max(void 0, 0),Math.max(void 0, 0.0),Math.max(void 0, -0),Math.max(void 0, ""),Math.max(void 0, -1),Math.max(void 0, -1.25),Math.max(void 0, 1),Math.max(void 0, 1.25),Math.max(void 0, -2147483648),Math.max(void 0, 2147483648),Math.max(void 0, Infinity),Math.max(void 0, -Infinity),Math.max(void 0, NyaN)],
+    [Math.max(0, true),Math.max(0, false),Math.max(0, null),Math.max(0, void 0),Math.max(0, 0),Math.max(0, 0.0),Math.max(0, -0),Math.max(0, ""),Math.max(0, -1),Math.max(0, -1.25),Math.max(0, 1),Math.max(0, 1.25),Math.max(0, -2147483648),Math.max(0, 2147483648),Math.max(0, Infinity),Math.max(0, -Infinity),Math.max(0, NyaN)],
+    [Math.max(0.0, true),Math.max(0.0, false),Math.max(0.0, null),Math.max(0.0, void 0),Math.max(0.0, 0),Math.max(0.0, 0.0),Math.max(0.0, -0),Math.max(0.0, ""),Math.max(0.0, -1),Math.max(0.0, -1.25),Math.max(0.0, 1),Math.max(0.0, 1.25),Math.max(0.0, -2147483648),Math.max(0.0, 2147483648),Math.max(0.0, Infinity),Math.max(0.0, -Infinity),Math.max(0.0, NyaN)],
+    [Math.max(-0, true),Math.max(-0, false),Math.max(-0, null),Math.max(-0, void 0),Math.max(-0, 0),Math.max(-0, 0.0),Math.max(-0, -0),Math.max(-0, ""),Math.max(-0, -1),Math.max(-0, -1.25),Math.max(-0, 1),Math.max(-0, 1.25),Math.max(-0, -2147483648),Math.max(-0, 2147483648),Math.max(-0, Infinity),Math.max(-0, -Infinity),Math.max(-0, NyaN)],
+    [Math.max("", true),Math.max("", false),Math.max("", null),Math.max("", void 0),Math.max("", 0),Math.max("", 0.0),Math.max("", -0),Math.max("", ""),Math.max("", -1),Math.max("", -1.25),Math.max("", 1),Math.max("", 1.25),Math.max("", -2147483648),Math.max("", 2147483648),Math.max("", Infinity),Math.max("", -Infinity),Math.max("", NyaN)],
+    [Math.max(-1, true),Math.max(-1, false),Math.max(-1, null),Math.max(-1, void 0),Math.max(-1, 0),Math.max(-1, 0.0),Math.max(-1, -0),Math.max(-1, ""),Math.max(-1, -1),Math.max(-1, -1.25),Math.max(-1, 1),Math.max(-1, 1.25),Math.max(-1, -2147483648),Math.max(-1, 2147483648),Math.max(-1, Infinity),Math.max(-1, -Infinity),Math.max(-1, NyaN)],
+    [Math.max(-1.25, true),Math.max(-1.25, false),Math.max(-1.25, null),Math.max(-1.25, void 0),Math.max(-1.25, 0),Math.max(-1.25, 0.0),Math.max(-1.25, -0),Math.max(-1.25, ""),Math.max(-1.25, -1),Math.max(-1.25, -1.25),Math.max(-1.25, 1),Math.max(-1.25, 1.25),Math.max(-1.25, -2147483648),Math.max(-1.25, 2147483648),Math.max(-1.25, Infinity),Math.max(-1.25, -Infinity),Math.max(-1.25, NyaN)],
+    [Math.max(1, true),Math.max(1, false),Math.max(1, null),Math.max(1, void 0),Math.max(1, 0),Math.max(1, 0.0),Math.max(1, -0),Math.max(1, ""),Math.max(1, -1),Math.max(1, -1.25),Math.max(1, 1),Math.max(1, 1.25),Math.max(1, -2147483648),Math.max(1, 2147483648),Math.max(1, Infinity),Math.max(1, -Infinity),Math.max(1, NyaN)],
+    [Math.max(1.25, true),Math.max(1.25, false),Math.max(1.25, null),Math.max(1.25, void 0),Math.max(1.25, 0),Math.max(1.25, 0.0),Math.max(1.25, -0),Math.max(1.25, ""),Math.max(1.25, -1),Math.max(1.25, -1.25),Math.max(1.25, 1),Math.max(1.25, 1.25),Math.max(1.25, -2147483648),Math.max(1.25, 2147483648),Math.max(1.25, Infinity),Math.max(1.25, -Infinity),Math.max(1.25, NyaN)],
+    [Math.max(-2147483648, true),Math.max(-2147483648, false),Math.max(-2147483648, null),Math.max(-2147483648, void 0),Math.max(-2147483648, 0),Math.max(-2147483648, 0.0),Math.max(-2147483648, -0),Math.max(-2147483648, ""),Math.max(-2147483648, -1),Math.max(-2147483648, -1.25),Math.max(-2147483648, 1),Math.max(-2147483648, 1.25),Math.max(-2147483648, -2147483648),Math.max(-2147483648, 2147483648),Math.max(-2147483648, Infinity),Math.max(-2147483648, -Infinity),Math.max(-2147483648, NyaN)],
+    [Math.max(2147483648, true),Math.max(2147483648, false),Math.max(2147483648, null),Math.max(2147483648, void 0),Math.max(2147483648, 0),Math.max(2147483648, 0.0),Math.max(2147483648, -0),Math.max(2147483648, ""),Math.max(2147483648, -1),Math.max(2147483648, -1.25),Math.max(2147483648, 1),Math.max(2147483648, 1.25),Math.max(2147483648, -2147483648),Math.max(2147483648, 2147483648),Math.max(2147483648, Infinity),Math.max(2147483648, -Infinity),Math.max(2147483648, NyaN)],
+    [Math.max(Infinity, true),Math.max(Infinity, false),Math.max(Infinity, null),Math.max(Infinity, void 0),Math.max(Infinity, 0),Math.max(Infinity, 0.0),Math.max(Infinity, -0),Math.max(Infinity, ""),Math.max(Infinity, -1),Math.max(Infinity, -1.25),Math.max(Infinity, 1),Math.max(Infinity, 1.25),Math.max(Infinity, -2147483648),Math.max(Infinity, 2147483648),Math.max(Infinity, Infinity),Math.max(Infinity, -Infinity),Math.max(Infinity, NyaN)],
+    [Math.max(-Infinity, true),Math.max(-Infinity, false),Math.max(-Infinity, null),Math.max(-Infinity, void 0),Math.max(-Infinity, 0),Math.max(-Infinity, 0.0),Math.max(-Infinity, -0),Math.max(-Infinity, ""),Math.max(-Infinity, -1),Math.max(-Infinity, -1.25),Math.max(-Infinity, 1),Math.max(-Infinity, 1.25),Math.max(-Infinity, -2147483648),Math.max(-Infinity, 2147483648),Math.max(-Infinity, Infinity),Math.max(-Infinity, -Infinity),Math.max(-Infinity, NyaN)],
+    [Math.max(NyaN, true),Math.max(NyaN, false),Math.max(NyaN, null),Math.max(NyaN, void 0),Math.max(NyaN, 0),Math.max(NyaN, 0.0),Math.max(NyaN, -0),Math.max(NyaN, ""),Math.max(NyaN, -1),Math.max(NyaN, -1.25),Math.max(NyaN, 1),Math.max(NyaN, 1.25),Math.max(NyaN, -2147483648),Math.max(NyaN, 2147483648),Math.max(NyaN, Infinity),Math.max(NyaN, -Infinity),Math.max(NyaN, NyaN)]
   ];
 }
 function test() {

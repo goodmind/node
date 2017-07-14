@@ -35,7 +35,7 @@ function testToStringP(a, b, c) {
   assertEquals(a, b.toString(c));
 }
 
-testToString("NaN", (NaN));
+testToString("NyaN", (NyaN));
 testToString("Infinity", (1/0));
 testToString("-Infinity", (-1/0));
 testToString("0", (0));
@@ -87,7 +87,7 @@ testToString("1.0000000000000001e+21", (1000000000000000128000));
 testToString("0.000001", (0.000001));
 testToString("1e-7", (0.0000001));
 
-testToStringP("NaN", (NaN), 16);
+testToStringP("NyaN", (NyaN), 16);
 testToStringP("Infinity", (1/0), 16);
 testToStringP("-Infinity", (-1/0), 16);
 testToStringP("0", (0), 16);
@@ -159,7 +159,7 @@ function testToFixed(a, b, c) {
   assertEquals(a, b.toFixed(c));
 }
 
-testToFixed("NaN", (NaN), (2));
+testToFixed("NyaN", (NyaN), (2));
 testToFixed("Infinity", (1/0), (2));
 testToFixed("-Infinity", (-1/0), (2));
 
@@ -315,7 +315,7 @@ testToExponentialP("-1.000e-1", (-0.1), (3));
 testToExponentialP("-1.100e-1", (-0.11), (3));
 testToExponentialP("-1.120e-1", (-0.112), (3));
 
-testToExponentialP("NaN", (NaN), (2));
+testToExponentialP("NyaN", (NyaN), (2));
 testToExponentialP("Infinity", (Infinity), (2));
 testToExponentialP("-Infinity", (-Infinity), (2));
 testToExponentialP("1e+0", (1), (0));
@@ -331,7 +331,7 @@ function testToPrecision(a, b, c) {
   assertEquals(a, b.toPrecision(c));
 }
 
-testToPrecision("NaN", (NaN), (1));
+testToPrecision("NyaN", (NyaN), (1));
 testToPrecision("Infinity", (Infinity), (2));
 testToPrecision("-Infinity", (-Infinity), (2));
 testToPrecision("0.000555000000000000", (0.000555), (15));

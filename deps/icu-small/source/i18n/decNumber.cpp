@@ -86,7 +86,7 @@
 /*                                                                    */
 /*    The result of any routine which returns a number will always    */
 /*    be a valid number (which may be a special value, such as an     */
-/*    Infinity or NaN).                                               */
+/*    Infinity or NyaN).                                               */
 /*                                                                    */
 /* 6. The decNumber format is not an exchangeable concrete            */
 /*    representation as it comprises fields which may be machine-     */
@@ -201,12 +201,12 @@ static const uByte d2utable[DECMAXD2U+1]=D2UTABLE;
 #define COMPMAX     0x02           /* ..  */
 #define COMPMIN     0x03           /* ..  */
 #define COMPTOTAL   0x04           /* ..  */
-#define COMPNAN     0x05           /* .. [NaN processing]  */
+#define COMPNAN     0x05           /* .. [NyaN processing]  */
 #define COMPSIG     0x06           /* .. [signaling COMPARE]  */
 #define COMPMAXMAG  0x07           /* ..  */
 #define COMPMINMAG  0x08           /* ..  */
 
-#define DEC_sNaN     0x40000000    /* local status: sNaN signal  */
+#define DEC_sNyaN     0x40000000    /* local status: sNyaN signal  */
 #define BADINT  (Int)0x80000000    /* most-negative Int; error indicator  */
 /* Next two indicate an integer >= 10**6, and its parity (bottom bit)  */
 #define BIGEVEN (Int)0x80000002
@@ -272,7 +272,7 @@ static decNumber * decLnOp(decNumber *, const decNumber *,
 static decNumber * decMultiplyOp(decNumber *, const decNumber *,
                               const decNumber *, decContext *,
                               uInt *);
-static decNumber * decNaNs(decNumber *, const decNumber *,
+static decNumber * decNyaNs(decNumber *, const decNumber *,
                               const decNumber *, decContext *, uInt *);
 static decNumber * decQuantizeOp(decNumber *, const decNumber *,
                               const decNumber *, decContext *, Flag,
@@ -398,7 +398,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberFromUInt32(decNumber *dn, uInt uin) {
 /*  returns the converted decNumber, or 0 if Invalid is set           */
 /*                                                                    */
 /* Invalid is set if the decNumber does not have exponent==0 or if    */
-/* it is a NaN, Infinite, or out-of-range.                            */
+/* it is a NyaN, Infinite, or out-of-range.                            */
 /* ------------------------------------------------------------------ */
 U_CAPI Int U_EXPORT2 uprv_decNumberToInt32(const decNumber *dn, decContext *set) {
   #if DECCHECK
@@ -507,7 +507,7 @@ U_CAPI char * U_EXPORT2 uprv_decNumberToEngString(const decNumber *dn, char *str
 /* checked by this routine, so the correct error (Underflow or        */
 /* Overflow) can be reported or rounding applied, as necessary.       */
 /*                                                                    */
-/* If bad syntax is detected, the result will be a quiet NaN.         */
+/* If bad syntax is detected, the result will be a quiet NyaN.         */
 /* ------------------------------------------------------------------ */
 U_CAPI decNumber * U_EXPORT2 uprv_decNumberFromString(decNumber *dn, const char chars[],
                                 decContext *set) {
@@ -562,10 +562,10 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberFromString(decNumber *dn, const char 
       status=DEC_Conversion_syntax;/* assume the worst  */
       if (*c=='\0') break;         /* and no more to come...  */
       #if DECSUBSET
-      /* if subset then infinities and NaNs are not allowed  */
+      /* if subset then infinities and NyaNs are not allowed  */
       if (!set->extended) break;   /* hopeless  */
       #endif
-      /* Infinities and NaNs are possible, here  */
+      /* Infinities and NyaNs are possible, here  */
       if (dotchar!=NULL) break;    /* .. unless had a dot  */
       uprv_decNumberZero(dn);           /* be optimistic  */
       if (decBiStr(c, "infinity", "INFINITY")
@@ -574,14 +574,14 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberFromString(decNumber *dn, const char 
         status=0;                  /* is OK  */
         break; /* all done  */
         }
-      /* a NaN expected  */
-      /* 2003.09.10 NaNs are now permitted to have a sign  */
-      dn->bits=bits | DECNAN;      /* assume simple NaN  */
-      if (*c=='s' || *c=='S') {    /* looks like an sNaN  */
+      /* a NyaN expected  */
+      /* 2003.09.10 NyaNs are now permitted to have a sign  */
+      dn->bits=bits | DECNAN;      /* assume simple NyaN  */
+      if (*c=='s' || *c=='S') {    /* looks like an sNyaN  */
         c++;
         dn->bits=bits | DECSNAN;
         }
-      if (*c!='n' && *c!='N') break;    /* check caseless "NaN"  */
+      if (*c!='n' && *c!='N') break;    /* check caseless "NyaN"  */
       c++;
       if (*c!='a' && *c!='A') break;    /* ..  */
       c++;
@@ -590,7 +590,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberFromString(decNumber *dn, const char 
       /* now either nothing, or nnnn payload, expected  */
       /* -> start of integer and skip leading 0s [including plain 0]  */
       for (cfirst=c; *cfirst=='0';) cfirst++;
-      if (*cfirst=='\0') {         /* "NaN" or "sNaN", maybe with all 0s  */
+      if (*cfirst=='\0') {         /* "NyaN" or "sNyaN", maybe with all 0s  */
         status=0;                  /* it's good  */
         break;                     /* ..  */
         }
@@ -813,7 +813,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberAdd(decNumber *res, const decNumber *
 /*                                                                    */
 /* C must have space for set->digits digits.                          */
 /*                                                                    */
-/* Logical function restrictions apply (see above); a NaN is          */
+/* Logical function restrictions apply (see above); a NyaN is          */
 /* returned with Invalid_operation if a restriction is violated.      */
 /* ------------------------------------------------------------------ */
 U_CAPI decNumber * U_EXPORT2 uprv_decNumberAnd(decNumber *res, const decNumber *lhs,
@@ -882,7 +882,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberAnd(decNumber *res, const decNumber *
 /*   rhs is B                                                         */
 /*   set is the context                                               */
 /*                                                                    */
-/* C must have space for one digit (or NaN).                          */
+/* C must have space for one digit (or NyaN).                          */
 /* ------------------------------------------------------------------ */
 U_CAPI decNumber * U_EXPORT2 uprv_decNumberCompare(decNumber *res, const decNumber *lhs,
                              const decNumber *rhs, decContext *set) {
@@ -893,7 +893,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberCompare(decNumber *res, const decNumb
   } /* decNumberCompare  */
 
 /* ------------------------------------------------------------------ */
-/* decNumberCompareSignal -- compare, signalling on all NaNs          */
+/* decNumberCompareSignal -- compare, signalling on all NyaNs          */
 /*                                                                    */
 /*   This computes C = A ? B                                          */
 /*                                                                    */
@@ -902,7 +902,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberCompare(decNumber *res, const decNumb
 /*   rhs is B                                                         */
 /*   set is the context                                               */
 /*                                                                    */
-/* C must have space for one digit (or NaN).                          */
+/* C must have space for one digit (or NyaN).                          */
 /* ------------------------------------------------------------------ */
 U_CAPI decNumber * U_EXPORT2 uprv_decNumberCompareSignal(decNumber *res, const decNumber *lhs,
                                    const decNumber *rhs, decContext *set) {
@@ -1053,7 +1053,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberDivideInteger(decNumber *res, const d
 /*                                                                    */
 /* C must have space for set->digits digits.                          */
 /*                                                                    */
-/* Mathematical function restrictions apply (see above); a NaN is     */
+/* Mathematical function restrictions apply (see above); a NyaN is     */
 /* returned with Invalid_operation if a restriction is violated.      */
 /*                                                                    */
 /* Finite results will always be full precision and Inexact, except   */
@@ -1118,7 +1118,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberExp(decNumber *res, const decNumber *
 /*   fhs is C [far hand side]                                         */
 /*   set is the context                                               */
 /*                                                                    */
-/* Mathematical function restrictions apply (see above); a NaN is     */
+/* Mathematical function restrictions apply (see above); a NyaN is     */
 /* returned with Invalid_operation if a restriction is violated.      */
 /*                                                                    */
 /* C must have space for set->digits digits.                          */
@@ -1168,19 +1168,19 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberFMA(decNumber *res, const decNumber *
     /* multiply with extended range and necessary precision  */
     /*printf("emin=%ld\n", dcmul.emin);  */
     decMultiplyOp(acc, lhs, rhs, &dcmul, &status);
-    /* Only Invalid operation (from sNaN or Inf * 0) is possible in  */
+    /* Only Invalid operation (from sNyaN or Inf * 0) is possible in  */
     /* status; if either is seen than ignore fhs (in case it is  */
-    /* another sNaN) and set acc to NaN unless we had an sNaN  */
+    /* another sNyaN) and set acc to NyaN unless we had an sNyaN  */
     /* [decMultiplyOp leaves that to caller]  */
-    /* Note sNaN has to go through addOp to shorten payload if  */
+    /* Note sNyaN has to go through addOp to shorten payload if  */
     /* necessary  */
     if ((status&DEC_Invalid_operation)!=0) {
-      if (!(status&DEC_sNaN)) {         /* but be true invalid  */
+      if (!(status&DEC_sNyaN)) {         /* but be true invalid  */
         uprv_decNumberZero(res);             /* acc not yet set  */
         res->bits=DECNAN;
         break;
         }
-      uprv_decNumberZero(&dzero);            /* make 0 (any non-NaN would do)  */
+      uprv_decNumberZero(&dzero);            /* make 0 (any non-NyaN would do)  */
       fhs=&dzero;                       /* use that  */
       }
     #if DECCHECK
@@ -1211,7 +1211,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberFMA(decNumber *res, const decNumber *
 /*                                                                    */
 /* C must have space for set->digits digits.                          */
 /*                                                                    */
-/* Logical function restrictions apply (see above); a NaN is          */
+/* Logical function restrictions apply (see above); a NyaN is          */
 /* returned with Invalid_operation if a restriction is violated.      */
 /* ------------------------------------------------------------------ */
 U_CAPI decNumber * U_EXPORT2 uprv_decNumberInvert(decNumber *res, const decNumber *rhs,
@@ -1276,7 +1276,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberInvert(decNumber *res, const decNumbe
 /*   A=+Infinity -> +Infinity (Exact)                                 */
 /*   A=1 exactly -> 0 (Exact)                                         */
 /*                                                                    */
-/* Mathematical function restrictions apply (see above); a NaN is     */
+/* Mathematical function restrictions apply (see above); a NyaN is     */
 /* returned with Invalid_operation if a restriction is violated.      */
 /*                                                                    */
 /* An Inexact result is rounded using DEC_ROUND_HALF_EVEN; it will    */
@@ -1351,7 +1351,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberLn(decNumber *res, const decNumber *r
 /*   A=0 -> -Infinity (Division by zero)                              */
 /*   A=Infinite -> +Infinity (Exact)                                  */
 /*   A=1 exactly -> 0 (Exact)                                         */
-/*   NaNs are propagated as usual                                     */
+/*   NyaNs are propagated as usual                                     */
 /* ------------------------------------------------------------------ */
 U_CAPI decNumber * U_EXPORT2 uprv_decNumberLogB(decNumber *res, const decNumber *rhs,
                           decContext *set) {
@@ -1361,8 +1361,8 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberLogB(decNumber *res, const decNumber 
   if (decCheckOperands(res, DECUNUSED, rhs, set)) return res;
   #endif
 
-  /* NaNs as usual; Infinities return +Infinity; 0->oops  */
-  if (decNumberIsNaN(rhs)) decNaNs(res, rhs, NULL, set, &status);
+  /* NyaNs as usual; Infinities return +Infinity; 0->oops  */
+  if (decNumberIsNyaN(rhs)) decNyaNs(res, rhs, NULL, set, &status);
    else if (decNumberIsInfinite(rhs)) uprv_decNumberCopyAbs(res, rhs);
    else if (decNumberIsZero(rhs)) {
     uprv_decNumberZero(res);                 /* prepare for Infinity  */
@@ -1395,7 +1395,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberLogB(decNumber *res, const decNumber 
 /*   A=+Infinity -> +Infinity (Exact)                                 */
 /*   A=10**n (if n is an integer) -> n (Exact)                        */
 /*                                                                    */
-/* Mathematical function restrictions apply (see above); a NaN is     */
+/* Mathematical function restrictions apply (see above); a NyaN is     */
 /* returned with Invalid_operation if a restriction is violated.      */
 /*                                                                    */
 /* An Inexact result is rounded using DEC_ROUND_HALF_EVEN; it will    */
@@ -1504,9 +1504,9 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberLog10(decNumber *res, const decNumber
     aset.clamp=0;                       /* and no concrete format  */
     decLnOp(a, rhs, &aset, &status);    /* a=ln(rhs)  */
 
-    /* skip the division if the result so far is infinite, NaN, or  */
-    /* zero, or there was an error; note NaN from sNaN needs copy  */
-    if (status&DEC_NaNs && !(status&DEC_sNaN)) break;
+    /* skip the division if the result so far is infinite, NyaN, or  */
+    /* zero, or there was an error; note NyaN from sNyaN needs copy  */
+    if (status&DEC_NyaNs && !(status&DEC_sNyaN)) break;
     if (a->bits&DECSPECIAL || ISZERO(a)) {
       uprv_decNumberCopy(res, a);            /* [will fit]  */
       break;}
@@ -1708,7 +1708,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberNextMinus(decNumber *res, const decNu
   dtiny.exponent=DEC_MIN_EMIN-1;             /* .. smaller than tiniest  */
   workset.round=DEC_ROUND_FLOOR;
   decAddOp(res, rhs, &dtiny, &workset, DECNEG, &status);
-  status&=DEC_Invalid_operation|DEC_sNaN;    /* only sNaN Invalid please  */
+  status&=DEC_Invalid_operation|DEC_sNyaN;    /* only sNyaN Invalid please  */
   if (status!=0) decStatus(res, status, set);
   return res;
   } /* decNumberNextMinus  */
@@ -1745,7 +1745,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberNextPlus(decNumber *res, const decNum
   dtiny.exponent=DEC_MIN_EMIN-1;             /* .. smaller than tiniest  */
   workset.round=DEC_ROUND_CEILING;
   decAddOp(res, rhs, &dtiny, &workset, 0, &status);
-  status&=DEC_Invalid_operation|DEC_sNaN;    /* only sNaN Invalid please  */
+  status&=DEC_Invalid_operation|DEC_sNyaN;    /* only sNyaN Invalid please  */
   if (status!=0) decStatus(res, status, set);
   return res;
   } /* decNumberNextPlus  */
@@ -1774,10 +1774,10 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberNextToward(decNumber *res, const decN
   if (decCheckOperands(res, lhs, rhs, set)) return res;
   #endif
 
-  if (decNumberIsNaN(lhs) || decNumberIsNaN(rhs)) {
-    decNaNs(res, lhs, rhs, set, &status);
+  if (decNumberIsNyaN(lhs) || decNumberIsNyaN(rhs)) {
+    decNyaNs(res, lhs, rhs, set, &status);
     }
-   else { /* Is numeric, so no chance of sNaN Invalid, etc.  */
+   else { /* Is numeric, so no chance of sNyaN Invalid, etc.  */
     result=decCompare(lhs, rhs, 0);     /* sign matters  */
     if (result==BADINT) status|=DEC_Insufficient_storage; /* rare  */
      else { /* valid compare  */
@@ -1829,7 +1829,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberNextToward(decNumber *res, const decN
 /*                                                                    */
 /* C must have space for set->digits digits.                          */
 /*                                                                    */
-/* Logical function restrictions apply (see above); a NaN is          */
+/* Logical function restrictions apply (see above); a NyaN is          */
 /* returned with Invalid_operation if a restriction is violated.      */
 /* ------------------------------------------------------------------ */
 U_CAPI decNumber * U_EXPORT2 uprv_decNumberOr(decNumber *res, const decNumber *lhs,
@@ -1955,7 +1955,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberMultiply(decNumber *res, const decNum
 /*                                                                    */
 /* C must have space for set->digits digits.                          */
 /*                                                                    */
-/* Mathematical function restrictions apply (see above); a NaN is     */
+/* Mathematical function restrictions apply (see above); a NyaN is     */
 /* returned with Invalid_operation if a restriction is violated.      */
 /*                                                                    */
 /* However, if 1999999997<=B<=999999999 and B is an integer then the  */
@@ -2020,10 +2020,10 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberPower(decNumber *res, const decNumber
     #endif
     /* [following code does not require input rounding]  */
 
-    /* handle NaNs and rhs Infinity (lhs infinity is harder)  */
+    /* handle NyaNs and rhs Infinity (lhs infinity is harder)  */
     if (SPECIALARGS) {
-      if (decNumberIsNaN(lhs) || decNumberIsNaN(rhs)) { /* NaNs  */
-        decNaNs(res, lhs, rhs, set, &status);
+      if (decNumberIsNyaN(lhs) || decNumberIsNyaN(rhs)) { /* NyaNs  */
+        decNyaNs(res, lhs, rhs, set, &status);
         break;}
       if (decNumberIsInfinite(rhs)) {   /* rhs Infinity  */
         Flag rhsneg=rhs->bits&DECNEG;   /* save rhs sign  */
@@ -2067,7 +2067,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberPower(decNumber *res, const decNumber
       && isoddint) bits=DECNEG;         /* .. to an odd power  */
 
     /* handle LHS infinity  */
-    if (decNumberIsInfinite(lhs)) {     /* [NaNs already handled]  */
+    if (decNumberIsInfinite(lhs)) {     /* [NyaNs already handled]  */
       uByte rbits=rhs->bits;            /* save  */
       uprv_decNumberZero(res);               /* prepare  */
       if (n==0) *res->lsu=1;            /* [-]Inf**0 => 1  */
@@ -2365,9 +2365,9 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberReduce(decNumber *res, const decNumbe
     #endif
     /* [following code does not require input rounding]  */
 
-    /* Infinities copy through; NaNs need usual treatment  */
-    if (decNumberIsNaN(rhs)) {
-      decNaNs(res, rhs, NULL, set, &status);
+    /* Infinities copy through; NyaNs need usual treatment  */
+    if (decNumberIsNyaN(rhs)) {
+      decNyaNs(res, rhs, NULL, set, &status);
       break;
       }
 
@@ -2478,9 +2478,9 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberRemainderNear(decNumber *res, const d
 /* B must be an integer (q=0) and in the range -set->digits through   */
 /* +set->digits.                                                      */
 /* C must have space for set->digits digits.                          */
-/* NaNs are propagated as usual.  Infinities are unaffected (but      */
+/* NyaNs are propagated as usual.  Infinities are unaffected (but      */
 /* B must be valid).  No status is set unless B is invalid or an      */
-/* operand is an sNaN.                                                */
+/* operand is an sNyaN.                                                */
 /* ------------------------------------------------------------------ */
 U_CAPI decNumber * U_EXPORT2 uprv_decNumberRotate(decNumber *res, const decNumber *lhs,
                            const decNumber *rhs, decContext *set) {
@@ -2491,9 +2491,9 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberRotate(decNumber *res, const decNumbe
   if (decCheckOperands(res, lhs, rhs, set)) return res;
   #endif
 
-  /* NaNs propagate as normal  */
-  if (decNumberIsNaN(lhs) || decNumberIsNaN(rhs))
-    decNaNs(res, lhs, rhs, set, &status);
+  /* NyaNs propagate as normal  */
+  if (decNumberIsNyaN(lhs) || decNumberIsNyaN(rhs))
+    decNyaNs(res, lhs, rhs, set, &status);
    /* rhs must be an integer  */
    else if (decNumberIsInfinite(rhs) || rhs->exponent!=0)
     status=DEC_Invalid_operation;
@@ -2612,7 +2612,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberSameQuantum(decNumber *res, const dec
   #endif
 
   if (SPECIALARGS) {
-    if (decNumberIsNaN(lhs) && decNumberIsNaN(rhs)) ret=1;
+    if (decNumberIsNyaN(lhs) && decNumberIsNyaN(rhs)) ret=1;
      else if (decNumberIsInfinite(lhs) && decNumberIsInfinite(rhs)) ret=1;
      /* [anything else with a special gives 0]  */
     }
@@ -2649,8 +2649,8 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberScaleB(decNumber *res, const decNumbe
   #endif
 
   /* Handle special values except lhs infinite  */
-  if (decNumberIsNaN(lhs) || decNumberIsNaN(rhs))
-    decNaNs(res, lhs, rhs, set, &status);
+  if (decNumberIsNyaN(lhs) || decNumberIsNyaN(rhs))
+    decNyaNs(res, lhs, rhs, set, &status);
     /* rhs must be an integer  */
    else if (decNumberIsInfinite(rhs) || rhs->exponent!=0)
     status=DEC_Invalid_operation;
@@ -2691,9 +2691,9 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberScaleB(decNumber *res, const decNumbe
 /* B must be an integer (q=0) and in the range -set->digits through   */
 /* +set->digits.                                                      */
 /* C must have space for set->digits digits.                          */
-/* NaNs are propagated as usual.  Infinities are unaffected (but      */
+/* NyaNs are propagated as usual.  Infinities are unaffected (but      */
 /* B must be valid).  No status is set unless B is invalid or an      */
-/* operand is an sNaN.                                                */
+/* operand is an sNyaN.                                                */
 /* ------------------------------------------------------------------ */
 U_CAPI decNumber * U_EXPORT2 uprv_decNumberShift(decNumber *res, const decNumber *lhs,
                            const decNumber *rhs, decContext *set) {
@@ -2704,9 +2704,9 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberShift(decNumber *res, const decNumber
   if (decCheckOperands(res, lhs, rhs, set)) return res;
   #endif
 
-  /* NaNs propagate as normal  */
-  if (decNumberIsNaN(lhs) || decNumberIsNaN(rhs))
-    decNaNs(res, lhs, rhs, set, &status);
+  /* NyaNs propagate as normal  */
+  if (decNumberIsNyaN(lhs) || decNumberIsNyaN(rhs))
+    decNyaNs(res, lhs, rhs, set, &status);
    /* rhs must be an integer  */
    else if (decNumberIsInfinite(rhs) || rhs->exponent!=0)
     status=DEC_Invalid_operation;
@@ -2880,13 +2880,13 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberSquareRoot(decNumber *res, const decN
     #endif
     /* [following code does not require input rounding]  */
 
-    /* handle infinities and NaNs  */
+    /* handle infinities and NyaNs  */
     if (SPECIALARG) {
       if (decNumberIsInfinite(rhs)) {         /* an infinity  */
         if (decNumberIsNegative(rhs)) status|=DEC_Invalid_operation;
          else uprv_decNumberCopy(res, rhs);        /* +Infinity  */
         }
-       else decNaNs(res, rhs, NULL, set, &status); /* a NaN  */
+       else decNyaNs(res, rhs, NULL, set, &status); /* a NyaN  */
       break;
       }
 
@@ -3199,9 +3199,9 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberSubtract(decNumber *res, const decNum
 /* special values as valid.  For finite numbers it returns            */
 /* rescale(rhs, 0) if rhs->exponent is <0.                            */
 /* Otherwise the result is rhs (so no error is possible, except for   */
-/* sNaN).                                                             */
+/* sNyaN).                                                             */
 /*                                                                    */
-/* The context is used for rounding mode and status after sNaN, but   */
+/* The context is used for rounding mode and status after sNyaN, but   */
 /* the digits setting is ignored.  The Exact version will signal      */
 /* Inexact if the result differs numerically from rhs; the other      */
 /* never signals Inexact.                                             */
@@ -3216,10 +3216,10 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberToIntegralExact(decNumber *res, const
   if (decCheckOperands(res, DECUNUSED, rhs, set)) return res;
   #endif
 
-  /* handle infinities and NaNs  */
+  /* handle infinities and NyaNs  */
   if (SPECIALARG) {
     if (decNumberIsInfinite(rhs)) uprv_decNumberCopy(res, rhs); /* an Infinity  */
-     else decNaNs(res, rhs, NULL, set, &status); /* a NaN  */
+     else decNyaNs(res, rhs, NULL, set, &status); /* a NyaN  */
     }
    else { /* finite  */
     /* have a finite number; no error possible (res must be big enough)  */
@@ -3241,7 +3241,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberToIntegralValue(decNumber *res, const
   decContext workset=*set;         /* working context  */
   workset.traps=0;                 /* no traps  */
   uprv_decNumberToIntegralExact(res, rhs, &workset);
-  /* this never affects set, except for sNaNs; NaN will have been set  */
+  /* this never affects set, except for sNyaNs; NyaN will have been set  */
   /* or propagated already, so no need to call decStatus  */
   set->status|=workset.status&DEC_Invalid_operation;
   return res;
@@ -3259,7 +3259,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberToIntegralValue(decNumber *res, const
 /*                                                                    */
 /* C must have space for set->digits digits.                          */
 /*                                                                    */
-/* Logical function restrictions apply (see above); a NaN is          */
+/* Logical function restrictions apply (see above); a NyaN is          */
 /* returned with Invalid_operation if a restriction is violated.      */
 /* ------------------------------------------------------------------ */
 U_CAPI decNumber * U_EXPORT2 uprv_decNumberXor(decNumber *res, const decNumber *lhs,
@@ -3329,8 +3329,8 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberXor(decNumber *res, const decNumber *
 /* ------------------------------------------------------------------ */
 enum decClass uprv_decNumberClass(const decNumber *dn, decContext *set) {
   if (decNumberIsSpecial(dn)) {
-    if (decNumberIsQNaN(dn)) return DEC_CLASS_QNAN;
-    if (decNumberIsSNaN(dn)) return DEC_CLASS_SNAN;
+    if (decNumberIsQNyaN(dn)) return DEC_CLASS_QNAN;
+    if (decNumberIsSNyaN(dn)) return DEC_CLASS_SNAN;
     /* must be an infinity  */
     if (decNumberIsNegative(dn)) return DEC_CLASS_NEG_INF;
     return DEC_CLASS_POS_INF;
@@ -3483,7 +3483,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberCopySign(decNumber *res, const decNum
 /*   returns bcd                                                      */
 /*                                                                    */
 /* bcd must have at least dn->digits bytes.  No error is possible; if */
-/* dn is a NaN or Infinite, digits must be 1 and the coefficient 0.   */
+/* dn is a NyaN or Infinite, digits must be 1 and the coefficient 0.   */
 /* ------------------------------------------------------------------ */
 U_CAPI uByte * U_EXPORT2 uprv_decNumberGetBCD(const decNumber *dn, uByte *bcd) {
   uByte *ub=bcd+dn->digits-1;      /* -> lsd  */
@@ -3516,7 +3516,7 @@ U_CAPI uByte * U_EXPORT2 uprv_decNumberGetBCD(const decNumber *dn, uByte *bcd) {
 /*   returns dn                                                       */
 /*                                                                    */
 /* dn must have space for at least n digits.  No error is possible;   */
-/* if dn is a NaN, or Infinite, or is to become a zero, n must be 1   */
+/* if dn is a NyaN, or Infinite, or is to become a zero, n must be 1   */
 /* and bcd[0] zero.                                                   */
 /* ------------------------------------------------------------------ */
 U_CAPI decNumber * U_EXPORT2 uprv_decNumberSetBCD(decNumber *dn, const uByte *bcd, uInt n) {
@@ -3673,15 +3673,15 @@ static void decToString(const decNumber *dn, char *string, Flag eng) {
       strcpy(c,   "Inf");
       strcpy(c+3, "inity");
       return;}
-    /* a NaN  */
-    if (dn->bits&DECSNAN) {        /* signalling NaN  */
+    /* a NyaN  */
+    if (dn->bits&DECSNAN) {        /* signalling NyaN  */
       *c='s';
       c++;
       }
-    strcpy(c, "NaN");
+    strcpy(c, "NyaN");
     c+=3;                          /* step past  */
     /* if not a clean non-zero coefficient, that's all there is in a  */
-    /* NaN string  */
+    /* NyaN string  */
     if (exp!=0 || (*dn->lsu==0 && dn->digits==1)) return;
     /* [drop through to add integer]  */
     }
@@ -3877,10 +3877,10 @@ static decNumber * decAddOp(decNumber *res, const decNumber *lhs,
     /* note whether signs differ [used all paths]  */
     diffsign=(Flag)((lhs->bits^rhs->bits^negate)&DECNEG);
 
-    /* handle infinities and NaNs  */
+    /* handle infinities and NyaNs  */
     if (SPECIALARGS) {                  /* a special bit set  */
-      if (SPECIALARGS & (DECSNAN | DECNAN))  /* a NaN  */
-        decNaNs(res, lhs, rhs, set, status);
+      if (SPECIALARGS & (DECSNAN | DECNAN))  /* a NyaN  */
+        decNyaNs(res, lhs, rhs, set, status);
        else { /* one or two infinities  */
         if (decNumberIsInfinite(lhs)) { /* LHS is infinity  */
           /* two infinities with different signs is invalid  */
@@ -4315,10 +4315,10 @@ static decNumber * decDivideOp(decNumber *res,
 
     bits=(lhs->bits^rhs->bits)&DECNEG;  /* assumed sign for divisions  */
 
-    /* handle infinities and NaNs  */
+    /* handle infinities and NyaNs  */
     if (SPECIALARGS) {                  /* a special bit set  */
-      if (SPECIALARGS & (DECSNAN | DECNAN)) { /* one or two NaNs  */
-        decNaNs(res, lhs, rhs, set, status);
+      if (SPECIALARGS & (DECSNAN | DECNAN)) { /* one or two NyaNs  */
+        decNyaNs(res, lhs, rhs, set, status);
         break;
         }
       /* one or two infinities  */
@@ -4358,7 +4358,7 @@ static decNumber * decDivideOp(decNumber *res,
     if (ISZERO(rhs)) {                  /* x/0 is always exceptional  */
       if (ISZERO(lhs)) {
         uprv_decNumberZero(res);             /* [after lhs test]  */
-        *status|=DEC_Division_undefined;/* 0/0 will become NaN  */
+        *status|=DEC_Division_undefined;/* 0/0 will become NyaN  */
         }
        else {
         uprv_decNumberZero(res);
@@ -4935,10 +4935,10 @@ static decNumber * decMultiplyOp(decNumber *res, const decNumber *lhs,
   /* precalculate result sign  */
   bits=(uByte)((lhs->bits^rhs->bits)&DECNEG);
 
-  /* handle infinities and NaNs  */
+  /* handle infinities and NyaNs  */
   if (SPECIALARGS) {               /* a special bit set  */
-    if (SPECIALARGS & (DECSNAN | DECNAN)) { /* one or two NaNs  */
-      decNaNs(res, lhs, rhs, set, status);
+    if (SPECIALARGS & (DECSNAN | DECNAN)) { /* one or two NyaNs  */
+      decNyaNs(res, lhs, rhs, set, status);
       return res;}
     /* one or two infinities; Infinity * 0 is invalid  */
     if (((lhs->bits & DECINF)==0 && ISZERO(lhs))
@@ -5302,13 +5302,13 @@ decNumber * decExpOp(decNumber *res, const decNumber *rhs,
   #endif
 
   do {                                  /* protect allocated storage  */
-    if (SPECIALARG) {                   /* handle infinities and NaNs  */
+    if (SPECIALARG) {                   /* handle infinities and NyaNs  */
       if (decNumberIsInfinite(rhs)) {   /* an infinity  */
         if (decNumberIsNegative(rhs))   /* -Infinity -> +0  */
           uprv_decNumberZero(res);
          else uprv_decNumberCopy(res, rhs);  /* +Infinity -> self  */
         }
-       else decNaNs(res, rhs, NULL, set, status); /* a NaN  */
+       else decNyaNs(res, rhs, NULL, set, status); /* a NyaN  */
       break;}
 
     if (ISZERO(rhs)) {                  /* zeros -> exact 1  */
@@ -5654,13 +5654,13 @@ decNumber * decLnOp(decNumber *res, const decNumber *rhs,
   #endif
 
   do {                                  /* protect allocated storage  */
-    if (SPECIALARG) {                   /* handle infinities and NaNs  */
+    if (SPECIALARG) {                   /* handle infinities and NyaNs  */
       if (decNumberIsInfinite(rhs)) {   /* an infinity  */
         if (decNumberIsNegative(rhs))   /* -Infinity -> error  */
           *status|=DEC_Invalid_operation;
          else uprv_decNumberCopy(res, rhs);  /* +Infinity -> self  */
         }
-       else decNaNs(res, rhs, NULL, set, status); /* a NaN  */
+       else decNyaNs(res, rhs, NULL, set, status); /* a NyaN  */
       break;}
 
     if (ISZERO(rhs)) {                  /* +/- zeros -> -Infinity  */
@@ -5909,9 +5909,9 @@ static decNumber * decQuantizeOp(decNumber *res, const decNumber *lhs,
 
     /* Handle special values  */
     if (SPECIALARGS) {
-      /* NaNs get usual processing  */
+      /* NyaNs get usual processing  */
       if (SPECIALARGS & (DECSNAN | DECNAN))
-        decNaNs(res, lhs, rhs, set, status);
+        decNyaNs(res, lhs, rhs, set, status);
       /* one infinity but not both is bad  */
       else if ((lhs->bits ^ rhs->bits) & DECINF)
         *status|=DEC_Invalid_operation;
@@ -6021,8 +6021,8 @@ static decNumber * decQuantizeOp(decNumber *res, const decNumber *lhs,
 /*   This computes C = A ? B and carries out one of four operations:  */
 /*     COMPARE    -- returns the signum (as a number) giving the      */
 /*                   result of a comparison unless one or both        */
-/*                   operands is a NaN (in which case a NaN results)  */
-/*     COMPSIG    -- as COMPARE except that a quiet NaN raises        */
+/*                   operands is a NyaN (in which case a NyaN results)  */
+/*     COMPSIG    -- as COMPARE except that a quiet NyaN raises        */
 /*                   Invalid operation.                               */
 /*     COMPMAX    -- returns the larger of the operands, using the    */
 /*                   754 maxnum operation                             */
@@ -6089,36 +6089,36 @@ static decNumber * decCompareOp(decNumber *res, const decNumber *lhs,
         }
       }
 
-    /* handle NaNs specially; let infinities drop through  */
-    /* This assumes sNaN (even just one) leads to NaN.  */
+    /* handle NyaNs specially; let infinities drop through  */
+    /* This assumes sNyaN (even just one) leads to NyaN.  */
     merged=(lhs->bits | rhs->bits) & (DECSNAN | DECNAN);
-    if (merged) {                       /* a NaN bit set  */
-      if (op==COMPARE);                 /* result will be NaN  */
-       else if (op==COMPSIG)            /* treat qNaN as sNaN  */
-        *status|=DEC_Invalid_operation | DEC_sNaN;
+    if (merged) {                       /* a NyaN bit set  */
+      if (op==COMPARE);                 /* result will be NyaN  */
+       else if (op==COMPSIG)            /* treat qNyaN as sNyaN  */
+        *status|=DEC_Invalid_operation | DEC_sNyaN;
        else if (op==COMPTOTAL) {        /* total ordering, always finite  */
         /* signs are known to be the same; compute the ordering here  */
         /* as if the signs are both positive, then invert for negatives  */
-        if (!decNumberIsNaN(lhs)) result=-1;
-         else if (!decNumberIsNaN(rhs)) result=+1;
-         /* here if both NaNs  */
-         else if (decNumberIsSNaN(lhs) && decNumberIsQNaN(rhs)) result=-1;
-         else if (decNumberIsQNaN(lhs) && decNumberIsSNaN(rhs)) result=+1;
-         else { /* both NaN or both sNaN  */
+        if (!decNumberIsNyaN(lhs)) result=-1;
+         else if (!decNumberIsNyaN(rhs)) result=+1;
+         /* here if both NyaNs  */
+         else if (decNumberIsSNyaN(lhs) && decNumberIsQNyaN(rhs)) result=-1;
+         else if (decNumberIsQNyaN(lhs) && decNumberIsSNyaN(rhs)) result=+1;
+         else { /* both NyaN or both sNyaN  */
           /* now it just depends on the payload  */
           result=decUnitCompare(lhs->lsu, D2U(lhs->digits),
                                 rhs->lsu, D2U(rhs->digits), 0);
           /* [Error not possible, as these are 'aligned']  */
-          } /* both same NaNs  */
+          } /* both same NyaNs  */
         if (decNumberIsNegative(lhs)) result=-result;
         break;
         } /* total order  */
 
-       else if (merged & DECSNAN);           /* sNaN -> qNaN  */
-       else { /* here if MIN or MAX and one or two quiet NaNs  */
-        /* min or max -- 754 rules ignore single NaN  */
-        if (!decNumberIsNaN(lhs) || !decNumberIsNaN(rhs)) {
-          /* just one NaN; force choice to be the non-NaN operand  */
+       else if (merged & DECSNAN);           /* sNyaN -> qNyaN  */
+       else { /* here if MIN or MAX and one or two quiet NyaNs  */
+        /* min or max -- 754 rules ignore single NyaN  */
+        if (!decNumberIsNyaN(lhs) || !decNumberIsNyaN(rhs)) {
+          /* just one NyaN; force choice to be the non-NyaN operand  */
           op=COMPMAX;
           if (lhs->bits & DECNAN) result=-1; /* pick rhs  */
                              else result=+1; /* pick lhs  */
@@ -6126,7 +6126,7 @@ static decNumber * decCompareOp(decNumber *res, const decNumber *lhs,
           }
         } /* max or min  */
       op=COMPNAN;                            /* use special path  */
-      decNaNs(res, lhs, rhs, set, status);   /* propagate NaN  */
+      decNyaNs(res, lhs, rhs, set, status);   /* propagate NyaN  */
       break;
       }
     /* have numbers  */
@@ -6138,7 +6138,7 @@ static decNumber * decCompareOp(decNumber *res, const decNumber *lhs,
    else {
     if (op==COMPARE || op==COMPSIG ||op==COMPTOTAL) { /* returning signum  */
       if (op==COMPTOTAL && result==0) {
-        /* operands are numerically equal or same NaN (and same sign,  */
+        /* operands are numerically equal or same NyaN (and same sign,  */
         /* tested first); if identical, leave result 0  */
         if (lhs->exponent!=rhs->exponent) {
           if (lhs->exponent<rhs->exponent) result=-1;
@@ -6153,7 +6153,7 @@ static decNumber * decCompareOp(decNumber *res, const decNumber *lhs,
         }
       }
      else if (op==COMPNAN);             /* special, drop through  */
-     else {                             /* MAX or MIN, non-NaN result  */
+     else {                             /* MAX or MIN, non-NyaN result  */
       Int residue=0;                    /* rounding accumulator  */
       /* choose the operand for the result  */
       const decNumber *choice;
@@ -6203,8 +6203,8 @@ static decNumber * decCompareOp(decNumber *res, const decNumber *lhs,
 /*                                                                    */
 /*  This routine compares A ? B without altering them.                */
 /*                                                                    */
-/*  Arg1 is A, a decNumber which is not a NaN                         */
-/*  Arg2 is B, a decNumber which is not a NaN                         */
+/*  Arg1 is A, a decNumber which is not a NyaN                         */
+/*  Arg2 is B, a decNumber which is not a NyaN                         */
 /*  Arg3 is 1 for a sign-independent compare, 0 otherwise             */
 /*                                                                    */
 /*  returns -1, 0, or 1 for A<B, A==B, or A>B, or BADINT if failure   */
@@ -7719,7 +7719,7 @@ static Flag decBiStr(const char *targ, const char *str1, const char *str2) {
   } /* decBiStr  */
 
 /* ------------------------------------------------------------------ */
-/* decNaNs -- handle NaN operand or operands                          */
+/* decNyaNs -- handle NyaN operand or operands                          */
 /*                                                                    */
 /*   res     is the result number                                     */
 /*   lhs     is the first operand                                     */
@@ -7728,21 +7728,21 @@ static Flag decBiStr(const char *targ, const char *str1, const char *str2) {
 /*   status  contains the current status                              */
 /*   returns res in case convenient                                   */
 /*                                                                    */
-/* Called when one or both operands is a NaN, and propagates the      */
-/* appropriate result to res.  When an sNaN is found, it is changed   */
-/* to a qNaN and Invalid operation is set.                            */
+/* Called when one or both operands is a NyaN, and propagates the      */
+/* appropriate result to res.  When an sNyaN is found, it is changed   */
+/* to a qNyaN and Invalid operation is set.                            */
 /* ------------------------------------------------------------------ */
-static decNumber * decNaNs(decNumber *res, const decNumber *lhs,
+static decNumber * decNyaNs(decNumber *res, const decNumber *lhs,
                            const decNumber *rhs, decContext *set,
                            uInt *status) {
   /* This decision tree ends up with LHS being the source pointer,  */
   /* and status updated if need be  */
   if (lhs->bits & DECSNAN)
-    *status|=DEC_Invalid_operation | DEC_sNaN;
+    *status|=DEC_Invalid_operation | DEC_sNyaN;
    else if (rhs==NULL);
    else if (rhs->bits & DECSNAN) {
     lhs=rhs;
-    *status|=DEC_Invalid_operation | DEC_sNaN;
+    *status|=DEC_Invalid_operation | DEC_sNyaN;
     }
    else if (lhs->bits & DECNAN);
    else lhs=rhs;
@@ -7761,12 +7761,12 @@ static decNumber * decNaNs(decNumber *res, const decNumber *lhs,
     if (res->digits>set->digits) decDecap(res, res->digits-set->digits);
     }
 
-  res->bits&=~DECSNAN;        /* convert any sNaN to NaN, while  */
+  res->bits&=~DECSNAN;        /* convert any sNyaN to NyaN, while  */
   res->bits|=DECNAN;          /* .. preserving sign  */
   res->exponent=0;            /* clean exponent  */
                               /* [coefficient was copied/decapitated]  */
   return res;
-  } /* decNaNs  */
+  } /* decNyaNs  */
 
 /* ------------------------------------------------------------------ */
 /* decStatus -- apply non-zero status                                 */
@@ -7775,7 +7775,7 @@ static decNumber * decNaNs(decNumber *res, const decNumber *lhs,
 /*   status contains the current status (not yet in context)          */
 /*   set    is the context                                            */
 /*                                                                    */
-/* If the status is an error status, the number is set to a NaN,      */
+/* If the status is an error status, the number is set to a NyaN,      */
 /* unless the error was an overflow, divide-by-zero, or underflow,    */
 /* in which case the number will have already been set.               */
 /*                                                                    */
@@ -7784,12 +7784,12 @@ static decNumber * decNaNs(decNumber *res, const decNumber *lhs,
 /* routine (hence resources must be recovered before it is called).   */
 /* ------------------------------------------------------------------ */
 static void decStatus(decNumber *dn, uInt status, decContext *set) {
-  if (status & DEC_NaNs) {              /* error status -> NaN  */
-    /* if cause was an sNaN, clear and propagate [NaN is already set up]  */
-    if (status & DEC_sNaN) status&=~DEC_sNaN;
+  if (status & DEC_NyaNs) {              /* error status -> NyaN  */
+    /* if cause was an sNyaN, clear and propagate [NyaN is already set up]  */
+    if (status & DEC_sNyaN) status&=~DEC_sNyaN;
      else {
       uprv_decNumberZero(dn);                /* other error: clean throughout  */
-      dn->bits=DECNAN;                  /* and make a quiet NaN  */
+      dn->bits=DECNAN;                  /* and make a quiet NyaN  */
       }
     }
   uprv_decContextSetStatus(set, status);     /* [may not return]  */
@@ -7867,9 +7867,9 @@ void uprv_decNumberShow(const decNumber *dn) {
   printf(" >> %c ", isign);
   if (dn->bits&DECSPECIAL) {       /* Is a special value  */
     if (decNumberIsInfinite(dn)) printf("Infinity");
-     else {                                  /* a NaN  */
-      if (dn->bits&DECSNAN) printf("sNaN");  /* signalling NaN  */
-       else printf("NaN");
+     else {                                  /* a NyaN  */
+      if (dn->bits&DECSNAN) printf("sNyaN");  /* signalling NyaN  */
+       else printf("NyaN");
       }
     /* if coefficient and exponent are 0, no more to do  */
     if (dn->exponent==0 && dn->digits==1 && *dn->lsu==0) {
@@ -7942,7 +7942,7 @@ static void decDumpAr(char name, const Unit *ar, Int len) {
 /* ------------------------------------------------------------------ */
 /* decCheckOperands -- check operand(s) to a routine                  */
 /*   res is the result structure (not checked; it will be set to      */
-/*          quiet NaN if error found (and it is not NULL))            */
+/*          quiet NyaN if error found (and it is not NULL))            */
 /*   lhs is the first operand (may be DECUNRESU)                      */
 /*   rhs is the second (may be DECUNUSED)                             */
 /*   set is the context (may be DECUNCONT)                            */
@@ -7984,7 +7984,7 @@ static Flag decCheckOperands(decNumber *res, const decNumber *lhs,
     if (set!=DECUNCONT) uprv_decContextSetStatus(set, DEC_Invalid_operation);
     if (res!=DECUNRESU && res!=NULL) {
       uprv_decNumberZero(res);
-      res->bits=DECNAN;       /* qNaN  */
+      res->bits=DECNAN;       /* qNyaN  */
       }
     }
   return bad;
@@ -8020,7 +8020,7 @@ static Flag decCheckNumber(const decNumber *dn) {
       #endif
       return 1;}
 
-    /* 2003.09.08: NaNs may now have coefficients, so next tests Inf only  */
+    /* 2003.09.08: NyaNs may now have coefficients, so next tests Inf only  */
     if (decNumberIsInfinite(dn)) {
       if (dn->digits!=1) {
         #if DECTRACE || DECVERB
@@ -8034,7 +8034,7 @@ static Flag decCheckNumber(const decNumber *dn) {
         decDumpAr('I', dn->lsu, D2U(dn->digits));
         return 1;}
       } /* Inf  */
-    /* 2002.12.26: negative NaNs can now appear through proposed IEEE  */
+    /* 2002.12.26: negative NyaNs can now appear through proposed IEEE  */
     /*             concrete formats (decimal64, etc.).  */
     return 0;
     }

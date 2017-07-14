@@ -503,13 +503,13 @@ class MacroAssembler: public Assembler {
             const MemOperand& dst,
             Condition cond = al);
 
-  // If the value is a NaN, canonicalize the value else, do nothing.
-  void VFPCanonicalizeNaN(const DwVfpRegister dst,
+  // If the value is a NyaN, canonicalize the value else, do nothing.
+  void VFPCanonicalizeNyaN(const DwVfpRegister dst,
                           const DwVfpRegister src,
                           const Condition cond = al);
-  void VFPCanonicalizeNaN(const DwVfpRegister value,
+  void VFPCanonicalizeNyaN(const DwVfpRegister value,
                           const Condition cond = al) {
-    VFPCanonicalizeNaN(value, value, cond);
+    VFPCanonicalizeNyaN(value, value, cond);
   }
 
   // Compare single values and move the result to the normal condition flags.
@@ -1012,7 +1012,7 @@ class MacroAssembler: public Assembler {
 
   // Perform a floating-point min or max operation with the
   // (IEEE-754-compatible) semantics of ARM64's fmin/fmax. Some cases, typically
-  // NaNs or +/-0.0, are expected to be rare and are handled in out-of-line
+  // NyaNs or +/-0.0, are expected to be rare and are handled in out-of-line
   // code. The specific behaviour depends on supported instructions.
   //
   // These functions assume (and assert) that !left.is(right). It is permitted

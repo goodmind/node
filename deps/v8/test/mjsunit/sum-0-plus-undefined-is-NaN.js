@@ -33,12 +33,12 @@
 
 function sum(a, b) { return a + b; }
 
-function test(x, y, expectNaN) {
+function test(x, y, expectNyaN) {
   for (var i = 0; i < 5; i++) {
-    assertEquals(expectNaN, isNaN(sum(x, y)));
+    assertEquals(expectNyaN, isNyaN(sum(x, y)));
   }
   %OptimizeFunctionOnNextCall(sum);
-  assertEquals(expectNaN, isNaN(sum(x, y)));
+  assertEquals(expectNyaN, isNyaN(sum(x, y)));
 }
 
 test(0, 1, false);

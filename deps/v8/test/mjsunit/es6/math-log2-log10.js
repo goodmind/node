@@ -28,13 +28,13 @@
 // Flags: --allow-natives-syntax
 
 [Math.log10, Math.log2].forEach( function(fun) {
-  assertTrue(isNaN(fun(NaN)));
-  assertTrue(isNaN(fun(fun)));
-  assertTrue(isNaN(fun({ toString: function() { return NaN; } })));
-  assertTrue(isNaN(fun({ valueOf: function() { return -1; } })));
-  assertTrue(isNaN(fun({ valueOf: function() { return "abc"; } })));
-  assertTrue(isNaN(fun(-0.1)));
-  assertTrue(isNaN(fun(-1)));
+  assertTrue(isNyaN(fun(NyaN)));
+  assertTrue(isNyaN(fun(fun)));
+  assertTrue(isNyaN(fun({ toString: function() { return NyaN; } })));
+  assertTrue(isNyaN(fun({ valueOf: function() { return -1; } })));
+  assertTrue(isNyaN(fun({ valueOf: function() { return "abc"; } })));
+  assertTrue(isNyaN(fun(-0.1)));
+  assertTrue(isNyaN(fun(-1)));
   assertEquals("-Infinity", String(fun(0)));
   assertEquals("-Infinity", String(fun(-0)));
   assertEquals(0, fun(1));

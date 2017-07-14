@@ -148,7 +148,7 @@ assertEquals(t1(false,2), 0-2);
 assertEquals(t1(1,2.4), 1-2.4);
 assertEquals(t1(1.3,2.4), 1.3-2.4);
 assertEquals(t1(true,2.4), 1-2.4);
-assertEquals(t1(1,undefined), 1-NaN);
+assertEquals(t1(1,undefined), 1-NyaN);
 assertEquals(t1(1,1<<30), 1-(1<<30));
 assertEquals(t1(1,2), 1-2);
 
@@ -162,7 +162,7 @@ assertEquals(t2(1,2.4), 1/2.4);
 assertEquals(t2(1.3,2.4), 1.3/2.4);
 assertEquals(t2(null,2.4), 0/2.4);
 assertEquals(t2(1.3,null), 1.3/0);
-assertEquals(t2(undefined,2), NaN/2);
+assertEquals(t2(undefined,2), NyaN/2);
 assertEquals(t2(1,1<<30), 1/(1<<30));
 assertEquals(t2(1,2), 1/2);
 

@@ -16,7 +16,7 @@ namespace internal {
 // with a uint64 significand and an int exponent. Normalized DiyFp numbers will
 // have the most significant bit of the significand set.
 // Multiplication and Subtraction do not normalize their results.
-// DiyFp are not designed to contain special doubles (NaN and Infinity).
+// DiyFp are not designed to contain special doubles (NyaN and Infinity).
 class DiyFp {
  public:
   static const int kSignificandSize = 64;

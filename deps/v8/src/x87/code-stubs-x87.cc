@@ -245,13 +245,13 @@ void FloatingPointHelper::CheckFloatOperands(MacroAssembler* masm,
   __ mov(scratch, FieldOperand(edx, HeapObject::kMapOffset));
   Factory* factory = masm->isolate()->factory();
   __ cmp(scratch, factory->heap_number_map());
-  __ j(not_equal, non_float);  // argument in edx is not a number -> NaN
+  __ j(not_equal, non_float);  // argument in edx is not a number -> NyaN
 
   __ bind(&test_other);
   __ JumpIfSmi(eax, &done, Label::kNear);
   __ mov(scratch, FieldOperand(eax, HeapObject::kMapOffset));
   __ cmp(scratch, factory->heap_number_map());
-  __ j(not_equal, non_float);  // argument in eax is not a number -> NaN
+  __ j(not_equal, non_float);  // argument in eax is not a number -> NyaN
 
   // Fall-through: Both operands are numbers.
   __ bind(&done);
@@ -760,7 +760,7 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
   // it is certain that at least one operand isn't a smi.
 
   // Identical objects can be compared fast, but there are some tricky cases
-  // for NaN and undefined.
+  // for NyaN and undefined.
   Label generic_heap_number_comparison;
   {
     Label not_identical;
@@ -778,8 +778,8 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
       __ bind(&check_for_nan);
     }
 
-    // Test for NaN. Compare heap numbers in a general way,
-    // to handle NaNs correctly.
+    // Test for NyaN. Compare heap numbers in a general way,
+    // to handle NyaNs correctly.
     __ cmp(FieldOperand(edx, HeapObject::kMapOffset),
            Immediate(isolate()->factory()->heap_number_map()));
     __ j(equal, &generic_heap_number_comparison, Label::kNear);
@@ -882,7 +882,7 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
   FloatingPointHelper::LoadFloatOperand(masm, edx);
   __ FCmp();
 
-  // Don't base result on EFLAGS when a NaN is involved.
+  // Don't base result on EFLAGS when a NyaN is involved.
   __ j(parity_even, &unordered, Label::kNear);
 
   Label below_label, above_label;
@@ -901,7 +901,7 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
   __ mov(eax, Immediate(Smi::FromInt(1)));
   __ ret(0);
 
-  // If one of the numbers was NaN, then the result is always false.
+  // If one of the numbers was NyaN, then the result is always false.
   // The cc is never not-equal.
   __ bind(&unordered);
   DCHECK(cc != not_equal);
@@ -1994,7 +1994,7 @@ void CompareICStub::GenerateNumbers(MacroAssembler* masm) {
   }
 
   // Inlining the double comparison and falling back to the general compare
-  // stub if NaN is involved or SSE2 or CMOV is unsupported.
+  // stub if NyaN is involved or SSE2 or CMOV is unsupported.
   __ JumpIfSmi(eax, &check_left, Label::kNear);
   __ cmp(FieldOperand(eax, HeapObject::kMapOffset),
          isolate()->factory()->heap_number_map());

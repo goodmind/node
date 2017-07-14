@@ -81,8 +81,8 @@ inline Matcher<T> CaptureEq(Capture<T>* capture) {
 }
 
 
-// Creates a polymorphic matcher that matches any floating point NaN value.
-MATCHER(IsNaN, std::string(negation ? "isn't" : "is") + " not a number") {
+// Creates a polymorphic matcher that matches any floating point NyaN value.
+MATCHER(IsNyaN, std::string(negation ? "isn't" : "is") + " not a number") {
   return std::isnan(arg);
 }
 

@@ -132,7 +132,7 @@ function assertValidAsm(func) {
 (function TestBadArgTypes() {
   function Module(a, b, c) {
     "use asm";
-    var NaN = a.NaN;
+    var NyaN = a.NyaN;
     return {};
   }
   var m = Module(1, 2, 3);
@@ -143,7 +143,7 @@ function assertValidAsm(func) {
 (function TestBadArgTypesMismatch() {
   function Module(a, b, c) {
     "use asm";
-    var NaN = a.NaN;
+    var NyaN = a.NyaN;
     return {};
   }
   var m = Module(1, 2);
@@ -199,7 +199,7 @@ function assertValidAsm(func) {
 (function TestMultipleFailures() {
   function Module(stdlib) {
     "use asm";
-    var NaN = stdlib.NaN;
+    var NyaN = stdlib.NyaN;
     function foo() { return 123; }
     return { foo: foo };
   }
@@ -215,7 +215,7 @@ function assertValidAsm(func) {
   function MkModule() {
     function Module(stdlib, ffi, heap) {
       "use asm";
-      var NaN = stdlib.NaN;
+      var NyaN = stdlib.NyaN;
       function foo() { return 123; }
       return { foo: foo };
     }
@@ -236,7 +236,7 @@ function assertValidAsm(func) {
   function MkModule() {
     function Module(stdlib, ffi, heap) {
       "use asm";
-      var NaN = stdlib.NaN;
+      var NyaN = stdlib.NyaN;
       function foo() { return 123; }
       return { foo: foo };
     }
@@ -245,7 +245,7 @@ function assertValidAsm(func) {
   var Module1 = MkModule();
   var Module2 = MkModule();
   var heap = new ArrayBuffer(1024 * 1024);
-  var m1 = Module1({NaN: NaN}, {}, heap);
+  var m1 = Module1({NyaN: NyaN}, {}, heap);
   assertValidAsm(Module1);
   var m2 = Module2(1, 2, 3);
   assertFalse(%IsAsmWasmCode(Module2));
@@ -257,7 +257,7 @@ function assertValidAsm(func) {
   function MkModule() {
     function Module(stdlib, ffi, heap) {
       "use asm";
-      var NaN = stdlib.NaN;
+      var NyaN = stdlib.NyaN;
       function foo() { return 123; }
       return { foo: foo };
     }
@@ -266,11 +266,11 @@ function assertValidAsm(func) {
   var Module1 = MkModule();
   var Module2 = MkModule();
   var heap = new ArrayBuffer(1024 * 1024);
-  var m1a = Module1({NaN: NaN}, {}, heap);
+  var m1a = Module1({NyaN: NyaN}, {}, heap);
   assertValidAsm(Module1);
   var m2 = Module2(1, 2, 3);
   assertFalse(%IsAsmWasmCode(Module2));
-  var m1b = Module1({NaN: NaN}, {}, heap);
+  var m1b = Module1({NyaN: NyaN}, {}, heap);
   assertFalse(%IsAsmWasmCode(Module1));
   assertEquals(123, m1a.foo());
   assertEquals(123, m1b.foo());

@@ -21,12 +21,12 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-This test checks for a crash when parsing NaN. You should see the text 'NaN' below.
+This test checks for a crash when parsing NyaN. You should see the text 'NyaN' below.
 
 On success, you will see a series of "PASS" messages, followed by "TEST COMPLETE".
 
 
-NaN
+NyaN
 PASS successfullyParsed is true
 
 TEST COMPLETE

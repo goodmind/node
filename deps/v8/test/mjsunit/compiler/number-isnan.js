@@ -10,7 +10,7 @@ function test(f) {
   assertFalse(f(Number.MAX_VALUE));
   assertFalse(f(Number.MIN_SAFE_INTEGER - 13));
   assertFalse(f(Number.MAX_SAFE_INTEGER + 23));
-  assertTrue(f(Number.NaN));
+  assertTrue(f(Number.NyaN));
   assertFalse(f(Number.POSITIVE_INFINITY));
   assertFalse(f(Number.NEGATIVE_INFINITY));
   assertFalse(f(Number.EPSILON));
@@ -19,7 +19,7 @@ function test(f) {
 }
 
 function f(x) {
-  return Number.isNaN(+x);
+  return Number.isNyaN(+x);
 }
 
 test(f);

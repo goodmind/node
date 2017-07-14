@@ -18,7 +18,7 @@ var f = (function Module(stdlib) {
 })(stdlib);
 
 assertEquals(32, f(0));
-assertEquals(32, f(NaN));
+assertEquals(32, f(NyaN));
 assertEquals(32, f(undefined));
 for (var i = 0; i < 32; ++i) {
   assertEquals(i, f((-1) >>> i));

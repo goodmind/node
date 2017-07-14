@@ -299,7 +299,7 @@
   V(NumberToInt32)                     \
   V(NumberToUint32)                    \
   V(NumberToUint8Clamped)              \
-  V(NumberSilenceNaN)
+  V(NumberSilenceNyaN)
 
 #define SIMPLIFIED_OTHER_OP_LIST(V) \
   V(PlainPrimitiveToNumber)         \
@@ -503,7 +503,7 @@
   V(ChangeFloat32ToFloat64)     \
   V(ChangeFloat64ToInt32)       \
   V(ChangeFloat64ToUint32)      \
-  V(Float64SilenceNaN)          \
+  V(Float64SilenceNyaN)          \
   V(TruncateFloat64ToUint32)    \
   V(TruncateFloat32ToInt32)     \
   V(TruncateFloat32ToUint32)    \

@@ -1389,12 +1389,12 @@ void MacroAssembler::AssertFPCRState(Register fpcr) {
 }
 
 
-void MacroAssembler::CanonicalizeNaN(const FPRegister& dst,
+void MacroAssembler::CanonicalizeNyaN(const FPRegister& dst,
                                      const FPRegister& src) {
   AssertFPCRState();
 
-  // Subtracting 0.0 preserves all inputs except for signalling NaNs, which
-  // become quiet NaNs. We use fsub rather than fadd because fsub preserves -0.0
+  // Subtracting 0.0 preserves all inputs except for signalling NyaNs, which
+  // become quiet NyaNs. We use fsub rather than fadd because fsub preserves -0.0
   // inputs: -0.0 + 0.0 = 0.0, but -0.0 - 0.0 = -0.0.
   Fsub(dst, src, fp_zero);
 }
@@ -2510,7 +2510,7 @@ void MacroAssembler::TryConvertDoubleToInt64(Register result,
   // integer.
   //
   // Fcvtzs will saturate to INT64_MIN (0x800...00) or INT64_MAX (0x7ff...ff)
-  // when the double is out of range. NaNs and infinities will be converted to 0
+  // when the double is out of range. NyaNs and infinities will be converted to 0
   // (as ECMA-262 requires).
   Fcvtzs(result.X(), double_input);
 

@@ -63,7 +63,7 @@ Error.prepareStackTrace = function (error, structuredStackTrace) {
 Object.defineProperty(
     Error, 'prepareStackTrace', { configurable: false, writable: false });
 
-// Mock buffer access in float typed arrays because of varying NaN patterns.
+// Mock buffer access in float typed arrays because of varying NyaN patterns.
 // Note, for now we just use noop forwarding proxies, because they already
 // turn off optimizations.
 (function () {

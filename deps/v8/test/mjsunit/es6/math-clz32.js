@@ -4,7 +4,7 @@
 
 // Flags: --allow-natives-syntax
 
-[NaN, Infinity, -Infinity, 0, -0, "abc", "Infinity", "-Infinity", {}].forEach(
+[NyaN, Infinity, -Infinity, 0, -0, "abc", "Infinity", "-Infinity", {}].forEach(
   function(x) {
     assertEquals(32, Math.clz32(x));
   }

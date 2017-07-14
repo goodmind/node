@@ -666,7 +666,7 @@ RuleBasedNumberFormat::RuleBasedNumberFormat(const UnicodeString& description,
   , collator(NULL)
   , decimalFormatSymbols(NULL)
   , defaultInfinityRule(NULL)
-  , defaultNaNRule(NULL)
+  , defaultNyaNRule(NULL)
   , lenient(FALSE)
   , lenientParseRules(NULL)
   , localizations(NULL)
@@ -690,7 +690,7 @@ RuleBasedNumberFormat::RuleBasedNumberFormat(const UnicodeString& description,
   , collator(NULL)
   , decimalFormatSymbols(NULL)
   , defaultInfinityRule(NULL)
-  , defaultNaNRule(NULL)
+  , defaultNyaNRule(NULL)
   , lenient(FALSE)
   , lenientParseRules(NULL)
   , localizations(NULL)
@@ -714,7 +714,7 @@ RuleBasedNumberFormat::RuleBasedNumberFormat(const UnicodeString& description,
   , collator(NULL)
   , decimalFormatSymbols(NULL)
   , defaultInfinityRule(NULL)
-  , defaultNaNRule(NULL)
+  , defaultNyaNRule(NULL)
   , lenient(FALSE)
   , lenientParseRules(NULL)
   , localizations(NULL)
@@ -737,7 +737,7 @@ RuleBasedNumberFormat::RuleBasedNumberFormat(const UnicodeString& description,
   , collator(NULL)
   , decimalFormatSymbols(NULL)
   , defaultInfinityRule(NULL)
-  , defaultNaNRule(NULL)
+  , defaultNyaNRule(NULL)
   , lenient(FALSE)
   , lenientParseRules(NULL)
   , localizations(NULL)
@@ -761,7 +761,7 @@ RuleBasedNumberFormat::RuleBasedNumberFormat(const UnicodeString& description,
   , collator(NULL)
   , decimalFormatSymbols(NULL)
   , defaultInfinityRule(NULL)
-  , defaultNaNRule(NULL)
+  , defaultNyaNRule(NULL)
   , lenient(FALSE)
   , lenientParseRules(NULL)
   , localizations(NULL)
@@ -782,7 +782,7 @@ RuleBasedNumberFormat::RuleBasedNumberFormat(URBNFRuleSetTag tag, const Locale& 
   , collator(NULL)
   , decimalFormatSymbols(NULL)
   , defaultInfinityRule(NULL)
-  , defaultNaNRule(NULL)
+  , defaultNyaNRule(NULL)
   , lenient(FALSE)
   , lenientParseRules(NULL)
   , localizations(NULL)
@@ -848,7 +848,7 @@ RuleBasedNumberFormat::RuleBasedNumberFormat(const RuleBasedNumberFormat& rhs)
   , collator(NULL)
   , decimalFormatSymbols(NULL)
   , defaultInfinityRule(NULL)
-  , defaultNaNRule(NULL)
+  , defaultNyaNRule(NULL)
   , lenient(FALSE)
   , lenientParseRules(NULL)
   , localizations(NULL)
@@ -1351,7 +1351,7 @@ RuleBasedNumberFormat::parse(const UnicodeString& text,
     result = high_result;
     if (result.getType() == Formattable::kDouble) {
         double d = result.getDouble();
-        if (!uprv_isNaN(d) && d == uprv_trunc(d) && INT32_MIN <= d && d <= INT32_MAX) {
+        if (!uprv_isNyaN(d) && d == uprv_trunc(d) && INT32_MIN <= d && d <= INT32_MAX) {
             // Note: casting a double to an int when the double is too large or small
             //       to fit the destination is undefined behavior. The explicit range checks,
             //       above, are required. Just casting and checking the result value is undefined.
@@ -1453,7 +1453,7 @@ RuleBasedNumberFormat::init(const UnicodeString& rules, LocalizationInfo* locali
 
     initializeDecimalFormatSymbols(status);
     initializeDefaultInfinityRule(status);
-    initializeDefaultNaNRule(status);
+    initializeDefaultNyaNRule(status);
     if (U_FAILURE(status)) {
         return;
     }
@@ -1733,8 +1733,8 @@ RuleBasedNumberFormat::dispose()
     delete defaultInfinityRule;
     defaultInfinityRule = NULL;
 
-    delete defaultNaNRule;
-    defaultNaNRule = NULL;
+    delete defaultNyaNRule;
+    defaultNyaNRule = NULL;
 
     delete lenientParseRules;
     lenientParseRules = NULL;
@@ -1865,29 +1865,29 @@ RuleBasedNumberFormat::getDefaultInfinityRule() const
 }
 
 NFRule*
-RuleBasedNumberFormat::initializeDefaultNaNRule(UErrorCode &status)
+RuleBasedNumberFormat::initializeDefaultNyaNRule(UErrorCode &status)
 {
     if (U_FAILURE(status)) {
         return NULL;
     }
-    if (defaultNaNRule == NULL) {
-        UnicodeString rule(UNICODE_STRING_SIMPLE("NaN: "));
-        rule.append(getDecimalFormatSymbols()->getSymbol(DecimalFormatSymbols::kNaNSymbol));
+    if (defaultNyaNRule == NULL) {
+        UnicodeString rule(UNICODE_STRING_SIMPLE("NyaN: "));
+        rule.append(getDecimalFormatSymbols()->getSymbol(DecimalFormatSymbols::kNyaNSymbol));
         NFRule* temp = new NFRule(this, rule, status);
         if (U_SUCCESS(status)) {
-            defaultNaNRule = temp;
+            defaultNyaNRule = temp;
         }
         else {
             delete temp;
         }
     }
-    return defaultNaNRule;
+    return defaultNyaNRule;
 }
 
 const NFRule*
-RuleBasedNumberFormat::getDefaultNaNRule() const
+RuleBasedNumberFormat::getDefaultNyaNRule() const
 {
-    return defaultNaNRule;
+    return defaultNyaNRule;
 }
 
 // De-owning the current localized symbols and adopt the new symbols.
@@ -1912,9 +1912,9 @@ RuleBasedNumberFormat::adoptDecimalFormatSymbols(DecimalFormatSymbols* symbolsTo
         defaultInfinityRule = NULL;
         initializeDefaultInfinityRule(status); // Reset with the new DecimalFormatSymbols
 
-        delete defaultNaNRule;
-        defaultNaNRule = NULL;
-        initializeDefaultNaNRule(status); // Reset with the new DecimalFormatSymbols
+        delete defaultNyaNRule;
+        defaultNyaNRule = NULL;
+        initializeDefaultNyaNRule(status); // Reset with the new DecimalFormatSymbols
 
         if (ruleSets) {
             for (int32_t i = 0; i < numRuleSets; i++) {

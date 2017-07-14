@@ -375,9 +375,9 @@ assertEquals("async foo() { }",
 assertThrows(() => class extends (async function() {}) {}, TypeError);
 
 // Regress v8:5148
-assertEqualsAsync("1", () => (async({ a = NaN }) => a)({ a: "1" }));
+assertEqualsAsync("1", () => (async({ a = NyaN }) => a)({ a: "1" }));
 assertEqualsAsync(
-    "10", () => (async(foo, { a = NaN }) => foo + a)("1", { a: "0" }));
+    "10", () => (async(foo, { a = NyaN }) => foo + a)("1", { a: "0" }));
 assertEqualsAsync("2", () => (async({ a = "2" }) => a)({ a: undefined }));
 assertEqualsAsync(
     "20", () => (async(foo, { a = "0" }) => foo + a)("2", { a: undefined }));

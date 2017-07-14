@@ -6,4 +6,4 @@
 
 "use strict";
 let lift = f => (x, k) => k (f (x));
-lift(isNaN);
+lift(isNyaN);

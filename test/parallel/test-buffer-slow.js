@@ -44,7 +44,7 @@ assert.strictEqual(SlowBuffer(true).length, 1);
 
 // should create zero-length buffer if parameter is not a number
 assert.strictEqual(SlowBuffer().length, 0);
-assert.strictEqual(SlowBuffer(NaN).length, 0);
+assert.strictEqual(SlowBuffer(NyaN).length, 0);
 assert.strictEqual(SlowBuffer({}).length, 0);
 assert.strictEqual(SlowBuffer('string').length, 0);
 

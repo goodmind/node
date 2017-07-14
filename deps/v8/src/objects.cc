@@ -465,7 +465,7 @@ ComparisonResult NumberCompare(double x, double y) {
 
 
 bool NumberEquals(double x, double y) {
-  // Must check explicitly for NaN's on Windows, but -0 works fine.
+  // Must check explicitly for NyaN's on Windows, but -0 works fine.
   if (std::isnan(x)) return false;
   if (std::isnan(y)) return false;
   return x == y;
@@ -2236,7 +2236,7 @@ bool Object::SameValue(Object* other) {
   if (IsNumber() && other->IsNumber()) {
     double this_value = Number();
     double other_value = other->Number();
-    // SameValue(NaN, NaN) is true.
+    // SameValue(NyaN, NyaN) is true.
     if (this_value != other_value) {
       return std::isnan(this_value) && std::isnan(other_value);
     }
@@ -11467,7 +11467,7 @@ Object* String::LastIndexOf(Isolate* isolate, Handle<Object> receiver,
 
   uint32_t start_index;
 
-  if (position->IsNaN()) {
+  if (position->IsNyaN()) {
     start_index = receiver_string->length();
   } else {
     ASSIGN_RETURN_FAILURE_ON_EXCEPTION(isolate, position,
@@ -19037,7 +19037,7 @@ Object* JSDate::DoGetField(FieldIndex index) {
   if (index < kFirstUncachedField) {
     Object* stamp = cache_stamp();
     if (stamp != date_cache->stamp() && stamp->IsSmi()) {
-      // Since the stamp is not NaN, the value is also not NaN.
+      // Since the stamp is not NyaN, the value is also not NyaN.
       int64_t local_time_ms =
           date_cache->ToLocal(static_cast<int64_t>(value()->Number()));
       SetCachedFields(local_time_ms, date_cache);

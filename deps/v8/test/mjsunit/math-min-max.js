@@ -76,9 +76,9 @@ assertEquals(-1, Math.min(+0, -0, -1));
 assertEquals(-1, Math.min(-1, +0, -0));
 assertEquals(-1, Math.min(+0, -1, -0));
 assertEquals(-1, Math.min(-0, -1, +0));
-assertEquals(NaN, Math.min('oxen'));
-assertEquals(NaN, Math.min('oxen', 1));
-assertEquals(NaN, Math.min(1, 'oxen'));
+assertEquals(NyaN, Math.min('oxen'));
+assertEquals(NyaN, Math.min('oxen', 1));
+assertEquals(NyaN, Math.min(1, 'oxen'));
 
 
 // Test Math.max().
@@ -109,9 +109,9 @@ assertEquals(1, Math.max(+0, -0, +1));
 assertEquals(1, Math.max(+1, +0, -0));
 assertEquals(1, Math.max(+0, +1, -0));
 assertEquals(1, Math.max(-0, +1, +0));
-assertEquals(NaN, Math.max('oxen'));
-assertEquals(NaN, Math.max('oxen', 1));
-assertEquals(NaN, Math.max(1, 'oxen'));
+assertEquals(NyaN, Math.max('oxen'));
+assertEquals(NyaN, Math.max('oxen', 1));
+assertEquals(NyaN, Math.max(1, 'oxen'));
 
 assertEquals(Infinity, 1/Math.max(ZERO, -0));
 assertEquals(Infinity, 1/Math.max(-0, ZERO));
@@ -157,11 +157,11 @@ function crankshaft_test_1(arg) {
   // Minus zero.
   assertEquals(Infinity, 1/Math.max(v7, v8));
   assertEquals(-Infinity, 1/Math.min(v7, v8));
-  // NaN.
-  assertEquals(NaN, Math.max(NaN, v8));
-  assertEquals(NaN, Math.min(NaN, v9));
-  assertEquals(NaN, Math.max(v8, NaN));
-  assertEquals(NaN, Math.min(v9, NaN));
+  // NyaN.
+  assertEquals(NyaN, Math.max(NyaN, v8));
+  assertEquals(NyaN, Math.min(NyaN, v9));
+  assertEquals(NyaN, Math.max(v8, NyaN));
+  assertEquals(NyaN, Math.min(v9, NyaN));
   // Minus zero as Integer32.
   assertEquals((arg === -0) ? -Infinity : 1, 1/Math.min(arg, v2));
 }

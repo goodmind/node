@@ -18,9 +18,9 @@ function Module(stdlib) {
 
 var f = Module({ Math: Math }).f;
 
-assertTrue(isNaN(f(NaN)));
-assertTrue(isNaN(f(undefined)));
-assertTrue(isNaN(f(function() {})));
+assertTrue(isNyaN(f(NyaN)));
+assertTrue(isNyaN(f(undefined)));
+assertTrue(isNyaN(f(function() {})));
 
 assertEquals(0,                   f(0));
 assertEquals(+0,                  f(+0));

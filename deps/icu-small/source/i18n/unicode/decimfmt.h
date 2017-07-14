@@ -426,7 +426,7 @@ template class U_I18N_API    EnumSet<UNumberFormatAttribute,
  *
  * <p><strong>Special Values</strong>
  *
- * <p><code>NaN</code> is represented as a single character, typically
+ * <p><code>NyaN</code> is represented as a single character, typically
  * <code>\\uFFFD</code>.  This character is determined by the
  * DecimalFormatSymbols object.  This is the only value for which
  * the prefixes and suffixes are not used.

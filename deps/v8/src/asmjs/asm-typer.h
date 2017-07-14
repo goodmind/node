@@ -38,7 +38,7 @@ class AsmTyper final {
     kModule = -1,
     kNone = 0,
     kInfinity,
-    kNaN,
+    kNyaN,
     kMathAcos,
     kMathAsin,
     kMathAtan,

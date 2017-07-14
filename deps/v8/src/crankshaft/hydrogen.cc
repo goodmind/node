@@ -2812,7 +2812,7 @@ void HGraphBuilder::BuildFillElementsWithHole(HValue* elements,
 
   HValue* hole = IsFastSmiOrObjectElementsKind(elements_kind)
                      ? graph()->GetConstantHole()
-                     : Add<HConstant>(HConstant::kHoleNaN);
+                     : Add<HConstant>(HConstant::kHoleNyaN);
 
   // Since we're about to store a hole value, the store instruction below must
   // assume an elements kind that supports heap object values.
@@ -2912,7 +2912,7 @@ void HGraphBuilder::BuildCopyElements(HValue* from_elements,
       if_hole.If<HCompareHoleAndBranch>(element);
       if_hole.Then();
       HConstant* hole_constant = IsFastDoubleElementsKind(to_elements_kind)
-                                     ? Add<HConstant>(HConstant::kHoleNaN)
+                                     ? Add<HConstant>(HConstant::kHoleNyaN)
                                      : graph()->GetConstantHole();
       Add<HStoreKeyed>(to_elements, key, hole_constant, nullptr, kind);
       if_hole.Else();
@@ -8724,7 +8724,7 @@ bool HOptimizedGraphBuilder::TryInlineBuiltinMethodCall(
                                   bounds_check, nullptr, elements_kind, LOAD);
         HValue* hole = IsFastSmiOrObjectElementsKind(elements_kind)
                            ? graph()->GetConstantHole()
-                           : Add<HConstant>(HConstant::kHoleNaN);
+                           : Add<HConstant>(HConstant::kHoleNyaN);
         if (IsFastSmiOrObjectElementsKind(elements_kind)) {
           elements_kind = FAST_HOLEY_ELEMENTS;
         }
@@ -8885,7 +8885,7 @@ bool HOptimizedGraphBuilder::TryInlineBuiltinMethodCall(
             // Put a hole at the end.
             HValue* hole = IsFastSmiOrObjectElementsKind(kind)
                                ? graph()->GetConstantHole()
-                               : Add<HConstant>(HConstant::kHoleNaN);
+                               : Add<HConstant>(HConstant::kHoleNyaN);
             if (IsFastSmiOrObjectElementsKind(kind)) kind = FAST_HOLEY_ELEMENTS;
             Add<HStoreKeyed>(elements, new_length, hole, nullptr, kind,
                              INITIALIZING_STORE);

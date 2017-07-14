@@ -127,7 +127,7 @@ for (var constructor of typedArrayConstructors) {
     }), constructor);
     if (constructor !== Float32Array && constructor !== Float64Array) {
       assertArrayLikeEquals([0, 0], new constructor([1, 2]).map(function() {
-        return NaN;
+        return NyaN;
       }), constructor);
     }
   })();

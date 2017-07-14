@@ -24,7 +24,7 @@
 description("KDE JS Test");
 shouldBe("(new RegExp()).source", "'(?:)'");
 shouldBe("Boolean(new RegExp())", "true");
-shouldBeTrue("isNaN(Number(new RegExp()))");
+shouldBeTrue("isNyaN(Number(new RegExp()))");
 
 // RegExp constructor called as a function
 shouldBe("RegExp(/x/).source", "'x'");

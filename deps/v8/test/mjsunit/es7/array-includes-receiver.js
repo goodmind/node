@@ -53,7 +53,7 @@ var kTests = {
         assertTrue(array.includes(-5));
         assertFalse(array.includes(-5.00001));
         assertFalse(array.includes(undefined));
-        assertFalse(array.includes(NaN));
+        assertFalse(array.includes(NyaN));
       }
     },
 
@@ -68,21 +68,21 @@ var kTests = {
         assertFalse(array.includes(72, 4));
         assertTrue(array.includes(undefined));
         assertFalse(array.includes(undefined, -2));
-        assertFalse(array.includes(NaN));
+        assertFalse(array.includes(NyaN));
       }
     },
 
     FAST_DOUBLE_ELEMENTS() {
       var array = [7.00000001, -13000.89412, 73451.4124,
-                   5824.48, 6.0000495, 48.3488, 44.0, 76.35, NaN, 78.4];
+                   5824.48, 6.0000495, 48.3488, 44.0, 76.35, NyaN, 78.4];
       assertTrue(%HasFastDoubleElements(array));
       assertFalse(%HasFastHoleyElements(array));
 
       for (var i = 0; i < kIterCount; ++i) {
         assertTrue(array.includes(7.00000001));
         assertFalse(array.includes(7.00000001, 2));
-        assertTrue(array.includes(NaN));
-        assertFalse(array.includes(NaN, -1));
+        assertTrue(array.includes(NyaN));
+        assertFalse(array.includes(NyaN, -1));
         assertTrue(array.includes(-13000.89412));
         assertFalse(array.includes(-13000.89412, -2));
         assertFalse(array.includes(undefined));
@@ -91,15 +91,15 @@ var kTests = {
 
     FAST_HOLEY_DOUBLE_ELEMENTS() {
       var array = [7.00000001, -13000.89412, ,
-                   5824.48, , 48.3488, , NaN, , 78.4];
+                   5824.48, , 48.3488, , NyaN, , 78.4];
       assertTrue(%HasFastDoubleElements(array));
       assertTrue(%HasFastHoleyElements(array));
 
       for (var i = 0; i < kIterCount; ++i) {
         assertTrue(array.includes(7.00000001));
         assertFalse(array.includes(7.00000001, 2));
-        assertTrue(array.includes(NaN));
-        assertFalse(array.includes(NaN, -2));
+        assertTrue(array.includes(NyaN));
+        assertFalse(array.includes(NyaN, -2));
         assertTrue(array.includes(-13000.89412));
         assertFalse(array.includes(-13000.89412, -2));
         assertTrue(array.includes(undefined, -2));
@@ -109,14 +109,14 @@ var kTests = {
 
     DICTIONARY_ELEMENTS() {
       var array = [];
-      Object.defineProperty(array, 4, { get() { return NaN; } });
+      Object.defineProperty(array, 4, { get() { return NyaN; } });
       Object.defineProperty(array, 7, { value: Function });
 
       assertTrue(%HasDictionaryElements(array));
 
       for (var i = 0; i < kIterCount; ++i) {
-        assertTrue(array.includes(NaN));
-        assertFalse(array.includes(NaN, -3));
+        assertTrue(array.includes(NyaN));
+        assertFalse(array.includes(NyaN, -3));
         assertTrue(array.includes(Function));
         assertTrue(array.includes(undefined));
         assertFalse(array.includes(undefined, 7));
@@ -168,7 +168,7 @@ var kTests = {
         assertTrue(Array.prototype.includes.call(object, -5));
         assertFalse(Array.prototype.includes.call(object, -5.00001));
         assertFalse(Array.prototype.includes.call(object, undefined));
-        assertFalse(Array.prototype.includes.call(object, NaN));
+        assertFalse(Array.prototype.includes.call(object, NyaN));
       }
     },
 
@@ -184,14 +184,14 @@ var kTests = {
         assertFalse(Array.prototype.includes.call(object, 72, 4));
         assertTrue(Array.prototype.includes.call(object, undefined));
         assertFalse(Array.prototype.includes.call(object, undefined, -2));
-        assertFalse(Array.prototype.includes.call(object, NaN));
+        assertFalse(Array.prototype.includes.call(object, NyaN));
       }
     },
 
     FAST_DOUBLE_ELEMENTS() {
       var object = { 0: 7.00000001, 1: -13000.89412, 2: 73451.4124,
                    3: 5824.48, 4: 6.0000495, 5: 48.3488, 6: 44.0, 7: 76.35,
-                   8: NaN, 9: 78.4, length: 10 };
+                   8: NyaN, 9: 78.4, length: 10 };
       // TODO(caitp): JSObjects always seem to start with FAST_HOLEY_ELEMENTS
       // assertTrue(%HasFastDoubleElements(object));
       // assertFalse(%HasFastHoleyElements(object));
@@ -199,8 +199,8 @@ var kTests = {
       for (var i = 0; i < kIterCount; ++i) {
         assertTrue(Array.prototype.includes.call(object, 7.00000001));
         assertFalse(Array.prototype.includes.call(object, 7.00000001, 2));
-        assertTrue(Array.prototype.includes.call(object, NaN));
-        assertFalse(Array.prototype.includes.call(object, NaN, -1));
+        assertTrue(Array.prototype.includes.call(object, NyaN));
+        assertFalse(Array.prototype.includes.call(object, NyaN, -1));
         assertTrue(Array.prototype.includes.call(object, -13000.89412));
         assertFalse(Array.prototype.includes.call(object, -13000.89412, -2));
         assertFalse(Array.prototype.includes.call(object, undefined));
@@ -209,7 +209,7 @@ var kTests = {
 
     FAST_HOLEY_DOUBLE_ELEMENTS() {
       var object = { 0: 7.00000001, 1: -13000.89412, 3: 5824.48, 5: 48.3488,
-                    7: NaN, 9: 78.4, length: 10 };
+                    7: NyaN, 9: 78.4, length: 10 };
       // TODO(caitp): JSObjects always seem to start with FAST_HOLEY_ELEMENTS
       // assertTrue(%HasFastDoubleElements(object));
       // assertTrue(%HasFastHoleyElements(object));
@@ -217,8 +217,8 @@ var kTests = {
       for (var i = 0; i < kIterCount; ++i) {
         assertTrue(Array.prototype.includes.call(object, 7.00000001));
         assertFalse(Array.prototype.includes.call(object, 7.00000001, 2));
-        assertTrue(Array.prototype.includes.call(object, NaN));
-        assertFalse(Array.prototype.includes.call(object, NaN, -2));
+        assertTrue(Array.prototype.includes.call(object, NyaN));
+        assertFalse(Array.prototype.includes.call(object, NyaN, -2));
         assertTrue(Array.prototype.includes.call(object, -13000.89412));
         assertFalse(Array.prototype.includes.call(object, -13000.89412, -2));
         assertTrue(Array.prototype.includes.call(object, undefined, -2));
@@ -228,14 +228,14 @@ var kTests = {
 
     DICTIONARY_ELEMENTS() {
       var object = { length: 8 };
-      Object.defineProperty(object, 4, { get() { return NaN; } });
+      Object.defineProperty(object, 4, { get() { return NyaN; } });
       Object.defineProperty(object, 7, { value: Function });
 
       assertTrue(%HasDictionaryElements(object));
 
       for (var i = 0; i < kIterCount; ++i) {
-        assertTrue(Array.prototype.includes.call(object, NaN));
-        assertFalse(Array.prototype.includes.call(object, NaN, -3));
+        assertTrue(Array.prototype.includes.call(object, NyaN));
+        assertFalse(Array.prototype.includes.call(object, NyaN, -3));
         assertTrue(Array.prototype.includes.call(object, Function));
         assertTrue(Array.prototype.includes.call(object, undefined));
         assertFalse(Array.prototype.includes.call(object, undefined, 7));
@@ -277,7 +277,7 @@ var kTests = {
         assertTrue(Array.prototype.includes.call("froyo", "y"));
         assertFalse(Array.prototype.includes.call("froyo", "y", -1));
         assertTrue(Array.prototype.includes.call("froyo", "y", -2));
-        assertFalse(Array.prototype.includes.call("froyo", NaN));
+        assertFalse(Array.prototype.includes.call("froyo", NyaN));
         assertFalse(Array.prototype.includes.call("froyo", undefined));
       }
     },
@@ -286,14 +286,14 @@ var kTests = {
       var string = new String("froyo");
 
       // Never accessible from A.p.includes as 'length' is not configurable
-      Object.defineProperty(string, 34, { value: NaN });
+      Object.defineProperty(string, 34, { value: NyaN });
       Object.defineProperty(string, 12, { get() { return "nope" } });
 
       for (var i = 0; i < kIterCount; ++i) {
         assertTrue(Array.prototype.includes.call("froyo", "y"));
         assertFalse(Array.prototype.includes.call("froyo", "y", -1));
         assertTrue(Array.prototype.includes.call("froyo", "y", -2));
-        assertFalse(Array.prototype.includes.call(string, NaN));
+        assertFalse(Array.prototype.includes.call(string, NyaN));
         assertFalse(Array.prototype.includes.call(string, undefined));
         assertFalse(Array.prototype.includes.call(string, "nope"));
       }
@@ -302,27 +302,27 @@ var kTests = {
 
   Arguments: {
     FAST_SLOPPY_ARGUMENTS_ELEMENTS() {
-      var args = (function(a, b) { return arguments; })("foo", NaN, "bar");
+      var args = (function(a, b) { return arguments; })("foo", NyaN, "bar");
       assertTrue(%HasSloppyArgumentsElements(args));
 
       for (var i = 0; i < kIterCount; ++i) {
         assertFalse(Array.prototype.includes.call(args, undefined));
-        assertTrue(Array.prototype.includes.call(args, NaN));
-        assertFalse(Array.prototype.includes.call(args, NaN, -1));
+        assertTrue(Array.prototype.includes.call(args, NyaN));
+        assertFalse(Array.prototype.includes.call(args, NyaN, -1));
         assertTrue(Array.prototype.includes.call(args, "bar", -1));
       }
     },
 
     SLOW_SLOPPY_ARGUMENTS_ELEMENTS() {
-      var args = (function(a, a) { return arguments; })("foo", NaN, "bar");
+      var args = (function(a, a) { return arguments; })("foo", NyaN, "bar");
       Object.defineProperty(args, 3, { get() { return "silver"; } });
       Object.defineProperty(args, "length", { value: 4 });
       assertTrue(%HasSloppyArgumentsElements(args));
 
       for (var i = 0; i < kIterCount; ++i) {
         assertFalse(Array.prototype.includes.call(args, undefined));
-        assertTrue(Array.prototype.includes.call(args, NaN));
-        assertFalse(Array.prototype.includes.call(args, NaN, -2));
+        assertTrue(Array.prototype.includes.call(args, NyaN));
+        assertFalse(Array.prototype.includes.call(args, NyaN, -2));
         assertTrue(Array.prototype.includes.call(args, "bar", -2));
         assertTrue(Array.prototype.includes.call(args, "silver", -1));
       }
@@ -332,7 +332,7 @@ var kTests = {
   TypedArray: {
     Int8Array() {
       var array = new Int8Array([-129, 128,
-                                 NaN /* 0 */, +0 /* 0 */, -0 /* 0 */,
+                                 NyaN /* 0 */, +0 /* 0 */, -0 /* 0 */,
                                  +Infinity /* 0 */, -Infinity /* 0 */,
                                  255 /* -1 */, 127 /* 127 */, -255 /* 1 */]);
       assertFalse(Array.prototype.includes.call(array, -129));
@@ -363,7 +363,7 @@ var kTests = {
 
     Uint8Array() {
       var array = new Uint8Array([-1, 256,
-                                  NaN /* 0 */, +0 /* 0 */, -0 /* 0 */,
+                                  NyaN /* 0 */, +0 /* 0 */, -0 /* 0 */,
                                   +Infinity /* 0 */, -Infinity /* 0 */,
                                   255 /* 255 */, 257 /* 1 */, -128 /* 128 */,
                                   -2 /* 254 */]);
@@ -397,7 +397,7 @@ var kTests = {
     },
 
     Uint8ClampedArray() {
-      var array = new Uint8ClampedArray([-1 /* 0 */, NaN /* 0 */, 256 /* 255 */,
+      var array = new Uint8ClampedArray([-1 /* 0 */, NyaN /* 0 */, 256 /* 255 */,
                                          127.6 /* 128 */, 127.4 /* 127 */,
                                          121.5 /* 122 */, 124.5 /* 124 */]);
       assertFalse(Array.prototype.includes.call(array, -1));
@@ -428,7 +428,7 @@ var kTests = {
 
     Int16Array() {
       var array = new Int16Array([-32769, 32768,
-                                  NaN /* 0 */, Infinity /* 0 */,
+                                  NyaN /* 0 */, Infinity /* 0 */,
                                   -Infinity /* 0 */, -0 /* 0 */, +0 /* 0 */,
                                   0x7FFFF /* -1 */, 30000 /* 30000 */,
                                   300000 /* -27680 */]);
@@ -460,7 +460,7 @@ var kTests = {
 
     Uint16Array() {
       var array = new Uint16Array([-1, 65536,
-                                  NaN /* 0 */, Infinity /* 0 */,
+                                  NyaN /* 0 */, Infinity /* 0 */,
                                   -Infinity /* 0 */, -0 /* 0 */, +0 /* 0 */,
                                   0x7FFFF /* 65535 */, 300000 /* 37856 */,
                                   3000000 /* 50880 */]);
@@ -492,7 +492,7 @@ var kTests = {
 
     Int32Array() {
       var array = new Int32Array([-2147483649, 2147483648,
-                                  NaN /* 0 */, Infinity /* 0 */,
+                                  NyaN /* 0 */, Infinity /* 0 */,
                                   -Infinity /* 0 */, -0 /* 0 */, +0 /* 0 */,
                                   0x7FFFFFFFF /* -1 */, 4294968064 /* 768 */,
                                   4294959447 /* -7849 */]);
@@ -524,7 +524,7 @@ var kTests = {
 
     Uint32Array() {
       var array = new Uint32Array([-1, 4294967296,
-                                  NaN /* 0 */, Infinity /* 0 */,
+                                  NyaN /* 0 */, Infinity /* 0 */,
                                   -Infinity /* 0 */, -0 /* 0 */, +0 /* 0 */,
                                   0x7FFFFFFFF /* 4294967295 */,
                                   4294968064 /* 768 */,
@@ -557,7 +557,7 @@ var kTests = {
 
     Float32Array() {
       var array = new Float32Array([-1, 4294967296,
-                                  NaN, Infinity /* 0 */,
+                                  NyaN, Infinity /* 0 */,
                                   -Infinity /* 0 */, -0 /* 0 */, +0 /* 0 */,
                                   0x7FFFFFFFF /* 34359738368.0 */,
                                   -4294968064 /* -4294968320.0 */,
@@ -565,7 +565,7 @@ var kTests = {
       assertTrue(Array.prototype.includes.call(array, -1.0));
       assertTrue(Array.prototype.includes.call(array, 4294967296));
 
-      assertTrue(Array.prototype.includes.call(array, NaN, 2));
+      assertTrue(Array.prototype.includes.call(array, NyaN, 2));
       assertTrue(Array.prototype.includes.call(array, Infinity, 3));
       assertTrue(Array.prototype.includes.call(array, -Infinity, 4));
       assertTrue(Array.prototype.includes.call(array, 0, 5));
@@ -590,7 +590,7 @@ var kTests = {
 
     Float64Array() {
       var array = new Float64Array([-1, 4294967296,
-                                  NaN, Infinity /* 0 */,
+                                  NyaN, Infinity /* 0 */,
                                   -Infinity /* 0 */, -0 /* 0 */, +0 /* 0 */,
                                   0x7FFFFFFFF /* 34359738367.0 */,
                                   -4294968064 /* -4294968064.0 */,
@@ -598,7 +598,7 @@ var kTests = {
       assertTrue(Array.prototype.includes.call(array, -1.0));
       assertTrue(Array.prototype.includes.call(array, 4294967296));
 
-      assertTrue(Array.prototype.includes.call(array, NaN, 2));
+      assertTrue(Array.prototype.includes.call(array, NyaN, 2));
       assertTrue(Array.prototype.includes.call(array, Infinity, 3));
       assertTrue(Array.prototype.includes.call(array, -Infinity, 4));
       assertTrue(Array.prototype.includes.call(array, 0, 5));

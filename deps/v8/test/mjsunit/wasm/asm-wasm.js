@@ -1144,11 +1144,11 @@ function TestForeignVariables() {
   // Check normal operation.
   TestCase({foo: 123, bar: 234.5, baz: 345.7}, 123, 234.5, 345, 345.7);
   // Check partial operation.
-  TestCase({baz: 345.7}, 0, NaN, 345, 345.7);
+  TestCase({baz: 345.7}, 0, NyaN, 345, 345.7);
   // Check that undefined values are converted to proper defaults.
-  TestCase({qux: 999}, 0, NaN, 0, NaN);
+  TestCase({qux: 999}, 0, NyaN, 0, NyaN);
   // Check that an undefined ffi is ok.
-  TestCase(undefined, 0, NaN, 0, NaN);
+  TestCase(undefined, 0, NyaN, 0, NyaN);
   // Check that true values are converted properly.
   TestCase({foo: true, bar: true, baz: true}, 1, 1.0, 1, 1.0);
   // Check that false values are converted properly.
@@ -1156,7 +1156,7 @@ function TestForeignVariables() {
   // Check that null values are converted properly.
   TestCase({foo: null, bar: null, baz: null}, 0, 0, 0, 0);
   // Check that string values are converted properly.
-  TestCase({foo: 'hi', bar: 'there', baz: 'dude'}, 0, NaN, 0, NaN);
+  TestCase({foo: 'hi', bar: 'there', baz: 'dude'}, 0, NyaN, 0, NyaN);
   TestCase({foo: '0xff', bar: '234', baz: '456.1'}, 255, 234, 456, 456.1, 456);
   // Check that Date values are converted properly.
   TestCase({foo: new Date(123), bar: new Date(456),
@@ -1164,7 +1164,7 @@ function TestForeignVariables() {
   // Check that list values are converted properly.
   TestCase({foo: [], bar: [], baz: []}, 0, 0, 0, 0);
   // Check that object values are converted properly.
-  TestCase({foo: {}, bar: {}, baz: {}}, 0, NaN, 0, NaN);
+  TestCase({foo: {}, bar: {}, baz: {}}, 0, NyaN, 0, NyaN);
   // Check that getter object values are converted properly.
   var o = {
     get foo() {
@@ -1178,16 +1178,16 @@ function TestForeignVariables() {
       return 123.4;
     }
   };
-  TestCase(o, 0, NaN, 123, 123.4);
+  TestCase(o, 0, NyaN, 123, 123.4);
   // Check that objects with valueOf are converted properly.
   var o = {
     valueOf: function() { return 99; }
   };
   TestCase({foo: o, bar: o, baz: o}, 99, 99, 99, 99);
   // Check that function values are converted properly.
-  TestCase({foo: TestCase, bar: TestCase, qux: TestCase}, 0, NaN, 0, NaN);
+  TestCase({foo: TestCase, bar: TestCase, qux: TestCase}, 0, NyaN, 0, NyaN);
   // Check that a missing ffi object is safe.
-  TestCase(undefined, 0, NaN, 0, NaN);
+  TestCase(undefined, 0, NyaN, 0, NyaN);
 }
 
 print("TestForeignVariables...");

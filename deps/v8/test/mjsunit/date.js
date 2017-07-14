@@ -53,7 +53,7 @@ assertEquals(8, dMax.getMonth());
 assertEquals(13, dMax.getUTCDate());
 
 var dOverflow = new Date(8.64e15+1);
-assertTrue(isNaN(dOverflow.getTime()));
+assertTrue(isNyaN(dOverflow.getTime()));
 
 var dMin = new Date(-8.64e15);
 assertEquals(-8.64e15, dMin.getTime());
@@ -62,7 +62,7 @@ assertEquals(3, dMin.getMonth());
 assertEquals(20, dMin.getUTCDate());
 
 var dUnderflow = new Date(-8.64e15-1);
-assertTrue(isNaN(dUnderflow.getTime()));
+assertTrue(isNyaN(dUnderflow.getTime()));
 
 
 // Tests inspired by js1_5/Date/regress-346363.js
@@ -82,69 +82,69 @@ assertEquals(2006, b.getUTCFullYear());
 var c = new Date();
 c.setMonth();
 c.setMonth(2);
-assertTrue(isNaN(c.getMonth()));
+assertTrue(isNyaN(c.getMonth()));
 
 var d = new Date();
 d.setUTCMonth();
 d.setUTCMonth(2);
-assertTrue(isNaN(d.getUTCMonth()));
+assertTrue(isNyaN(d.getUTCMonth()));
 
 // Date
 var e = new Date();
 e.setDate();
 e.setDate(2);
-assertTrue(isNaN(e.getDate()));
+assertTrue(isNyaN(e.getDate()));
 
 var f = new Date();
 f.setUTCDate();
 f.setUTCDate(2);
-assertTrue(isNaN(f.getUTCDate()));
+assertTrue(isNyaN(f.getUTCDate()));
 
 // Hours
 var g = new Date();
 g.setHours();
 g.setHours(2);
-assertTrue(isNaN(g.getHours()));
+assertTrue(isNyaN(g.getHours()));
 
 var h = new Date();
 h.setUTCHours();
 h.setUTCHours(2);
-assertTrue(isNaN(h.getUTCHours()));
+assertTrue(isNyaN(h.getUTCHours()));
 
 // Minutes
 var g = new Date();
 g.setMinutes();
 g.setMinutes(2);
-assertTrue(isNaN(g.getMinutes()));
+assertTrue(isNyaN(g.getMinutes()));
 
 var h = new Date();
 h.setUTCHours();
 h.setUTCHours(2);
-assertTrue(isNaN(h.getUTCHours()));
+assertTrue(isNyaN(h.getUTCHours()));
 
 
 // Seconds
 var i = new Date();
 i.setSeconds();
 i.setSeconds(2);
-assertTrue(isNaN(i.getSeconds()));
+assertTrue(isNyaN(i.getSeconds()));
 
 var j = new Date();
 j.setUTCSeconds();
 j.setUTCSeconds(2);
-assertTrue(isNaN(j.getUTCSeconds()));
+assertTrue(isNyaN(j.getUTCSeconds()));
 
 
 // Milliseconds
 var k = new Date();
 k.setMilliseconds();
 k.setMilliseconds(2);
-assertTrue(isNaN(k.getMilliseconds()));
+assertTrue(isNyaN(k.getMilliseconds()));
 
 var l = new Date();
 l.setUTCMilliseconds();
 l.setUTCMilliseconds(2);
-assertTrue(isNaN(l.getUTCMilliseconds()));
+assertTrue(isNyaN(l.getUTCMilliseconds()));
 
 // Test that -0 is treated correctly in MakeDay.
 var d = new Date();
@@ -161,30 +161,30 @@ assertDoesNotThrow("new Date(-0x40000001, -0x40000001, -0x40000001," +
 
 assertEquals(8639999999999999, Date.UTC(275760, 8, 12, 23, 59, 59, 999));
 assertEquals(8640000000000000, Date.UTC(275760, 8, 13));
-assertTrue(isNaN(Date.UTC(275760, 8, 13, 0, 0, 0, 1)));
-assertTrue(isNaN(Date.UTC(275760, 8, 14)));
+assertTrue(isNyaN(Date.UTC(275760, 8, 13, 0, 0, 0, 1)));
+assertTrue(isNyaN(Date.UTC(275760, 8, 14)));
 
 assertEquals(Date.UTC(-271821, 3, 20, 0, 0, 0, 1), -8639999999999999);
 assertEquals(Date.UTC(-271821, 3, 20), -8640000000000000);
-assertTrue(isNaN(Date.UTC(-271821, 3, 19, 23, 59, 59, 999)));
-assertTrue(isNaN(Date.UTC(-271821, 3, 19)));
+assertTrue(isNyaN(Date.UTC(-271821, 3, 19, 23, 59, 59, 999)));
+assertTrue(isNyaN(Date.UTC(-271821, 3, 19)));
 
 
 // Test creation with large date values.
 d = new Date(1969, 12, 1, 99999999999);
-assertTrue(isNaN(d.getTime()));
+assertTrue(isNyaN(d.getTime()));
 d = new Date(1969, 12, 1, -99999999999);
-assertTrue(isNaN(d.getTime()));
+assertTrue(isNyaN(d.getTime()));
 d = new Date(1969, 12, 1, Infinity);
-assertTrue(isNaN(d.getTime()));
+assertTrue(isNyaN(d.getTime()));
 d = new Date(1969, 12, 1, -Infinity);
-assertTrue(isNaN(d.getTime()));
+assertTrue(isNyaN(d.getTime()));
 d = new Date(1969, 12, 1, 0);
 d.setTime(Math.pow(2, 64));
-assertTrue(isNaN(d.getTime()));
+assertTrue(isNyaN(d.getTime()));
 d = new Date(1969, 12, 1, 0);
 d.setTime(Math.pow(-2, 64));
-assertTrue(isNaN(d.getTime()));
+assertTrue(isNyaN(d.getTime()));
 
 
 // Test creation with obscure date values.

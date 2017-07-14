@@ -211,7 +211,7 @@ function LoadAt_f32(stdlib, foreign, buffer) {
 
 RunAsmJsTest(LoadAt_f32, function(module) {
   var load = module.load;
-  for (index of OOB_INDEXES) assertEquals(NaN, load(index));
+  for (index of OOB_INDEXES) assertEquals(NyaN, load(index));
   checkView(new Float32Array(buffer), load, 2);
 });
 
@@ -227,7 +227,7 @@ function LoadAt_f64(stdlib, foreign, buffer) {
 
 RunAsmJsTest(LoadAt_f64, function(module) {
   var load = module.load;
-  for (index of OOB_INDEXES) assertEquals(NaN, load(index));
+  for (index of OOB_INDEXES) assertEquals(NyaN, load(index));
   checkView(new Float64Array(buffer), load, 3);
 });
 

@@ -161,7 +161,7 @@ class AsmTyperHarnessBuilder {
         var_info->set_mutability(AsmTyper::VariableInfo::kImmutableGlobal);
         break;
       case AsmTyper::kInfinity:
-      case AsmTyper::kNaN:
+      case AsmTyper::kNyaN:
         stdlib_map = &typer_->stdlib_types_;
       default:
         break;
@@ -543,9 +543,9 @@ TEST(ErrorsInGlobalVariableDefinition) {
       {"var v = stdlib.Math", "Invalid import"},
       {"var v = Stdlib.Math.E", "Invalid import"},
       {"var v = stdlib.Math.E[0]", "Invalid import"},
-      {"var v = stdlibb.NaN", "Invalid import"},
-      {"var v = ffi.NaN[0]", "Invalid import"},
-      {"var v = heap.NaN[0]", "Invalid import"},
+      {"var v = stdlibb.NyaN", "Invalid import"},
+      {"var v = ffi.NyaN[0]", "Invalid import"},
+      {"var v = heap.NyaN[0]", "Invalid import"},
       {"var v = ffi.foo * 2.0;", "unrecognized annotation"},
       {"var v = ffi.foo|1;", "unrecognized annotation"},
       {"var v = ffi()|0;", "must import member"},
@@ -554,8 +554,8 @@ TEST(ErrorsInGlobalVariableDefinition) {
       {"var v = +ffi().a;", "object lookup failed"},
       {"var v = sstdlib.a|0;", "object lookup failed"},
       {"var v = +sstdlib.a;", "object lookup failed"},
-      {"var v = stdlib.NaN|0;", "object is not the ffi"},
-      {"var v = +stdlib.NaN;", "object is not the ffi"},
+      {"var v = stdlib.NyaN|0;", "object is not the ffi"},
+      {"var v = +stdlib.NyaN;", "object is not the ffi"},
       {"var v = new f()", "Invalid type after new"},
       {"var v = new stdli.Uint8Array(heap)", "Unknown stdlib member in heap"},
       {"var v = new stdlib.dd(heap)", "Unknown stdlib member in heap"},

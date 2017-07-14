@@ -32,7 +32,7 @@ PASS a.propertyIsEnumerable ('non-existant') is false
 PASS global.propertyIsEnumerable ('aVarDecl') is true
 PASS global.propertyIsEnumerable ('aFunctionDecl') is true
 PASS global.propertyIsEnumerable ('Math') is false
-PASS global.propertyIsEnumerable ('NaN') is false
+PASS global.propertyIsEnumerable ('NyaN') is false
 PASS global.propertyIsEnumerable ('undefined') is false
 PASS successfullyParsed is true
 

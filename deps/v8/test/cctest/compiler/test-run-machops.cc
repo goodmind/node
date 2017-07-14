@@ -5774,7 +5774,7 @@ TEST(RunFloat64Atan) {
   BufferedRawMachineAssemblerTester<double> m(MachineType::Float64());
   m.Return(m.Float64Atan(m.Parameter(0)));
   CHECK(std::isnan(m.Call(std::numeric_limits<double>::quiet_NaN())));
-  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NaN())));
+  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NyaN())));
   CHECK_DOUBLE_EQ(-0.0, m.Call(-0.0));
   CHECK_DOUBLE_EQ(0.0, m.Call(0.0));
   FOR_FLOAT64_INPUTS(i) { CHECK_DOUBLE_EQ(ieee754::atan(*i), m.Call(*i)); }
@@ -5784,7 +5784,7 @@ TEST(RunFloat64Atanh) {
   BufferedRawMachineAssemblerTester<double> m(MachineType::Float64());
   m.Return(m.Float64Atanh(m.Parameter(0)));
   CHECK(std::isnan(m.Call(std::numeric_limits<double>::quiet_NaN())));
-  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NaN())));
+  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NyaN())));
   CHECK_DOUBLE_EQ(std::numeric_limits<double>::infinity(), m.Call(1.0));
   CHECK_DOUBLE_EQ(-std::numeric_limits<double>::infinity(), m.Call(-1.0));
   CHECK_DOUBLE_EQ(-0.0, m.Call(-0.0));
@@ -5807,7 +5807,7 @@ TEST(RunFloat64Cos) {
   BufferedRawMachineAssemblerTester<double> m(MachineType::Float64());
   m.Return(m.Float64Cos(m.Parameter(0)));
   CHECK(std::isnan(m.Call(std::numeric_limits<double>::quiet_NaN())));
-  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NaN())));
+  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NyaN())));
   FOR_FLOAT64_INPUTS(i) { CHECK_DOUBLE_EQ(ieee754::cos(*i), m.Call(*i)); }
 }
 
@@ -5815,7 +5815,7 @@ TEST(RunFloat64Cosh) {
   BufferedRawMachineAssemblerTester<double> m(MachineType::Float64());
   m.Return(m.Float64Cosh(m.Parameter(0)));
   CHECK(std::isnan(m.Call(std::numeric_limits<double>::quiet_NaN())));
-  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NaN())));
+  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NyaN())));
   FOR_FLOAT64_INPUTS(i) { CHECK_DOUBLE_EQ(ieee754::cosh(*i), m.Call(*i)); }
 }
 
@@ -5823,7 +5823,7 @@ TEST(RunFloat64Exp) {
   BufferedRawMachineAssemblerTester<double> m(MachineType::Float64());
   m.Return(m.Float64Exp(m.Parameter(0)));
   CHECK(std::isnan(m.Call(std::numeric_limits<double>::quiet_NaN())));
-  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NaN())));
+  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NyaN())));
   CHECK_EQ(0.0, m.Call(-std::numeric_limits<double>::infinity()));
   CHECK_DOUBLE_EQ(1.0, m.Call(-0.0));
   CHECK_DOUBLE_EQ(1.0, m.Call(0.0));
@@ -5836,7 +5836,7 @@ TEST(RunFloat64Expm1) {
   BufferedRawMachineAssemblerTester<double> m(MachineType::Float64());
   m.Return(m.Float64Expm1(m.Parameter(0)));
   CHECK(std::isnan(m.Call(std::numeric_limits<double>::quiet_NaN())));
-  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NaN())));
+  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NyaN())));
   CHECK_EQ(-1.0, m.Call(-std::numeric_limits<double>::infinity()));
   CHECK_DOUBLE_EQ(std::numeric_limits<double>::infinity(),
                   m.Call(std::numeric_limits<double>::infinity()));
@@ -5847,7 +5847,7 @@ TEST(RunFloat64Log) {
   BufferedRawMachineAssemblerTester<double> m(MachineType::Float64());
   m.Return(m.Float64Log(m.Parameter(0)));
   CHECK(std::isnan(m.Call(std::numeric_limits<double>::quiet_NaN())));
-  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NaN())));
+  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NyaN())));
   CHECK(std::isnan(m.Call(-std::numeric_limits<double>::infinity())));
   CHECK(std::isnan(m.Call(-1.0)));
   CHECK_DOUBLE_EQ(-std::numeric_limits<double>::infinity(), m.Call(-0.0));
@@ -5862,7 +5862,7 @@ TEST(RunFloat64Log1p) {
   BufferedRawMachineAssemblerTester<double> m(MachineType::Float64());
   m.Return(m.Float64Log1p(m.Parameter(0)));
   CHECK(std::isnan(m.Call(std::numeric_limits<double>::quiet_NaN())));
-  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NaN())));
+  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NyaN())));
   CHECK(std::isnan(m.Call(-std::numeric_limits<double>::infinity())));
   CHECK_DOUBLE_EQ(-std::numeric_limits<double>::infinity(), m.Call(-1.0));
   CHECK_DOUBLE_EQ(0.0, m.Call(0.0));
@@ -5876,7 +5876,7 @@ TEST(RunFloat64Log2) {
   BufferedRawMachineAssemblerTester<double> m(MachineType::Float64());
   m.Return(m.Float64Log2(m.Parameter(0)));
   CHECK(std::isnan(m.Call(std::numeric_limits<double>::quiet_NaN())));
-  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NaN())));
+  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NyaN())));
   CHECK(std::isnan(m.Call(-std::numeric_limits<double>::infinity())));
   CHECK(std::isnan(m.Call(-1.0)));
   CHECK_DOUBLE_EQ(-std::numeric_limits<double>::infinity(), m.Call(-0.0));
@@ -5891,7 +5891,7 @@ TEST(RunFloat64Log10) {
   BufferedRawMachineAssemblerTester<double> m(MachineType::Float64());
   m.Return(m.Float64Log10(m.Parameter(0)));
   CHECK(std::isnan(m.Call(std::numeric_limits<double>::quiet_NaN())));
-  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NaN())));
+  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NyaN())));
   CHECK(std::isnan(m.Call(-std::numeric_limits<double>::infinity())));
   CHECK(std::isnan(m.Call(-1.0)));
   CHECK_DOUBLE_EQ(-std::numeric_limits<double>::infinity(), m.Call(-0.0));
@@ -5905,7 +5905,7 @@ TEST(RunFloat64Cbrt) {
   BufferedRawMachineAssemblerTester<double> m(MachineType::Float64());
   m.Return(m.Float64Cbrt(m.Parameter(0)));
   CHECK(std::isnan(m.Call(std::numeric_limits<double>::quiet_NaN())));
-  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NaN())));
+  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NyaN())));
   CHECK_DOUBLE_EQ(std::numeric_limits<double>::infinity(),
                   m.Call(std::numeric_limits<double>::infinity()));
   CHECK_DOUBLE_EQ(-std::numeric_limits<double>::infinity(),
@@ -5917,7 +5917,7 @@ TEST(RunFloat64Sin) {
   BufferedRawMachineAssemblerTester<double> m(MachineType::Float64());
   m.Return(m.Float64Sin(m.Parameter(0)));
   CHECK(std::isnan(m.Call(std::numeric_limits<double>::quiet_NaN())));
-  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NaN())));
+  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NyaN())));
   FOR_FLOAT64_INPUTS(i) { CHECK_DOUBLE_EQ(ieee754::sin(*i), m.Call(*i)); }
 }
 
@@ -5925,7 +5925,7 @@ TEST(RunFloat64Sinh) {
   BufferedRawMachineAssemblerTester<double> m(MachineType::Float64());
   m.Return(m.Float64Sinh(m.Parameter(0)));
   CHECK(std::isnan(m.Call(std::numeric_limits<double>::quiet_NaN())));
-  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NaN())));
+  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NyaN())));
   FOR_FLOAT64_INPUTS(i) { CHECK_DOUBLE_EQ(ieee754::sinh(*i), m.Call(*i)); }
 }
 
@@ -5933,7 +5933,7 @@ TEST(RunFloat64Tan) {
   BufferedRawMachineAssemblerTester<double> m(MachineType::Float64());
   m.Return(m.Float64Tan(m.Parameter(0)));
   CHECK(std::isnan(m.Call(std::numeric_limits<double>::quiet_NaN())));
-  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NaN())));
+  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NyaN())));
   FOR_FLOAT64_INPUTS(i) { CHECK_DOUBLE_EQ(ieee754::tan(*i), m.Call(*i)); }
 }
 
@@ -5941,7 +5941,7 @@ TEST(RunFloat64Tanh) {
   BufferedRawMachineAssemblerTester<double> m(MachineType::Float64());
   m.Return(m.Float64Tanh(m.Parameter(0)));
   CHECK(std::isnan(m.Call(std::numeric_limits<double>::quiet_NaN())));
-  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NaN())));
+  CHECK(std::isnan(m.Call(std::numeric_limits<double>::signaling_NyaN())));
   FOR_FLOAT64_INPUTS(i) { CHECK_DOUBLE_EQ(ieee754::tanh(*i), m.Call(*i)); }
 }
 

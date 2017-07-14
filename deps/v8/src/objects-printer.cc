@@ -834,7 +834,7 @@ void JSDate::JSDatePrint(std::ostream& os) {  // NOLINT
   JSObjectPrintHeader(os, this, "JSDate");
   os << "\n - value = " << Brief(value());
   if (!year()->IsSmi()) {
-    os << "\n - time = NaN\n";
+    os << "\n - time = NyaN\n";
   } else {
     // TODO(svenpanne) Add some basic formatting to our streams.
     ScopedVector<char> buf(100);

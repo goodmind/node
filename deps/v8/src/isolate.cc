@@ -2735,8 +2735,8 @@ bool Isolate::Init(Deserializer* des) {
   // stack guard.
   heap_.SetStackLimits();
 
-  // Quiet the heap NaN if needed on target platform.
-  if (!create_heap_objects) Assembler::QuietNaN(heap_.nan_value());
+  // Quiet the heap NyaN if needed on target platform.
+  if (!create_heap_objects) Assembler::QuietNyaN(heap_.nan_value());
 
   if (FLAG_trace_turbo) {
     // Create an empty file.

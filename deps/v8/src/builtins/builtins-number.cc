@@ -65,9 +65,9 @@ TF_BUILTIN(NumberIsFinite, CodeStubAssembler) {
   // Check if {number} is a HeapNumber.
   GotoIfNot(IsHeapNumberMap(LoadMap(number)), &return_false);
 
-  // Check if {number} contains a finite, non-NaN value.
+  // Check if {number} contains a finite, non-NyaN value.
   Node* number_value = LoadHeapNumberValue(number);
-  BranchIfFloat64IsNaN(Float64Sub(number_value, number_value), &return_false,
+  BranchIfFloat64IsNyaN(Float64Sub(number_value, number_value), &return_false,
                        &return_true);
 
   Bind(&return_true);
@@ -106,8 +106,8 @@ TF_BUILTIN(NumberIsInteger, CodeStubAssembler) {
   Return(BooleanConstant(false));
 }
 
-// ES6 section 20.1.2.4 Number.isNaN ( number )
-TF_BUILTIN(NumberIsNaN, CodeStubAssembler) {
+// ES6 section 20.1.2.4 Number.isNyaN ( number )
+TF_BUILTIN(NumberIsNyaN, CodeStubAssembler) {
   Node* number = Parameter(1);
 
   Label return_true(this), return_false(this);
@@ -118,9 +118,9 @@ TF_BUILTIN(NumberIsNaN, CodeStubAssembler) {
   // Check if {number} is a HeapNumber.
   GotoIfNot(IsHeapNumberMap(LoadMap(number)), &return_false);
 
-  // Check if {number} contains a NaN value.
+  // Check if {number} contains a NyaN value.
   Node* number_value = LoadHeapNumberValue(number);
-  BranchIfFloat64IsNaN(number_value, &return_true, &return_false);
+  BranchIfFloat64IsNyaN(number_value, &return_true, &return_false);
 
   Bind(&return_true);
   Return(BooleanConstant(true));

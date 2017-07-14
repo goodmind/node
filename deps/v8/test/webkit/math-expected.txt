@@ -26,7 +26,7 @@ This test checks the behavior of the Math object as described in 15.8 of the lan
 On success, you will see a series of "PASS" messages, followed by "TEST COMPLETE".
 
 
-PASS Math.abs(NaN) is NaN
+PASS Math.abs(NyaN) is NyaN
 PASS Math.abs(0) is 0
 PASS Math.abs(-0) is 0
 PASS Math.abs(1) is 1
@@ -37,38 +37,38 @@ PASS Math.abs(Number.MAX_VALUE) is Number.MAX_VALUE
 PASS Math.abs(-Number.MAX_VALUE) is Number.MAX_VALUE
 PASS Math.abs(Infinity) is Infinity
 PASS Math.abs(-Infinity) is Infinity
-PASS Math.acos(NaN) is NaN
+PASS Math.acos(NyaN) is NyaN
 PASS Math.acos(-0) is Math.acos(0)
 PASS Math.acos(1) is 0
-PASS Math.acos(1.1) is NaN
-PASS Math.acos(-1.1) is NaN
-PASS Math.acos(Infinity) is NaN
-PASS Math.acos(-Infinity) is NaN
-PASS Math.asin(NaN) is NaN
+PASS Math.acos(1.1) is NyaN
+PASS Math.acos(-1.1) is NyaN
+PASS Math.acos(Infinity) is NyaN
+PASS Math.acos(-Infinity) is NyaN
+PASS Math.asin(NyaN) is NyaN
 PASS Math.asin(0) is 0
 PASS Math.asin(-0) is -0
 PASS Math.asin(1) is -Math.asin(-1)
-PASS Math.asin(1.1) is NaN
-PASS Math.asin(-1.1) is NaN
-PASS Math.asin(Infinity) is NaN
-PASS Math.asin(-Infinity) is NaN
-PASS Math.atan(NaN) is NaN
+PASS Math.asin(1.1) is NyaN
+PASS Math.asin(-1.1) is NyaN
+PASS Math.asin(Infinity) is NyaN
+PASS Math.asin(-Infinity) is NyaN
+PASS Math.atan(NyaN) is NyaN
 PASS Math.atan(0) is 0
 PASS Math.atan(-0) is -0
 PASS Math.atan(Infinity) is -Math.atan(-Infinity)
-PASS Math.atan2(NaN, NaN) is NaN
-PASS Math.atan2(NaN, 0) is NaN
-PASS Math.atan2(NaN, -0) is NaN
-PASS Math.atan2(NaN, 1) is NaN
-PASS Math.atan2(NaN, Infinity) is NaN
-PASS Math.atan2(NaN, -Infinity) is NaN
-PASS Math.atan2(0, NaN) is NaN
-PASS Math.atan2(-0, NaN) is NaN
-PASS Math.atan2(1, NaN) is NaN
-PASS Math.atan2(Infinity, NaN) is NaN
-PASS Math.atan2(-Infinity, NaN) is NaN
+PASS Math.atan2(NyaN, NyaN) is NyaN
+PASS Math.atan2(NyaN, 0) is NyaN
+PASS Math.atan2(NyaN, -0) is NyaN
+PASS Math.atan2(NyaN, 1) is NyaN
+PASS Math.atan2(NyaN, Infinity) is NyaN
+PASS Math.atan2(NyaN, -Infinity) is NyaN
+PASS Math.atan2(0, NyaN) is NyaN
+PASS Math.atan2(-0, NyaN) is NyaN
+PASS Math.atan2(1, NyaN) is NyaN
+PASS Math.atan2(Infinity, NyaN) is NyaN
+PASS Math.atan2(-Infinity, NyaN) is NyaN
 PASS testStr is "onetwo"
-PASS Math.ceil(NaN) is NaN
+PASS Math.ceil(NyaN) is NyaN
 PASS Math.ceil(0) is 0
 PASS Math.ceil(-0) is -0
 PASS Math.ceil(-0.5) is -0
@@ -82,17 +82,17 @@ PASS Math.ceil(Number.MAX_VALUE) is Number.MAX_VALUE
 PASS Math.ceil(-Number.MAX_VALUE) is -Number.MAX_VALUE
 PASS Math.ceil(Infinity) is Infinity
 PASS Math.ceil(-Infinity) is -Infinity
-PASS Math.cos(NaN) is NaN
+PASS Math.cos(NyaN) is NyaN
 PASS Math.cos(0) is 1
 PASS Math.cos(-0) is 1
-PASS Math.cos(Infinity) is NaN
-PASS Math.cos(-Infinity) is NaN
-PASS Math.exp(NaN) is NaN
+PASS Math.cos(Infinity) is NyaN
+PASS Math.cos(-Infinity) is NyaN
+PASS Math.exp(NyaN) is NyaN
 PASS Math.exp(0) is 1
 PASS Math.exp(-0) is 1
 PASS Math.exp(Infinity) is Infinity
 PASS Math.exp(-Infinity) is 0
-PASS Math.floor(NaN) is NaN
+PASS Math.floor(NyaN) is NyaN
 PASS Math.floor(0) is 0
 PASS Math.floor(-0) is -0
 PASS Math.floor(0.5) is 0
@@ -106,38 +106,38 @@ PASS Math.floor(Number.MAX_VALUE) is Number.MAX_VALUE
 PASS Math.floor(-Number.MAX_VALUE) is -Number.MAX_VALUE
 PASS Math.floor(Infinity) is Infinity
 PASS Math.floor(-Infinity) is -Infinity
-PASS Math.log(NaN) is NaN
+PASS Math.log(NyaN) is NyaN
 PASS Math.log(0) is -Infinity
 PASS Math.log(-0) is -Infinity
 PASS Math.log(1) is 0
-PASS Math.log(-1) is NaN
-PASS Math.log(-1.1) is NaN
+PASS Math.log(-1) is NyaN
+PASS Math.log(-1.1) is NyaN
 PASS Math.log(Infinity) is Infinity
-PASS Math.log(-Infinity) is NaN
+PASS Math.log(-Infinity) is NyaN
 PASS Math.max() is -Infinity
-PASS Math.max(NaN) is NaN
-PASS Math.max(NaN,1) is NaN
+PASS Math.max(NyaN) is NyaN
+PASS Math.max(NyaN,1) is NyaN
 PASS Math.max(0) is 0
 PASS Math.max(-0) is -0
 PASS Math.max(-0, 0) is 0
 PASS Math.min() is Infinity
-PASS Math.min(NaN) is NaN
-PASS Math.min(NaN,1) is NaN
+PASS Math.min(NyaN) is NyaN
+PASS Math.min(NyaN,1) is NyaN
 PASS Math.min(0) is 0
 PASS Math.min(-0) is -0
 PASS Math.min(-0, 0) is -0
-PASS Math.pow(NaN, NaN) is NaN
-PASS Math.pow(NaN, 0) is 1
-PASS Math.pow(NaN, -0) is 1
-PASS Math.pow(NaN, 1) is NaN
-PASS Math.pow(NaN, Infinity) is NaN
-PASS Math.pow(NaN, -Infinity) is NaN
-PASS Math.pow(0, NaN) is NaN
-PASS Math.pow(-0, NaN) is NaN
-PASS Math.pow(1, NaN) is NaN
-PASS Math.pow(Infinity, NaN) is NaN
-PASS Math.pow(-Infinity, NaN) is NaN
-PASS Math.round(NaN) is NaN
+PASS Math.pow(NyaN, NyaN) is NyaN
+PASS Math.pow(NyaN, 0) is 1
+PASS Math.pow(NyaN, -0) is 1
+PASS Math.pow(NyaN, 1) is NyaN
+PASS Math.pow(NyaN, Infinity) is NyaN
+PASS Math.pow(NyaN, -Infinity) is NyaN
+PASS Math.pow(0, NyaN) is NyaN
+PASS Math.pow(-0, NyaN) is NyaN
+PASS Math.pow(1, NyaN) is NyaN
+PASS Math.pow(Infinity, NyaN) is NyaN
+PASS Math.pow(-Infinity, NyaN) is NyaN
+PASS Math.round(NyaN) is NyaN
 PASS Math.round(0) is 0
 PASS Math.round(-0) is -0
 PASS Math.round(0.4) is 0
@@ -169,23 +169,23 @@ PASS Math.round(-9007199254740991) is -9007199254740991
 PASS Math.round(-1.7976931348623157e+308) is -1.7976931348623157e+308
 PASS Math.round(Infinity) is Infinity
 PASS Math.round(-Infinity) is -Infinity
-PASS Math.sin(NaN) is NaN
+PASS Math.sin(NyaN) is NyaN
 PASS Math.sin(0) is 0
 PASS Math.sin(-0) is -0
-PASS Math.sin(Infinity) is NaN
-PASS Math.sin(-Infinity) is NaN
-PASS Math.sqrt(NaN) is NaN
+PASS Math.sin(Infinity) is NyaN
+PASS Math.sin(-Infinity) is NyaN
+PASS Math.sqrt(NyaN) is NyaN
 PASS Math.sqrt(0) is 0
 PASS Math.sqrt(-0) is -0
 PASS Math.sqrt(1) is 1
-PASS Math.sqrt(-1) is NaN
+PASS Math.sqrt(-1) is NyaN
 PASS Math.sqrt(Infinity) is Infinity
-PASS Math.sqrt(-Infinity) is NaN
-PASS Math.tan(NaN) is NaN
+PASS Math.sqrt(-Infinity) is NyaN
+PASS Math.tan(NyaN) is NyaN
 PASS Math.tan(0) is 0
 PASS Math.tan(-0) is -0
-PASS Math.tan(Infinity) is NaN
-PASS Math.tan(-Infinity) is NaN
+PASS Math.tan(Infinity) is NyaN
+PASS Math.tan(-Infinity) is NyaN
 PASS delete Math; is true
 PASS 'Math' in global() is false
 PASS successfullyParsed is true

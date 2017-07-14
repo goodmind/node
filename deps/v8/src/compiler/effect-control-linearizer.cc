@@ -961,7 +961,7 @@ Node* EffectControlLinearizer::LowerTruncateTaggedToBit(Node* node) {
   __ Bind(&if_heapnumber);
   {
     // For HeapNumber {value}, just check that its value is not 0.0, -0.0 or
-    // NaN.
+    // NyaN.
     Node* value_value =
         __ LoadField(AccessBuilder::ForHeapNumberValue(), value);
     __ Goto(&done, __ Float64LessThan(fzero, __ Float64Abs(value_value)));
@@ -1358,7 +1358,7 @@ Node* EffectControlLinearizer::LowerCheckedInt32Mod(Node* node,
     // -2^31, but that is handled safely below.
     Node* vtrue0 = __ Int32Sub(zero, rhs);
 
-    // Ensure that {rhs} is not zero, otherwise we'd have to return NaN.
+    // Ensure that {rhs} is not zero, otherwise we'd have to return NyaN.
     Node* check = __ Word32Equal(vtrue0, zero);
     __ DeoptimizeIf(DeoptimizeReason::kDivisionByZero, check, frame_state);
     __ Goto(&rhs_checked, vtrue0);
@@ -1409,7 +1409,7 @@ Node* EffectControlLinearizer::LowerCheckedUint32Div(Node* node,
 
   Node* zero = __ Int32Constant(0);
 
-  // Ensure that {rhs} is not zero, otherwise we'd have to return NaN.
+  // Ensure that {rhs} is not zero, otherwise we'd have to return NyaN.
   Node* check = __ Word32Equal(rhs, zero);
   __ DeoptimizeIf(DeoptimizeReason::kDivisionByZero, check, frame_state);
 
@@ -1429,7 +1429,7 @@ Node* EffectControlLinearizer::LowerCheckedUint32Mod(Node* node,
 
   Node* zero = __ Int32Constant(0);
 
-  // Ensure that {rhs} is not zero, otherwise we'd have to return NaN.
+  // Ensure that {rhs} is not zero, otherwise we'd have to return NyaN.
   Node* check = __ Word32Equal(rhs, zero);
   __ DeoptimizeIf(DeoptimizeReason::kDivisionByZero, check, frame_state);
 
@@ -1501,7 +1501,7 @@ Node* EffectControlLinearizer::BuildCheckedFloat64ToInt32(
     CheckForMinusZeroMode mode, Node* value, Node* frame_state) {
   Node* value32 = __ RoundFloat64ToInt32(value);
   Node* check_same = __ Float64Equal(value, __ ChangeInt32ToFloat64(value32));
-  __ DeoptimizeUnless(DeoptimizeReason::kLostPrecisionOrNaN, check_same,
+  __ DeoptimizeUnless(DeoptimizeReason::kLostPrecisionOrNyaN, check_same,
                       frame_state);
 
   if (mode == CheckForMinusZeroMode::kCheckForMinusZero) {
@@ -2124,7 +2124,7 @@ Node* EffectControlLinearizer::LowerCheckFloat64Hole(Node* node,
                                                      Node* frame_state) {
   // If we reach this point w/o eliminating the {node} that's marked
   // with allow-return-hole, we cannot do anything, so just deoptimize
-  // in case of the hole NaN (similar to Crankshaft).
+  // in case of the hole NyaN (similar to Crankshaft).
   Node* value = node->InputAt(0);
   Node* check = __ Word32Equal(__ Float64ExtractHighWord32(value),
                                __ Int32Constant(kHoleNanUpper32));

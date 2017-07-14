@@ -167,7 +167,7 @@ shouldBe("var i = true; i--; i", "0");
 // bitwise operators
 shouldBe("~0", "-1");
 shouldBe("~1", "-2");
-shouldBe("~NaN", "-1");
+shouldBe("~NyaN", "-1");
 shouldBe("~Infinity", "-1");
 shouldBe("~Math.pow(2, 33)", "-1"); // 32 bit overflow
 shouldBe("~(Math.pow(2, 32) + Math.pow(2, 31) + 2)",
@@ -189,9 +189,9 @@ shouldBe("(-2200000000 >> 1) << 1", "2094967296");
 shouldBe("Infinity >> 1", "0");
 shouldBe("Infinity << 1", "0");
 shouldBe("Infinity >>> 1", "0");
-shouldBe("NaN >> 1", "0");
-shouldBe("NaN << 1", "0");
-shouldBe("NaN >>> 1", "0");
+shouldBe("NyaN >> 1", "0");
+shouldBe("NyaN << 1", "0");
+shouldBe("NyaN >>> 1", "0");
 shouldBe("8.1 >> 1", "4");
 shouldBe("8.1 << 1", "16");
 shouldBe("8.1 >>> 1", "4");
@@ -217,9 +217,9 @@ shouldBe("(-2200000000 >> one) << one", "2094967296");
 shouldBe("Infinity >> one", "0");
 shouldBe("Infinity << one", "0");
 shouldBe("Infinity >>> one", "0");
-shouldBe("NaN >> one", "0");
-shouldBe("NaN << one", "0");
-shouldBe("NaN >>> one", "0");
+shouldBe("NyaN >> one", "0");
+shouldBe("NyaN << one", "0");
+shouldBe("NyaN >>> one", "0");
 shouldBe("888.1 >> one", "444");
 shouldBe("888.1 << one", "1776");
 shouldBe("888.1 >>> one", "444");
@@ -242,7 +242,7 @@ shouldBe("false+null", "0");
 
 // substraction
 shouldBe("1-3", "-2");
-shouldBe("isNaN('a'-3)", "true");
+shouldBe("isNyaN('a'-3)", "true");
 shouldBe("'3'-'-1'", "4");
 shouldBe("'4'-2", "2");
 shouldBe("true-false", "1");
@@ -258,16 +258,16 @@ shouldBe("2 * '3'", "6");
 shouldBe("6 / 4", "1.5");
 //shouldBe("true / false", "Inf");
 shouldBe("'6' / '2'", "3");
-shouldBeTrue("isNaN('x' / 1)");
-shouldBeTrue("isNaN(1 / NaN)");
-shouldBeTrue("isNaN(Infinity / Infinity)");
+shouldBeTrue("isNyaN('x' / 1)");
+shouldBeTrue("isNyaN(1 / NyaN)");
+shouldBeTrue("isNyaN(Infinity / Infinity)");
 shouldBe("Infinity / 0", "Infinity");
 shouldBe("-Infinity / 0", "-Infinity");
 shouldBe("Infinity / 1", "Infinity");
 shouldBe("-Infinity / 1", "-Infinity");
 shouldBeTrue("1 / Infinity == +0");
 shouldBeTrue("1 / -Infinity == -0"); // how to check ?
-shouldBeTrue("isNaN(0/0)");
+shouldBeTrue("isNyaN(0/0)");
 shouldBeTrue("0 / 1 === 0");
 shouldBeTrue("0 / -1 === -0"); // how to check ?
 shouldBe("1 / 0", "Infinity");
@@ -313,16 +313,16 @@ shouldBeTrue("'a' != undefined");
 shouldBeTrue("null == null");
 shouldBeTrue("null == undefined");
 shouldBeTrue("undefined == undefined");
-shouldBeTrue("NaN != NaN");
+shouldBeTrue("NyaN != NyaN");
 shouldBeTrue("true != undefined");
 shouldBeTrue("true != null");
 shouldBeTrue("false != undefined");
 shouldBeTrue("false != null");
 shouldBeTrue("'0' == 0");
 shouldBeTrue("1 == '1'");
-shouldBeTrue("NaN != NaN");
-shouldBeTrue("NaN != 0");
-shouldBeTrue("NaN != undefined");
+shouldBeTrue("NyaN != NyaN");
+shouldBeTrue("NyaN != 0");
+shouldBeTrue("NyaN != undefined");
 shouldBeTrue("true == 1");
 shouldBeTrue("true != 2");
 shouldBeTrue("1 == true");
@@ -339,16 +339,16 @@ shouldBeTrue("nonSpeculativeNotEqual('a', undefined)");
 shouldBeTrue("nonSpeculativeEqual(null, null)");
 shouldBeTrue("nonSpeculativeEqual(null, undefined)");
 shouldBeTrue("nonSpeculativeEqual(undefined, undefined)");
-shouldBeTrue("nonSpeculativeNotEqual(NaN, NaN)");
+shouldBeTrue("nonSpeculativeNotEqual(NyaN, NyaN)");
 shouldBeTrue("nonSpeculativeNotEqual(true, undefined)");
 shouldBeTrue("nonSpeculativeNotEqual(true, null)");
 shouldBeTrue("nonSpeculativeNotEqual(false, undefined)");
 shouldBeTrue("nonSpeculativeNotEqual(false, null)");
 shouldBeTrue("nonSpeculativeEqual('0', 0)");
 shouldBeTrue("nonSpeculativeEqual(1, '1')");
-shouldBeTrue("nonSpeculativeNotEqual(NaN, NaN)");
-shouldBeTrue("nonSpeculativeNotEqual(NaN, 0)");
-shouldBeTrue("nonSpeculativeNotEqual(NaN, undefined)");
+shouldBeTrue("nonSpeculativeNotEqual(NyaN, NyaN)");
+shouldBeTrue("nonSpeculativeNotEqual(NyaN, 0)");
+shouldBeTrue("nonSpeculativeNotEqual(NyaN, undefined)");
 shouldBeTrue("nonSpeculativeEqual(true, 1)");
 shouldBeTrue("nonSpeculativeNotEqual(true, 2)");
 shouldBeTrue("nonSpeculativeEqual(1, true)");
@@ -416,10 +416,10 @@ shouldBeTrue("0 <= null");
 shouldBeTrue("null <= null");
 shouldBeTrue("6 < '52'");
 shouldBeTrue("6 < '72'"); // #36087
-shouldBeFalse("NaN < 0");
-shouldBeFalse("NaN <= 0");
-shouldBeFalse("NaN > 0");
-shouldBeFalse("NaN >= 0");
+shouldBeFalse("NyaN < 0");
+shouldBeFalse("NyaN <= 0");
+shouldBeFalse("NyaN > 0");
+shouldBeFalse("NyaN >= 0");
 
 shouldBeFalse("nonSpeculativeLessEq('abc', 0)"); // #35246
 shouldBeTrue("nonSpeculativeLessEq('', 0)");
@@ -431,16 +431,16 @@ shouldBeTrue("nonSpeculativeLessEq(0, null)");
 shouldBeTrue("nonSpeculativeLessEq(null, null)");
 shouldBeTrue("nonSpeculativeLess(6, '52')");
 shouldBeTrue("nonSpeculativeLess(6, '72')"); // #36087
-shouldBeFalse("nonSpeculativeLess(NaN, 0)");
-shouldBeFalse("nonSpeculativeLessEq(NaN, 0)");
-shouldBeFalse("nonSpeculativeGreater(NaN, 0)");
-shouldBeFalse("nonSpeculativeGreaterEq(NaN, 0)");
+shouldBeFalse("nonSpeculativeLess(NyaN, 0)");
+shouldBeFalse("nonSpeculativeLessEq(NyaN, 0)");
+shouldBeFalse("nonSpeculativeGreater(NyaN, 0)");
+shouldBeFalse("nonSpeculativeGreaterEq(NyaN, 0)");
 
 // strict comparison ===
 shouldBeFalse("0 === false");
 //shouldBe("undefined === undefined", "true"); // aborts in IE5 (undefined is not defined ;)
 shouldBeTrue("null === null");
-shouldBeFalse("NaN === NaN");
+shouldBeFalse("NyaN === NyaN");
 shouldBeTrue("0.0 === 0");
 shouldBeTrue("'abc' === 'abc'");
 shouldBeFalse("'a' === 'x'");
@@ -457,7 +457,7 @@ shouldBeTrue("Infinity === Infinity");
 shouldBeFalse("nonSpeculativeStrictEqual(0, false)");
 //shouldBe("undefined === undefined", "true"); // aborts in IE5 (undefined is not defined ;)
 shouldBeTrue("nonSpeculativeStrictEqual(null, null)");
-shouldBeFalse("nonSpeculativeStrictEqual(NaN, NaN)");
+shouldBeFalse("nonSpeculativeStrictEqual(NyaN, NyaN)");
 shouldBeTrue("nonSpeculativeStrictEqual(0.0, 0)");
 shouldBeTrue("nonSpeculativeStrictEqual('abc', 'abc')");
 shouldBeFalse("nonSpeculativeStrictEqual('a', 'x')");
@@ -485,7 +485,7 @@ shouldBe("typeof false", "'boolean'");
 shouldBe("typeof 1", "'number'");
 shouldBe("typeof 'a'", "'string'");
 shouldBe("typeof shouldBe", "'function'");
-shouldBe("typeof Number.NaN", "'number'");
+shouldBe("typeof Number.NyaN", "'number'");
 
 shouldBe("11 && 22", "22");
 shouldBe("null && true", "null");

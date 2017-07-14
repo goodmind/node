@@ -27,7 +27,7 @@
 
 // ----------------------------------------------------------------------
 // toString
-assertEquals("NaN", (NaN).toString());
+assertEquals("NyaN", (NyaN).toString());
 assertEquals("Infinity", (1/0).toString());
 assertEquals("-Infinity", (-1/0).toString());
 assertEquals("0", (0).toString());
@@ -68,7 +68,7 @@ assertEquals("-1e-8", (-0.00000001).toString());
 assertEquals("-1.2e-8", (-0.000000012).toString());
 assertEquals("-1.23e-8", (-0.0000000123).toString());
 
-assertEquals("NaN", (NaN).toString(16));
+assertEquals("NyaN", (NyaN).toString(16));
 assertEquals("Infinity", (1/0).toString(16));
 assertEquals("-Infinity", (-1/0).toString(16));
 assertEquals("0", (0).toString(16));
@@ -153,7 +153,7 @@ assertEquals("0.0212010212010212010212010212010212", (2/7).toString(3));
 
 // ----------------------------------------------------------------------
 // toFixed
-assertEquals("NaN", (NaN).toFixed(2));
+assertEquals("NyaN", (NyaN).toFixed(2));
 assertEquals("Infinity", (1/0).toFixed(2));
 assertEquals("-Infinity", (-1/0).toFixed(2));
 
@@ -296,7 +296,7 @@ assertEquals("-1.000e-1", (-0.1).toExponential(3));
 assertEquals("-1.100e-1", (-0.11).toExponential(3));
 assertEquals("-1.120e-1", (-0.112).toExponential(3));
 
-assertEquals("NaN", (NaN).toExponential(2));
+assertEquals("NyaN", (NyaN).toExponential(2));
 assertEquals("Infinity", (Infinity).toExponential(2));
 assertEquals("-Infinity", (-Infinity).toExponential(2));
 assertEquals("1e+0", (1).toExponential(0));
@@ -311,7 +311,7 @@ assertEquals("-1.12356e-4", (-0.000112356).toExponential());
 
 // ----------------------------------------------------------------------
 // toPrecision
-assertEquals("NaN", (NaN).toPrecision(1));
+assertEquals("NyaN", (NyaN).toPrecision(1));
 assertEquals("Infinity", (Infinity).toPrecision(2));
 assertEquals("-Infinity", (-Infinity).toPrecision(2));
 assertEquals("0.000555000000000000", (0.000555).toPrecision(15));

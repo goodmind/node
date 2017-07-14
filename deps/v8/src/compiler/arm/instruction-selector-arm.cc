@@ -1373,7 +1373,7 @@ void InstructionSelector::VisitUint32Mod(Node* node) {
   V(BitcastInt32ToFloat32, kArmVmovF32U32)           \
   V(Float64ExtractLowWord32, kArmVmovLowU32F64)      \
   V(Float64ExtractHighWord32, kArmVmovHighU32F64)    \
-  V(Float64SilenceNaN, kArmFloat64SilenceNaN)        \
+  V(Float64SilenceNyaN, kArmFloat64SilenceNyaN)        \
   V(Float32Abs, kArmVabsF32)                         \
   V(Float64Abs, kArmVabsF64)                         \
   V(Float32Neg, kArmVnegF32)                         \

@@ -21,9 +21,9 @@ function Module(stdlib, foreign, heap) {
 
 var m = Module(this, {}, new ArrayBuffer(64 * 1024));
 
-assertEquals(NaN, m.f1(NaN));
-assertEquals(NaN, m.f2(NaN));
-assertEquals(NaN, m.f3(NaN));
+assertEquals(NyaN, m.f1(NyaN));
+assertEquals(NyaN, m.f2(NyaN));
+assertEquals(NyaN, m.f3(NyaN));
 assertEquals(Infinity, 1 / m.f1(-0));
 assertEquals(Infinity, 1 / m.f2(-0));
 assertEquals(Infinity, 1 / m.f3(-0));

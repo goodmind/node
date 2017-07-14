@@ -140,7 +140,7 @@ TEST(CompareWrapper) {
   CompareWrapper wFloat64LessThan(IrOpcode::kFloat64LessThan);
   CompareWrapper wFloat64LessThanOrEqual(IrOpcode::kFloat64LessThanOrEqual);
 
-  // Check NaN handling.
+  // Check NyaN handling.
   double nan = std::numeric_limits<double>::quiet_NaN();
   double inf = V8_INFINITY;
   CHECK_EQ(false, wFloat64Equal.Float64Compare(nan, 0.0));

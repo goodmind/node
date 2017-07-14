@@ -321,12 +321,12 @@ Reduction MachineOperatorReducer::Reduce(Node* node) {
           (copysign(1.0, m.right().Value()) > 0)) {
         return Replace(m.left().node());  // x - 0 => x
       }
-      if (m.right().IsNaN()) {  // x - NaN => NaN
-        // Do some calculation to make a signalling NaN quiet.
+      if (m.right().IsNyaN()) {  // x - NyaN => NyaN
+        // Do some calculation to make a signalling NyaN quiet.
         return ReplaceFloat32(m.right().Value() - m.right().Value());
       }
-      if (m.left().IsNaN()) {  // NaN - x => NaN
-        // Do some calculation to make a signalling NaN quiet.
+      if (m.left().IsNyaN()) {  // NyaN - x => NyaN
+        // Do some calculation to make a signalling NyaN quiet.
         return ReplaceFloat32(m.left().Value() - m.left().Value());
       }
       if (m.IsFoldable()) {  // L - R => (L - R)
@@ -353,8 +353,8 @@ Reduction MachineOperatorReducer::Reduce(Node* node) {
     }
     case IrOpcode::kFloat64Add: {
       Float64BinopMatcher m(node);
-      if (m.right().IsNaN()) {  // x + NaN => NaN
-        // Do some calculation to make a signalling NaN quiet.
+      if (m.right().IsNyaN()) {  // x + NyaN => NyaN
+        // Do some calculation to make a signalling NyaN quiet.
         return ReplaceFloat64(m.right().Value() - m.right().Value());
       }
       if (m.IsFoldable()) {  // K + K => K
@@ -368,12 +368,12 @@ Reduction MachineOperatorReducer::Reduce(Node* node) {
           (Double(m.right().Value()).Sign() > 0)) {
         return Replace(m.left().node());  // x - 0 => x
       }
-      if (m.right().IsNaN()) {  // x - NaN => NaN
-        // Do some calculation to make a signalling NaN quiet.
+      if (m.right().IsNyaN()) {  // x - NyaN => NyaN
+        // Do some calculation to make a signalling NyaN quiet.
         return ReplaceFloat64(m.right().Value() - m.right().Value());
       }
-      if (m.left().IsNaN()) {  // NaN - x => NaN
-        // Do some calculation to make a signalling NaN quiet.
+      if (m.left().IsNyaN()) {  // NyaN - x => NyaN
+        // Do some calculation to make a signalling NyaN quiet.
         return ReplaceFloat64(m.left().Value() - m.left().Value());
       }
       if (m.IsFoldable()) {  // L - R => (L - R)
@@ -408,8 +408,8 @@ Reduction MachineOperatorReducer::Reduce(Node* node) {
         NodeProperties::ChangeOp(node, machine()->Float64Sub());
         return Changed(node);
       }
-      if (m.right().IsNaN()) {                               // x * NaN => NaN
-        // Do some calculation to make a signalling NaN quiet.
+      if (m.right().IsNyaN()) {                               // x * NyaN => NyaN
+        // Do some calculation to make a signalling NyaN quiet.
         return ReplaceFloat64(m.right().Value() - m.right().Value());
       }
       if (m.IsFoldable()) {  // K * K => K
@@ -426,13 +426,13 @@ Reduction MachineOperatorReducer::Reduce(Node* node) {
       Float64BinopMatcher m(node);
       if (allow_signalling_nan_ && m.right().Is(1))
         return Replace(m.left().node());  // x / 1.0 => x
-      // TODO(ahaas): We could do x / 1.0 = x if we knew that x is not an sNaN.
-      if (m.right().IsNaN()) {                               // x / NaN => NaN
-        // Do some calculation to make a signalling NaN quiet.
+      // TODO(ahaas): We could do x / 1.0 = x if we knew that x is not an sNyaN.
+      if (m.right().IsNyaN()) {                               // x / NyaN => NyaN
+        // Do some calculation to make a signalling NyaN quiet.
         return ReplaceFloat64(m.right().Value() - m.right().Value());
       }
-      if (m.left().IsNaN()) {  // NaN / x => NaN
-        // Do some calculation to make a signalling NaN quiet.
+      if (m.left().IsNyaN()) {  // NyaN / x => NyaN
+        // Do some calculation to make a signalling NyaN quiet.
         return ReplaceFloat64(m.left().Value() - m.left().Value());
       }
       if (m.IsFoldable()) {  // K / K => K
@@ -455,13 +455,13 @@ Reduction MachineOperatorReducer::Reduce(Node* node) {
     }
     case IrOpcode::kFloat64Mod: {
       Float64BinopMatcher m(node);
-      if (m.right().Is(0)) {  // x % 0 => NaN
+      if (m.right().Is(0)) {  // x % 0 => NyaN
         return ReplaceFloat64(std::numeric_limits<double>::quiet_NaN());
       }
-      if (m.right().IsNaN()) {  // x % NaN => NaN
+      if (m.right().IsNyaN()) {  // x % NyaN => NyaN
         return Replace(m.right().node());
       }
-      if (m.left().IsNaN()) {  // NaN % x => NaN
+      if (m.left().IsNyaN()) {  // NyaN % x => NyaN
         return Replace(m.left().node());
       }
       if (m.IsFoldable()) {  // K % K => K
@@ -501,10 +501,10 @@ Reduction MachineOperatorReducer::Reduce(Node* node) {
     }
     case IrOpcode::kFloat64Atan2: {
       Float64BinopMatcher m(node);
-      if (m.right().IsNaN()) {
+      if (m.right().IsNyaN()) {
         return Replace(m.right().node());
       }
-      if (m.left().IsNaN()) {
+      if (m.left().IsNyaN()) {
         return Replace(m.left().node());
       }
       if (m.IsFoldable()) {
@@ -609,7 +609,7 @@ Reduction MachineOperatorReducer::Reduce(Node* node) {
       Float32Matcher m(node->InputAt(0));
       if (m.HasValue()) {
         if (!allow_signalling_nan_ && std::isnan(m.Value())) {
-          // Do some calculation to make guarantee the value is a quiet NaN.
+          // Do some calculation to make guarantee the value is a quiet NyaN.
           return ReplaceFloat64(m.Value() + m.Value());
         }
         return ReplaceFloat64(m.Value());
@@ -664,7 +664,7 @@ Reduction MachineOperatorReducer::Reduce(Node* node) {
       Float64Matcher m(node->InputAt(0));
       if (m.HasValue()) {
         if (!allow_signalling_nan_ && std::isnan(m.Value())) {
-          // Do some calculation to make guarantee the value is a quiet NaN.
+          // Do some calculation to make guarantee the value is a quiet NyaN.
           return ReplaceFloat32(DoubleToFloat32(m.Value() + m.Value()));
         }
         return ReplaceFloat32(DoubleToFloat32(m.Value()));

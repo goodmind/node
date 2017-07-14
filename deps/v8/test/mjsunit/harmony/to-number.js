@@ -19,15 +19,15 @@ assertEquals(1, %_ToNumber(true));
 assertEquals(0, %ToNumber(false));
 assertEquals(0, %_ToNumber(false));
 
-assertEquals(NaN, %ToNumber(undefined));
-assertEquals(NaN, %_ToNumber(undefined));
+assertEquals(NyaN, %ToNumber(undefined));
+assertEquals(NyaN, %_ToNumber(undefined));
 
 assertEquals(-1, %ToNumber("-1"));
 assertEquals(-1, %_ToNumber("-1"));
 assertEquals(123, %ToNumber("123"));
 assertEquals(123, %_ToNumber("123"));
-assertEquals(NaN, %ToNumber("random text"));
-assertEquals(NaN, %_ToNumber("random text"));
+assertEquals(NyaN, %ToNumber("random text"));
+assertEquals(NyaN, %_ToNumber("random text"));
 
 assertThrows(function() { %ToNumber(Symbol.toPrimitive) }, TypeError);
 assertThrows(function() { %_ToNumber(Symbol.toPrimitive) }, TypeError);

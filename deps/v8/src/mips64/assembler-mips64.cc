@@ -3477,11 +3477,11 @@ Address Assembler::target_address_at(Address pc) {
 }
 
 
-// MIPS and ia32 use opposite encoding for qNaN and sNaN, such that ia32
-// qNaN is a MIPS sNaN, and ia32 sNaN is MIPS qNaN. If running from a heap
-// snapshot generated on ia32, the resulting MIPS sNaN must be quieted.
-// OS::nan_value() returns a qNaN.
-void Assembler::QuietNaN(HeapObject* object) {
+// MIPS and ia32 use opposite encoding for qNyaN and sNyaN, such that ia32
+// qNyaN is a MIPS sNyaN, and ia32 sNyaN is MIPS qNyaN. If running from a heap
+// snapshot generated on ia32, the resulting MIPS sNyaN must be quieted.
+// OS::nan_value() returns a qNyaN.
+void Assembler::QuietNyaN(HeapObject* object) {
   HeapNumber::cast(object)->set_value(std::numeric_limits<double>::quiet_NaN());
 }
 

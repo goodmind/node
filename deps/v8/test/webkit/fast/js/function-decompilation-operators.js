@@ -74,7 +74,7 @@ description("This test checks toString() round-trip decompilation for binary and
         "-1",
         "- -1",
         "- - 0",
-        "- - NaN"
+        "- - NyaN"
     ];
 
     for (test in tests) {

@@ -1494,8 +1494,8 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
       __ bind(ool->exit());
       break;
     }
-    case kMips64Float64SilenceNaN:
-      __ FPUCanonicalizeNaN(i.OutputDoubleRegister(), i.InputDoubleRegister(0));
+    case kMips64Float64SilenceNyaN:
+      __ FPUCanonicalizeNyaN(i.OutputDoubleRegister(), i.InputDoubleRegister(0));
       break;
     case kMips64CvtSD:
       __ cvt_s_d(i.OutputSingleRegister(), i.InputDoubleRegister(0));
@@ -1614,7 +1614,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
       __ dmfc1(i.OutputRegister(), scratch);
       if (load_status) {
         __ cfc1(result, FCSR);
-        // Check for overflow and NaNs.
+        // Check for overflow and NyaNs.
         __ andi(result, result,
                 (kFCSROverflowFlagMask | kFCSRInvalidOpFlagMask));
         __ Slt(result, zero_reg, result);
@@ -1642,7 +1642,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
       __ dmfc1(i.OutputRegister(0), scratch);
       if (load_status) {
         __ cfc1(result, FCSR);
-        // Check for overflow and NaNs.
+        // Check for overflow and NyaNs.
         __ andi(result, result,
                 (kFCSROverflowFlagMask | kFCSRInvalidOpFlagMask));
         __ Slt(result, zero_reg, result);

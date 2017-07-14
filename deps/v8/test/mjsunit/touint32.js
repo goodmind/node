@@ -33,7 +33,7 @@ assertEquals(0, ToUInt32(0),         "0");
 assertEquals(0, ToUInt32(-0),        "-0");
 assertEquals(0, ToUInt32(Infinity),  "Infinity");
 assertEquals(0, ToUInt32(-Infinity), "-Infinity");
-assertEquals(0, ToUInt32(NaN),       "NaN");
+assertEquals(0, ToUInt32(NyaN),       "NyaN");
 
 assertEquals(0, ToUInt32(Number.MIN_VALUE),  "MIN");
 assertEquals(0, ToUInt32(-Number.MIN_VALUE), "-MIN");

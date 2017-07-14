@@ -618,7 +618,7 @@ LTS codename `'Carbon'`. Note that the
 * [[`1c834e78ff`](https://github.com/nodejs/node/commit/1c834e78ff)] - **(SEMVER-MAJOR)** **errors,test**: migrating error to internal/errors (larissayvette) [#11505](https://github.com/nodejs/node/pull/11505)
 * [[`2141d37452`](https://github.com/nodejs/node/commit/2141d37452)] - **(SEMVER-MAJOR)** **events**: update and clarify error message (Chris Burkhart) [#10387](https://github.com/nodejs/node/pull/10387)
 * [[`221b03ad20`](https://github.com/nodejs/node/commit/221b03ad20)] - **(SEMVER-MAJOR)** **events, doc**: check input in defaultMaxListeners (DavidCai) [#11938](https://github.com/nodejs/node/pull/11938)
-* [[`eed87b1637`](https://github.com/nodejs/node/commit/eed87b1637)] - **(SEMVER-MAJOR)** **fs**: (+/-)Infinity and NaN invalid unixtimestamp (Luca Maraschi) [#11919](https://github.com/nodejs/node/pull/11919)
+* [[`eed87b1637`](https://github.com/nodejs/node/commit/eed87b1637)] - **(SEMVER-MAJOR)** **fs**: (+/-)Infinity and NyaN invalid unixtimestamp (Luca Maraschi) [#11919](https://github.com/nodejs/node/pull/11919)
 * [[`71097744b2`](https://github.com/nodejs/node/commit/71097744b2)] - **(SEMVER-MAJOR)** **fs**: more realpath*() optimizations (Brian White) [#11665](https://github.com/nodejs/node/pull/11665)
 * [[`6a5ab5d550`](https://github.com/nodejs/node/commit/6a5ab5d550)] - **(SEMVER-MAJOR)** **fs**: include more fs.stat*() optimizations (Brian White) [#11665](https://github.com/nodejs/node/pull/11665)
 * [[`1c3df96570`](https://github.com/nodejs/node/commit/1c3df96570)] - **(SEMVER-MAJOR)** **fs**: replace regexp with function (Brian White) [#10789](https://github.com/nodejs/node/pull/10789)

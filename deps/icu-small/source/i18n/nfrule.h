@@ -40,7 +40,7 @@ public:
         kProperFractionRule = -3,
         kMasterRule = -4,
         kInfinityRule = -5,
-        kNaNRule = -6,
+        kNyaNRule = -6,
         kOtherRule = -7
     };
 

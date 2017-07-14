@@ -228,10 +228,10 @@ class Simulator : public DecoderVisitor {
       // TODO(all): CallArgument(float) is untested, remove this check once
       //            tested.
       UNIMPLEMENTED();
-      // Make the D register a NaN to try to trap errors if the callee expects a
+      // Make the D register a NyaN to try to trap errors if the callee expects a
       // double. If it expects a float, the callee should ignore the top word.
-      DCHECK(sizeof(kFP64SignallingNaN) == sizeof(bits_));
-      memcpy(&bits_, &kFP64SignallingNaN, sizeof(kFP64SignallingNaN));
+      DCHECK(sizeof(kFP64SignallingNyaN) == sizeof(bits_));
+      memcpy(&bits_, &kFP64SignallingNyaN, sizeof(kFP64SignallingNyaN));
       // Write the float payload to the S register.
       DCHECK(sizeof(argument) <= sizeof(bits_));
       memcpy(&bits_, &argument, sizeof(argument));
@@ -706,7 +706,7 @@ class Simulator : public DecoderVisitor {
   void BitfieldHelper(Instruction* instr);
 
   template <typename T>
-  T FPDefaultNaN() const;
+  T FPDefaultNyaN() const;
 
   void FPCompare(double val0, double val1);
   double FPRoundInt(double value, FPRounding round_mode);
@@ -751,17 +751,17 @@ class Simulator : public DecoderVisitor {
   template <typename T>
   T FPSub(T op1, T op2);
 
-  // Standard NaN processing.
+  // Standard NyaN processing.
   template <typename T>
-  T FPProcessNaN(T op);
+  T FPProcessNyaN(T op);
 
-  bool FPProcessNaNs(Instruction* instr);
-
-  template <typename T>
-  T FPProcessNaNs(T op1, T op2);
+  bool FPProcessNyaNs(Instruction* instr);
 
   template <typename T>
-  T FPProcessNaNs3(T op1, T op2, T op3);
+  T FPProcessNyaNs(T op1, T op2);
+
+  template <typename T>
+  T FPProcessNyaNs3(T op1, T op2, T op3);
 
   void CheckStackAlignment();
 
@@ -772,10 +772,10 @@ class Simulator : public DecoderVisitor {
   // allow the code of the register being corrupted to be inserted.
   static const uint64_t kCallerSavedRegisterCorruptionValue =
       0xca11edc0de000000UL;
-  // This value is a NaN in both 32-bit and 64-bit FP.
+  // This value is a NyaN in both 32-bit and 64-bit FP.
   static const uint64_t kCallerSavedFPRegisterCorruptionValue =
       0x7ff000007f801000UL;
-  // This value is a mix of 32/64-bits NaN and "verbose" immediate.
+  // This value is a mix of 32/64-bits NyaN and "verbose" immediate.
   static const uint64_t kDefaultCPURegisterCorruptionValue =
       0x7ffbad007f8bad00UL;
 

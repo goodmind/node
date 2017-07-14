@@ -243,13 +243,13 @@ int32_t countChar32(
         const DigitInterval &mantissaInterval,
         const SciFormatterOptions &options) const;
 
-UnicodeString &formatNaN(
+UnicodeString &formatNyaN(
         FieldPositionHandler &handler,
         UnicodeString &appendTo) const {
     return fNan.format(handler, appendTo);
 }
 
-int32_t countChar32ForNaN() const {
+int32_t countChar32ForNyaN() const {
     return fNan.toString().countChar32();
 }
 

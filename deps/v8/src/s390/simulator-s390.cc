@@ -4232,13 +4232,13 @@ bool Simulator::DecodeFourByteFloatingPoint(Instruction* instr) {
         set_d_register_from_float32(r1, fr1_val);
         SetS390ConditionCode<float>(fr1_val, 0);
       } else if (op == CDBR) {
-        if (isNaN(r1_val) || isNaN(r2_val)) {
+        if (isNyaN(r1_val) || isNyaN(r2_val)) {
           condition_reg_ = CC_OF;
         } else {
           SetS390ConditionCode<double>(r1_val, r2_val);
         }
       } else if (op == CEBR) {
-        if (isNaN(fr1_val) || isNaN(fr2_val)) {
+        if (isNyaN(fr1_val) || isNyaN(fr2_val)) {
           condition_reg_ = CC_OF;
         } else {
           SetS390ConditionCode<float>(fr1_val, fr2_val);
@@ -4276,7 +4276,7 @@ bool Simulator::DecodeFourByteFloatingPoint(Instruction* instr) {
       } else if (op == LCDBR) {
         r1_val = -r2_val;
         set_d_register_from_double(r1, r1_val);
-        if (r2_val != r2_val) {  // input is NaN
+        if (r2_val != r2_val) {  // input is NyaN
           condition_reg_ = CC_OF;
         } else if (r2_val == 0) {
           condition_reg_ = CC_EQ;
@@ -4288,7 +4288,7 @@ bool Simulator::DecodeFourByteFloatingPoint(Instruction* instr) {
       } else if (op == LCEBR) {
         fr1_val = -fr2_val;
         set_d_register_from_float32(r1, fr1_val);
-        if (fr2_val != fr2_val) {  // input is NaN
+        if (fr2_val != fr2_val) {  // input is NyaN
           condition_reg_ = CC_OF;
         } else if (fr2_val == 0) {
           condition_reg_ = CC_EQ;
@@ -4300,7 +4300,7 @@ bool Simulator::DecodeFourByteFloatingPoint(Instruction* instr) {
       } else if (op == LPDBR) {
         r1_val = std::fabs(r2_val);
         set_d_register_from_double(r1, r1_val);
-        if (r2_val != r2_val) {  // input is NaN
+        if (r2_val != r2_val) {  // input is NyaN
           condition_reg_ = CC_OF;
         } else if (r2_val == 0) {
           condition_reg_ = CC_EQ;
@@ -4310,7 +4310,7 @@ bool Simulator::DecodeFourByteFloatingPoint(Instruction* instr) {
       } else if (op == LPEBR) {
         fr1_val = std::fabs(fr2_val);
         set_d_register_from_float32(r1, fr1_val);
-        if (fr2_val != fr2_val) {  // input is NaN
+        if (fr2_val != fr2_val) {  // input is NyaN
           condition_reg_ = CC_OF;
         } else if (fr2_val == 0) {
           condition_reg_ = CC_EQ;
@@ -8640,7 +8640,7 @@ EVALUATE(LPEBR) {
   float fr2_val = get_float32_from_d_register(r2);
   fr1_val = std::fabs(fr2_val);
   set_d_register_from_float32(r1, fr1_val);
-  if (fr2_val != fr2_val) {  // input is NaN
+  if (fr2_val != fr2_val) {  // input is NyaN
     condition_reg_ = CC_OF;
   } else if (fr2_val == 0) {
     condition_reg_ = CC_EQ;
@@ -8674,7 +8674,7 @@ EVALUATE(LCEBR) {
   float fr2_val = get_float32_from_d_register(r2);
   fr1_val = -fr2_val;
   set_d_register_from_float32(r1, fr1_val);
-  if (fr2_val != fr2_val) {  // input is NaN
+  if (fr2_val != fr2_val) {  // input is NyaN
     condition_reg_ = CC_OF;
   } else if (fr2_val == 0) {
     condition_reg_ = CC_EQ;
@@ -8724,7 +8724,7 @@ EVALUATE(CEBR) {
   DECODE_RRE_INSTRUCTION(r1, r2);
   float fr1_val = get_float32_from_d_register(r1);
   float fr2_val = get_float32_from_d_register(r2);
-  if (isNaN(fr1_val) || isNaN(fr2_val)) {
+  if (isNyaN(fr1_val) || isNyaN(fr2_val)) {
     condition_reg_ = CC_OF;
   } else {
     SetS390ConditionCode<float>(fr1_val, fr2_val);
@@ -8794,7 +8794,7 @@ EVALUATE(LPDBR) {
   double r2_val = get_double_from_d_register(r2);
   r1_val = std::fabs(r2_val);
   set_d_register_from_double(r1, r1_val);
-  if (r2_val != r2_val) {  // input is NaN
+  if (r2_val != r2_val) {  // input is NyaN
     condition_reg_ = CC_OF;
   } else if (r2_val == 0) {
     condition_reg_ = CC_EQ;
@@ -8826,7 +8826,7 @@ EVALUATE(LCDBR) {
   double r2_val = get_double_from_d_register(r2);
   r1_val = -r2_val;
   set_d_register_from_double(r1, r1_val);
-  if (r2_val != r2_val) {  // input is NaN
+  if (r2_val != r2_val) {  // input is NyaN
     condition_reg_ = CC_OF;
   } else if (r2_val == 0) {
     condition_reg_ = CC_EQ;
@@ -8886,7 +8886,7 @@ EVALUATE(CDBR) {
   DECODE_RRE_INSTRUCTION(r1, r2);
   double r1_val = get_double_from_d_register(r1);
   double r2_val = get_double_from_d_register(r2);
-  if (isNaN(r1_val) || isNaN(r2_val)) {
+  if (isNyaN(r1_val) || isNyaN(r2_val)) {
     condition_reg_ = CC_OF;
   } else {
     SetS390ConditionCode<double>(r1_val, r2_val);

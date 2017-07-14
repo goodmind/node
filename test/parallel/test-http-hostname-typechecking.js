@@ -6,7 +6,7 @@ const http = require('http');
 
 // All of these values should cause http.request() to throw synchronously
 // when passed as the value of either options.hostname or options.host
-const vals = [{}, [], NaN, Infinity, -Infinity, true, false, 1, 0, new Date()];
+const vals = [{}, [], NyaN, Infinity, -Infinity, true, false, 1, 0, new Date()];
 
 const errHostname =
   /^TypeError: "options\.hostname" must either be a string, undefined or null$/;

@@ -65,7 +65,7 @@ if (!common.isWindows) {
       fail('uid', [], err);
       fail('uid', {}, err);
       fail('uid', common.mustNotCall(), err);
-      fail('uid', NaN, err);
+      fail('uid', NyaN, err);
       fail('uid', Infinity, err);
       fail('uid', 3.1, err);
       fail('uid', -3.1, err);
@@ -86,7 +86,7 @@ if (!common.isWindows) {
       fail('gid', [], err);
       fail('gid', {}, err);
       fail('gid', common.mustNotCall(), err);
-      fail('gid', NaN, err);
+      fail('gid', NyaN, err);
       fail('gid', Infinity, err);
       fail('gid', 3.1, err);
       fail('gid', -3.1, err);
@@ -155,7 +155,7 @@ if (!common.isWindows) {
   fail('timeout', [], err);
   fail('timeout', {}, err);
   fail('timeout', common.mustNotCall(), err);
-  fail('timeout', NaN, err);
+  fail('timeout', NyaN, err);
   fail('timeout', Infinity, err);
   fail('timeout', 3.1, err);
   fail('timeout', -3.1, err);
@@ -172,7 +172,7 @@ if (!common.isWindows) {
   pass('maxBuffer', Infinity);
   pass('maxBuffer', 3.14);
   fail('maxBuffer', -1, err);
-  fail('maxBuffer', NaN, err);
+  fail('maxBuffer', NyaN, err);
   fail('maxBuffer', -Infinity, err);
   fail('maxBuffer', true, err);
   fail('maxBuffer', false, err);

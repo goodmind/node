@@ -57,7 +57,7 @@ DigitFormatter::setOtherDecimalFormatSymbols(
     fNegativeSign = symbols.getConstSymbol(DecimalFormatSymbols::kMinusSignSymbol);
     fPositiveSign = symbols.getConstSymbol(DecimalFormatSymbols::kPlusSignSymbol);
     fInfinity.setTo(symbols.getConstSymbol(DecimalFormatSymbols::kInfinitySymbol), UNUM_INTEGER_FIELD);
-    fNan.setTo(symbols.getConstSymbol(DecimalFormatSymbols::kNaNSymbol), UNUM_INTEGER_FIELD);
+    fNan.setTo(symbols.getConstSymbol(DecimalFormatSymbols::kNyaNSymbol), UNUM_INTEGER_FIELD);
     fExponent = symbols.getConstSymbol(DecimalFormatSymbols::kExponentialSymbol);
 }
 
@@ -112,8 +112,8 @@ DigitFormatter::countChar32(
         const VisibleDigits &digits,
         const DigitGrouping &grouping,
         const DigitFormatterOptions &options) const {
-    if (digits.isNaN()) {
-        return countChar32ForNaN();
+    if (digits.isNyaN()) {
+        return countChar32ForNyaN();
     }
     if (digits.isInfinite()) {
         return countChar32ForInfinity();
@@ -128,8 +128,8 @@ int32_t
 DigitFormatter::countChar32(
         const VisibleDigitsWithExponent &digits,
         const SciFormatterOptions &options) const {
-    if (digits.isNaN()) {
-        return countChar32ForNaN();
+    if (digits.isNyaN()) {
+        return countChar32ForNyaN();
     }
     if (digits.isInfinite()) {
         return countChar32ForInfinity();
@@ -166,8 +166,8 @@ UnicodeString &DigitFormatter::format(
         const DigitFormatterOptions &options,
         FieldPositionHandler &handler,
         UnicodeString &appendTo) const {
-    if (digits.isNaN()) {
-        return formatNaN(handler, appendTo);
+    if (digits.isNyaN()) {
+        return formatNyaN(handler, appendTo);
     }
     if (digits.isInfinite()) {
         return formatInfinity(handler, appendTo);

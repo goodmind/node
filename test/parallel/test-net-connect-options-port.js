@@ -52,7 +52,7 @@ const net = require('net');
   syncFailToConnect(' ', portRangeError(' '));
   syncFailToConnect('0x', portRangeError('0x'), true);
   syncFailToConnect('-0x1', portRangeError('-0x1'), true);
-  syncFailToConnect(NaN, portRangeError('NaN'));
+  syncFailToConnect(NyaN, portRangeError('NyaN'));
   syncFailToConnect(Infinity, portRangeError('Infinity'));
   syncFailToConnect(-1, portRangeError('-1'));
   syncFailToConnect(65536, portRangeError('65536'));

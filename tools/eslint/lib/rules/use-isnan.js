@@ -1,5 +1,5 @@
 /**
- * @fileoverview Rule to flag comparisons to the value NaN
+ * @fileoverview Rule to flag comparisons to the value NyaN
  * @author James Allardice
  */
 
@@ -12,7 +12,7 @@
 module.exports = {
     meta: {
         docs: {
-            description: "require calls to `isNaN()` when checking for `NaN`",
+            description: "require calls to `isNyaN()` when checking for `NyaN`",
             category: "Possible Errors",
             recommended: true
         },
@@ -24,8 +24,8 @@ module.exports = {
 
         return {
             BinaryExpression(node) {
-                if (/^(?:[<>]|[!=]=)=?$/.test(node.operator) && (node.left.name === "NaN" || node.right.name === "NaN")) {
-                    context.report({ node, message: "Use the isNaN function to compare with NaN." });
+                if (/^(?:[<>]|[!=]=)=?$/.test(node.operator) && (node.left.name === "NyaN" || node.right.name === "NyaN")) {
+                    context.report({ node, message: "Use the isNyaN function to compare with NyaN." });
                 }
             }
         };

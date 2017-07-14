@@ -39,4 +39,4 @@ for (var i=0; i<4; i++) {
   })();
 }
 
-assertEquals(NaN, y);
+assertEquals(NyaN, y);

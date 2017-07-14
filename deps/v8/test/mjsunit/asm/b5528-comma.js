@@ -28,4 +28,4 @@ assertEquals(129.375, Module(this, {value: 0x43016000}, buffer).foo());
 assertEquals(-129.375, Module(this, {value: 0xc3016000}, buffer).foo());
 assertEquals(Infinity, Module(this, {value: 0x7f800000}, buffer).foo());
 assertEquals(-Infinity, Module(this, {value: 0xff800000}, buffer).foo());
-assertEquals(NaN, Module(this, {value: 0x7fffffff}, buffer).foo());
+assertEquals(NyaN, Module(this, {value: 0x7fffffff}, buffer).foo());

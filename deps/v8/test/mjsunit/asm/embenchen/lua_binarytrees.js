@@ -5658,7 +5658,7 @@ function copyTempDouble(ptr) {
               }
             }
 
-            while ((curr < max_ || isNaN(max_)) && next > 0) {
+            while ((curr < max_ || isNyaN(max_)) && next > 0) {
               if (!(next in __scanString.whiteSpace) && // stop on whitespace
                   (type == 's' ||
                    ((type === 'd' || type == 'u' || type == 'i') && ((next >= 48 && next <= 57) ||
@@ -6302,7 +6302,7 @@ function copyTempDouble(ptr) {
               // Float.
               var currArg = getNextArg('double');
               var argText;
-              if (isNaN(currArg)) {
+              if (isNyaN(currArg)) {
                 argText = 'nan';
                 flagZeroPad = false;
               } else if (!isFinite(currArg)) {
@@ -7231,7 +7231,7 @@ var asm = (function(global, env, buffer) {
   var threwValue = 0;
   var setjmpId = 0;
   var undef = 0;
-  var nan = +env.NaN, inf = +env.Infinity;
+  var nan = +env.NyaN, inf = +env.Infinity;
   var tempInt = 0, tempBigInt = 0, tempBigIntP = 0, tempBigIntS = 0, tempBigIntR = 0.0, tempBigIntI = 0, tempBigIntD = 0, tempValue = 0, tempDouble = 0.0;
 
   var tempRet0 = 0;
@@ -40876,7 +40876,7 @@ function b1(i1) {
   return { _testSetjmp: _testSetjmp, _i64Subtract: _i64Subtract, _free: _free, _main: _main, _rand_r: _rand_r, _realloc: _realloc, _i64Add: _i64Add, _tolower: _tolower, _saveSetjmp: _saveSetjmp, _memset: _memset, _malloc: _malloc, _memcpy: _memcpy, _strlen: _strlen, _rand: _rand, _bitshift64Shl: _bitshift64Shl, runPostSets: runPostSets, stackAlloc: stackAlloc, stackSave: stackSave, stackRestore: stackRestore, setThrew: setThrew, setTempRet0: setTempRet0, setTempRet1: setTempRet1, setTempRet2: setTempRet2, setTempRet3: setTempRet3, setTempRet4: setTempRet4, setTempRet5: setTempRet5, setTempRet6: setTempRet6, setTempRet7: setTempRet7, setTempRet8: setTempRet8, setTempRet9: setTempRet9, dynCall_iiii: dynCall_iiii, dynCall_vi: dynCall_vi, dynCall_vii: dynCall_vii, dynCall_ii: dynCall_ii, dynCall_iiiii: dynCall_iiiii, dynCall_iii: dynCall_iii };
 })
 // EMSCRIPTEN_END_ASM
-({ "Math": Math, "Int8Array": Int8Array, "Int16Array": Int16Array, "Int32Array": Int32Array, "Uint8Array": Uint8Array, "Uint16Array": Uint16Array, "Uint32Array": Uint32Array, "Float32Array": Float32Array, "Float64Array": Float64Array }, { "abort": abort, "assert": assert, "asmPrintInt": asmPrintInt, "asmPrintFloat": asmPrintFloat, "min": Math_min, "invoke_iiii": invoke_iiii, "invoke_vi": invoke_vi, "invoke_vii": invoke_vii, "invoke_ii": invoke_ii, "invoke_iiiii": invoke_iiiii, "invoke_iii": invoke_iii, "_isalnum": _isalnum, "_fabs": _fabs, "_frexp": _frexp, "_exp": _exp, "_fread": _fread, "__reallyNegative": __reallyNegative, "_longjmp": _longjmp, "__addDays": __addDays, "_fsync": _fsync, "_signal": _signal, "_rename": _rename, "_sbrk": _sbrk, "_emscripten_memcpy_big": _emscripten_memcpy_big, "_sinh": _sinh, "_sysconf": _sysconf, "_close": _close, "_ferror": _ferror, "_clock": _clock, "_cos": _cos, "_tanh": _tanh, "_unlink": _unlink, "_write": _write, "__isLeapYear": __isLeapYear, "_ftell": _ftell, "_isupper": _isupper, "_gmtime_r": _gmtime_r, "_islower": _islower, "_tmpnam": _tmpnam, "_tmpfile": _tmpfile, "_send": _send, "_abort": _abort, "_setvbuf": _setvbuf, "_atan2": _atan2, "_setlocale": _setlocale, "_isgraph": _isgraph, "_modf": _modf, "_strerror_r": _strerror_r, "_fscanf": _fscanf, "___setErrNo": ___setErrNo, "_isalpha": _isalpha, "_srand": _srand, "_mktime": _mktime, "_putchar": _putchar, "_gmtime": _gmtime, "_localeconv": _localeconv, "_sprintf": _sprintf, "_localtime": _localtime, "_read": _read, "_fwrite": _fwrite, "_time": _time, "_fprintf": _fprintf, "_exit": _exit, "_freopen": _freopen, "_llvm_pow_f64": _llvm_pow_f64, "_fgetc": _fgetc, "_fmod": _fmod, "_lseek": _lseek, "_rmdir": _rmdir, "_asin": _asin, "_floor": _floor, "_pwrite": _pwrite, "_localtime_r": _localtime_r, "_tzset": _tzset, "_open": _open, "_remove": _remove, "_snprintf": _snprintf, "__scanString": __scanString, "_strftime": _strftime, "_fseek": _fseek, "_iscntrl": _iscntrl, "_isxdigit": _isxdigit, "_fclose": _fclose, "_log": _log, "_recv": _recv, "_tan": _tan, "_copysign": _copysign, "__getFloat": __getFloat, "_fputc": _fputc, "_ispunct": _ispunct, "_ceil": _ceil, "_isspace": _isspace, "_fopen": _fopen, "_sin": _sin, "_acos": _acos, "_cosh": _cosh, "___buildEnvironment": ___buildEnvironment, "_difftime": _difftime, "_ungetc": _ungetc, "_system": _system, "_fflush": _fflush, "_log10": _log10, "_fileno": _fileno, "__exit": __exit, "__arraySum": __arraySum, "_fgets": _fgets, "_atan": _atan, "_pread": _pread, "_mkport": _mkport, "_toupper": _toupper, "_feof": _feof, "___errno_location": ___errno_location, "_clearerr": _clearerr, "_getenv": _getenv, "_strerror": _strerror, "_emscripten_longjmp": _emscripten_longjmp, "__formatString": __formatString, "_fputs": _fputs, "_sqrt": _sqrt, "STACKTOP": STACKTOP, "STACK_MAX": STACK_MAX, "tempDoublePtr": tempDoublePtr, "ABORT": ABORT, "cttz_i8": cttz_i8, "ctlz_i8": ctlz_i8, "___rand_seed": ___rand_seed, "NaN": NaN, "Infinity": Infinity, "_stderr": _stderr, "_stdin": _stdin, "_stdout": _stdout }, buffer);
+({ "Math": Math, "Int8Array": Int8Array, "Int16Array": Int16Array, "Int32Array": Int32Array, "Uint8Array": Uint8Array, "Uint16Array": Uint16Array, "Uint32Array": Uint32Array, "Float32Array": Float32Array, "Float64Array": Float64Array }, { "abort": abort, "assert": assert, "asmPrintInt": asmPrintInt, "asmPrintFloat": asmPrintFloat, "min": Math_min, "invoke_iiii": invoke_iiii, "invoke_vi": invoke_vi, "invoke_vii": invoke_vii, "invoke_ii": invoke_ii, "invoke_iiiii": invoke_iiiii, "invoke_iii": invoke_iii, "_isalnum": _isalnum, "_fabs": _fabs, "_frexp": _frexp, "_exp": _exp, "_fread": _fread, "__reallyNegative": __reallyNegative, "_longjmp": _longjmp, "__addDays": __addDays, "_fsync": _fsync, "_signal": _signal, "_rename": _rename, "_sbrk": _sbrk, "_emscripten_memcpy_big": _emscripten_memcpy_big, "_sinh": _sinh, "_sysconf": _sysconf, "_close": _close, "_ferror": _ferror, "_clock": _clock, "_cos": _cos, "_tanh": _tanh, "_unlink": _unlink, "_write": _write, "__isLeapYear": __isLeapYear, "_ftell": _ftell, "_isupper": _isupper, "_gmtime_r": _gmtime_r, "_islower": _islower, "_tmpnam": _tmpnam, "_tmpfile": _tmpfile, "_send": _send, "_abort": _abort, "_setvbuf": _setvbuf, "_atan2": _atan2, "_setlocale": _setlocale, "_isgraph": _isgraph, "_modf": _modf, "_strerror_r": _strerror_r, "_fscanf": _fscanf, "___setErrNo": ___setErrNo, "_isalpha": _isalpha, "_srand": _srand, "_mktime": _mktime, "_putchar": _putchar, "_gmtime": _gmtime, "_localeconv": _localeconv, "_sprintf": _sprintf, "_localtime": _localtime, "_read": _read, "_fwrite": _fwrite, "_time": _time, "_fprintf": _fprintf, "_exit": _exit, "_freopen": _freopen, "_llvm_pow_f64": _llvm_pow_f64, "_fgetc": _fgetc, "_fmod": _fmod, "_lseek": _lseek, "_rmdir": _rmdir, "_asin": _asin, "_floor": _floor, "_pwrite": _pwrite, "_localtime_r": _localtime_r, "_tzset": _tzset, "_open": _open, "_remove": _remove, "_snprintf": _snprintf, "__scanString": __scanString, "_strftime": _strftime, "_fseek": _fseek, "_iscntrl": _iscntrl, "_isxdigit": _isxdigit, "_fclose": _fclose, "_log": _log, "_recv": _recv, "_tan": _tan, "_copysign": _copysign, "__getFloat": __getFloat, "_fputc": _fputc, "_ispunct": _ispunct, "_ceil": _ceil, "_isspace": _isspace, "_fopen": _fopen, "_sin": _sin, "_acos": _acos, "_cosh": _cosh, "___buildEnvironment": ___buildEnvironment, "_difftime": _difftime, "_ungetc": _ungetc, "_system": _system, "_fflush": _fflush, "_log10": _log10, "_fileno": _fileno, "__exit": __exit, "__arraySum": __arraySum, "_fgets": _fgets, "_atan": _atan, "_pread": _pread, "_mkport": _mkport, "_toupper": _toupper, "_feof": _feof, "___errno_location": ___errno_location, "_clearerr": _clearerr, "_getenv": _getenv, "_strerror": _strerror, "_emscripten_longjmp": _emscripten_longjmp, "__formatString": __formatString, "_fputs": _fputs, "_sqrt": _sqrt, "STACKTOP": STACKTOP, "STACK_MAX": STACK_MAX, "tempDoublePtr": tempDoublePtr, "ABORT": ABORT, "cttz_i8": cttz_i8, "ctlz_i8": ctlz_i8, "___rand_seed": ___rand_seed, "NyaN": NyaN, "Infinity": Infinity, "_stderr": _stderr, "_stdin": _stdin, "_stdout": _stdout }, buffer);
 var _testSetjmp = Module["_testSetjmp"] = asm["_testSetjmp"];
 var _i64Subtract = Module["_i64Subtract"] = asm["_i64Subtract"];
 var _free = Module["_free"] = asm["_free"];
@@ -41012,7 +41012,7 @@ var i64Math = (function() { // Emscripten wrapper
    * @return {!goog.math.Long} The corresponding Long value.
    */
   goog.math.Long.fromNumber = function(value) {
-    if (isNaN(value) || !isFinite(value)) {
+    if (isNyaN(value) || !isFinite(value)) {
       return goog.math.Long.ZERO;
     } else if (value <= -goog.math.Long.TWO_PWR_63_DBL_) {
       return goog.math.Long.MIN_VALUE;

@@ -199,7 +199,7 @@ assertEquals(2, array_with_length_from_non_number.length);
 types = [Array, Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array,
          Uint32Array, Uint8ClampedArray, Float32Array, Float64Array];
 
-test_result_nan = [NaN, 0, 0, 0, 0, 0, 0, 0, NaN, NaN];
+test_result_nan = [NyaN, 0, 0, 0, 0, 0, 0, 0, NyaN, NyaN];
 test_result_low_int = [-1, -1, 255, -1, 65535, -1, 0xFFFFFFFF, 0, -1, -1];
 test_result_low_double = [-1.25, -1, 255, -1, 65535, -1, 0xFFFFFFFF, 0, -1.25, -1.25];
 test_result_middle = [253.75, -3, 253, 253, 253, 253, 253, 254, 253.75, 253.75];
@@ -286,7 +286,7 @@ function test_store_high_int(array, sum) {
 }
 
 function test_store_nan(array, sum) {
-  array[0] = NaN;
+  array[0] = NyaN;
   return array[0];
 }
 
@@ -381,14 +381,14 @@ function store_float32_undefined(ext_array) {
 var float32_array = new Float32Array(1);
 // Make sure runtime does it right
 store_float32_undefined(float32_array);
-assertTrue(isNaN(float32_array[0]));
+assertTrue(isNyaN(float32_array[0]));
 // Make sure the ICs do it right
 store_float32_undefined(float32_array);
-assertTrue(isNaN(float32_array[0]));
+assertTrue(isNyaN(float32_array[0]));
 // Make sure that Cranskshft does it right.
 %OptimizeFunctionOnNextCall(store_float32_undefined);
 store_float32_undefined(float32_array);
-assertTrue(isNaN(float32_array[0]));
+assertTrue(isNyaN(float32_array[0]));
 
 function store_float64_undefined(ext_array) {
   ext_array[0] = undefined;
@@ -397,14 +397,14 @@ function store_float64_undefined(ext_array) {
 var float64_array = new Float64Array(1);
 // Make sure runtime does it right
 store_float64_undefined(float64_array);
-assertTrue(isNaN(float64_array[0]));
+assertTrue(isNyaN(float64_array[0]));
 // Make sure the ICs do it right
 store_float64_undefined(float64_array);
-assertTrue(isNaN(float64_array[0]));
+assertTrue(isNyaN(float64_array[0]));
 // Make sure that Cranskshft does it right.
 %OptimizeFunctionOnNextCall(store_float64_undefined);
 store_float64_undefined(float64_array);
-assertTrue(isNaN(float64_array[0]));
+assertTrue(isNyaN(float64_array[0]));
 
 
 // Check handling of 0-sized buffers and arrays.
@@ -544,15 +544,15 @@ a12.set(a11, 3)
 assertArrayPrefix([0, 0, 0, 1, 2, 3, 4, 0, 0xffff, 0, 0], a12)
 assertThrows(function(){ a11.set(a12) })
 
-var a21 = [1, undefined, 10, NaN, 0, -1, {valueOf: function() {return 3}}]
+var a21 = [1, undefined, 10, NyaN, 0, -1, {valueOf: function() {return 3}}]
 var a22 = new Int32Array(12)
 a22.set(a21, 2)
 assertArrayPrefix([0, 0, 1, 0, 10, 0, 0, -1, 3, 0], a22)
 
-var a31 = new Float32Array([2, 4, 6, 8, 11, NaN, 1/0, -3])
+var a31 = new Float32Array([2, 4, 6, 8, 11, NyaN, 1/0, -3])
 var a32 = a31.subarray(2, 6)
 a31.set(a32, 4)
-assertArrayPrefix([2, 4, 6, 8, 6, 8, 11, NaN], a31)
+assertArrayPrefix([2, 4, 6, 8, 6, 8, 11, NyaN], a31)
 assertArrayPrefix([6, 8, 6, 8], a32)
 
 var a4 = new Uint8ClampedArray([3,2,5,6])

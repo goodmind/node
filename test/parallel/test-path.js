@@ -365,7 +365,7 @@ assert.strictEqual(failures.length, 0, failures.join(''));
 
 
 // Test thrown TypeErrors
-const typeErrorTests = [true, false, 7, null, {}, undefined, [], NaN];
+const typeErrorTests = [true, false, 7, null, {}, undefined, [], NyaN];
 
 function fail(fn) {
   const args = Array.from(arguments).slice(1);

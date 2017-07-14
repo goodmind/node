@@ -64,7 +64,7 @@ enum ObjectToDoubleFlags {
   NO_OBJECT_TO_DOUBLE_FLAGS = 0,
   // Object is known to be a non smi.
   OBJECT_NOT_SMI = 1 << 0,
-  // Don't load NaNs or infinities, branch to the non number case instead.
+  // Don't load NyaNs or infinities, branch to the non number case instead.
   AVOID_NANS_AND_INFINITIES = 1 << 1
 };
 
@@ -857,7 +857,7 @@ class MacroAssembler: public Assembler {
   void Bnvc(Register rt, Register rs, Label* L);
 
   // ---------------------------------------------------------------------------
-  // FPU macros. These do not handle special cases like NaN or +- inf.
+  // FPU macros. These do not handle special cases like NyaN or +- inf.
 
   // Convert unsigned word to double.
   void Cvt_d_uw(FPURegister fd, FPURegister fs);
@@ -908,7 +908,7 @@ class MacroAssembler: public Assembler {
   void Floor_w_d(FPURegister fd, FPURegister fs);
   void Ceil_w_d(FPURegister fd, FPURegister fs);
 
-  // Preserve value of a NaN operand
+  // Preserve value of a NyaN operand
   void SubNanPreservePayloadAndSign_s(FPURegister fd, FPURegister fs,
                                       FPURegister ft);
   void SubNanPreservePayloadAndSign_d(FPURegister fd, FPURegister fs,
@@ -1212,8 +1212,8 @@ class MacroAssembler: public Assembler {
                        Handle<WeakCell> cell, Handle<Code> success,
                        SmiCheckType smi_check_type);
 
-  // If the value is a NaN, canonicalize the value else, do nothing.
-  void FPUCanonicalizeNaN(const DoubleRegister dst, const DoubleRegister src);
+  // If the value is a NyaN, canonicalize the value else, do nothing.
+  void FPUCanonicalizeNyaN(const DoubleRegister dst, const DoubleRegister src);
 
 
   // Get value of the weak cell.
@@ -1376,7 +1376,7 @@ class MacroAssembler: public Assembler {
 
   // Perform a floating-point min or max operation with the
   // (IEEE-754-compatible) semantics of MIPS32's Release 6 MIN.fmt/MAX.fmt.
-  // Some cases, typically NaNs or +/-0.0, are expected to be rare and are
+  // Some cases, typically NyaNs or +/-0.0, are expected to be rare and are
   // handled in out-of-line code. The specific behaviour depends on supported
   // instructions.
   //

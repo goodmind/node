@@ -70,7 +70,7 @@ assertEquals("zero", f2(0), "0-1-switch.0");
 assertEquals("one", f2(1), "0-1-switch.1");
 assertEquals("default", f2(7), "0-1-switch.2");
 assertEquals("default", f2(-1), "0-1-switch.-1");
-assertEquals("default", f2(NaN), "0-1-switch.NaN");
+assertEquals("default", f2(NyaN), "0-1-switch.NyaN");
 assertEquals("default", f2(Math.pow(2,34)), "0-1-switch.largeNum");
 assertEquals("default", f2("0"), "0-1-switch.string");
 assertEquals("default", f2(false), "0-1-switch.bool");
@@ -409,7 +409,7 @@ function test_switch(clause_type, test_type, feedback, optimize) {
   } else if (test_type === 'oddball') {
     pairs = [
       { value: null, expected: undefined },
-      { value: NaN, expected: undefined },
+      { value: NyaN, expected: undefined },
       { value: undefined, expected: undefined }
     ];
   } else if (test_type === 'smi') {

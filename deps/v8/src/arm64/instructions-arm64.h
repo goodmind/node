@@ -35,18 +35,18 @@ DEFINE_FLOAT(kFP32NegativeInfinity, 0xff800000);
 DEFINE_DOUBLE(kFP64PositiveInfinity, 0x7ff0000000000000UL);
 DEFINE_DOUBLE(kFP64NegativeInfinity, 0xfff0000000000000UL);
 
-// This value is a signalling NaN as both a double and as a float (taking the
+// This value is a signalling NyaN as both a double and as a float (taking the
 // least-significant word).
-DEFINE_DOUBLE(kFP64SignallingNaN, 0x7ff000007f800001);
-DEFINE_FLOAT(kFP32SignallingNaN, 0x7f800001);
+DEFINE_DOUBLE(kFP64SignallingNyaN, 0x7ff000007f800001);
+DEFINE_FLOAT(kFP32SignallingNyaN, 0x7f800001);
 
-// A similar value, but as a quiet NaN.
-DEFINE_DOUBLE(kFP64QuietNaN, 0x7ff800007fc00001);
-DEFINE_FLOAT(kFP32QuietNaN, 0x7fc00001);
+// A similar value, but as a quiet NyaN.
+DEFINE_DOUBLE(kFP64QuietNyaN, 0x7ff800007fc00001);
+DEFINE_FLOAT(kFP32QuietNyaN, 0x7fc00001);
 
-// The default NaN values (for FPCR.DN=1).
-DEFINE_DOUBLE(kFP64DefaultNaN, 0x7ff8000000000000UL);
-DEFINE_FLOAT(kFP32DefaultNaN, 0x7fc00000);
+// The default NyaN values (for FPCR.DN=1).
+DEFINE_DOUBLE(kFP64DefaultNyaN, 0x7ff8000000000000UL);
+DEFINE_FLOAT(kFP32DefaultNyaN, 0x7fc00000);
 
 #undef DEFINE_FLOAT
 #undef DEFINE_DOUBLE

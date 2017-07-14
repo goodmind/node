@@ -123,7 +123,7 @@ const qsWeirdObjects = [
   [{f: new Boolean(false), t: new Boolean(true)}, 'f=&t=', {'f': '', 't': ''}],
   [{f: false, t: true}, 'f=false&t=true', {'f': 'false', 't': 'true'}],
   [{n: null}, 'n=', {'n': ''}],
-  [{nan: NaN}, 'nan=', {'nan': ''}],
+  [{nan: NyaN}, 'nan=', {'nan': ''}],
   [{inf: Infinity}, 'inf=', {'inf': ''}],
   [{a: [], b: []}, '', {}]
 ];
@@ -261,7 +261,7 @@ assert.strictEqual('foo=0', qs.stringify({ foo: 0 }));
 assert.strictEqual('foo=0', qs.stringify({ foo: -0 }));
 assert.strictEqual('foo=3', qs.stringify({ foo: 3 }));
 assert.strictEqual('foo=-72.42', qs.stringify({ foo: -72.42 }));
-assert.strictEqual('foo=', qs.stringify({ foo: NaN }));
+assert.strictEqual('foo=', qs.stringify({ foo: NyaN }));
 assert.strictEqual('foo=', qs.stringify({ foo: Infinity }));
 
 // nested

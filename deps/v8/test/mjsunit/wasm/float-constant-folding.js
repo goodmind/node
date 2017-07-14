@@ -8,63 +8,63 @@ load("test/mjsunit/wasm/wasm-constants.js");
 load("test/mjsunit/wasm/wasm-module-builder.js");
 
 (function() {
-  print("F32: sNaN - 0 = qNaN");
+  print("F32: sNyaN - 0 = qNyaN");
   var builder = new WasmModuleBuilder();
   builder.addFunction("F32Sub0", kSig_i_i).addBody(
       [ kExprGetLocal, 0, kExprF32ReinterpretI32, kExprF32Const, 0x00, 0x00,
           0x00, 0x00, // 0.0
           kExprF32Sub, kExprI32ReinterpretF32, ]).exportFunc();
   var module = builder.instantiate();
-  // F32Sub0(signalling_NaN)
+  // F32Sub0(signalling_NyaN)
   assertEquals(0x7fe00000, module.exports.F32Sub0(0x7fa00000));
 })();
 
 (function() {
-  print("F32: -0 sNaN = qNaN");
+  print("F32: -0 sNyaN = qNyaN");
   var builder = new WasmModuleBuilder();
   builder.addFunction("F32Sub0", kSig_i_i).addBody(
       [ kExprF32Const, 0x00, 0x00, 0x00, 0x80, // 0.0
       kExprGetLocal, 0, kExprF32ReinterpretI32, kExprF32Sub,
           kExprI32ReinterpretF32, ]).exportFunc();
   var module = builder.instantiate();
-  // F32Sub0(signalling_NaN)
+  // F32Sub0(signalling_NyaN)
   assertEquals(0x7fe00000, module.exports.F32Sub0(0x7fa00000));
 })();
 
 (function() {
-  print("F32: sNaN - X = qNaN");
+  print("F32: sNyaN - X = qNyaN");
   var builder = new WasmModuleBuilder();
-  builder.addFunction("F32NaNSubX", kSig_i_i).addBody(
+  builder.addFunction("F32NyaNSubX", kSig_i_i).addBody(
       [ kExprF32Const, 0x00, 0x00, 0xa0, 0x7f, kExprF32Const, 0x12, 0x34, 0x56,
           0x78, kExprF32Sub, kExprI32ReinterpretF32, ]).exportFunc();
   var module = builder.instantiate();
-  assertEquals(0x7fe00000, module.exports.F32NaNSubX());
+  assertEquals(0x7fe00000, module.exports.F32NyaNSubX());
 })();
 
 (function() {
-  print("F32: X - sNaN = qNaN");
+  print("F32: X - sNyaN = qNyaN");
   var builder = new WasmModuleBuilder();
-  builder.addFunction("F32XSubNaN", kSig_i_i).addBody(
+  builder.addFunction("F32XSubNyaN", kSig_i_i).addBody(
       [ kExprF32Const, 0x12, 0x34, 0x56, 0x78, kExprF32Const, 0x00, 0x00, 0xa0,
           0x7f, kExprF32Sub, kExprI32ReinterpretF32, ]).exportFunc();
   var module = builder.instantiate();
-  assertEquals(0x7fe00000, module.exports.F32XSubNaN());
+  assertEquals(0x7fe00000, module.exports.F32XSubNyaN());
 })();
 
 (function() {
-  print("F64: X + sNaN = qNaN");
+  print("F64: X + sNyaN = qNyaN");
   var builder = new WasmModuleBuilder();
-  builder.addFunction("F32XAddNaN", kSig_i_i).addBody(
+  builder.addFunction("F32XAddNyaN", kSig_i_i).addBody(
       [ kExprF64Const, 0xde, 0xbc, 0x0a, 0x89, 0x67, 0x45, 0x23, 0x01,
           kExprF64Const, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf2, 0x7f,
           kExprF64Add, kExprI64ReinterpretF64, kExprI64Const, 32, kExprI64ShrU,
           kExprI32ConvertI64, ]).exportFunc();
   var module = builder.instantiate();
-  assertEquals(0x7ffa0000, module.exports.F32XAddNaN());
+  assertEquals(0x7ffa0000, module.exports.F32XAddNyaN());
 })();
 
 (function() {
-  print("F64: sNaN - 0 = qNaN");
+  print("F64: sNyaN - 0 = qNyaN");
   var builder = new WasmModuleBuilder();
   builder.addFunction("F64Sub0", kSig_i_i).addBody(
       [ kExprI64Const, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0xf9, 0xff,
@@ -77,7 +77,7 @@ load("test/mjsunit/wasm/wasm-module-builder.js");
 })();
 
 (function() {
-  print("F64: -0 - sNaN = qNaN");
+  print("F64: -0 - sNyaN = qNyaN");
   var builder = new WasmModuleBuilder();
   builder.addFunction("F64Sub0", kSig_i_i).addBody(
       [ kExprF64Const, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, // 0.0
@@ -89,31 +89,31 @@ load("test/mjsunit/wasm/wasm-module-builder.js");
 })();
 
 (function() {
-  print("F64: sNaN - X = qNaN");
+  print("F64: sNyaN - X = qNyaN");
   var builder = new WasmModuleBuilder();
-  builder.addFunction("F64NaNSubX", kSig_i_i).addBody(
+  builder.addFunction("F64NyaNSubX", kSig_i_i).addBody(
       [ kExprF64Const, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf2, 0x7f,
           kExprF64Const, 0xde, 0xbc, 0x0a, 0x89, 0x67, 0x45, 0x23, 0x01,
           kExprF64Sub, kExprI64ReinterpretF64, kExprI64Const, 32, kExprI64ShrU,
           kExprI32ConvertI64, ]).exportFunc();
   var module = builder.instantiate();
-  assertEquals(0x7ffa0000, module.exports.F64NaNSubX());
+  assertEquals(0x7ffa0000, module.exports.F64NyaNSubX());
 })();
 
 (function() {
-  print("F64: X - sNaN = qNaN");
+  print("F64: X - sNyaN = qNyaN");
   var builder = new WasmModuleBuilder();
-  builder.addFunction("F64XSubNaN", kSig_i_i).addBody(
+  builder.addFunction("F64XSubNyaN", kSig_i_i).addBody(
       [ kExprF64Const, 0xde, 0xbc, 0x0a, 0x89, 0x67, 0x45, 0x23, 0x01,
           kExprF64Const, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf2, 0x7f,
           kExprF64Sub, kExprI64ReinterpretF64, kExprI64Const, 32, kExprI64ShrU,
           kExprI32ConvertI64, ]).exportFunc();
   var module = builder.instantiate();
-  assertEquals(0x7ffa0000, module.exports.F64XSubNaN());
+  assertEquals(0x7ffa0000, module.exports.F64XSubNyaN());
 })();
 
 (function() {
-  print("F64: sNaN * 1 = qNaN");
+  print("F64: sNyaN * 1 = qNyaN");
   var builder = new WasmModuleBuilder();
   builder.addFunction("F64Mul1", kSig_i_i).addBody(
       [ kExprI64Const, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0xf9, 0xff,
@@ -125,19 +125,19 @@ load("test/mjsunit/wasm/wasm-module-builder.js");
 })();
 
 (function() {
-  print("F64: X * sNaN = qNaN");
+  print("F64: X * sNyaN = qNyaN");
   var builder = new WasmModuleBuilder();
-  builder.addFunction("F64XMulNaN", kSig_i_i).addBody(
+  builder.addFunction("F64XMulNyaN", kSig_i_i).addBody(
       [ kExprF64Const, 0xde, 0xbc, 0x0a, 0x89, 0x67, 0x45, 0x23, 0x01,
           kExprF64Const, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf2, 0x7f,
           kExprF64Mul, kExprI64ReinterpretF64, kExprI64Const, 32, kExprI64ShrU,
           kExprI32ConvertI64, ]).exportFunc();
   var module = builder.instantiate();
-  assertEquals(0x7ffa0000, module.exports.F64XMulNaN());
+  assertEquals(0x7ffa0000, module.exports.F64XMulNyaN());
 })();
 
 (function() {
-  print("F64: sNaN / 1 = qNaN");
+  print("F64: sNyaN / 1 = qNyaN");
   var builder = new WasmModuleBuilder();
   builder.addFunction("F64Div1", kSig_i_i).addBody(
       [ kExprI64Const, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0xf9, 0xff,
@@ -149,7 +149,7 @@ load("test/mjsunit/wasm/wasm-module-builder.js");
 })();
 
 (function() {
-  print("F64: sNaN / -1 = qNaN");
+  print("F64: sNyaN / -1 = qNyaN");
   var builder = new WasmModuleBuilder();
   builder.addFunction("F64Div1", kSig_i_i).addBody(
       [ kExprI64Const, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0xf9, 0xff,
@@ -161,7 +161,7 @@ load("test/mjsunit/wasm/wasm-module-builder.js");
 })();
 
 (function() {
-  print("F64: sNaN / -1 = qNaN");
+  print("F64: sNyaN / -1 = qNyaN");
   var builder = new WasmModuleBuilder();
   builder.addFunction("F64Div1", kSig_i_i)
     .addBody([
@@ -180,31 +180,31 @@ load("test/mjsunit/wasm/wasm-module-builder.js");
 })();
 
 (function() {
-  print("F64: X / sNaN = qNaN");
+  print("F64: X / sNyaN = qNyaN");
   var builder = new WasmModuleBuilder();
-  builder.addFunction("F64XDivNaN", kSig_i_i).addBody(
+  builder.addFunction("F64XDivNyaN", kSig_i_i).addBody(
       [ kExprF64Const, 0xde, 0xbc, 0x0a, 0x89, 0x67, 0x45, 0x23, 0x01,
           kExprF64Const, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf2, 0x7f,
           kExprF64Div, kExprI64ReinterpretF64, kExprI64Const, 32, kExprI64ShrU,
           kExprI32ConvertI64, ]).exportFunc();
   var module = builder.instantiate();
-  assertEquals(0x7ffa0000, module.exports.F64XDivNaN());
+  assertEquals(0x7ffa0000, module.exports.F64XDivNyaN());
 })();
 
 (function() {
-  print("F64: sNaN / X = qNaN");
+  print("F64: sNyaN / X = qNyaN");
   var builder = new WasmModuleBuilder();
-  builder.addFunction("F64NaNDivX", kSig_i_i).addBody(
+  builder.addFunction("F64NyaNDivX", kSig_i_i).addBody(
       [ kExprF64Const, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf2, 0x7f,
           kExprF64Const, 0xde, 0xbc, 0x0a, 0x89, 0x67, 0x45, 0x23, 0x01,
           kExprF64Div, kExprI64ReinterpretF64, kExprI64Const, 32, kExprI64ShrU,
           kExprI32ConvertI64, ]).exportFunc();
   var module = builder.instantiate();
-  assertEquals(0x7ffa0000, module.exports.F64NaNDivX());
+  assertEquals(0x7ffa0000, module.exports.F64NyaNDivX());
 })();
 
 (function() {
-  print("F32ConvertF64(sNaN) = qNaN");
+  print("F32ConvertF64(sNyaN) = qNyaN");
   var builder = new WasmModuleBuilder();
   builder.addFunction("F32ConvertF64X", kSig_i_i).addBody(
       [ kExprF64Const, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf2, 0x7f,
@@ -214,7 +214,7 @@ load("test/mjsunit/wasm/wasm-module-builder.js");
 })();
 
 (function() {
-  print("F64ConvertF32(sNaN) = qNaN");
+  print("F64ConvertF32(sNyaN) = qNyaN");
   var builder = new WasmModuleBuilder();
   builder.addFunction("F64ConvertF32X", kSig_i_i).addBody(
       [ kExprF32Const, 0x00, 0x00, 0xa0, 0x7f, kExprF64ConvertF32,
@@ -225,7 +225,7 @@ load("test/mjsunit/wasm/wasm-module-builder.js");
 })();
 
 (function() {
-  print("F64ConvertF32(F32ConvertF64(sNaN)) = qNaN");
+  print("F64ConvertF32(F32ConvertF64(sNyaN)) = qNyaN");
   var builder = new WasmModuleBuilder();
   builder.addFunction("F64toF32toF64", kSig_i_i).addBody(
       [ kExprI64Const, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0xf9, 0xff,

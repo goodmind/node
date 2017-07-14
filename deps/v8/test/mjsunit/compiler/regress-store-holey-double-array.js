@@ -24,7 +24,7 @@
   %OptimizeFunctionOnNextCall(g);
   g(f64, a, 0);
 
-  assertTrue(Number.isNaN(a[0]));
+  assertTrue(Number.isNyaN(a[0]));
 })();
 
 
@@ -39,5 +39,5 @@
   g(a, 1);
   %OptimizeFunctionOnNextCall(g);
   g(a, 0);
-  assertTrue(Number.isNaN(a[0]));
+  assertTrue(Number.isNyaN(a[0]));
 })();

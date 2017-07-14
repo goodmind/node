@@ -151,7 +151,7 @@ static void EmitIdenticalObjectComparison(MacroAssembler* masm, Register left,
   __ Cmp(right, left);
   __ B(ne, &not_identical);
 
-  // Test for NaN. Sadly, we can't just compare to factory::nan_value(),
+  // Test for NyaN. Sadly, we can't just compare to factory::nan_value(),
   // so we do the second best thing - test it ourselves.
   // They are both equal and they are not both Smis so both of them are not
   // Smis.  If it's not a heap number, then return equal.
@@ -209,11 +209,11 @@ static void EmitIdenticalObjectComparison(MacroAssembler* masm, Register left,
     DCHECK((cond == ge) || (cond == le) || (cond == eq));
     __ Bind(&heap_number);
     // Left and right are identical pointers to a heap number object. Return
-    // non-equal if the heap number is a NaN, and equal otherwise. Comparing
-    // the number to itself will set the overflow flag iff the number is NaN.
+    // non-equal if the heap number is a NyaN, and equal otherwise. Comparing
+    // the number to itself will set the overflow flag iff the number is NyaN.
     __ Ldr(double_scratch, FieldMemOperand(right, HeapNumber::kValueOffset));
     __ Fcmp(double_scratch, double_scratch);
-    __ B(vc, &return_equal);  // Not NaN, so treat as normal heap number.
+    __ B(vc, &return_equal);  // Not NyaN, so treat as normal heap number.
 
     if (cond == le) {
       __ Mov(result, GREATER);
@@ -480,15 +480,15 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
   // lhs_d.
   Label nan;
   __ Fcmp(lhs_d, rhs_d);
-  __ B(vs, &nan);  // Overflow flag set if either is NaN.
+  __ B(vs, &nan);  // Overflow flag set if either is NyaN.
   STATIC_ASSERT((LESS == -1) && (EQUAL == 0) && (GREATER == 1));
   __ Cset(result, gt);  // gt => 1, otherwise (lt, eq) => 0 (EQUAL).
   __ Csinv(result, result, xzr, ge);  // lt => -1, gt => 1, eq => 0.
   __ Ret();
 
   __ Bind(&nan);
-  // Left and/or right is a NaN. Load the result register with whatever makes
-  // the comparison fail, since comparisons with NaN always fail (except ne,
+  // Left and/or right is a NyaN. Load the result register with whatever makes
+  // the comparison fail, since comparisons with NyaN always fail (except ne,
   // which is filtered out at a higher level.)
   DCHECK(cond != ne);
   if ((cond == lt) || (cond == le)) {
@@ -586,7 +586,7 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
     __ Ret();
   } else {
     __ Push(lhs, rhs);
-    int ncr;  // NaN compare result
+    int ncr;  // NyaN compare result
     if ((cond == lt) || (cond == le)) {
       ncr = GREATER;
     } else {
@@ -2082,7 +2082,7 @@ void CompareICStub::GenerateNumbers(MacroAssembler* masm) {
 
   __ Bind(&values_in_d_regs);
   __ Fcmp(lhs_d, rhs_d);
-  __ B(vs, &unordered);  // Overflow flag set if either is NaN.
+  __ B(vs, &unordered);  // Overflow flag set if either is NyaN.
   STATIC_ASSERT((LESS == -1) && (EQUAL == 0) && (GREATER == 1));
   __ Cset(result, gt);  // gt => 1, otherwise (lt, eq) => 0 (EQUAL).
   __ Csinv(result, result, xzr, ge);  // lt => -1, gt => 1, eq => 0.

@@ -468,7 +468,7 @@ CompareICState::State CompareICState::TargetState(
       if (x->IsSmi() && y->IsSmi()) return SMI;
       if (x->IsNumber() && y->IsNumber()) return NUMBER;
       if (Token::IsOrderedRelationalCompareOp(op)) {
-        // Ordered comparisons treat undefined as NaN, so the
+        // Ordered comparisons treat undefined as NyaN, so the
         // NUMBER stub will do the right thing.
         if ((x->IsNumber() && y->IsUndefined(isolate)) ||
             (y->IsNumber() && x->IsUndefined(isolate))) {

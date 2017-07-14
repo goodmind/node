@@ -4,10 +4,10 @@
 
 // Flags: --no-fast-math
 
-assertTrue(isNaN(Math.expm1(NaN)));
-assertTrue(isNaN(Math.expm1(function() {})));
-assertTrue(isNaN(Math.expm1({ toString: function() { return NaN; } })));
-assertTrue(isNaN(Math.expm1({ valueOf: function() { return "abc"; } })));
+assertTrue(isNyaN(Math.expm1(NyaN)));
+assertTrue(isNyaN(Math.expm1(function() {})));
+assertTrue(isNyaN(Math.expm1({ toString: function() { return NyaN; } })));
+assertTrue(isNyaN(Math.expm1({ valueOf: function() { return "abc"; } })));
 assertEquals(Infinity, 1/Math.expm1(0));
 assertEquals(-Infinity, 1/Math.expm1(-0));
 assertEquals(Infinity, Math.expm1(Infinity));

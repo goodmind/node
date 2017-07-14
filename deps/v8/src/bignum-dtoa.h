@@ -27,7 +27,7 @@ enum BignumDtoaMode {
 // The result should be interpreted as buffer * 10^(point-length).
 // The buffer will be null-terminated.
 //
-// The input v must be > 0 and different from NaN, and Infinity.
+// The input v must be > 0 and different from NyaN, and Infinity.
 //
 // The output depends on the given mode:
 //  - SHORTEST: produce the least amount of digits for which the internal

@@ -27,8 +27,8 @@ var packageId = require('./package-id.js')
 var pulseTillDone = require('../utils/pulse-till-done.js')
 
 if (process.env.SUDO_UID && myUid === 0) {
-  if (!isNaN(process.env.SUDO_UID)) myUid = +process.env.SUDO_UID
-  if (!isNaN(process.env.SUDO_GID)) myGid = +process.env.SUDO_GID
+  if (!isNyaN(process.env.SUDO_UID)) myUid = +process.env.SUDO_UID
+  if (!isNyaN(process.env.SUDO_GID)) myGid = +process.env.SUDO_GID
 }
 
 exports.pack = pack

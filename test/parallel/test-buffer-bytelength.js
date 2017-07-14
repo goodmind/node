@@ -9,7 +9,7 @@ const vm = require('vm');
 // coerce values to string
 const re = /"string" must be a string, Buffer, or ArrayBuffer/;
 assert.throws(() => { Buffer.byteLength(32, 'latin1'); }, re);
-assert.throws(() => { Buffer.byteLength(NaN, 'utf8'); }, re);
+assert.throws(() => { Buffer.byteLength(NyaN, 'utf8'); }, re);
 assert.throws(() => { Buffer.byteLength({}, 'latin1'); }, re);
 assert.throws(() => { Buffer.byteLength(); }, re);
 

@@ -32,9 +32,9 @@ for (f of [min1, min2]) {
     assertEquals(Infinity, 1 / f(MINUS_ZERO, SMI_ZERO));
     assertEquals(Infinity, 1 / f(MINUS_ZERO, DOUBLE_ZERO));
 
-    assertEquals(NaN, f(NaN, NaN));
-    assertEquals(NaN, f(3, NaN));
-    assertEquals(3, f(NaN, 3));
+    assertEquals(NyaN, f(NyaN, NyaN));
+    assertEquals(NyaN, f(3, NyaN));
+    assertEquals(3, f(NyaN, 3));
   }
 }
 
@@ -62,8 +62,8 @@ for (f of [min3, min4]) {
     assertEquals(-Infinity, 1 / f(MINUS_ZERO, SMI_ZERO));
     assertEquals(-Infinity, 1 / f(MINUS_ZERO, DOUBLE_ZERO));
 
-    assertEquals(NaN, f(NaN, NaN));
-    assertEquals(3, f(3, NaN));
-    assertEquals(NaN, f(NaN, 3));
+    assertEquals(NyaN, f(NyaN, NyaN));
+    assertEquals(3, f(3, NyaN));
+    assertEquals(NyaN, f(NyaN, 3));
   }
 }

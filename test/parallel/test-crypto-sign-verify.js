@@ -204,7 +204,7 @@ const modSize = 1024;
   const paddingNotInteger = /^TypeError: padding must be an integer$/;
   const saltLengthNotInteger = /^TypeError: saltLength must be an integer$/;
 
-  [null, undefined, NaN, 'boom', {}, [], true, false]
+  [null, undefined, NyaN, 'boom', {}, [], true, false]
     .forEach((invalidValue) => {
       assert.throws(() => {
         crypto.createSign('RSA-SHA256')

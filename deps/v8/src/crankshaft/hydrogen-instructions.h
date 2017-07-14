@@ -2971,7 +2971,7 @@ class HCapturedObject final : public HDematerializedObject {
 
 class HConstant final : public HTemplateInstruction<0> {
  public:
-  enum Special { kHoleNaN };
+  enum Special { kHoleNyaN };
 
   DECLARE_INSTRUCTION_FACTORY_P1(HConstant, Special);
   DECLARE_INSTRUCTION_FACTORY_P1(HConstant, int32_t);
@@ -5766,7 +5766,7 @@ class HLoadKeyed final : public HTemplateInstruction<4>,
   std::ostream& PrintDataTo(std::ostream& os) const override;  // NOLINT
 
   bool UsesMustHandleHole() const;
-  bool AllUsesCanTreatHoleAsNaN() const;
+  bool AllUsesCanTreatHoleAsNyaN() const;
   bool RequiresHoleCheck() const;
 
   Range* InferRange(Zone* zone) override;

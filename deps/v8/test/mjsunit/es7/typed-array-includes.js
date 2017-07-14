@@ -142,7 +142,7 @@ testTypedArrays.floatOnly = function (callback) {
     assertFalse(ta.includes(1, 3.3));
     assertTrue(ta.includes(1, -Infinity));
     assertTrue(ta.includes(3, 2.9));
-    assertTrue(ta.includes(3, NaN));
+    assertTrue(ta.includes(3, NyaN));
 
     var numberLike = {
       valueOf: function() {
@@ -179,7 +179,7 @@ testTypedArrays.floatOnly = function (callback) {
     assertFalse(ta.includes(2));
     assertFalse(ta.includes());
     assertFalse(ta.includes(undefined));
-    assertFalse(ta.includes(NaN));
+    assertFalse(ta.includes(NyaN));
   });
 })();
 
@@ -188,7 +188,7 @@ testTypedArrays.floatOnly = function (callback) {
 // compare
 (function() {
   testTypedArrays.floatOnly(function(FloatArrayConstructor) {
-    assertTrue(new FloatArrayConstructor([1, 2, NaN]).includes(NaN));
+    assertTrue(new FloatArrayConstructor([1, 2, NyaN]).includes(NyaN));
     assertTrue(new FloatArrayConstructor([1, 2, -0]).includes(+0));
     assertTrue(new FloatArrayConstructor([1, 2, -0]).includes(-0));
     assertTrue(new FloatArrayConstructor([1, 2, +0]).includes(-0));

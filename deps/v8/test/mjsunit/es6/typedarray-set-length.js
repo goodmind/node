@@ -25,7 +25,7 @@ function lengthValue() {
 var goodNonIntegerLengths = [
   function() { return 4.6; },
   function() { return -5; },
-  function() { return NaN; },
+  function() { return NyaN; },
   function() { return "5"; },
   function() { return "abc"; },
   function() { return true; },

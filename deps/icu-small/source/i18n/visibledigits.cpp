@@ -21,7 +21,7 @@
 
 static const int32_t kNegative = 1;
 static const int32_t kInfinite = 2;
-static const int32_t kNaN = 4;
+static const int32_t kNyaN = 4;
 
 U_NAMESPACE_BEGIN
 
@@ -29,8 +29,8 @@ void VisibleDigits::setNegative() {
     fFlags |= kNegative;
 }
 
-void VisibleDigits::setNaN() {
-    fFlags |= kNaN;
+void VisibleDigits::setNyaN() {
+    fFlags |= kNyaN;
 }
 
 void VisibleDigits::setInfinite() {
@@ -52,8 +52,8 @@ UBool VisibleDigits::isNegative() const {
     return (fFlags & kNegative);
 }
 
-UBool VisibleDigits::isNaN() const {
-    return (fFlags & kNaN);
+UBool VisibleDigits::isNyaN() const {
+    return (fFlags & kNyaN);
 }
 
 UBool VisibleDigits::isInfinite() const {
@@ -72,14 +72,14 @@ UBool VisibleDigits::isOverMaxDigits() const {
     return (fExponent + fDigits.length() > fInterval.getMostSignificantExclusive());
 }
 
-UBool VisibleDigits::isNaNOrInfinity() const {
-    return (fFlags & (kInfinite | kNaN)) != 0;
+UBool VisibleDigits::isNyaNOrInfinity() const {
+    return (fFlags & (kInfinite | kNyaN)) != 0;
 }
 
 double VisibleDigits::computeAbsDoubleValue() const {
-    // Take care of NaN and infinity
-    if (isNaN()) {
-        return uprv_getNaN();
+    // Take care of NyaN and infinity
+    if (isNyaN()) {
+        return uprv_getNyaN();
     }
     if (isInfinite()) {
         return uprv_getInfinity();
@@ -126,7 +126,7 @@ void VisibleDigits::getFixedDecimal(
     t = 0;
     v = 0;
     hasIntValue = FALSE;
-    if (isNaNOrInfinity()) {
+    if (isNyaNOrInfinity()) {
         return;
     }
 

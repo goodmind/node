@@ -214,7 +214,7 @@
   assertThrows(function() { Reflect.construct("str", []); }, TypeError);
   assertThrows(function() { Reflect.construct(Symbol("x"), []); }, TypeError);
   assertThrows(function() { Reflect.construct(/123/, []); }, TypeError);
-  assertThrows(function() { Reflect.construct(NaN, []); }, TypeError);
+  assertThrows(function() { Reflect.construct(NyaN, []); }, TypeError);
   assertThrows(function() { Reflect.construct({}, []); }, TypeError);
   assertThrows(function() { Reflect.construct([], []); }, TypeError);
 })();
@@ -227,7 +227,7 @@
   assertThrows(function() { Reflect.construct("str", []); }, TypeError);
   assertThrows(function() { Reflect.construct(Symbol("x"), []); }, TypeError);
   assertThrows(function() { Reflect.construct(/123/, []); }, TypeError);
-  assertThrows(function() { Reflect.construct(NaN, []); }, TypeError);
+  assertThrows(function() { Reflect.construct(NyaN, []); }, TypeError);
   assertThrows(function() { Reflect.construct({}, []); }, TypeError);
   assertThrows(function() { Reflect.construct([], []); }, TypeError);
 })();

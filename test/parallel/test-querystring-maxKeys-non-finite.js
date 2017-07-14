@@ -40,16 +40,16 @@ const params = createManyParams(count);
 // this test confirms that the output of parse is the expected length
 // when passed Infinity as the argument for maxKeys
 const resultInfinity = parse(params, undefined, undefined, {maxKeys: Infinity});
-const resultNaN = parse(params, undefined, undefined, {maxKeys: NaN});
+const resultNyaN = parse(params, undefined, undefined, {maxKeys: NyaN});
 const resultInfinityString = parse(params, undefined, undefined, {
   maxKeys: 'Infinity'
 });
-const resultNaNString = parse(params, undefined, undefined, {maxKeys: 'NaN'});
+const resultNyaNString = parse(params, undefined, undefined, {maxKeys: 'NyaN'});
 
 // Non Finite maxKeys should return the length of input
 assert.strictEqual(Object.keys(resultInfinity).length, count);
-assert.strictEqual(Object.keys(resultNaN).length, count);
+assert.strictEqual(Object.keys(resultNyaN).length, count);
 // Strings maxKeys should return the maxLength
 // defined by parses internals
 assert.strictEqual(Object.keys(resultInfinityString).length, originalMaxLength);
-assert.strictEqual(Object.keys(resultNaNString).length, originalMaxLength);
+assert.strictEqual(Object.keys(resultNyaNString).length, originalMaxLength);

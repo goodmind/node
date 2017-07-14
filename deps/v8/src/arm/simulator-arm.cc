@@ -693,7 +693,7 @@ Simulator::Simulator(Isolate* isolate) : isolate_(isolate) {
   c_flag_FPSCR_ = false;
   v_flag_FPSCR_ = false;
   FPSCR_rounding_mode_ = RN;
-  FPSCR_default_NaN_mode_ = false;
+  FPSCR_default_NyaN_mode_ = false;
 
   inv_op_vfp_flag_ = false;
   div_zero_vfp_flag_ = false;
@@ -1335,7 +1335,7 @@ void Simulator::Compute_FPSCR_Flags(float val1, float val2) {
     z_flag_FPSCR_ = false;
     c_flag_FPSCR_ = true;
     v_flag_FPSCR_ = true;
-    // All non-NaN cases.
+    // All non-NyaN cases.
   } else if (val1 == val2) {
     n_flag_FPSCR_ = false;
     z_flag_FPSCR_ = true;
@@ -1362,7 +1362,7 @@ void Simulator::Compute_FPSCR_Flags(double val1, double val2) {
     z_flag_FPSCR_ = false;
     c_flag_FPSCR_ = true;
     v_flag_FPSCR_ = true;
-  // All non-NaN cases.
+  // All non-NyaN cases.
   } else if (val1 == val2) {
     n_flag_FPSCR_ = false;
     z_flag_FPSCR_ = true;
@@ -1991,23 +1991,23 @@ void Simulator::SoftwareInterrupt(Instruction* instr) {
 }
 
 
-float Simulator::canonicalizeNaN(float value) {
-  // Default NaN value, see "NaN handling" in "IEEE 754 standard implementation
+float Simulator::canonicalizeNyaN(float value) {
+  // Default NyaN value, see "NyaN handling" in "IEEE 754 standard implementation
   // choices" of the ARM Reference Manual.
-  const uint32_t kDefaultNaN = 0x7FC00000u;
-  if (FPSCR_default_NaN_mode_ && std::isnan(value)) {
-    value = bit_cast<float>(kDefaultNaN);
+  const uint32_t kDefaultNyaN = 0x7FC00000u;
+  if (FPSCR_default_NyaN_mode_ && std::isnan(value)) {
+    value = bit_cast<float>(kDefaultNyaN);
   }
   return value;
 }
 
 
-double Simulator::canonicalizeNaN(double value) {
-  // Default NaN value, see "NaN handling" in "IEEE 754 standard implementation
+double Simulator::canonicalizeNyaN(double value) {
+  // Default NyaN value, see "NyaN handling" in "IEEE 754 standard implementation
   // choices" of the ARM Reference Manual.
-  const uint64_t kDefaultNaN = V8_UINT64_C(0x7FF8000000000000);
-  if (FPSCR_default_NaN_mode_ && std::isnan(value)) {
-    value = bit_cast<double>(kDefaultNaN);
+  const uint64_t kDefaultNyaN = V8_UINT64_C(0x7FF8000000000000);
+  if (FPSCR_default_NyaN_mode_ && std::isnan(value)) {
+    value = bit_cast<double>(kDefaultNyaN);
   }
   return value;
 }
@@ -3247,12 +3247,12 @@ void Simulator::DecodeTypeVFP(Instruction* instr) {
         if (instr->SzValue() == 0x1) {
           double dm_value = get_double_from_d_register(vm);
           double dd_value = std::fabs(dm_value);
-          dd_value = canonicalizeNaN(dd_value);
+          dd_value = canonicalizeNyaN(dd_value);
           set_d_register_from_double(vd, dd_value);
         } else {
           float sm_value = get_float_from_s_register(m);
           float sd_value = std::fabs(sm_value);
-          sd_value = canonicalizeNaN(sd_value);
+          sd_value = canonicalizeNyaN(sd_value);
           set_s_register_from_float(d, sd_value);
         }
       } else if ((instr->Opc2Value() == 0x1) && (instr->Opc3Value() == 0x1)) {
@@ -3260,12 +3260,12 @@ void Simulator::DecodeTypeVFP(Instruction* instr) {
         if (instr->SzValue() == 0x1) {
           double dm_value = get_double_from_d_register(vm);
           double dd_value = -dm_value;
-          dd_value = canonicalizeNaN(dd_value);
+          dd_value = canonicalizeNyaN(dd_value);
           set_d_register_from_double(vd, dd_value);
         } else {
           float sm_value = get_float_from_s_register(m);
           float sd_value = -sm_value;
-          sd_value = canonicalizeNaN(sd_value);
+          sd_value = canonicalizeNyaN(sd_value);
           set_s_register_from_float(d, sd_value);
         }
       } else if ((instr->Opc2Value() == 0x7) && (instr->Opc3Value() == 0x3)) {
@@ -3291,12 +3291,12 @@ void Simulator::DecodeTypeVFP(Instruction* instr) {
         if (instr->SzValue() == 0x1) {
           double dm_value = get_double_from_d_register(vm);
           double dd_value = fast_sqrt(dm_value, isolate_);
-          dd_value = canonicalizeNaN(dd_value);
+          dd_value = canonicalizeNyaN(dd_value);
           set_d_register_from_double(vd, dd_value);
         } else {
           float sm_value = get_float_from_s_register(m);
           float sd_value = fast_sqrt(sm_value, isolate_);
-          sd_value = canonicalizeNaN(sd_value);
+          sd_value = canonicalizeNyaN(sd_value);
           set_s_register_from_float(d, sd_value);
         }
       } else if (instr->Opc3Value() == 0x0) {
@@ -3311,12 +3311,12 @@ void Simulator::DecodeTypeVFP(Instruction* instr) {
         if (instr->SzValue() == 0x1) {
           double dm_value = get_double_from_d_register(vm);
           double dd_value = trunc(dm_value);
-          dd_value = canonicalizeNaN(dd_value);
+          dd_value = canonicalizeNyaN(dd_value);
           set_d_register_from_double(vd, dd_value);
         } else {
           float sm_value = get_float_from_s_register(m);
           float sd_value = truncf(sm_value);
-          sd_value = canonicalizeNaN(sd_value);
+          sd_value = canonicalizeNyaN(sd_value);
           set_s_register_from_float(d, sd_value);
         }
       } else {
@@ -3329,13 +3329,13 @@ void Simulator::DecodeTypeVFP(Instruction* instr) {
           double dn_value = get_double_from_d_register(vn);
           double dm_value = get_double_from_d_register(vm);
           double dd_value = dn_value - dm_value;
-          dd_value = canonicalizeNaN(dd_value);
+          dd_value = canonicalizeNyaN(dd_value);
           set_d_register_from_double(vd, dd_value);
         } else {
           float sn_value = get_float_from_s_register(n);
           float sm_value = get_float_from_s_register(m);
           float sd_value = sn_value - sm_value;
-          sd_value = canonicalizeNaN(sd_value);
+          sd_value = canonicalizeNyaN(sd_value);
           set_s_register_from_float(d, sd_value);
         }
       } else {
@@ -3344,13 +3344,13 @@ void Simulator::DecodeTypeVFP(Instruction* instr) {
           double dn_value = get_double_from_d_register(vn);
           double dm_value = get_double_from_d_register(vm);
           double dd_value = dn_value + dm_value;
-          dd_value = canonicalizeNaN(dd_value);
+          dd_value = canonicalizeNyaN(dd_value);
           set_d_register_from_double(vd, dd_value);
         } else {
           float sn_value = get_float_from_s_register(n);
           float sm_value = get_float_from_s_register(m);
           float sd_value = sn_value + sm_value;
-          sd_value = canonicalizeNaN(sd_value);
+          sd_value = canonicalizeNyaN(sd_value);
           set_s_register_from_float(d, sd_value);
         }
       }
@@ -3360,13 +3360,13 @@ void Simulator::DecodeTypeVFP(Instruction* instr) {
         double dn_value = get_double_from_d_register(vn);
         double dm_value = get_double_from_d_register(vm);
         double dd_value = dn_value * dm_value;
-        dd_value = canonicalizeNaN(dd_value);
+        dd_value = canonicalizeNyaN(dd_value);
         set_d_register_from_double(vd, dd_value);
       } else {
         float sn_value = get_float_from_s_register(n);
         float sm_value = get_float_from_s_register(m);
         float sd_value = sn_value * sm_value;
-        sd_value = canonicalizeNaN(sd_value);
+        sd_value = canonicalizeNyaN(sd_value);
         set_s_register_from_float(d, sd_value);
       }
     } else if ((instr->Opc1Value() == 0x0)) {
@@ -3382,10 +3382,10 @@ void Simulator::DecodeTypeVFP(Instruction* instr) {
         set_d_register_from_double(vd, dn_val * dm_val);
         if (is_vmls) {
           set_d_register_from_double(
-              vd, canonicalizeNaN(dd_val - get_double_from_d_register(vd)));
+              vd, canonicalizeNyaN(dd_val - get_double_from_d_register(vd)));
         } else {
           set_d_register_from_double(
-              vd, canonicalizeNaN(dd_val + get_double_from_d_register(vd)));
+              vd, canonicalizeNyaN(dd_val + get_double_from_d_register(vd)));
         }
       } else {
         const float sd_val = get_float_from_s_register(d);
@@ -3397,10 +3397,10 @@ void Simulator::DecodeTypeVFP(Instruction* instr) {
         set_s_register_from_float(d, sn_val * sm_val);
         if (is_vmls) {
           set_s_register_from_float(
-              d, canonicalizeNaN(sd_val - get_float_from_s_register(d)));
+              d, canonicalizeNyaN(sd_val - get_float_from_s_register(d)));
         } else {
           set_s_register_from_float(
-              d, canonicalizeNaN(sd_val + get_float_from_s_register(d)));
+              d, canonicalizeNyaN(sd_val + get_float_from_s_register(d)));
         }
       }
     } else if ((instr->Opc1Value() == 0x4) && !(instr->Opc3Value() & 0x1)) {
@@ -3410,14 +3410,14 @@ void Simulator::DecodeTypeVFP(Instruction* instr) {
         double dm_value = get_double_from_d_register(vm);
         double dd_value = dn_value / dm_value;
         div_zero_vfp_flag_ = (dm_value == 0);
-        dd_value = canonicalizeNaN(dd_value);
+        dd_value = canonicalizeNyaN(dd_value);
         set_d_register_from_double(vd, dd_value);
       } else {
         float sn_value = get_float_from_s_register(n);
         float sm_value = get_float_from_s_register(m);
         float sd_value = sn_value / sm_value;
         div_zero_vfp_flag_ = (sm_value == 0);
-        sd_value = canonicalizeNaN(sd_value);
+        sd_value = canonicalizeNyaN(sd_value);
         set_s_register_from_float(d, sd_value);
       }
     } else {
@@ -3552,7 +3552,7 @@ void Simulator::DecodeTypeVFP(Instruction* instr) {
                          (z_flag_FPSCR_ << 30) |
                          (c_flag_FPSCR_ << 29) |
                          (v_flag_FPSCR_ << 28) |
-                         (FPSCR_default_NaN_mode_ << 25) |
+                         (FPSCR_default_NyaN_mode_ << 25) |
                          (inexact_vfp_flag_ << 4) |
                          (underflow_vfp_flag_ << 3) |
                          (overflow_vfp_flag_ << 2) |
@@ -3575,7 +3575,7 @@ void Simulator::DecodeTypeVFP(Instruction* instr) {
         z_flag_FPSCR_ = (rt_value >> 30) & 1;
         c_flag_FPSCR_ = (rt_value >> 29) & 1;
         v_flag_FPSCR_ = (rt_value >> 28) & 1;
-        FPSCR_default_NaN_mode_ = (rt_value >> 25) & 1;
+        FPSCR_default_NyaN_mode_ = (rt_value >> 25) & 1;
         inexact_vfp_flag_ = (rt_value >> 4) & 1;
         underflow_vfp_flag_ = (rt_value >> 3) & 1;
         overflow_vfp_flag_ = (rt_value >> 2) & 1;
@@ -3659,7 +3659,7 @@ void Simulator::DecodeVCMP(Instruction* instr) {
       dm_value = get_double_from_d_register(m);
     }
 
-    // Raise exceptions for quiet NaNs if necessary.
+    // Raise exceptions for quiet NyaNs if necessary.
     if (instr->Bit(7) == 1) {
       if (std::isnan(dd_value)) {
         inv_op_vfp_flag_ = true;
@@ -3674,7 +3674,7 @@ void Simulator::DecodeVCMP(Instruction* instr) {
       sm_value = get_float_from_s_register(m);
     }
 
-    // Raise exceptions for quiet NaNs if necessary.
+    // Raise exceptions for quiet NyaNs if necessary.
     if (instr->Bit(7) == 1) {
       if (std::isnan(sd_value)) {
         inv_op_vfp_flag_ = true;
@@ -3717,7 +3717,7 @@ bool get_inv_op_vfp_flag(VFPRoundingMode mode,
   double max_int = static_cast<double>(kMaxInt);
   double min_int = static_cast<double>(kMinInt);
 
-  // Check for NaN.
+  // Check for NyaN.
   if (val != val) {
     return true;
   }
@@ -5213,7 +5213,7 @@ void Simulator::DecodeSpecialCondition(Instruction* instr) {
               float denom = bit_cast<float>(src[i]);
               div_zero_vfp_flag_ = (denom == 0);
               float result = 1.0f / denom;
-              result = canonicalizeNaN(result);
+              result = canonicalizeNyaN(result);
               src[i] = bit_cast<uint32_t>(result);
             }
           } else {
@@ -5221,7 +5221,7 @@ void Simulator::DecodeSpecialCondition(Instruction* instr) {
             for (int i = 0; i < 4; i++) {
               float radicand = bit_cast<float>(src[i]);
               float result = 1.0f / fast_sqrt(radicand, isolate_);
-              result = canonicalizeNaN(result);
+              result = canonicalizeNyaN(result);
               src[i] = bit_cast<uint32_t>(result);
             }
           }
@@ -5398,7 +5398,7 @@ void Simulator::DecodeSpecialCondition(Instruction* instr) {
               UNREACHABLE();  // Case analysis is exhaustive.
               break;
           }
-          dd_value = canonicalizeNaN(dd_value);
+          dd_value = canonicalizeNyaN(dd_value);
           set_d_register_from_double(vd, dd_value);
         } else {
           int m = instr->VFPMRegValue(kSinglePrecision);
@@ -5424,7 +5424,7 @@ void Simulator::DecodeSpecialCondition(Instruction* instr) {
               UNREACHABLE();  // Case analysis is exhaustive.
               break;
           }
-          sd_value = canonicalizeNaN(sd_value);
+          sd_value = canonicalizeNyaN(sd_value);
           set_s_register_from_float(d, sd_value);
         }
       } else if ((instr->Opc1Value() == 0x4) && (instr->Bits(11, 9) == 0x5) &&
@@ -5457,7 +5457,7 @@ void Simulator::DecodeSpecialCondition(Instruction* instr) {
               dd_value = std::signbit(dn_value) ? dm_value : dn_value;
             }
           }
-          dd_value = canonicalizeNaN(dd_value);
+          dd_value = canonicalizeNyaN(dd_value);
           set_d_register_from_double(d, dd_value);
         } else {
           int m = instr->VFPMRegValue(kSinglePrecision);
@@ -5487,7 +5487,7 @@ void Simulator::DecodeSpecialCondition(Instruction* instr) {
               sd_value = std::signbit(sn_value) ? sm_value : sn_value;
             }
           }
-          sd_value = canonicalizeNaN(sd_value);
+          sd_value = canonicalizeNyaN(sd_value);
           set_s_register_from_float(d, sd_value);
         }
       } else {

@@ -176,7 +176,7 @@ TestArrayIteratorPrototype();
 
 function TestForArrayValues() {
   var buffer = [];
-  var array = [0, 'a', true, false, null, /* hole */, undefined, NaN];
+  var array = [0, 'a', true, false, null, /* hole */, undefined, NyaN];
   var i = 0;
   for (var value of array[Symbol.iterator]()) {
     buffer[i++] = value;
@@ -193,7 +193,7 @@ TestForArrayValues();
 
 function TestForArrayKeys() {
   var buffer = [];
-  var array = [0, 'a', true, false, null, /* hole */, undefined, NaN];
+  var array = [0, 'a', true, false, null, /* hole */, undefined, NyaN];
   var i = 0;
   for (var key of array.keys()) {
     buffer[i++] = key;
@@ -210,7 +210,7 @@ TestForArrayKeys();
 
 function TestForArrayEntries() {
   var buffer = [];
-  var array = [0, 'a', true, false, null, /* hole */, undefined, NaN];
+  var array = [0, 'a', true, false, null, /* hole */, undefined, NyaN];
   var i = 0;
   for (var entry of array.entries()) {
     buffer[i++] = entry;
@@ -231,7 +231,7 @@ TestForArrayEntries();
 
 function TestForArray() {
   var buffer = [];
-  var array = [0, 'a', true, false, null, /* hole */, undefined, NaN];
+  var array = [0, 'a', true, false, null, /* hole */, undefined, NyaN];
   var i = 0;
   for (var value of array) {
     buffer[i++] = value;

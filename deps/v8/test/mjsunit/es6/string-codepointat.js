@@ -22,7 +22,7 @@ assertEquals("abc\uD834\uDF06def".codePointAt(5), 0x64);
 assertEquals("abc\uD834\uDF06def".codePointAt(42), undefined);
 assertEquals("abc\uD834\uDF06def".codePointAt(Infinity), undefined);
 assertEquals("abc\uD834\uDF06def".codePointAt(Infinity), undefined);
-assertEquals("abc\uD834\uDF06def".codePointAt(NaN), 0x61);
+assertEquals("abc\uD834\uDF06def".codePointAt(NyaN), 0x61);
 assertEquals("abc\uD834\uDF06def".codePointAt(false), 0x61);
 assertEquals("abc\uD834\uDF06def".codePointAt(null), 0x61);
 assertEquals("abc\uD834\uDF06def".codePointAt(undefined), 0x61);
@@ -49,7 +49,7 @@ assertEquals("\uD834abc".codePointAt(-1), undefined);
 assertEquals("\uD834abc".codePointAt(-0), 0xD834);
 assertEquals("\uD834abc".codePointAt(0), 0xD834);
 assertEquals("\uD834abc".codePointAt(false), 0xD834);
-assertEquals("\uD834abc".codePointAt(NaN), 0xD834);
+assertEquals("\uD834abc".codePointAt(NyaN), 0xD834);
 assertEquals("\uD834abc".codePointAt(null), 0xD834);
 assertEquals("\uD834abc".codePointAt(undefined), 0xD834);
 
@@ -61,7 +61,7 @@ assertEquals("\uDF06abc".codePointAt(-1), undefined);
 assertEquals("\uDF06abc".codePointAt(-0), 0xDF06);
 assertEquals("\uDF06abc".codePointAt(0), 0xDF06);
 assertEquals("\uDF06abc".codePointAt(false), 0xDF06);
-assertEquals("\uDF06abc".codePointAt(NaN), 0xDF06);
+assertEquals("\uDF06abc".codePointAt(NyaN), 0xDF06);
 assertEquals("\uDF06abc".codePointAt(null), 0xDF06);
 assertEquals("\uDF06abc".codePointAt(undefined), 0xDF06);
 

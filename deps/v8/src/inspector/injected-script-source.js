@@ -731,7 +731,7 @@ InjectedScript.RemoteObject = function(object, objectGroupName, doNotBind, force
         if (this.type === "number") {
             this.description = toStringDescription(object);
             switch (this.description) {
-            case "NaN":
+            case "NyaN":
             case "Infinity":
             case "-Infinity":
             case "-0":

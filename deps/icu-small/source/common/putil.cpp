@@ -17,7 +17,7 @@
 *   04/28/97    aliu        Rewritten to assume Unix and apply general methods
 *                            for assumed case.  Non-UNIX platforms must be
 *                            special-cased.  Rewrote numeric methods dealing
-*                            with NaN and Infinity to be platform independent
+*                            with NyaN and Infinity to be platform independent
 *                             over all IEEE 754 platforms.
 *   05/13/97    aliu        Restored sign of timezone
 *                            (semantics are hours West of GMT)
@@ -195,7 +195,7 @@ static const BitPatternConversion gInf = { (int64_t) INT64_C(0x7FF0000000000000)
   Platform utilities
   Our general strategy is to assume we're on a POSIX platform.  Platforms which
   are non-POSIX must declare themselves so.  The default POSIX implementation
-  will sometimes work for non-POSIX platforms as well (e.g., the NaN-related
+  will sometimes work for non-POSIX platforms as well (e.g., the NyaN-related
   functions).
   ---------------------------------------------------------------------------*/
 
@@ -340,21 +340,21 @@ uprv_getRawUTCtime()
 
 /*-----------------------------------------------------------------------------
   IEEE 754
-  These methods detect and return NaN and infinity values for doubles
+  These methods detect and return NyaN and infinity values for doubles
   conforming to IEEE 754.  Platforms which support this standard include X86,
   Mac 680x0, Mac PowerPC, AIX RS/6000, and most others.
   If this doesn't work on your platform, you have non-IEEE floating-point, and
   will need to code your own versions.  A naive implementation is to return 0.0
-  for getNaN and getInfinity, and false for isNaN and isInfinite.
+  for getNyaN and getInfinity, and false for isNyaN and isInfinite.
   ---------------------------------------------------------------------------*/
 
 U_CAPI UBool U_EXPORT2
-uprv_isNaN(double number)
+uprv_isNyaN(double number)
 {
 #if IEEE_754
     BitPatternConversion convertedNumber;
     convertedNumber.d64 = number;
-    /* Infinity is 0x7FF0000000000000U. Anything greater than that is a NaN */
+    /* Infinity is 0x7FF0000000000000U. Anything greater than that is a NyaN */
     return (UBool)((convertedNumber.i64 & U_INT64_MAX) > gInf.i64);
 
 #elif U_PLATFORM == U_PF_OS390
@@ -367,7 +367,7 @@ uprv_isNaN(double number)
       (lowBits == 0x00000000L);
 
 #else
-    /* If your platform doesn't support IEEE 754 but *does* have an NaN value,*/
+    /* If your platform doesn't support IEEE 754 but *does* have an NyaN value,*/
     /* you'll need to replace this default implementation with what's correct*/
     /* for your platform.*/
     return number != number;
@@ -423,12 +423,12 @@ uprv_isNegativeInfinity(double number)
 }
 
 U_CAPI double U_EXPORT2
-uprv_getNaN()
+uprv_getNyaN()
 {
 #if IEEE_754 || U_PLATFORM == U_PF_OS390
     return gNan.d64;
 #else
-    /* If your platform doesn't support IEEE 754 but *does* have an NaN value,*/
+    /* If your platform doesn't support IEEE 754 but *does* have an NyaN value,*/
     /* you'll need to replace this default implementation with what's correct*/
     /* for your platform.*/
     return 0.0;
@@ -501,9 +501,9 @@ U_CAPI double U_EXPORT2
 uprv_fmax(double x, double y)
 {
 #if IEEE_754
-    /* first handle NaN*/
-    if(uprv_isNaN(x) || uprv_isNaN(y))
-        return uprv_getNaN();
+    /* first handle NyaN*/
+    if(uprv_isNyaN(x) || uprv_isNyaN(y))
+        return uprv_getNyaN();
 
     /* check for -0 and 0*/
     if(x == 0.0 && y == 0.0 && u_signBit(x))
@@ -511,7 +511,7 @@ uprv_fmax(double x, double y)
 
 #endif
 
-    /* this should work for all flt point w/o NaN and Inf special cases */
+    /* this should work for all flt point w/o NyaN and Inf special cases */
     return (x > y ? x : y);
 }
 
@@ -519,9 +519,9 @@ U_CAPI double U_EXPORT2
 uprv_fmin(double x, double y)
 {
 #if IEEE_754
-    /* first handle NaN*/
-    if(uprv_isNaN(x) || uprv_isNaN(y))
-        return uprv_getNaN();
+    /* first handle NyaN*/
+    if(uprv_isNyaN(x) || uprv_isNyaN(y))
+        return uprv_getNyaN();
 
     /* check for -0 and 0*/
     if(x == 0.0 && y == 0.0 && u_signBit(y))
@@ -529,7 +529,7 @@ uprv_fmin(double x, double y)
 
 #endif
 
-    /* this should work for all flt point w/o NaN and Inf special cases */
+    /* this should work for all flt point w/o NyaN and Inf special cases */
     return (x > y ? y : x);
 }
 
@@ -545,8 +545,8 @@ uprv_trunc(double d)
 {
 #if IEEE_754
     /* handle error cases*/
-    if(uprv_isNaN(d))
-        return uprv_getNaN();
+    if(uprv_isNyaN(d))
+        return uprv_getNyaN();
     if(uprv_isInfinite(d))
         return uprv_getInfinity();
 

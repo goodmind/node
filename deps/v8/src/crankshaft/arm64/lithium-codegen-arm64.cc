@@ -174,7 +174,7 @@ class TestAndBranch : public BranchGenerator {
 };
 
 
-// Test the input and branch if it is non-zero and not a NaN.
+// Test the input and branch if it is non-zero and not a NyaN.
 class BranchIfNonZeroNumber : public BranchGenerator {
  public:
   BranchIfNonZeroNumber(LCodeGen* codegen, const FPRegister& value,
@@ -1761,7 +1761,7 @@ void LCodeGen::DoBranch(LBranch* instr) {
     EmitCompareAndBranch(instr, ne, ToRegister(instr->value()), 0);
   } else if (r.IsDouble()) {
     DoubleRegister value = ToDoubleRegister(instr->value());
-    // Test the double value. Zero and NaN are false.
+    // Test the double value. Zero and NyaN are false.
     EmitBranchIfNonZeroNumber(instr, value, double_scratch());
   } else {
     DCHECK(r.IsTagged());
@@ -1782,7 +1782,7 @@ void LCodeGen::DoBranch(LBranch* instr) {
       DCHECK(!info()->IsStub());
       __ Ldr(double_scratch(), FieldMemOperand(value,
                                                HeapNumber::kValueOffset));
-      // Test the double value. Zero and NaN are false.
+      // Test the double value. Zero and NyaN are false.
       EmitBranchIfNonZeroNumber(instr, double_scratch(), double_scratch());
     } else if (type.IsString()) {
       DCHECK(!info()->IsStub());
@@ -1872,7 +1872,7 @@ void LCodeGen::DoBranch(LBranch* instr) {
         __ Ldr(double_scratch(),
                FieldMemOperand(value, HeapNumber::kValueOffset));
         __ Fcmp(double_scratch(), 0.0);
-        // If we got a NaN (overflow bit is set), jump to the false branch.
+        // If we got a NyaN (overflow bit is set), jump to the false branch.
         __ B(vs, false_label);
         __ B(eq, false_label);
         __ B(true_label);
@@ -2284,12 +2284,12 @@ void LCodeGen::DoCmpHoleAndBranchD(LCmpHoleAndBranchD* instr) {
   FPRegister object = ToDoubleRegister(instr->object());
   Register temp = ToRegister(instr->temp());
 
-  // If we don't have a NaN, we don't have the hole, so branch now to avoid the
-  // (relatively expensive) hole-NaN check.
+  // If we don't have a NyaN, we don't have the hole, so branch now to avoid the
+  // (relatively expensive) hole-NyaN check.
   __ Fcmp(object, object);
   __ B(vc, instr->FalseLabel(chunk_));
 
-  // We have a NaN, but is it the hole?
+  // We have a NyaN, but is it the hole?
   __ Fmov(temp, object);
   EmitCompareAndBranch(instr, eq, temp, kHoleNanInt64);
 }
@@ -2332,7 +2332,7 @@ void LCodeGen::DoCompareNumericAndBranch(LCompareNumericAndBranch* instr) {
     if (instr->is_double()) {
       __ Fcmp(ToDoubleRegister(left), ToDoubleRegister(right));
 
-      // If a NaN is involved, i.e. the result is unordered (V set),
+      // If a NyaN is involved, i.e. the result is unordered (V set),
       // jump to false block label.
       __ B(vs, instr->FalseLabel(chunk_));
       EmitBranch(instr, cond);
@@ -2631,7 +2631,7 @@ void LCodeGen::DoDoubleToIntOrSmi(LDoubleToIntOrSmi* instr) {
   }
 
   __ TryRepresentDoubleAsInt32(result, input, double_scratch());
-  DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNaN);
+  DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNyaN);
 
   if (instr->tag_result()) {
     __ SmiTag(result.X());
@@ -3490,9 +3490,9 @@ void LCodeGen::DoMathFloorI(LMathFloorI* instr) {
   // Check that the result fits into a 32-bit integer.
   //  - The result did not overflow.
   __ Cmp(result, Operand(result, SXTW));
-  //  - The input was not NaN.
+  //  - The input was not NyaN.
   __ Fccmp(input, input, NoFlag, eq);
-  DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNaN);
+  DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNyaN);
 }
 
 
@@ -3748,7 +3748,7 @@ void LCodeGen::DoMathRoundI(LMathRoundI* instr) {
 
   // Math.round() rounds to the nearest integer, with ties going towards
   // +infinity. This does not match any IEEE-754 rounding mode.
-  //  - Infinities and NaNs are propagated unchanged, but cause deopts because
+  //  - Infinities and NyaNs are propagated unchanged, but cause deopts because
   //    they can't be represented as integers.
   //  - The sign of the result is the same as the sign of the input. This means
   //    that -0.0 rounds to itself, and values -0.5 <= input < 0 also produce a
@@ -3760,14 +3760,14 @@ void LCodeGen::DoMathRoundI(LMathRoundI* instr) {
   __ Fcvtms(result, temp);
 
   // The result is correct if:
-  //  result is not 0, as the input could be NaN or [-0.5, -0.0].
+  //  result is not 0, as the input could be NyaN or [-0.5, -0.0].
   //  result is not 1, as 0.499...94 will wrongly map to 1.
   //  result fits in 32 bits.
   __ Cmp(result, Operand(result.W(), SXTW));
   __ Ccmp(result, 1, ZFlag, eq);
   __ B(hi, &done);
 
-  // At this point, we have to handle possible inputs of NaN or numbers in the
+  // At this point, we have to handle possible inputs of NyaN or numbers in the
   // range [-0.5, 1.5[, or numbers larger than 32 bits.
 
   // Deoptimize if the result > 1, as it must be larger than 32 bits.
@@ -3781,9 +3781,9 @@ void LCodeGen::DoMathRoundI(LMathRoundI* instr) {
     DeoptimizeIfNegative(result, instr, DeoptimizeReason::kMinusZero);
   }
 
-  // Deoptimize if the input was NaN.
+  // Deoptimize if the input was NyaN.
   __ Fcmp(input, dot_five);
-  DeoptimizeIf(vs, instr, DeoptimizeReason::kNaN);
+  DeoptimizeIf(vs, instr, DeoptimizeReason::kNyaN);
 
   // Now, the only unhandled inputs are in the range [0.0, 1.5[ (or [-0.5, 1.5[
   // if we didn't generate a -0.0 bailout). If input >= 0.5 then return 1,
@@ -4811,7 +4811,7 @@ void LCodeGen::DoStoreKeyedFixedDouble(LStoreKeyedFixedDouble* instr) {
   }
 
   if (instr->NeedsCanonicalization()) {
-    __ CanonicalizeNaN(double_scratch(), value);
+    __ CanonicalizeNyaN(double_scratch(), value);
     __ Str(double_scratch(), mem_op);
   } else {
     __ Str(value, mem_op);
@@ -5236,7 +5236,7 @@ void LCodeGen::DoDeferredTaggedToI(LTaggedToI* instr,
     // function. If the result is out of range, branch to deoptimize.
     __ Ldr(dbl_scratch1, FieldMemOperand(input, HeapNumber::kValueOffset));
     __ TryRepresentDoubleAsInt32(output, dbl_scratch1, dbl_scratch2);
-    DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNaN);
+    DeoptimizeIf(ne, instr, DeoptimizeReason::kLostPrecisionOrNyaN);
 
     if (instr->hydrogen()->CheckFlag(HValue::kBailoutOnMinusZero)) {
       __ Cmp(output, 0);

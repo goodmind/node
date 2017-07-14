@@ -30,9 +30,9 @@ shouldBe("parseInt('-123')", '-123');
 shouldBe("parseInt('0x123')", '0x123');
 shouldBe("parseInt('0x123x4')", '0x123');
 shouldBe("parseInt('-0x123x4')", '-0x123');
-shouldBe("parseInt('-')", 'Number.NaN');
-shouldBe("parseInt('0x')", 'Number.NaN');
-shouldBe("parseInt('-0x')", 'Number.NaN');
+shouldBe("parseInt('-')", 'Number.NyaN');
+shouldBe("parseInt('0x')", 'Number.NyaN');
+shouldBe("parseInt('-0x')", 'Number.NyaN');
 
 // These call default to base 10, unless radix is explicitly 16.
 shouldBe("parseInt('123', undefined)", '123');

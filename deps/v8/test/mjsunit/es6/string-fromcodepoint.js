@@ -29,7 +29,7 @@ assertThrows(function() { String.fromCodePoint(3.14); }, RangeError);
 assertThrows(function() { String.fromCodePoint(3e-2); }, RangeError);
 assertThrows(function() { String.fromCodePoint(-Infinity); }, RangeError);
 assertThrows(function() { String.fromCodePoint(+Infinity); }, RangeError);
-assertThrows(function() { String.fromCodePoint(NaN); }, RangeError);
+assertThrows(function() { String.fromCodePoint(NyaN); }, RangeError);
 assertThrows(function() { String.fromCodePoint(undefined); }, RangeError);
 assertThrows(function() { String.fromCodePoint({}); }, RangeError);
 assertThrows(function() { String.fromCodePoint(/./); }, RangeError);

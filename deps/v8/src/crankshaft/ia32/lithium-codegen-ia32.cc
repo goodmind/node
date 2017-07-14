@@ -936,7 +936,7 @@ void LCodeGen::DoModI(LModI* instr) {
 
   Label done;
   // Check for x % 0, idiv would signal a divide error. We have to
-  // deopt in this case because we can't return a NaN.
+  // deopt in this case because we can't return a NyaN.
   if (hmod->CheckFlag(HValue::kCanBeDivByZero)) {
     __ test(right_reg, Operand(right_reg));
     DeoptimizeIf(zero, instr, DeoptimizeReason::kDivisionByZero);
@@ -1667,7 +1667,7 @@ void LCodeGen::DoMathMinMax(LMathMinMax* instr) {
     XMMRegister left_reg = ToDoubleRegister(left);
     XMMRegister right_reg = ToDoubleRegister(right);
     __ ucomisd(left_reg, right_reg);
-    __ j(parity_even, &check_nan_left, Label::kNear);  // At least one NaN.
+    __ j(parity_even, &check_nan_left, Label::kNear);  // At least one NyaN.
     __ j(equal, &check_zero, Label::kNear);  // left == right.
     __ j(condition, &return_left, Label::kNear);
     __ jmp(&return_right, Label::kNear);
@@ -1687,8 +1687,8 @@ void LCodeGen::DoMathMinMax(LMathMinMax* instr) {
     __ jmp(&return_left, Label::kNear);
 
     __ bind(&check_nan_left);
-    __ ucomisd(left_reg, left_reg);  // NaN check.
-    __ j(parity_even, &return_left, Label::kNear);  // left == NaN.
+    __ ucomisd(left_reg, left_reg);  // NyaN check.
+    __ j(parity_even, &return_left, Label::kNear);  // left == NyaN.
     __ bind(&return_right);
     __ movaps(left_reg, right_reg);
 
@@ -1928,7 +1928,7 @@ void LCodeGen::DoBranch(LBranch* instr) {
       }
 
       if (expected & ToBooleanHint::kHeapNumber) {
-        // heap number -> false iff +0, -0, or NaN.
+        // heap number -> false iff +0, -0, or NyaN.
         Label not_heap_number;
         __ cmp(FieldOperand(reg, HeapObject::kMapOffset),
                factory()->heap_number_map());
@@ -2015,7 +2015,7 @@ void LCodeGen::DoCompareNumericAndBranch(LCompareNumericAndBranch* instr) {
   } else {
     if (instr->is_double()) {
       __ ucomisd(ToDoubleRegister(left), ToDoubleRegister(right));
-      // Don't base result on EFLAGS when a NaN is involved. Instead
+      // Don't base result on EFLAGS when a NyaN is involved. Instead
       // jump to the false block.
       __ j(parity_even, instr->FalseLabel(chunk_));
     } else {
@@ -3104,7 +3104,7 @@ void LCodeGen::DoMathFloorI(LMathFloorI* instr) {
     // Deoptimize on unordered.
     __ xorps(xmm_scratch, xmm_scratch);  // Zero the register.
     __ ucomisd(input_reg, xmm_scratch);
-    DeoptimizeIf(parity_even, instr, DeoptimizeReason::kNaN);
+    DeoptimizeIf(parity_even, instr, DeoptimizeReason::kNyaN);
     __ j(below, &negative_sign, Label::kNear);
 
     if (instr->hydrogen()->CheckFlag(HValue::kBailoutOnMinusZero)) {
@@ -3238,7 +3238,7 @@ void LCodeGen::DoMathPowHalf(LMathPowHalf* instr) {
 
   // Note that according to ECMA-262 15.8.2.13:
   // Math.pow(-Infinity, 0.5) == Infinity
-  // Math.sqrt(-Infinity) == NaN
+  // Math.sqrt(-Infinity) == NyaN
   Label done, sqrt;
   // Check base for -Infinity.  According to IEEE-754, single-precision
   // -Infinity has the highest 9 bits set and the lowest 23 bits cleared.
@@ -3246,7 +3246,7 @@ void LCodeGen::DoMathPowHalf(LMathPowHalf* instr) {
   __ movd(xmm_scratch, scratch);
   __ cvtss2sd(xmm_scratch, xmm_scratch);
   __ ucomisd(input_reg, xmm_scratch);
-  // Comparing -Infinity with NaN results in "unordered", which sets the
+  // Comparing -Infinity with NyaN results in "unordered", which sets the
   // zero flag as if both were equal.  However, it also sets the carry flag.
   __ j(not_equal, &sqrt, Label::kNear);
   __ j(carry, &sqrt, Label::kNear);
@@ -3704,7 +3704,7 @@ void LCodeGen::DoStoreKeyedFixedDoubleArray(LStoreKeyed* instr) {
 
   if (instr->NeedsCanonicalization()) {
     XMMRegister xmm_scratch = double_scratch0();
-    // Turn potential sNaN value into qNaN.
+    // Turn potential sNyaN value into qNyaN.
     __ xorps(xmm_scratch, xmm_scratch);
     __ subsd(value, xmm_scratch);
   }
@@ -4278,7 +4278,7 @@ void LCodeGen::EmitNumberUntagD(LNumberUntagD* instr, Register input_reg,
     if (can_convert_undefined_to_nan) {
       __ bind(&convert);
 
-      // Convert undefined to NaN.
+      // Convert undefined to NyaN.
       __ cmp(input_reg, factory()->undefined_value());
       DeoptimizeIf(not_equal, instr,
                    DeoptimizeReason::kNotAHeapNumberUndefined);
@@ -4332,7 +4332,7 @@ void LCodeGen::DoDeferredTaggedToI(LTaggedToI* instr, Label* done) {
     __ Cvtsi2sd(scratch, Operand(input_reg));
     __ ucomisd(xmm0, scratch);
     DeoptimizeIf(not_equal, instr, DeoptimizeReason::kLostPrecision);
-    DeoptimizeIf(parity_even, instr, DeoptimizeReason::kNaN);
+    DeoptimizeIf(parity_even, instr, DeoptimizeReason::kNyaN);
     if (instr->hydrogen()->GetMinusZeroMode() == FAIL_ON_MINUS_ZERO) {
       __ test(input_reg, Operand(input_reg));
       __ j(not_zero, done);
@@ -4420,7 +4420,7 @@ void LCodeGen::DoDoubleToI(LDoubleToI* instr) {
     __ bind(&lost_precision);
     DeoptimizeIf(no_condition, instr, DeoptimizeReason::kLostPrecision);
     __ bind(&is_nan);
-    DeoptimizeIf(no_condition, instr, DeoptimizeReason::kNaN);
+    DeoptimizeIf(no_condition, instr, DeoptimizeReason::kNyaN);
     __ bind(&minus_zero);
     DeoptimizeIf(no_condition, instr, DeoptimizeReason::kMinusZero);
     __ bind(&done);
@@ -4446,7 +4446,7 @@ void LCodeGen::DoDoubleToSmi(LDoubleToSmi* instr) {
   __ bind(&lost_precision);
   DeoptimizeIf(no_condition, instr, DeoptimizeReason::kLostPrecision);
   __ bind(&is_nan);
-  DeoptimizeIf(no_condition, instr, DeoptimizeReason::kNaN);
+  DeoptimizeIf(no_condition, instr, DeoptimizeReason::kNyaN);
   __ bind(&minus_zero);
   DeoptimizeIf(no_condition, instr, DeoptimizeReason::kMinusZero);
   __ bind(&done);

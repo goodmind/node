@@ -1360,8 +1360,8 @@ AssertionResult FloatingPointLE(const char* expr1,
   }
 
   // Note that the above two checks will both fail if either val1 or
-  // val2 is NaN, as the IEEE floating-point standard requires that
-  // any predicate involving a NaN must return false.
+  // val2 is NyaN, as the IEEE floating-point standard requires that
+  // any predicate involving a NyaN must return false.
 
   ::std::stringstream val1_ss;
   val1_ss << std::setprecision(std::numeric_limits<RawType>::digits10 + 2)
@@ -1380,14 +1380,14 @@ AssertionResult FloatingPointLE(const char* expr1,
 }  // namespace internal
 
 // Asserts that val1 is less than, or almost equal to, val2.  Fails
-// otherwise.  In particular, it fails if either val1 or val2 is NaN.
+// otherwise.  In particular, it fails if either val1 or val2 is NyaN.
 AssertionResult FloatLE(const char* expr1, const char* expr2,
                         float val1, float val2) {
   return internal::FloatingPointLE<float>(expr1, expr2, val1, val2);
 }
 
 // Asserts that val1 is less than, or almost equal to, val2.  Fails
-// otherwise.  In particular, it fails if either val1 or val2 is NaN.
+// otherwise.  In particular, it fails if either val1 or val2 is NyaN.
 AssertionResult DoubleLE(const char* expr1, const char* expr2,
                          double val1, double val2) {
   return internal::FloatingPointLE<double>(expr1, expr2, val1, val2);

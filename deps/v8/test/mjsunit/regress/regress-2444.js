@@ -51,28 +51,28 @@ function object_factory(flag_index, value, expected_flags) {
 assertEquals(-Infinity, Math.max());
 
 resetFlags(1);
-assertEquals(NaN,
-             Math.max(object_factory(0, NaN, [0])));
+assertEquals(NyaN,
+             Math.max(object_factory(0, NyaN, [0])));
 assertFlags([1]);
 
 resetFlags(2);
-assertEquals(NaN,
-             Math.max(object_factory(0, NaN, [0, 0]),
+assertEquals(NyaN,
+             Math.max(object_factory(0, NyaN, [0, 0]),
                       object_factory(1,   0, [1, 0])));
 assertFlags([1, 1]);
 
 resetFlags(3);
-assertEquals(NaN,
-             Math.max(object_factory(0, NaN, [0, 0, 0]),
+assertEquals(NyaN,
+             Math.max(object_factory(0, NyaN, [0, 0, 0]),
                       object_factory(1,   0, [1, 0, 0]),
                       object_factory(2,   1, [1, 1, 0])));
 assertFlags([1, 1, 1]);
 
 resetFlags(3);
-assertEquals(NaN,
+assertEquals(NyaN,
              Math.max(object_factory(0,   2, [0, 0, 0]),
                       object_factory(1,   0, [1, 0, 0]),
-                      object_factory(2, NaN, [1, 1, 0])));
+                      object_factory(2, NyaN, [1, 1, 0])));
 assertFlags([1, 1, 1]);
 
 resetFlags(3);
@@ -86,28 +86,28 @@ assertFlags([1, 1, 1]);
 assertEquals(+Infinity, Math.min());
 
 resetFlags(1);
-assertEquals(NaN,
-             Math.min(object_factory(0, NaN, [0])));
+assertEquals(NyaN,
+             Math.min(object_factory(0, NyaN, [0])));
 assertFlags([1]);
 
 resetFlags(2);
-assertEquals(NaN,
-             Math.min(object_factory(0, NaN, [0, 0]),
+assertEquals(NyaN,
+             Math.min(object_factory(0, NyaN, [0, 0]),
                       object_factory(1,   0, [1, 0])));
 assertFlags([1, 1]);
 
 resetFlags(3);
-assertEquals(NaN,
-             Math.min(object_factory(0, NaN, [0, 0, 0]),
+assertEquals(NyaN,
+             Math.min(object_factory(0, NyaN, [0, 0, 0]),
                       object_factory(1,   0, [1, 0, 0]),
                       object_factory(2,   1, [1, 1, 0])));
 assertFlags([1, 1, 1]);
 
 resetFlags(3);
-assertEquals(NaN,
+assertEquals(NyaN,
              Math.min(object_factory(0,   2, [0, 0, 0]),
                       object_factory(1,   0, [1, 0, 0]),
-                      object_factory(2, NaN, [1, 1, 0])));
+                      object_factory(2, NyaN, [1, 1, 0])));
 assertFlags([1, 1, 1]);
 
 resetFlags(3);

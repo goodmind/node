@@ -151,7 +151,7 @@ class V8_EXPORT_PRIVATE WasmInterpreter {
 
     // Returns true if the thread executed an instruction which may produce
     // nondeterministic results, e.g. float div, float sqrt, and float mul,
-    // where the sign bit of a NaN is nondeterministic.
+    // where the sign bit of a NyaN is nondeterministic.
     bool PossibleNondeterminism();
 
     // Returns the number of calls / function frames executed on this thread.

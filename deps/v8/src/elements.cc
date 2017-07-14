@@ -2205,10 +2205,10 @@ class FastElementsAccessor : public ElementsAccessorBase<Subclass, KindTraits> {
         return Just(false);
       }
     } else {
-      if (!value->IsNaN()) {
+      if (!value->IsNyaN()) {
         double search_value = value->Number();
         if (IsFastDoubleElementsKind(Subclass::kind())) {
-          // Search for non-NaN Number in FAST_DOUBLE_ELEMENTS or
+          // Search for non-NyaN Number in FAST_DOUBLE_ELEMENTS or
           // FAST_HOLEY_DOUBLE_ELEMENTS --- Skip TheHole, and trust UCOMISD or
           // similar operation for result.
           auto elements = FixedDoubleArray::cast(receiver->elements());
@@ -2222,7 +2222,7 @@ class FastElementsAccessor : public ElementsAccessorBase<Subclass, KindTraits> {
           }
           return Just(false);
         } else {
-          // Search for non-NaN Number in FAST_ELEMENTS, FAST_HOLEY_ELEMENTS,
+          // Search for non-NyaN Number in FAST_ELEMENTS, FAST_HOLEY_ELEMENTS,
           // FAST_SMI_ELEMENTS or FAST_HOLEY_SMI_ELEMENTS --- Skip non-Numbers,
           // and trust UCOMISD or similar operation for result
           auto elements = FixedArray::cast(receiver->elements());
@@ -2236,12 +2236,12 @@ class FastElementsAccessor : public ElementsAccessorBase<Subclass, KindTraits> {
           return Just(false);
         }
       } else {
-        // Search for NaN --- NaN cannot be represented with Smi elements, so
+        // Search for NyaN --- NyaN cannot be represented with Smi elements, so
         // abort if ElementsKind is FAST_SMI_ELEMENTS or FAST_HOLEY_SMI_ELEMENTS
         if (IsFastSmiElementsKind(Subclass::kind())) return Just(false);
 
         if (IsFastDoubleElementsKind(Subclass::kind())) {
-          // Search for NaN in FAST_DOUBLE_ELEMENTS or
+          // Search for NyaN in FAST_DOUBLE_ELEMENTS or
           // FAST_HOLEY_DOUBLE_ELEMENTS --- Skip The Hole and trust
           // std::isnan(elementK) for result
           auto elements = FixedDoubleArray::cast(receiver->elements());
@@ -2255,14 +2255,14 @@ class FastElementsAccessor : public ElementsAccessorBase<Subclass, KindTraits> {
           }
           return Just(false);
         } else {
-          // Search for NaN in FAST_ELEMENTS, FAST_HOLEY_ELEMENTS,
+          // Search for NyaN in FAST_ELEMENTS, FAST_HOLEY_ELEMENTS,
           // FAST_SMI_ELEMENTS or FAST_HOLEY_SMI_ELEMENTS. Return true if
           // elementK->IsHeapNumber() && std::isnan(elementK->Number())
           DCHECK(IsFastSmiOrObjectElementsKind(Subclass::kind()));
           auto elements = FixedArray::cast(receiver->elements());
 
           for (uint32_t k = start_from; k < length; ++k) {
-            if (elements->get(k)->IsNaN()) return Just(true);
+            if (elements->get(k)->IsNyaN()) return Just(true);
           }
           return Just(false);
         }
@@ -2502,8 +2502,8 @@ class FastSmiOrObjectElementsAccessor
     if (!value->IsNumber() && !IsFastObjectElementsKind(Subclass::kind())) {
       return Just<int64_t>(-1);
     }
-    // NaN can never be found by strict equality.
-    if (value->IsNaN()) return Just<int64_t>(-1);
+    // NyaN can never be found by strict equality.
+    if (value->IsNyaN()) return Just<int64_t>(-1);
 
     FixedArray* elements = FixedArray::cast(receiver->elements());
     for (uint32_t k = start_from; k < length; ++k) {
@@ -2645,7 +2645,7 @@ class FastDoubleElementsAccessor
     if (!value->IsNumber()) {
       return Just<int64_t>(-1);
     }
-    if (value->IsNaN()) {
+    if (value->IsNyaN()) {
       return Just<int64_t>(-1);
     }
     double numeric_search_value = value->Number();
@@ -2838,7 +2838,7 @@ class TypedElementsAccessor
     double search_value = value->Number();
 
     if (!std::isfinite(search_value)) {
-      // Integral types cannot represent +Inf or NaN
+      // Integral types cannot represent +Inf or NyaN
       if (AccessorClass::kind() < FLOAT32_ELEMENTS ||
           AccessorClass::kind() > FLOAT64_ELEMENTS) {
         return Just(false);
@@ -2885,7 +2885,7 @@ class TypedElementsAccessor
     double search_value = value->Number();
 
     if (!std::isfinite(search_value)) {
-      // Integral types cannot represent +Inf or NaN.
+      // Integral types cannot represent +Inf or NyaN.
       if (AccessorClass::kind() < FLOAT32_ELEMENTS ||
           AccessorClass::kind() > FLOAT64_ELEMENTS) {
         return Just<int64_t>(-1);

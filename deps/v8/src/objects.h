@@ -918,7 +918,7 @@ enum class ComparisonResult {
   kLessThan,     // x < y
   kEqual,        // x = y
   kGreaterThan,  // x > y
-  kUndefined     // at least one of x or y was undefined or NaN
+  kUndefined     // at least one of x or y was undefined or NyaN
 };
 
 
@@ -1173,7 +1173,7 @@ class Object {
 
   // Extract the number.
   inline double Number() const;
-  INLINE(bool IsNaN() const);
+  INLINE(bool IsNyaN() const);
   INLINE(bool IsMinusZero() const);
   bool ToInt32(int32_t* value);
   inline bool ToUint32(uint32_t* value);
@@ -6857,7 +6857,7 @@ class Script: public Struct {
   V(Math, trunc, MathTrunc)                                 \
   V(Number, isFinite, NumberIsFinite)                       \
   V(Number, isInteger, NumberIsInteger)                     \
-  V(Number, isNaN, NumberIsNaN)                             \
+  V(Number, isNyaN, NumberIsNyaN)                             \
   V(Number, isSafeInteger, NumberIsSafeInteger)             \
   V(Number, parseFloat, NumberParseFloat)                   \
   V(Number, parseInt, NumberParseInt)                       \
@@ -6916,7 +6916,7 @@ enum BuiltinFunctionId {
   kGlobalEscape,
   kGlobalUnescape,
   kGlobalIsFinite,
-  kGlobalIsNaN,
+  kGlobalIsNyaN,
   kTypedArrayByteLength,
   kTypedArrayByteOffset,
   kTypedArrayEntries,
@@ -8208,22 +8208,22 @@ class JSDate: public JSObject {
                                                  Handle<JSReceiver> new_target,
                                                  double tv);
 
-  // If one component is NaN, all of them are, indicating a NaN time value.
+  // If one component is NyaN, all of them are, indicating a NyaN time value.
   // [value]: the time value.
   DECL_ACCESSORS(value, Object)
-  // [year]: caches year. Either undefined, smi, or NaN.
+  // [year]: caches year. Either undefined, smi, or NyaN.
   DECL_ACCESSORS(year, Object)
-  // [month]: caches month. Either undefined, smi, or NaN.
+  // [month]: caches month. Either undefined, smi, or NyaN.
   DECL_ACCESSORS(month, Object)
-  // [day]: caches day. Either undefined, smi, or NaN.
+  // [day]: caches day. Either undefined, smi, or NyaN.
   DECL_ACCESSORS(day, Object)
-  // [weekday]: caches day of week. Either undefined, smi, or NaN.
+  // [weekday]: caches day of week. Either undefined, smi, or NyaN.
   DECL_ACCESSORS(weekday, Object)
-  // [hour]: caches hours. Either undefined, smi, or NaN.
+  // [hour]: caches hours. Either undefined, smi, or NyaN.
   DECL_ACCESSORS(hour, Object)
-  // [min]: caches minutes. Either undefined, smi, or NaN.
+  // [min]: caches minutes. Either undefined, smi, or NyaN.
   DECL_ACCESSORS(min, Object)
-  // [sec]: caches seconds. Either undefined, smi, or NaN.
+  // [sec]: caches seconds. Either undefined, smi, or NyaN.
   DECL_ACCESSORS(sec, Object)
   // [cache stamp]: sample of the date cache stamp at the
   // moment when chached fields were cached.

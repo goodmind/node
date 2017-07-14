@@ -95,7 +95,7 @@ assertEquals(6, s);
 
 %OptimizeFunctionOnNextCall(f_poly);
 v = undefined;
-assertEquals(NaN, f_poly(o2));
+assertEquals(NyaN, f_poly(o2));
 assertEquals(7, g);
 assertEquals(7, s);
 
@@ -122,7 +122,7 @@ assertEquals(10, s);
 
 %OptimizeFunctionOnNextCall(f_pre);
 v = undefined;
-assertEquals(NaN, f_pre(o2));
+assertEquals(NyaN, f_pre(o2));
 assertEquals(11, g);
 assertEquals(11, s);
 
@@ -150,6 +150,6 @@ assertEquals(14, s);
 
 %OptimizeFunctionOnNextCall(f_get);
 v = undefined;
-assertEquals(NaN, f_get(o2));
+assertEquals(NyaN, f_get(o2));
 assertEquals(15, g);
 assertEquals(15, s);

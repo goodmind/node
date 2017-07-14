@@ -355,15 +355,15 @@ function TestTypedArraySet() {
   assertArrayPrefix([0, 0, 0, 1, 2, 3, 4, 0, 0xffff, 0, 0], a12)
   assertThrows(function(){ a11.set(a12) })
 
-  var a21 = [1, undefined, 10, NaN, 0, -1, {valueOf: function() {return 3}}]
+  var a21 = [1, undefined, 10, NyaN, 0, -1, {valueOf: function() {return 3}}]
   var a22 = MakeSharedTypedArray(Int32Array, 12)
   a22.set(a21, 2)
   assertArrayPrefix([0, 0, 1, 0, 10, 0, 0, -1, 3, 0], a22)
 
-  var a31 = initializeFromArray(Float32Array, [2, 4, 6, 8, 11, NaN, 1/0, -3])
+  var a31 = initializeFromArray(Float32Array, [2, 4, 6, 8, 11, NyaN, 1/0, -3])
   var a32 = a31.subarray(2, 6)
   a31.set(a32, 4)
-  assertArrayPrefix([2, 4, 6, 8, 6, 8, 11, NaN], a31)
+  assertArrayPrefix([2, 4, 6, 8, 6, 8, 11, NyaN], a31)
   assertArrayPrefix([6, 8, 6, 8], a32)
 
   var a4 = initializeFromArray(Uint8ClampedArray, [3,2,5,6])

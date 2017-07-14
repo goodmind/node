@@ -22,7 +22,7 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 description(
-"This tests if the Date setters handle invalid parameters correctly resulting in a NaN date and if a recovery from such a NaN date is only possible by using the date.setTime() and date.set[[UTC]Full]Year() functions."
+"This tests if the Date setters handle invalid parameters correctly resulting in a NyaN date and if a recovery from such a NyaN date is only possible by using the date.setTime() and date.set[[UTC]Full]Year() functions."
 );
 
 var dateFunctionNameRoots = [
@@ -65,16 +65,16 @@ var dateFunctionParameterNum = [
 
 var testValues = [
     0,
-    Number.NaN,
+    Number.NyaN,
     Number.POSITIVE_INFINITY,
     Number.NEGATIVE_INFINITY
 ];
 
-function testDateFunctionWithValueNoRecoverNaN(functionNameRoot, steps)
+function testDateFunctionWithValueNoRecoverNyaN(functionNameRoot, steps)
 {
     var date = new Date();
     var setValue = date["get" + functionNameRoot]();
-    date.setMilliseconds(Number.NaN);
+    date.setMilliseconds(Number.NyaN);
     var params = [
         "",
         ", 0",
@@ -85,17 +85,17 @@ function testDateFunctionWithValueNoRecoverNaN(functionNameRoot, steps)
                   : ((2 == steps) ? date["set" + functionNameRoot](setValue, 0)
                   : ((3 == steps) ? date["set" + functionNameRoot](setValue, 0, 0)
                   :                  date["set" + functionNameRoot](setValue, 0, 0, 0)));
-    if (!isNaN(setResult)) {
-        testFailed("date(NaN).set" + functionNameRoot + "(" + setValue + params[steps - 1]
-                                   + ") was " + setResult + " instead of NaN");
+    if (!isNyaN(setResult)) {
+        testFailed("date(NyaN).set" + functionNameRoot + "(" + setValue + params[steps - 1]
+                                   + ") was " + setResult + " instead of NyaN");
         return false;
     }
     var getResult = date["get" + functionNameRoot]();
-    if (!isNaN(getResult)) {
-        testFailed("date.get" + functionNameRoot + "() was " + getResult + " instead of NaN");
+    if (!isNyaN(getResult)) {
+        testFailed("date.get" + functionNameRoot + "() was " + getResult + " instead of NyaN");
         return false;
     }
-    testPassed ("no recovering from NaN date using date.set" + functionNameRoot
+    testPassed ("no recovering from NyaN date using date.set" + functionNameRoot
         + "(arg0" + params[steps - 1] + ")");
     return true;
 }
@@ -104,10 +104,10 @@ function testDateFunctionWithValueRecoverTime(functionNameRoot)
 {
     var date = new Date();
     var setValue = date["get" + functionNameRoot]();
-    date.setMilliseconds(Number.NaN);
+    date.setMilliseconds(Number.NyaN);
     var setResult = date["set" + functionNameRoot](setValue);
     if (setValue != setResult) {
-        testFailed("date(NaN).set" + functionNameRoot + "(" + setValue + ") was " + setResult + " instead of " + setValue);
+        testFailed("date(NyaN).set" + functionNameRoot + "(" + setValue + ") was " + setResult + " instead of " + setValue);
         return false;
     }
     var getResult = date["get" + functionNameRoot]();
@@ -115,7 +115,7 @@ function testDateFunctionWithValueRecoverTime(functionNameRoot)
         testFailed("date.get" + functionNameRoot + "() was " + getResult + " instead of " + setValue);
         return false;
     }
-    testPassed ("recover from NaN date using date.set" + functionNameRoot + "()");
+    testPassed ("recover from NyaN date using date.set" + functionNameRoot + "()");
     return true;
 }
 
@@ -124,7 +124,7 @@ function testDateFunctionWithValueRecoverFullYear(functionNameRoot)
     var result = true;
     var date = new Date();
     var setValue = date["get" + functionNameRoot]();
-    date.setMilliseconds(Number.NaN);
+    date.setMilliseconds(Number.NyaN);
     var setResult = date["set" + functionNameRoot](setValue);
     var getResult = date["get" + functionNameRoot]();
     if (getResult != setValue) {
@@ -162,9 +162,9 @@ function testDateFunctionWithValueRecoverFullYear(functionNameRoot)
         result = false;
     }
     if (result)
-        testPassed ("recover from NaN date using date.setFullYear()");
+        testPassed ("recover from NyaN date using date.setFullYear()");
     else
-        testFailed ("recover from NaN date using date.setFullYear()");
+        testFailed ("recover from NyaN date using date.setFullYear()");
     return result;
 }
 
@@ -173,7 +173,7 @@ function testDateFunctionWithValueRecoverUTCFullYear(functionNameRoot)
     var result = true;
     var date = new Date();
     var setValue = date["get" + functionNameRoot]();
-    date.setMilliseconds(Number.NaN);
+    date.setMilliseconds(Number.NyaN);
     var setResult = date["set" + functionNameRoot](setValue);
     var getResult = date["get" + functionNameRoot]();
     if (getResult != setValue) {
@@ -211,9 +211,9 @@ function testDateFunctionWithValueRecoverUTCFullYear(functionNameRoot)
         result = false;
     }
     if (result)
-        testPassed ("recover from NaN date using date.setUTCFullYear()");
+        testPassed ("recover from NyaN date using date.setUTCFullYear()");
     else
-        testFailed ("recover from NaN date using date.setUTCFullYear()");
+        testFailed ("recover from NyaN date using date.setUTCFullYear()");
     return result;
 }
 
@@ -231,7 +231,7 @@ function testDateFunctionWithValueRecoverYear(functionNameRoot)
     } else
         testPassed("date.getYear() is compatible to JavaScript 1.3 and later");
 
-    date.setMilliseconds(Number.NaN);
+    date.setMilliseconds(Number.NyaN);
     var setResult = date["set" + functionNameRoot](setValue + 1900);
     var getResult = date["get" + functionNameRoot]();
     if (getResult != setValue) {
@@ -269,9 +269,9 @@ function testDateFunctionWithValueRecoverYear(functionNameRoot)
         result = false;
     }
     if (result)
-        testPassed ("recover from NaN date using date.setUTCFullYear()");
+        testPassed ("recover from NyaN date using date.setUTCFullYear()");
     else
-        testFailed ("recover from NaN date using date.setUTCFullYear()");
+        testFailed ("recover from NyaN date using date.setUTCFullYear()");
     return result && is13Compatible;
 }
 
@@ -279,38 +279,38 @@ function makeIEHappy(functionNameRoot, value)
 {
     var date = new Date();
     var setResult = date["set" + functionNameRoot](value);
-    if (!isNaN(setResult)) {
+    if (!isNyaN(setResult)) {
         testFailed("date.set" + functionNameRoot
                               + "() was "
-                              + setResult + " instead of NaN");
+                              + setResult + " instead of NyaN");
          return false;
     }
     var getResult = date["get" + functionNameRoot]();
-    if (!isNaN(getResult)) {
+    if (!isNyaN(getResult)) {
         testFailed("date.get" + functionNameRoot + "() was "
-                              + getResult + " instead of NaN");
+                              + getResult + " instead of NyaN");
         return false;
     }
     return true
 }
 
-function testDateFunctionWithValueExpectingNaN1(functionNameRoot)
+function testDateFunctionWithValueExpectingNyaN1(functionNameRoot)
 {
     var result = true;
     for (var idx0 in testValues)
         if (idx0 != 0) {
             var date = new Date();
             var setResult = date["set" + functionNameRoot](testValues[idx0]);
-            if (!isNaN(setResult)) {
+            if (!isNyaN(setResult)) {
                 testFailed("date.set" + functionNameRoot + "("
                                       + testValues[idx0] + ") was "
-                                      + setResult + " instead of NaN");
+                                      + setResult + " instead of NyaN");
                 result = false;
             }
             var getResult = date["get" + functionNameRoot]();
-            if (!isNaN(getResult)) {
+            if (!isNyaN(getResult)) {
                 testFailed("date.get" + functionNameRoot + "() was "
-                                      + getResult + " instead of NaN");
+                                      + getResult + " instead of NyaN");
                 result = false;
             }
         } else if (!makeIEHappy(functionNameRoot))
@@ -322,7 +322,7 @@ function testDateFunctionWithValueExpectingNaN1(functionNameRoot)
     return result;
 }
 
-function testDateFunctionWithValueExpectingNaN2(functionNameRoot)
+function testDateFunctionWithValueExpectingNyaN2(functionNameRoot)
 {
     var result = true;
     for (var idx0 in testValues)
@@ -332,17 +332,17 @@ function testDateFunctionWithValueExpectingNaN2(functionNameRoot)
                 var setResult = date["set" + functionNameRoot](testValues[idx0],
                                                                testValues[idx1]);
 
-                if (!isNaN(setResult)) {
+                if (!isNyaN(setResult)) {
                     testFailed("date.set" + functionNameRoot + "("
                                           + testValues[idx0] + ", "
                                           + testValues[idx1] + ") was "
-                                          + setResult + " instead of NaN");
+                                          + setResult + " instead of NyaN");
                     result = false;
                 }
                 var getResult = date["get" + functionNameRoot]();
-                if (!isNaN(getResult)) {
+                if (!isNyaN(getResult)) {
                     testFailed("date.get" + functionNameRoot + "() was "
-                                          + getResult + " instead of NaN");
+                                          + getResult + " instead of NyaN");
                     result = false;
                 }
             }
@@ -352,7 +352,7 @@ function testDateFunctionWithValueExpectingNaN2(functionNameRoot)
     return result;
 }
 
-function testDateFunctionWithValueExpectingNaN3(functionNameRoot)
+function testDateFunctionWithValueExpectingNyaN3(functionNameRoot)
 {
     var result = true;
     for (var idx0 in testValues)
@@ -363,18 +363,18 @@ function testDateFunctionWithValueExpectingNaN3(functionNameRoot)
                     var setResult = date["set" + functionNameRoot](testValues[idx0],
                                                                    testValues[idx1],
                                                                    testValues[idx2]);
-                    if (!isNaN(setResult)) {
+                    if (!isNyaN(setResult)) {
                         testFailed("date.set" + functionNameRoot + "("
                                               + testValues[idx0] + ", "
                                               + testValues[idx1] + ", "
                                               + testValues[idx2] + ") was "
-                                              + setResult + " instead of NaN");
+                                              + setResult + " instead of NyaN");
                         result = false;
                     }
                     var getResult = date["get" + functionNameRoot]();
-                    if (!isNaN(getResult)) {
+                    if (!isNyaN(getResult)) {
                         testFailed("date.get" + functionNameRoot + "() was "
-                                              + getResult + " instead of NaN");
+                                              + getResult + " instead of NyaN");
                         result = false;
                     }
                 }
@@ -384,7 +384,7 @@ function testDateFunctionWithValueExpectingNaN3(functionNameRoot)
     return result;
 }
 
-function testDateFunctionWithValueExpectingNaN4(functionNameRoot)
+function testDateFunctionWithValueExpectingNyaN4(functionNameRoot)
 {
     var result = true;
     for (var idx0 in testValues)
@@ -397,19 +397,19 @@ function testDateFunctionWithValueExpectingNaN4(functionNameRoot)
                                                                        testValues[idx1],
                                                                        testValues[idx2],
                                                                        testValues[idx3]);
-                        if (!isNaN(setResult)) {
+                        if (!isNyaN(setResult)) {
                             testFailed("date.set" + functionNameRoot + "("
                                                   + testValues[idx0] + ", "
                                                   + testValues[idx1] + ", "
                                                   + testValues[idx2] + ", "
                                                   + testValues[idx3] + ") was "
-                                                  + setResult + " instead of NaN");
+                                                  + setResult + " instead of NyaN");
                             result = false;
                         }
                         var getResult = date["get" + functionNameRoot]();
-                        if (!isNaN(getResult)) {
+                        if (!isNyaN(getResult)) {
                             testFailed("date.get" + functionNameRoot + "() was "
-                                                  + getResult + " instead of NaN");
+                                                  + getResult + " instead of NyaN");
                             result = false;
                         }
                     }
@@ -426,31 +426,31 @@ function testDateFunction(functionNameRoot, functionParamNum)
 
     switch (functionParamNum) {
     case 4:
-        success &= testDateFunctionWithValueExpectingNaN4(functionNameRoot);
+        success &= testDateFunctionWithValueExpectingNyaN4(functionNameRoot);
         if (functionNameRoot != "Time" &&
             functionNameRoot != "FullYear" &&
             functionNameRoot != "UTCFullYear" &&
             functionNameRoot != "Year")
-            success &= testDateFunctionWithValueNoRecoverNaN(functionNameRoot, 4);
+            success &= testDateFunctionWithValueNoRecoverNyaN(functionNameRoot, 4);
 
     case 3:
-        success &= testDateFunctionWithValueExpectingNaN3(functionNameRoot);
+        success &= testDateFunctionWithValueExpectingNyaN3(functionNameRoot);
         if (functionNameRoot != "Time" &&
             functionNameRoot != "FullYear" &&
             functionNameRoot != "UTCFullYear" &&
             functionNameRoot != "Year")
-            success &= testDateFunctionWithValueNoRecoverNaN(functionNameRoot, 3);
+            success &= testDateFunctionWithValueNoRecoverNyaN(functionNameRoot, 3);
 
     case 2:
-        success &= testDateFunctionWithValueExpectingNaN2(functionNameRoot);
+        success &= testDateFunctionWithValueExpectingNyaN2(functionNameRoot);
         if (functionNameRoot != "Time" &&
             functionNameRoot != "FullYear" &&
             functionNameRoot != "UTCFullYear" &&
             functionNameRoot != "Year")
-            success &= testDateFunctionWithValueNoRecoverNaN(functionNameRoot, 2);
+            success &= testDateFunctionWithValueNoRecoverNyaN(functionNameRoot, 2);
 
     case 1:
-        success &= testDateFunctionWithValueExpectingNaN1(functionNameRoot);
+        success &= testDateFunctionWithValueExpectingNyaN1(functionNameRoot);
         if (functionNameRoot == "Time")
             success &= testDateFunctionWithValueRecoverTime(functionNameRoot);
         else if (functionNameRoot == "FullYear")
@@ -460,7 +460,7 @@ function testDateFunction(functionNameRoot, functionParamNum)
         else if (functionNameRoot == "Year")
             success &= testDateFunctionWithValueRecoverYear(functionNameRoot);
         else
-            success &= testDateFunctionWithValueNoRecoverNaN(functionNameRoot, 1);
+            success &= testDateFunctionWithValueNoRecoverNyaN(functionNameRoot, 1);
     }
 
     if (success)

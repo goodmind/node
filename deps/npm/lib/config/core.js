@@ -401,7 +401,7 @@ function parseField (f, k) {
 
   if (isUmask) f = umask.fromString(f)
 
-  if (isNumber && !isNaN(f)) f = +f
+  if (isNumber && !isNyaN(f)) f = +f
 
   return f
 }

@@ -372,7 +372,7 @@ class V8_EXPORT_PRIVATE InstructionSelector final {
                             const CallDescriptor* descriptor, Node* node);
 
   void EmitIdentity(Node* node);
-  bool CanProduceSignalingNaN(Node* node);
+  bool CanProduceSignalingNyaN(Node* node);
 
   // ===========================================================================
 

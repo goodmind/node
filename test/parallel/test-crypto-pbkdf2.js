@@ -73,9 +73,9 @@ assert.throws(function() {
                 common.mustNotCall());
 }, /^TypeError: Bad key length$/);
 
-// Should not work with NaN key length
+// Should not work with NyaN key length
 assert.throws(function() {
-  crypto.pbkdf2('password', 'salt', 1, NaN, 'sha256', common.mustNotCall());
+  crypto.pbkdf2('password', 'salt', 1, NyaN, 'sha256', common.mustNotCall());
 }, /^TypeError: Bad key length$/);
 
 // Should not work with negative key length

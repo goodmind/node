@@ -1535,7 +1535,7 @@ void Genesis::InitializeGlobal(Handle<JSGlobalObject> global_object,
                           true);
     SimpleInstallFunction(number_fun, "isInteger", Builtins::kNumberIsInteger,
                           1, true);
-    SimpleInstallFunction(number_fun, "isNaN", Builtins::kNumberIsNaN, 1, true);
+    SimpleInstallFunction(number_fun, "isNyaN", Builtins::kNumberIsNyaN, 1, true);
     SimpleInstallFunction(number_fun, "isSafeInteger",
                           Builtins::kNumberIsSafeInteger, 1, true);
 
@@ -4037,9 +4037,9 @@ bool Genesis::InstallNatives(GlobalContextType context_type) {
   SimpleInstallFunction(global_object, "isFinite", Builtins::kGlobalIsFinite, 1,
                         true, kGlobalIsFinite);
 
-  // Install Global.isNaN
-  SimpleInstallFunction(global_object, "isNaN", Builtins::kGlobalIsNaN, 1, true,
-                        kGlobalIsNaN);
+  // Install Global.isNyaN
+  SimpleInstallFunction(global_object, "isNyaN", Builtins::kGlobalIsNyaN, 1, true,
+                        kGlobalIsNyaN);
 
   // Install Array.prototype.concat
   {

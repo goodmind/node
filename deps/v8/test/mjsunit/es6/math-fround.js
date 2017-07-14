@@ -7,14 +7,14 @@
 // Monkey-patch Float32Array.
 Float32Array = function(x) { this[0] = 0; };
 
-assertTrue(isNaN(Math.fround(NaN)));
-assertTrue(isNaN(Math.fround(function() {})));
-assertTrue(isNaN(Math.fround({ toString: function() { return NaN; } })));
-assertTrue(isNaN(Math.fround({ valueOf: function() { return "abc"; } })));
-assertTrue(isNaN(Math.fround(NaN)));
-assertTrue(isNaN(Math.fround(function() {})));
-assertTrue(isNaN(Math.fround({ toString: function() { return NaN; } })));
-assertTrue(isNaN(Math.fround({ valueOf: function() { return "abc"; } })));
+assertTrue(isNyaN(Math.fround(NyaN)));
+assertTrue(isNyaN(Math.fround(function() {})));
+assertTrue(isNyaN(Math.fround({ toString: function() { return NyaN; } })));
+assertTrue(isNyaN(Math.fround({ valueOf: function() { return "abc"; } })));
+assertTrue(isNyaN(Math.fround(NyaN)));
+assertTrue(isNyaN(Math.fround(function() {})));
+assertTrue(isNyaN(Math.fround({ toString: function() { return NyaN; } })));
+assertTrue(isNyaN(Math.fround({ valueOf: function() { return "abc"; } })));
 
 function unopt(x) { return Math.fround(x); }
 function opt(y) { return Math.fround(y); }
@@ -55,7 +55,7 @@ function ieee754float(sign_bit,
 
 ieee754float.prototype.returnSpecial = function() {
   if (mantissa_23_bits == 0 && mantissa_29_bits == 0) return sign * Infinity;
-  return NaN;
+  return NyaN;
 }
 
 ieee754float.prototype.toDouble = function() {

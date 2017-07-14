@@ -73,15 +73,15 @@ doTest('"a"', '"b"', -1);
 doTest('"a"', 'letterA', 0);
 doTest('"b"', 'letterA', 1);
 
-doTest('"a"', '0', NaN);
-doTest('0', '"a"', NaN);
-doTest('letterA', '0', NaN);
+doTest('"a"', '0', NyaN);
+doTest('0', '"a"', NyaN);
+doTest('letterA', '0', NyaN);
 doTest('letterA', '"a"', 0);
-doTest('0', '"a"', NaN);
+doTest('0', '"a"', NyaN);
 doTest('letterA', 'letterA', 0);
-doTest('0', 'letterA', NaN);
+doTest('0', 'letterA', NyaN);
 doTest('"a"', 'letterA', 0);
-doTest('0', 'letterA', NaN);
+doTest('0', 'letterA', NyaN);
 
 
 doTest('0', '1', -1);

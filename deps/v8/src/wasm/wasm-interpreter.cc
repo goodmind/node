@@ -1572,7 +1572,7 @@ class ThreadImpl {
           break;
         }
         // We need to treat kExprI32ReinterpretF32 and kExprI64ReinterpretF64
-        // specially to guarantee that the quiet bit of a NaN is preserved on
+        // specially to guarantee that the quiet bit of a NyaN is preserved on
         // ia32 by the reinterpret casts.
         case kExprI32ReinterpretF32: {
           WasmVal val = Pop();

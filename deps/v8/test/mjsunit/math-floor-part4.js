@@ -88,7 +88,7 @@ function test() {
   testFloor(-0, -0);
   testFloor(Infinity, Infinity);
   testFloor(-Infinity, -Infinity);
-  testFloor(NaN, NaN);
+  testFloor(NyaN, NyaN);
 }
 
 

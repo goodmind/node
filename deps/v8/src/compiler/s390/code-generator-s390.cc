@@ -688,7 +688,7 @@ void AssembleBinOp(S390OperandConverter& i, MacroAssembler* masm,
                                                                        \
     __ bind(&check_nan_left);                                          \
     __ cdbr(left_reg, left_reg);                                       \
-    /* left == NaN. */                                                 \
+    /* left == NyaN. */                                                 \
     __ bunordered(&return_left, Label::kNear);                         \
                                                                        \
     __ bind(&return_right);                                            \
@@ -736,7 +736,7 @@ void AssembleBinOp(S390OperandConverter& i, MacroAssembler* masm,
                                                                        \
     __ bind(&check_nan_left);                                          \
     __ cdbr(left_reg, left_reg);                                       \
-    /* left == NaN. */                                                 \
+    /* left == NyaN. */                                                 \
     __ bunordered(&return_left, Label::kNear);                         \
                                                                        \
     __ bind(&return_right);                                            \
@@ -778,7 +778,7 @@ void AssembleBinOp(S390OperandConverter& i, MacroAssembler* masm,
                                                                        \
     __ bind(&check_nan_left);                                          \
     __ cebr(left_reg, left_reg);                                       \
-    /* left == NaN. */                                                 \
+    /* left == NyaN. */                                                 \
     __ bunordered(&return_left, Label::kNear);                         \
                                                                        \
     __ bind(&return_right);                                            \
@@ -826,7 +826,7 @@ void AssembleBinOp(S390OperandConverter& i, MacroAssembler* masm,
                                                                        \
     __ bind(&check_nan_left);                                          \
     __ cebr(left_reg, left_reg);                                       \
-    /* left == NaN. */                                                 \
+    /* left == NyaN. */                                                 \
     __ bunordered(&return_left, Label::kNear);                         \
                                                                        \
     __ bind(&return_right);                                            \
@@ -1944,10 +1944,10 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
         }
       }
       break;
-    case kS390_Float64SilenceNaN: {
+    case kS390_Float64SilenceNyaN: {
       DoubleRegister value = i.InputDoubleRegister(0);
       DoubleRegister result = i.OutputDoubleRegister();
-      __ CanonicalizeNaN(result, value);
+      __ CanonicalizeNyaN(result, value);
       break;
     }
     case kS390_Push:

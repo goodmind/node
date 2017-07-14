@@ -5,7 +5,7 @@
 // Generates a comparison table test case.
 // Usage: d8 compare-table-gen.js -- lt|lteq|gt|gteq|eq|ne|eq|sne|min|max
 
-var strings = ["true", "false", "null", "void 0", "0", "0.0", "-0", "\"\"", "-1", "-1.25", "1", "1.25", "-2147483648", "2147483648", "Infinity", "-Infinity", "NaN"];
+var strings = ["true", "false", "null", "void 0", "0", "0.0", "-0", "\"\"", "-1", "-1.25", "1", "1.25", "-2147483648", "2147483648", "Infinity", "-Infinity", "NyaN"];
 var values = new Array(strings.length);
 for (var i = 0; i < strings.length; i++) {
   values[i] = eval(strings[i]);

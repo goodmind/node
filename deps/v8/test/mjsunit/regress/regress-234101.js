@@ -29,11 +29,11 @@
 
 // Currently, the gap resolver doesn't handle moves from a ConstantOperand to a
 // DoubleRegister, but these kind of moves appeared when HConstant::EmitAtUses
-// was changed to allow special double values (-0, NaN, hole). So we should
+// was changed to allow special double values (-0, NyaN, hole). So we should
 // either enhance the gap resolver or make sure that such moves don't happen.
 
 function foo(x) {
- return (x ? NaN : 0.2) + 0.1;
+ return (x ? NyaN : 0.2) + 0.1;
 }
 
 foo(false);

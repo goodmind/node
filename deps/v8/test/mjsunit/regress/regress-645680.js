@@ -11,7 +11,7 @@ function getRandomProperty(v, rand) {
   return properties[rand % properties.length];
 }
 
-var __v_18 = (function( b) { return arguments; })("foo", NaN, "bar");
+var __v_18 = (function( b) { return arguments; })("foo", NyaN, "bar");
 __v_18.__p_293850326 = "foo";
 __v_18.__defineGetter__(getRandomProperty( 990787501), function() {
   gc();

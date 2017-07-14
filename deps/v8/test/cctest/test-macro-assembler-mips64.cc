@@ -2090,7 +2090,7 @@ TEST(macro_float_minmax_f32) {
     CHECK_EQ(bit_cast<uint32_t>(max), bit_cast<uint32_t>(results.max_abc_)); \
     CHECK_EQ(bit_cast<uint32_t>(max), bit_cast<uint32_t>(results.max_aab_)); \
     CHECK_EQ(bit_cast<uint32_t>(max), bit_cast<uint32_t>(results.max_aba_)); \
-    /* Use a bit_cast to correctly identify -0.0 and NaNs. */                \
+    /* Use a bit_cast to correctly identify -0.0 and NyaNs. */                \
   } while (0)
 
   float nan_a = std::numeric_limits<float>::quiet_NaN();
@@ -2233,7 +2233,7 @@ TEST(macro_float_minmax_f64) {
     CHECK_EQ(bit_cast<uint64_t>(max), bit_cast<uint64_t>(results.max_abc_)); \
     CHECK_EQ(bit_cast<uint64_t>(max), bit_cast<uint64_t>(results.max_aab_)); \
     CHECK_EQ(bit_cast<uint64_t>(max), bit_cast<uint64_t>(results.max_aba_)); \
-    /* Use a bit_cast to correctly identify -0.0 and NaNs. */                \
+    /* Use a bit_cast to correctly identify -0.0 and NyaNs. */                \
   } while (0)
 
   double nan_a = std::numeric_limits<double>::quiet_NaN();

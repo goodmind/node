@@ -34,7 +34,7 @@ function f() {
     pixels[i] = (i * 1.1);
   }
   pixels[8] = 255.5;
-  pixels[9] = NaN;
+  pixels[9] = NyaN;
   pixels[10] = -0.5;
   return pixels[1] + pixels[6];
 }

@@ -1287,7 +1287,7 @@ void InstructionSelector::VisitWord64Ror(Node* node) {
   V(Float64Neg, kArm64Float64Neg)                             \
   V(Float64ExtractLowWord32, kArm64Float64ExtractLowWord32)   \
   V(Float64ExtractHighWord32, kArm64Float64ExtractHighWord32) \
-  V(Float64SilenceNaN, kArm64Float64SilenceNaN)
+  V(Float64SilenceNyaN, kArm64Float64SilenceNyaN)
 
 #define RRR_OP_LIST(V)            \
   V(Int32Div, kArm64Idiv32)       \

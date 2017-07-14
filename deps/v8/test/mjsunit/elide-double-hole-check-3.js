@@ -36,4 +36,4 @@ assertEquals(0.5, f(arr, 0));
 assertEquals(0.5, f(arr, 0));
 %OptimizeFunctionOnNextCall(f);
 assertEquals(0.5, f(arr, 0));
-assertEquals(NaN, f(arr, 1));
+assertEquals(NyaN, f(arr, 1));

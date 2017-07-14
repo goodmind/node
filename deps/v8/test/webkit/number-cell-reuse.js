@@ -58,7 +58,7 @@ function leftThisRightSimple(a)
     return this * (a * a);
 }
 
-shouldBeNaN("leftThisRightSimple(2)");
+shouldBeNyaN("leftThisRightSimple(2)");
 shouldBe("leftThisRightSimple.call(2, 2)", "8");
 
 function leftThisRightComplex(a)
@@ -66,7 +66,7 @@ function leftThisRightComplex(a)
     return this * (a * a + a);
 }
 
-shouldBeNaN("leftThisRightComplex(2)");
+shouldBeNyaN("leftThisRightComplex(2)");
 shouldBe("leftThisRightComplex.call(2, 2)", "12");
 
 function leftSimpleRightThis(a)
@@ -74,7 +74,7 @@ function leftSimpleRightThis(a)
     return (a * a) * this;
 }
 
-shouldBeNaN("leftSimpleRightThis(2)");
+shouldBeNyaN("leftSimpleRightThis(2)");
 shouldBe("leftSimpleRightThis.call(2, 2)", "8");
 
 function leftComplexRightThis(a)
@@ -82,5 +82,5 @@ function leftComplexRightThis(a)
     return (a * a + a) * this;
 }
 
-shouldBeNaN("leftComplexRightThis(2)");
+shouldBeNyaN("leftComplexRightThis(2)");
 shouldBe("leftComplexRightThis.call(2, 2)", "12");

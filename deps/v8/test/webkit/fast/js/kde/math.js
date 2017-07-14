@@ -43,7 +43,7 @@ shouldBe("String()+Math.PI", "'3.141592653589793'");
 shouldBe("String()+Math.SQRT1_2", "'0.7071067811865476'");
 shouldBe("String()+Math.SQRT2", "'1.4142135623730951'");
 
-shouldBe("String()+Number.NaN", "'NaN'");
+shouldBe("String()+Number.NyaN", "'NyaN'");
 shouldBe("String()+Number.NEGATIVE_INFINITY", "'-Infinity'");
 shouldBe("String()+Number.POSITIVE_INFINITY", "'Infinity'");
 
@@ -64,8 +64,8 @@ shouldBe("Math.round(1.1)", "1");
 shouldBe("Math.round(1.6)", "2");
 shouldBe("Math.round(-3.5)", "-3");
 shouldBe("Math.round(-3.6)", "-4");
-shouldBeTrue("isNaN(Math.round())");
-shouldBeTrue("isNaN(Math.round(NaN))");
+shouldBeTrue("isNyaN(Math.round())");
+shouldBeTrue("isNyaN(Math.round(NyaN))");
 shouldBe("Math.round(-Infinity)", "-Infinity");
 shouldBe("Math.round(Infinity)", "Infinity");
 shouldBe("Math.round(99999999999999999999.99)", "100000000000000000000");
@@ -73,8 +73,8 @@ shouldBe("Math.round(-99999999999999999999.99)", "-100000000000000000000");
 
 // Math.log()
 shouldBe("Math.log(Math.E*Math.E)", "2");
-shouldBeTrue("isNaN(Math.log(NaN))");
-shouldBeTrue("isNaN(Math.log(-1))");
+shouldBeTrue("isNyaN(Math.log(NyaN))");
+shouldBeTrue("isNyaN(Math.log(-1))");
 shouldBeFalse("isFinite(Math.log(0))");
 shouldBe("Math.log(1)", "0");
 shouldBeFalse("isFinite(Math.log(Infinity))");
@@ -86,7 +86,7 @@ shouldBeTrue("isNegativeZero(Math.min(negativeZero, 0))");
 shouldBeFalse("isFinite(Math.max())");
 shouldBe("Math.max(1)", "1"); // NS 4.x and IE 5.x seem to know about 2 arg version only
 shouldBe("Math.max(1, 2, 3)", "3"); // NS 4.x and IE 5.x seem to know about 2 arg version only
-shouldBeTrue("isNaN(Math.max(1,NaN,3))");
+shouldBeTrue("isNyaN(Math.max(1,NyaN,3))");
 shouldBeTrue("!isNegativeZero(Math.max(negativeZero, 0))");
 
 
@@ -106,7 +106,7 @@ shouldBe("my = myfunc, myfunc(4)", "5");
 
 // Conversions
 shouldBe("Boolean(Math)", "true");
-shouldBeTrue("isNaN(Number(Math));");
+shouldBeTrue("isNyaN(Number(Math));");
 
 // Unicity
 shouldBe("Math.abs===Math.abs", "true")

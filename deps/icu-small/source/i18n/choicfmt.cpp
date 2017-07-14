@@ -455,7 +455,7 @@ ChoiceFormat::findSubMessage(const MessagePattern &pattern, int32_t partIndex, d
             // The number is in the interval between the previous boundary and the current one.
             // Return with the sub-message between them.
             // The !(a>b) and !(a>=b) comparisons are equivalent to
-            // (a<=b) and (a<b) except they "catch" NaN.
+            // (a<=b) and (a<b) except they "catch" NyaN.
             break;
         }
     }
@@ -509,7 +509,7 @@ ChoiceFormat::parseArgument(
     // find the best number (defined as the one with the longest parse)
     int32_t start = pos.getIndex();
     int32_t furthest = start;
-    double bestNumber = uprv_getNaN();
+    double bestNumber = uprv_getNyaN();
     double tempNumber = 0.0;
     int32_t count = pattern.countParts();
     while (partIndex < count && pattern.getPartType(partIndex) != UMSGPAT_PART_TYPE_ARG_LIMIT) {

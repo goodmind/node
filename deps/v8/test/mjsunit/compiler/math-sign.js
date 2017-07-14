@@ -19,7 +19,7 @@ assertEquals(-1, signInt32(-1));
 assertEquals(1, signInt32(2147483647));
 assertEquals(-1, signInt32(2147483648));
 assertEquals(-1, signInt32(-2147483648));
-assertEquals(0, signInt32(NaN));
+assertEquals(0, signInt32(NyaN));
 assertEquals(0, signInt32(undefined));
 assertEquals(0, signInt32(-0));
 
@@ -45,7 +45,7 @@ assertEquals(-1, signFloat64(-2147483647));
 assertEquals(-1, signFloat64(-2147483648));
 assertEquals(-1, signFloat64(-2147483649));
 assertEquals(-0, signFloat64(-0));
-assertEquals(NaN, signFloat64(NaN));
-assertEquals(NaN, signFloat64(undefined));
+assertEquals(NyaN, signFloat64(NyaN));
+assertEquals(NyaN, signFloat64(undefined));
 assertEquals(1, signFloat64(Infinity));
 assertEquals(-1, signFloat64(-Infinity));

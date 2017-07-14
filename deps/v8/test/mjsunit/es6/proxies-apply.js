@@ -88,7 +88,7 @@
 
 
 (function testCallProxyNonCallableTarget() {
-  var values = [NaN, 1.5, 100, /RegExp/, "string", {}, [], Symbol(),
+  var values = [NyaN, 1.5, 100, /RegExp/, "string", {}, [], Symbol(),
                 new Map(), new Set(), new WeakMap(), new WeakSet()];
   values.forEach(target => {
     target = Object(target);

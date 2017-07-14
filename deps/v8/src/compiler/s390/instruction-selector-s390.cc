@@ -1640,8 +1640,8 @@ void InstructionSelector::VisitFloat64Max(Node* node) {
   VisitRRR(this, kS390_MaxDouble, node);
 }
 
-void InstructionSelector::VisitFloat64SilenceNaN(Node* node) {
-  VisitRR(this, kS390_Float64SilenceNaN, node);
+void InstructionSelector::VisitFloat64SilenceNyaN(Node* node) {
+  VisitRR(this, kS390_Float64SilenceNyaN, node);
 }
 
 void InstructionSelector::VisitFloat32Min(Node* node) {

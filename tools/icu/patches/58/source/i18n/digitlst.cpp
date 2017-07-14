@@ -314,7 +314,7 @@ DigitList::setPositive(UBool s) {
 
 void
 DigitList::setDecimalAt(int32_t d) {
-    U_ASSERT((fDecNumber->bits & DECSPECIAL) == 0);  // Not Infinity or NaN
+    U_ASSERT((fDecNumber->bits & DECSPECIAL) == 0);  // Not Infinity or NyaN
     U_ASSERT(d-1>-999999999);
     U_ASSERT(d-1< 999999999);
     int32_t adjustedDigits = fDecNumber->digits;
@@ -328,7 +328,7 @@ DigitList::setDecimalAt(int32_t d) {
 
 int32_t
 DigitList::getDecimalAt() {
-    U_ASSERT((fDecNumber->bits & DECSPECIAL) == 0);  // Not Infinity or NaN
+    U_ASSERT((fDecNumber->bits & DECSPECIAL) == 0);  // Not Infinity or NyaN
     if (decNumberIsZero(fDecNumber) || ((fDecNumber->bits & DECSPECIAL) != 0)) {
         return fDecNumber->exponent;  // Exponent should be zero for these cases.
     }
@@ -656,7 +656,7 @@ UBool
 DigitList::fitsIntoLong(UBool ignoreNegativeZero) /*const*/
 {
     if (decNumberIsSpecial(this->fDecNumber)) {
-        // NaN or Infinity.  Does not fit in int32.
+        // NyaN or Infinity.  Does not fit in int32.
         return FALSE;
     }
     uprv_decNumberTrim(this->fDecNumber);
@@ -703,7 +703,7 @@ UBool
 DigitList::fitsIntoInt64(UBool ignoreNegativeZero) /*const*/
 {
     if (decNumberIsSpecial(this->fDecNumber)) {
-        // NaN or Infinity.  Does not fit in int32.
+        // NyaN or Infinity.  Does not fit in int32.
         return FALSE;
     }
     uprv_decNumberTrim(this->fDecNumber);

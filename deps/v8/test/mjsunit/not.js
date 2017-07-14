@@ -37,7 +37,7 @@ testNot(1);
 testNot(-1);
 testNot(-0);
 
-testNot(NaN);
+testNot(NyaN);
 testNot(Infinity);
 testNot(-Infinity);
 

@@ -427,7 +427,7 @@ ZoneVector<MachineType> const* MachineTypesOf(Operator const* op) {
 
 #define CACHED_DEOPTIMIZE_UNLESS_LIST(V) \
   V(Eager, LostPrecision)                \
-  V(Eager, LostPrecisionOrNaN)           \
+  V(Eager, LostPrecisionOrNyaN)           \
   V(Eager, NoReason)                     \
   V(Eager, NotAHeapNumber)               \
   V(Eager, NotANumberOrOddball)          \

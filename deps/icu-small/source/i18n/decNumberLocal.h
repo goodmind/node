@@ -284,13 +284,13 @@
     uByte   *lsd;             /* -> least ditto                       */
     uInt     sign;            /* 0=positive, DECFLOAT_Sign=negative   */
     Int      exponent;        /* Unadjusted signed exponent (q), or   */
-                              /* DECFLOAT_NaN etc. for a special      */
+                              /* DECFLOAT_NyaN etc. for a special      */
     } bcdnum;
 
   /* Test if exponent or bcdnum exponent must be a special, etc.      */
   #define EXPISSPECIAL(exp) ((exp)>=DECFLOAT_MinSp)
   #define EXPISINF(exp) (exp==DECFLOAT_Inf)
-  #define EXPISNAN(exp) (exp==DECFLOAT_qNaN || exp==DECFLOAT_sNaN)
+  #define EXPISNAN(exp) (exp==DECFLOAT_qNyaN || exp==DECFLOAT_sNyaN)
   #define NUMISSPECIAL(num) (EXPISSPECIAL((num)->exponent))
 
   /* Refer to a 32-bit word or byte in a decFloat (df) by big-endian  */
@@ -445,7 +445,7 @@
     /* Compile-time computes of the exponent continuation field masks */
     /* full exponent continuation field:                              */
     #define ECONMASK ((0x03ffffff>>(32-6-DECECONL))<<(32-6-DECECONL))
-    /* same, not including its first digit (the qNaN/sNaN selector):  */
+    /* same, not including its first digit (the qNyaN/sNyaN selector):  */
     #define ECONNANMASK ((0x01ffffff>>(32-6-DECECONL))<<(32-6-DECECONL))
 
     /* Macros to decode the coefficient in a finite decFloat *df into */

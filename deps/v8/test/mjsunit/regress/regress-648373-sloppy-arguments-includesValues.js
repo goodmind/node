@@ -15,7 +15,7 @@ __v_2 = {
     }  ,
   Arguments: {
     FAST_SLOPPY_ARGUMENTS_ELEMENTS() {
-      var __v_11 = (function( b) { return arguments; })("foo", NaN, "bar");
+      var __v_11 = (function( b) { return arguments; })("foo", NyaN, "bar");
       __v_11.__p_2006760047 = __v_11[getRandomProperty( 2006760047)];
       __v_11.__defineGetter__(getRandomProperty( 1698457573), function() {  gc(); __v_4[ 1486458228] = __v_2[ 1286067691]; return __v_11.__p_2006760047; });
 ;

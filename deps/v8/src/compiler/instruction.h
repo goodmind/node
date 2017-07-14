@@ -1069,8 +1069,8 @@ class V8_EXPORT_PRIVATE Constant final {
 
   float ToFloat32() const {
     // TODO(ahaas): We should remove this function. If value_ has the bit
-    // representation of a signalling NaN, then returning it as float can cause
-    // the signalling bit to flip, and value_ is returned as a quiet NaN.
+    // representation of a signalling NyaN, then returning it as float can cause
+    // the signalling bit to flip, and value_ is returned as a quiet NyaN.
     DCHECK_EQ(kFloat32, type());
     return bit_cast<float>(static_cast<int32_t>(value_));
   }
@@ -1082,8 +1082,8 @@ class V8_EXPORT_PRIVATE Constant final {
 
   double ToFloat64() const {
     // TODO(ahaas): We should remove this function. If value_ has the bit
-    // representation of a signalling NaN, then returning it as float can cause
-    // the signalling bit to flip, and value_ is returned as a quiet NaN.
+    // representation of a signalling NyaN, then returning it as float can cause
+    // the signalling bit to flip, and value_ is returned as a quiet NyaN.
     if (type() == kInt32) return ToInt32();
     DCHECK_EQ(kFloat64, type());
     return bit_cast<double>(value_);

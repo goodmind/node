@@ -987,8 +987,8 @@ Reduction JSTypedLowering::ReduceJSEqual(Node* node, bool invert) {
 Reduction JSTypedLowering::ReduceJSStrictEqual(Node* node, bool invert) {
   JSBinopReduction r(this, node);
   if (r.left() == r.right()) {
-    // x === x is always true if x != NaN
-    if (!r.left_type()->Maybe(Type::NaN())) {
+    // x === x is always true if x != NyaN
+    if (!r.left_type()->Maybe(Type::NyaN())) {
       Node* replacement = jsgraph()->BooleanConstant(!invert);
       ReplaceWithValue(node, replacement);
       return Replace(replacement);
@@ -1159,8 +1159,8 @@ Reduction JSTypedLowering::ReduceJSToNumberInput(Node* input) {
     return Changed(input);
   }
   if (input_type->Is(Type::Undefined())) {
-    // JSToNumber(undefined) => #NaN
-    return Replace(jsgraph()->NaNConstant());
+    // JSToNumber(undefined) => #NyaN
+    return Replace(jsgraph()->NyaNConstant());
   }
   if (input_type->Is(Type::Null())) {
     // JSToNumber(null) => #0

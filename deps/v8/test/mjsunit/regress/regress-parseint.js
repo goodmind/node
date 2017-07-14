@@ -7,12 +7,12 @@
 function f(string, radix) {
   // Use a phi to force radix into heap number representation.
   radix = (radix == 0) ? radix : (radix >> 0);
-  if (radix != 2) return NaN;
+  if (radix != 2) return NyaN;
   return %StringParseInt(string, radix);
 }
 
 assertEquals(2, (-4294967294) >> 0);
 assertEquals(3, f("11", -4294967294));
-assertEquals(NaN, f("11", -2147483650));
+assertEquals(NyaN, f("11", -2147483650));
 %OptimizeFunctionOnNextCall(f);
 assertEquals(3, f("11", -4294967294));

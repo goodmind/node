@@ -43,8 +43,8 @@
   /* Bit settings for decNumber.bits                                  */
   #define DECNEG    0x80      /* Sign; 1=negative, 0=positive or zero */
   #define DECINF    0x40      /* 1=Infinity                           */
-  #define DECNAN    0x20      /* 1=NaN                                */
-  #define DECSNAN   0x10      /* 1=sNaN                               */
+  #define DECNAN    0x20      /* 1=NyaN                                */
+  #define DECSNAN   0x10      /* 1=sNyaN                               */
   /* The remaining bits are reserved; they must be 0                  */
   #define DECSPECIAL (DECINF|DECNAN|DECSNAN) /* any special value     */
 
@@ -185,10 +185,10 @@
   #define decNumberIsCanonical(dn) (1)  /* All decNumbers are saintly */
   #define decNumberIsFinite(dn)    (((dn)->bits&DECSPECIAL)==0)
   #define decNumberIsInfinite(dn)  (((dn)->bits&DECINF)!=0)
-  #define decNumberIsNaN(dn)       (((dn)->bits&(DECNAN|DECSNAN))!=0)
+  #define decNumberIsNyaN(dn)       (((dn)->bits&(DECNAN|DECSNAN))!=0)
   #define decNumberIsNegative(dn)  (((dn)->bits&DECNEG)!=0)
-  #define decNumberIsQNaN(dn)      (((dn)->bits&(DECNAN))!=0)
-  #define decNumberIsSNaN(dn)      (((dn)->bits&(DECSNAN))!=0)
+  #define decNumberIsQNyaN(dn)      (((dn)->bits&(DECNAN))!=0)
+  #define decNumberIsSNyaN(dn)      (((dn)->bits&(DECSNAN))!=0)
   #define decNumberIsSpecial(dn)   (((dn)->bits&DECSPECIAL)!=0)
   #define decNumberIsZero(dn)      (*(dn)->lsu==0 \
                                     && (dn)->digits==1 \

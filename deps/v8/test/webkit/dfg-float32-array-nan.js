@@ -22,7 +22,7 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 description(
-"Tests what happens in the DFG JIT if we load from a Float32 array that contains a weirdly formatted NaN."
+"Tests what happens in the DFG JIT if we load from a Float32 array that contains a weirdly formatted NyaN."
 );
 
 var buffer = new ArrayBuffer(4);
@@ -40,6 +40,6 @@ function foo(o) {
 }
 
 for (var i = 0; i < 100; ++i)
-    shouldBe("\"\" + foo(floatView)", "\"NaN\"");
+    shouldBe("\"\" + foo(floatView)", "\"NyaN\"");
 
 debug("I didn't crash, which is a good thing.");

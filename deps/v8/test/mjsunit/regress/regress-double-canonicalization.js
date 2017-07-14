@@ -6,8 +6,8 @@
 
 var ab = new ArrayBuffer(8);
 var i_view = new Int32Array(ab);
-i_view[0] = %GetHoleNaNUpper()
-i_view[1] = %GetHoleNaNLower();
+i_view[0] = %GetHoleNyaNUpper()
+i_view[1] = %GetHoleNyaNLower();
 var hole_nan = (new Float64Array(ab))[0];
 
 var array = [];
@@ -20,5 +20,5 @@ write();
 %OptimizeFunctionOnNextCall(write);
 write();
 array[1] = undefined;
-assertTrue(isNaN(array[0]));
+assertTrue(isNyaN(array[0]));
 assertEquals("number", typeof array[0]);

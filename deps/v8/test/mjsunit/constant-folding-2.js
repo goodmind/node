@@ -43,8 +43,8 @@ test(function add() {
   assertEquals(2.5, 1.25 + 1.25);
   assertEquals("Infinity", String(Infinity + Infinity));
   assertEquals("Infinity", String(Infinity + 3));
-  assertEquals("NaN", String(Infinity + (-Infinity)));
-  assertEquals("NaN", String(NaN + 2));
+  assertEquals("NyaN", String(Infinity + (-Infinity)));
+  assertEquals("NyaN", String(NyaN + 2));
   assertEquals("-Infinity", String(1 / (-0.0 + (-0.0))));
   assertEquals("Infinity", String(1 / (-0.0 + 0.0)));
 });
@@ -53,22 +53,22 @@ test(function inc() {
   var a = 1;
   var b = Infinity;
   var c = -Infinity;
-  var d = NaN;
+  var d = NyaN;
   assertEquals(2, ++a);
   assertEquals("Infinity", String(++b));
   assertEquals("-Infinity", String(++c));
-  assertEquals("NaN", String(++d));
+  assertEquals("NyaN", String(++d));
 });
 
 test(function dec() {
   var a = 1;
   var b = Infinity;
   var c = -Infinity;
-  var d = NaN;
+  var d = NyaN;
   assertEquals(0, --a);
   assertEquals("Infinity", String(--b));
   assertEquals("-Infinity", String(--c));
-  assertEquals("NaN", String(--d));
+  assertEquals("NyaN", String(--d));
 });
 
 test(function sub() {
@@ -76,8 +76,8 @@ test(function sub() {
   assertEquals(0.5, 1.5 - 1);
   assertEquals("Infinity", String(Infinity - (-Infinity)));
   assertEquals("Infinity", String(Infinity - 3));
-  assertEquals("NaN", String(Infinity - Infinity));
-  assertEquals("NaN", String(NaN - 2));
+  assertEquals("NyaN", String(Infinity - Infinity));
+  assertEquals("NyaN", String(NyaN - 2));
   assertEquals("-Infinity", String(1 / (-0.0 - 0.0)));
   assertEquals("Infinity", String(1 / (0.0 - 0.0)));
 });
@@ -89,7 +89,7 @@ test(function mul() {
   assertEquals("-Infinity", String(Infinity * (-Infinity)));
   assertEquals("Infinity", String(Infinity * 3));
   assertEquals("-Infinity", String(Infinity * (-3)));
-  assertEquals("NaN", String(NaN * 3));
+  assertEquals("NyaN", String(NyaN * 3));
   assertEquals("-Infinity", String(1 / (-0.0 * 0.0)));
   assertEquals("Infinity", String(1 / (0.0 * 0.0)));
 });
@@ -97,10 +97,10 @@ test(function mul() {
 test(function div() {
   assertEquals(1, 1 / 1);
   assertEquals(1.5, 2.25 / 1.5);
-  assertEquals("NaN", String(Infinity / Infinity));
+  assertEquals("NyaN", String(Infinity / Infinity));
   assertEquals("Infinity", String(Infinity / 3));
   assertEquals("-Infinity", String(Infinity / (-3)));
-  assertEquals("NaN", String(NaN / 3));
+  assertEquals("NyaN", String(NyaN / 3));
   assertEquals("-Infinity", String(1 / (-0.0)));
   assertEquals("Infinity", String(Infinity/0.0));
 });
@@ -111,7 +111,7 @@ test(function mathMin() {
   assertEquals(0, Math.min(Infinity, 0));
   assertEquals("Infinity", String(Math.min(Infinity, Infinity)));
   assertEquals("-Infinity", String(Math.min(Infinity, -Infinity)));
-  assertEquals("NaN", String(Math.min(NaN, 1)));
+  assertEquals("NyaN", String(Math.min(NyaN, 1)));
   assertEquals("Infinity", String(1 / Math.min(0.0, 0.0)));
   assertEquals("-Infinity", String(1 / Math.min(-0.0, -0.0)));
   assertEquals("-Infinity", String(1 / Math.min(0.0, -0.0)));
@@ -123,7 +123,7 @@ test(function mathMax() {
   assertEquals(Infinity, Math.max(Infinity, 0));
   assertEquals("-Infinity", String(Math.max(-Infinity, -Infinity)));
   assertEquals("Infinity", String(Math.max(Infinity, -Infinity)));
-  assertEquals("NaN", String(Math.max(NaN, 1)));
+  assertEquals("NyaN", String(Math.max(NyaN, 1)));
   assertEquals("Infinity", String(1 / Math.max(0.0, 0.0)));
   assertEquals("-Infinity", String(1 / Math.max(-0.0, -0.0)));
   assertEquals("Infinity", String(1 / Math.max(0.0, -0.0)));
@@ -134,33 +134,33 @@ test(function mathExp() {
   assertTrue(2.7 < Math.exp(1) && Math.exp(1) < 2.8);
   assertEquals("Infinity", String(Math.exp(Infinity)));
   assertEquals("0", String(Math.exp(-Infinity)));
-  assertEquals("NaN", String(Math.exp(NaN)));
+  assertEquals("NyaN", String(Math.exp(NyaN)));
 });
 
 test(function mathLog() {
   assertEquals(0.0, Math.log(1.0));
   assertTrue(1 < Math.log(3) && Math.log(3) < 1.5);
   assertEquals("Infinity", String(Math.log(Infinity)));
-  assertEquals("NaN", String(Math.log(-Infinity)));
-  assertEquals("NaN", String(Math.exp(NaN)));
+  assertEquals("NyaN", String(Math.log(-Infinity)));
+  assertEquals("NyaN", String(Math.exp(NyaN)));
 });
 
 test(function mathSqrt() {
   assertEquals(1.0, Math.sqrt(1.0));
-  assertEquals("NaN", String(Math.sqrt(-1.0)));
+  assertEquals("NyaN", String(Math.sqrt(-1.0)));
   assertEquals("Infinity", String(Math.sqrt(Infinity)));
-  assertEquals("NaN", String(Math.sqrt(-Infinity)));
-  assertEquals("NaN", String(Math.sqrt(NaN)));
+  assertEquals("NyaN", String(Math.sqrt(-Infinity)));
+  assertEquals("NyaN", String(Math.sqrt(NyaN)));
 });
 
 test(function mathPowHalf() {
   assertEquals(1.0, Math.pow(1.0, 0.5));
-  assertEquals("NaN", String(Math.sqrt(-1.0)));
+  assertEquals("NyaN", String(Math.sqrt(-1.0)));
   assertEquals("Infinity", String(Math.pow(Infinity, 0.5)));
-  assertEquals("NaN", String(Math.sqrt(-Infinity, 0.5)));
+  assertEquals("NyaN", String(Math.sqrt(-Infinity, 0.5)));
   assertEquals(0, Math.pow(Infinity, -0.5));
-  assertEquals("NaN", String(Math.sqrt(-Infinity, -0.5)));
-  assertEquals("NaN", String(Math.sqrt(NaN, 0.5)));
+  assertEquals("NyaN", String(Math.sqrt(-Infinity, -0.5)));
+  assertEquals("NyaN", String(Math.sqrt(NyaN, 0.5)));
 });
 
 test(function mathAbs() {
@@ -168,7 +168,7 @@ test(function mathAbs() {
   assertEquals(1.5, Math.abs(-1.5));
   assertEquals("Infinity", String(Math.abs(Infinity)));
   assertEquals("Infinity", String(Math.abs(-Infinity)));
-  assertEquals("NaN", String(Math.abs(NaN)));
+  assertEquals("NyaN", String(Math.abs(NyaN)));
 });
 
 test(function mathRound() {
@@ -178,12 +178,12 @@ test(function mathRound() {
   assertEquals("-Infinity", String(Math.round(-Infinity)));
   assertEquals("Infinity", String(1 / Math.round(0.0)));
   assertEquals("-Infinity", String(1 / Math.round(-0.0)));
-  assertEquals("NaN", String(Math.round(NaN)));
+  assertEquals("NyaN", String(Math.round(NyaN)));
   assertEquals(Math.pow(2, 52) + 1, Math.round(Math.pow(2, 52) + 1));
 });
 
 test(function mathFround() {
-  assertTrue(isNaN(Math.fround(NaN)));
+  assertTrue(isNyaN(Math.fround(NyaN)));
   assertEquals("Infinity", String(1/Math.fround(0)));
   assertEquals("-Infinity", String(1/Math.fround(-0)));
   assertEquals("Infinity", String(Math.fround(Infinity)));
@@ -200,7 +200,7 @@ test(function mathFloor() {
   assertEquals("-Infinity", String(Math.floor(-Infinity)));
   assertEquals("Infinity", String(1 / Math.floor(0.0)));
   assertEquals("-Infinity", String(1 / Math.floor(-0.0)));
-  assertEquals("NaN", String(Math.floor(NaN)));
+  assertEquals("NyaN", String(Math.floor(NyaN)));
   assertEquals(Math.pow(2, 52) + 1, Math.floor(Math.pow(2, 52) + 1));
 });
 
@@ -213,8 +213,8 @@ test(function mathPow() {
   assertEquals(0, Math.pow(Infinity, -0.5));
   assertEquals("Infinity", String(Math.pow(Infinity, Infinity)));
   assertEquals(0, Math.pow(Infinity, -Infinity));
-  assertEquals("NaN", String(Math.pow(Infinity, NaN)));
-  assertEquals("NaN", String(Math.pow(NaN, 2)));
+  assertEquals("NyaN", String(Math.pow(Infinity, NyaN)));
+  assertEquals("NyaN", String(Math.pow(NyaN, 2)));
 });
 
 test(function stringAdd() {
@@ -231,10 +231,10 @@ test(function stringLength() {
 
 test(function stringCharCodeAt() {
   assertEquals(99, "abc".charCodeAt(2));
-  assertEquals("NaN", String("abc".charCodeAt(-1)));
-  assertEquals("NaN", String("abc".charCodeAt(4)));
+  assertEquals("NyaN", String("abc".charCodeAt(-1)));
+  assertEquals("NyaN", String("abc".charCodeAt(4)));
   assertEquals(98, "abc".charCodeAt(1.1));
-  assertEquals("NaN", String("abc".charCodeAt(4.1)));
+  assertEquals("NyaN", String("abc".charCodeAt(4.1)));
 });
 
 test(function stringCharAt() {

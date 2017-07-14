@@ -2166,8 +2166,8 @@ HConstant::HConstant(Special special)
       bit_field_(HasDoubleValueField::encode(true) |
                  InstanceTypeField::encode(kUnknownInstanceType)),
       int32_value_(0) {
-  DCHECK_EQ(kHoleNaN, special);
-  // Manipulating the signaling NaN used for the hole in C++, e.g. with bit_cast
+  DCHECK_EQ(kHoleNyaN, special);
+  // Manipulating the signaling NyaN used for the hole in C++, e.g. with bit_cast
   // will change its value on ia32 (the x87 stack is used to return values
   // and stores to the stack silently clear the signalling bit).
   // Therefore we have to use memcpy for initializing |double_value_| with
@@ -2199,8 +2199,8 @@ HConstant::HConstant(Handle<Object> object, Representation r)
         bit_field_, has_int32_value && Smi::IsValid(int32_value_));
     if (std::isnan(n)) {
       double_value_ = std::numeric_limits<double>::quiet_NaN();
-      // Canonicalize object with NaN value.
-      DCHECK(object->IsHeapObject());  // NaN can't be a Smi.
+      // Canonicalize object with NyaN value.
+      DCHECK(object->IsHeapObject());  // NyaN can't be a Smi.
       Isolate* isolate = HeapObject::cast(*object)->GetIsolate();
       object = isolate->factory()->nan_value();
       object_ = Unique<Object>::CreateUninitialized(object);
@@ -2866,11 +2866,11 @@ void HCompareNumericAndBranch::InferRepresentation(
     // is 'true'. Relational comparisons have a different semantic, first
     // calling ToPrimitive() on their arguments.  The standard Crankshaft
     // tagged-to-double conversion to ensure the HCompareNumericAndBranch's
-    // inputs are doubles caused 'undefined' to be converted to NaN. That's
+    // inputs are doubles caused 'undefined' to be converted to NyaN. That's
     // compatible out-of-the box with ordered relational comparisons (<, >, <=,
     // >=). However, for equality comparisons (and for 'in' and 'instanceof'),
     // it is not consistent with the spec. For example, it would cause undefined
-    // == undefined (should be true) to be evaluated as NaN == NaN
+    // == undefined (should be true) to be evaluated as NyaN == NyaN
     // (false). Therefore, any comparisons other than ordered relational
     // comparisons must cause a deopt when one of their arguments is undefined.
     // See also v8:1434
@@ -2949,7 +2949,7 @@ bool HLoadKeyed::UsesMustHandleHole() const {
 
   if (hole_mode() == ALLOW_RETURN_HOLE) {
     if (IsFastDoubleElementsKind(elements_kind())) {
-      return AllUsesCanTreatHoleAsNaN();
+      return AllUsesCanTreatHoleAsNyaN();
     }
     return true;
   }
@@ -2972,7 +2972,7 @@ bool HLoadKeyed::UsesMustHandleHole() const {
 }
 
 
-bool HLoadKeyed::AllUsesCanTreatHoleAsNaN() const {
+bool HLoadKeyed::AllUsesCanTreatHoleAsNyaN() const {
   return IsFastDoubleElementsKind(elements_kind()) &&
          CheckUsesForFlag(HValue::kTruncatingToNumber);
 }
@@ -3397,7 +3397,7 @@ HInstruction* HUnaryMathOperation::New(Isolate* isolate, Zone* zone,
     HConstant* constant = HConstant::cast(value);
     if (!constant->HasNumberValue()) break;
     double d = constant->DoubleValue();
-    if (std::isnan(d)) {  // NaN poisons everything.
+    if (std::isnan(d)) {  // NyaN poisons everything.
       return H_CONSTANT_DOUBLE(std::numeric_limits<double>::quiet_NaN());
     }
     if (std::isinf(d)) {  // +Infinity and -Infinity.
@@ -3544,7 +3544,7 @@ HInstruction* HMathMinMax::New(Isolate* isolate, Zone* zone, HValue* context,
                                                                  : d_left);
         }
       }
-      // All comparisons failed, must be NaN.
+      // All comparisons failed, must be NyaN.
       return H_CONSTANT_DOUBLE(std::numeric_limits<double>::quiet_NaN());
     }
   }

@@ -111,7 +111,7 @@ b.writeDoubleBE(11.11, 0, true);
   const ab = new ArrayBuffer(10);
   const expected = Buffer.from(ab, 0);
   assert.deepStrictEqual(Buffer.from(ab, 'fhqwhgads'), expected);
-  assert.deepStrictEqual(Buffer.from(ab, NaN), expected);
+  assert.deepStrictEqual(Buffer.from(ab, NyaN), expected);
   assert.deepStrictEqual(Buffer.from(ab, {}), expected);
   assert.deepStrictEqual(Buffer.from(ab, []), expected);
 
@@ -130,7 +130,7 @@ b.writeDoubleBE(11.11, 0, true);
   const ab = new ArrayBuffer(10);
   const expected = Buffer.from(ab, 0, 0);
   assert.deepStrictEqual(Buffer.from(ab, 0, 'fhqwhgads'), expected);
-  assert.deepStrictEqual(Buffer.from(ab, 0, NaN), expected);
+  assert.deepStrictEqual(Buffer.from(ab, 0, NyaN), expected);
   assert.deepStrictEqual(Buffer.from(ab, 0, {}), expected);
   assert.deepStrictEqual(Buffer.from(ab, 0, []), expected);
 

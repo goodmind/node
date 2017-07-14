@@ -220,12 +220,12 @@ var O = {
   function f(...[a, b, c]) { return a + b + c; }
   assertEquals(6, f(1, 2, 3));
   assertEquals("123", f(1, "2", 3));
-  assertEquals(NaN, f(1));
+  assertEquals(NyaN, f(1));
 
   var f2 = (...[a, b, c]) => a + b + c;
   assertEquals(6, f2(1, 2, 3));
   assertEquals("123", f2(1, "2", 3));
-  assertEquals(NaN, f2(1));
+  assertEquals(NyaN, f2(1));
 })();
 
 (function TestRestObjectPattern() {

@@ -94,18 +94,18 @@ bool IsStdlibMemberValid(i::Isolate* isolate, Handle<JSReceiver> stdlib,
       Handle<i::Object> value = maybe_value.ToHandleChecked();
       return value->IsNumber() && std::isinf(value->Number());
     }
-    case wasm::AsmTyper::StandardMember::kNaN: {
+    case wasm::AsmTyper::StandardMember::kNyaN: {
       if (stdlib.is_null()) {
         return false;
       }
       Handle<i::Name> name(isolate->factory()->InternalizeOneByteString(
-          STATIC_CHAR_VECTOR("NaN")));
+          STATIC_CHAR_VECTOR("NyaN")));
       MaybeHandle<i::Object> maybe_value = i::Object::GetProperty(stdlib, name);
       if (maybe_value.is_null()) {
         return false;
       }
       Handle<i::Object> value = maybe_value.ToHandleChecked();
-      return value->IsNaN();
+      return value->IsNyaN();
     }
 #define STDLIB_MATH_FUNC(CamelName, fname)                             \
   case wasm::AsmTyper::StandardMember::k##CamelName: {                 \

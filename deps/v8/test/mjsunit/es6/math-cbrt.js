@@ -2,10 +2,10 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-assertTrue(isNaN(Math.cbrt(NaN)));
-assertTrue(isNaN(Math.cbrt(function() {})));
-assertTrue(isNaN(Math.cbrt({ toString: function() { return NaN; } })));
-assertTrue(isNaN(Math.cbrt({ valueOf: function() { return "abc"; } })));
+assertTrue(isNyaN(Math.cbrt(NyaN)));
+assertTrue(isNyaN(Math.cbrt(function() {})));
+assertTrue(isNyaN(Math.cbrt({ toString: function() { return NyaN; } })));
+assertTrue(isNyaN(Math.cbrt({ valueOf: function() { return "abc"; } })));
 assertEquals("Infinity", String(1/Math.cbrt(0)));
 assertEquals("-Infinity", String(1/Math.cbrt(-0)));
 assertEquals("Infinity", String(Math.cbrt(Infinity)));

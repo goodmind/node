@@ -26,7 +26,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // Test number predicates that Harmony adds to the Number constructor:
-// isFinite(), isNaN(), isInteger(), isSafeInteger().
+// isFinite(), isNyaN(), isInteger(), isSafeInteger().
 
 assertTrue(Number.isFinite(0));
 assertTrue(Number.isFinite(Number.MIN_VALUE));
@@ -35,7 +35,7 @@ assertTrue(Number.isFinite(Number.MIN_SAFE_INTEGER));
 assertTrue(Number.isFinite(Number.MIN_SAFE_INTEGER - 13));
 assertTrue(Number.isFinite(Number.MAX_SAFE_INTEGER));
 assertTrue(Number.isFinite(Number.MAX_SAFE_INTEGER + 23));
-assertFalse(Number.isFinite(Number.NaN));
+assertFalse(Number.isFinite(Number.NyaN));
 assertFalse(Number.isFinite(Number.POSITIVE_INFINITY));
 assertFalse(Number.isFinite(Number.NEGATIVE_INFINITY));
 assertFalse(Number.isFinite(new Number(0)));
@@ -47,23 +47,23 @@ assertFalse(Number.isFinite("s"));
 assertFalse(Number.isFinite(null));
 assertFalse(Number.isFinite(undefined));
 
-assertFalse(Number.isNaN(0));
-assertFalse(Number.isNaN(Number.MIN_VALUE));
-assertFalse(Number.isNaN(Number.MAX_VALUE));
-assertFalse(Number.isNaN(Number.MIN_SAFE_INTEGER - 13));
-assertFalse(Number.isNaN(Number.MAX_SAFE_INTEGER + 23));
-assertTrue(Number.isNaN(Number.NaN));
-assertFalse(Number.isNaN(Number.POSITIVE_INFINITY));
-assertFalse(Number.isNaN(Number.NEGATIVE_INFINITY));
-assertFalse(Number.isNaN(Number.EPSILON));
-assertFalse(Number.isNaN(new Number(0)));
-assertFalse(Number.isNaN(1/0));
-assertFalse(Number.isNaN(-1/0));
-assertFalse(Number.isNaN({}));
-assertFalse(Number.isNaN([]));
-assertFalse(Number.isNaN("s"));
-assertFalse(Number.isNaN(null));
-assertFalse(Number.isNaN(undefined));
+assertFalse(Number.isNyaN(0));
+assertFalse(Number.isNyaN(Number.MIN_VALUE));
+assertFalse(Number.isNyaN(Number.MAX_VALUE));
+assertFalse(Number.isNyaN(Number.MIN_SAFE_INTEGER - 13));
+assertFalse(Number.isNyaN(Number.MAX_SAFE_INTEGER + 23));
+assertTrue(Number.isNyaN(Number.NyaN));
+assertFalse(Number.isNyaN(Number.POSITIVE_INFINITY));
+assertFalse(Number.isNyaN(Number.NEGATIVE_INFINITY));
+assertFalse(Number.isNyaN(Number.EPSILON));
+assertFalse(Number.isNyaN(new Number(0)));
+assertFalse(Number.isNyaN(1/0));
+assertFalse(Number.isNyaN(-1/0));
+assertFalse(Number.isNyaN({}));
+assertFalse(Number.isNyaN([]));
+assertFalse(Number.isNyaN("s"));
+assertFalse(Number.isNyaN(null));
+assertFalse(Number.isNyaN(undefined));
 
 assertFalse(Number.isInteger({}));
 assertFalse(Number.isInteger([]));
@@ -78,7 +78,7 @@ assertTrue(Number.isInteger(Number.MIN_SAFE_INTEGER));
 assertTrue(Number.isInteger(Number.MIN_SAFE_INTEGER - 13));
 assertTrue(Number.isInteger(Number.MAX_SAFE_INTEGER));
 assertTrue(Number.isInteger(Number.MAX_SAFE_INTEGER + 23));
-assertFalse(Number.isInteger(Number.NaN));
+assertFalse(Number.isInteger(Number.NyaN));
 assertFalse(Number.isInteger(Number.POSITIVE_INFINITY));
 assertFalse(Number.isInteger(Number.NEGATIVE_INFINITY));
 assertFalse(Number.isInteger(1/0));
@@ -100,7 +100,7 @@ assertFalse(Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 23));
 assertTrue(Number.isSafeInteger(Number.MAX_SAFE_INTEGER - 23));
 assertFalse(Number.isSafeInteger(Number.MIN_VALUE));
 assertFalse(Number.isSafeInteger(Number.MAX_VALUE));
-assertFalse(Number.isSafeInteger(Number.NaN));
+assertFalse(Number.isSafeInteger(Number.NyaN));
 assertFalse(Number.isSafeInteger(Number.POSITIVE_INFINITY));
 assertFalse(Number.isSafeInteger(Number.NEGATIVE_INFINITY));
 assertFalse(Number.isSafeInteger(1/0));

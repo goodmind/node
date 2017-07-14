@@ -36,7 +36,7 @@ function set_pixel(obj, arg) {
 }
 
 set_pixel(obj, 1.5);
-set_pixel(obj, NaN);
+set_pixel(obj, NyaN);
 %OptimizeFunctionOnNextCall(set_pixel);
 set_pixel(obj, undefined);
 set_pixel(obj, undefined);

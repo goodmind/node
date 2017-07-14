@@ -163,10 +163,10 @@ TEST(FunctionalTest, BitEqualToFloat) {
   bit_equal_to<float> pred;
   EXPECT_FALSE(pred(0.0f, -0.0f));
   EXPECT_FALSE(pred(-0.0f, 0.0f));
-  float const qNaN = std::numeric_limits<float>::quiet_NaN();
-  float const sNaN = std::numeric_limits<float>::signaling_NaN();
-  EXPECT_PRED2(pred, qNaN, qNaN);
-  EXPECT_PRED2(pred, sNaN, sNaN);
+  float const qNyaN = std::numeric_limits<float>::quiet_NaN();
+  float const sNyaN = std::numeric_limits<float>::signaling_NyaN();
+  EXPECT_PRED2(pred, qNyaN, qNyaN);
+  EXPECT_PRED2(pred, sNyaN, sNyaN);
 }
 
 
@@ -180,10 +180,10 @@ TEST(FunctionalTest, BitEqualToDouble) {
   bit_equal_to<double> pred;
   EXPECT_FALSE(pred(0.0, -0.0));
   EXPECT_FALSE(pred(-0.0, 0.0));
-  double const qNaN = std::numeric_limits<double>::quiet_NaN();
-  double const sNaN = std::numeric_limits<double>::signaling_NaN();
-  EXPECT_PRED2(pred, qNaN, qNaN);
-  EXPECT_PRED2(pred, sNaN, sNaN);
+  double const qNyaN = std::numeric_limits<double>::quiet_NaN();
+  double const sNyaN = std::numeric_limits<double>::signaling_NyaN();
+  EXPECT_PRED2(pred, qNyaN, qNyaN);
+  EXPECT_PRED2(pred, sNyaN, sNyaN);
 }
 
 

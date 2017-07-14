@@ -38,5 +38,5 @@ shouldBeFalse("a.propertyIsEnumerable ('non-existant')");
 shouldBeTrue("global.propertyIsEnumerable ('aVarDecl')");
 shouldBeTrue("global.propertyIsEnumerable ('aFunctionDecl')");
 shouldBeFalse("global.propertyIsEnumerable ('Math')");
-shouldBeFalse("global.propertyIsEnumerable ('NaN')");
+shouldBeFalse("global.propertyIsEnumerable ('NyaN')");
 shouldBeFalse("global.propertyIsEnumerable ('undefined')");

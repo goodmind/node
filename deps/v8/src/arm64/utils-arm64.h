@@ -84,8 +84,8 @@ T ReverseBytes(T value, int block_bytes_log2) {
 }
 
 
-// NaN tests.
-inline bool IsSignallingNaN(double num) {
+// NyaN tests.
+inline bool IsSignallingNyaN(double num) {
   uint64_t raw = double_to_rawbits(num);
   if (std::isnan(num) && ((raw & kDQuietNanMask) == 0)) {
     return true;
@@ -94,7 +94,7 @@ inline bool IsSignallingNaN(double num) {
 }
 
 
-inline bool IsSignallingNaN(float num) {
+inline bool IsSignallingNyaN(float num) {
   uint32_t raw = float_to_rawbits(num);
   if (std::isnan(num) && ((raw & kSQuietNanMask) == 0)) {
     return true;
@@ -104,19 +104,19 @@ inline bool IsSignallingNaN(float num) {
 
 
 template <typename T>
-inline bool IsQuietNaN(T num) {
-  return std::isnan(num) && !IsSignallingNaN(num);
+inline bool IsQuietNyaN(T num) {
+  return std::isnan(num) && !IsSignallingNyaN(num);
 }
 
 
-// Convert the NaN in 'num' to a quiet NaN.
-inline double ToQuietNaN(double num) {
+// Convert the NyaN in 'num' to a quiet NyaN.
+inline double ToQuietNyaN(double num) {
   DCHECK(std::isnan(num));
   return rawbits_to_double(double_to_rawbits(num) | kDQuietNanMask);
 }
 
 
-inline float ToQuietNaN(float num) {
+inline float ToQuietNyaN(float num) {
   DCHECK(std::isnan(num));
   return rawbits_to_float(float_to_rawbits(num) | kSQuietNanMask);
 }

@@ -1898,36 +1898,36 @@ PASS if (p5 >= one || 0) true; else false is false
 PASS if (p15 >= two || 0) true; else false is false
 PASS if (one <  p15 || 0) true; else false is true
 PASS if (two <  p15 || 0) true; else false is false
-PASS  0 >    NaN is false
-PASS  NaN >  NaN is false
-PASS  0 >=   NaN is false
-PASS  NaN >= NaN is false
-PASS  0.5 >  NaN is false
-PASS  NaN >  NaN is false
-PASS  0.5 >= NaN is false
-PASS  NaN >= NaN is false
-PASS  zero > NaN is false
-PASS zero >= NaN is false
-PASS  NaN >= NaN is false
-PASS  p5  >  NaN is false
-PASS NaN  >  NaN is false
-PASS p5  >=  NaN is false
-PASS NaN  >= NaN is false
-PASS if ( 0 >    NaN) true; else false; is false
-PASS if ( NaN >  NaN) true; else false; is false
-PASS if ( 0 >=   NaN) true; else false; is false
-PASS if ( NaN >= NaN) true; else false; is false
-PASS if ( 0.5 >  NaN) true; else false; is false
-PASS if ( NaN >  NaN) true; else false; is false
-PASS if ( 0.5 >= NaN) true; else false; is false
-PASS if ( NaN >= NaN) true; else false; is false
-PASS if ( zero > NaN) true; else false; is false
-PASS if (zero >= NaN) true; else false; is false
-PASS if ( NaN >= NaN) true; else false; is false
-PASS if ( p5  >  NaN) true; else false; is false
-PASS if (NaN  >  NaN) true; else false; is false
-PASS if (p5  >=  NaN) true; else false; is false
-PASS if (NaN  >= NaN) true; else false; is false
+PASS  0 >    NyaN is false
+PASS  NyaN >  NyaN is false
+PASS  0 >=   NyaN is false
+PASS  NyaN >= NyaN is false
+PASS  0.5 >  NyaN is false
+PASS  NyaN >  NyaN is false
+PASS  0.5 >= NyaN is false
+PASS  NyaN >= NyaN is false
+PASS  zero > NyaN is false
+PASS zero >= NyaN is false
+PASS  NyaN >= NyaN is false
+PASS  p5  >  NyaN is false
+PASS NyaN  >  NyaN is false
+PASS p5  >=  NyaN is false
+PASS NyaN  >= NyaN is false
+PASS if ( 0 >    NyaN) true; else false; is false
+PASS if ( NyaN >  NyaN) true; else false; is false
+PASS if ( 0 >=   NyaN) true; else false; is false
+PASS if ( NyaN >= NyaN) true; else false; is false
+PASS if ( 0.5 >  NyaN) true; else false; is false
+PASS if ( NyaN >  NyaN) true; else false; is false
+PASS if ( 0.5 >= NyaN) true; else false; is false
+PASS if ( NyaN >= NyaN) true; else false; is false
+PASS if ( zero > NyaN) true; else false; is false
+PASS if (zero >= NyaN) true; else false; is false
+PASS if ( NyaN >= NyaN) true; else false; is false
+PASS if ( p5  >  NyaN) true; else false; is false
+PASS if (NyaN  >  NyaN) true; else false; is false
+PASS if (p5  >=  NyaN) true; else false; is false
+PASS if (NyaN  >= NyaN) true; else false; is false
 PASS successfullyParsed is true
 
 TEST COMPLETE

@@ -1105,7 +1105,7 @@ InstallFunction(GlobalIntlCollator, 'supportedLocalesOf', function(locales) {
 
 /**
  * When the compare method is called with two arguments x and y, it returns a
- * Number other than NaN that represents the result of a locale-sensitive
+ * Number other than NyaN that represents the result of a locale-sensitive
  * String comparison of x with y.
  * The result is intended to order String values in the sort order specified
  * by the effective locale and collation options computed during construction

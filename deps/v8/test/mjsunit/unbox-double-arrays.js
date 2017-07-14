@@ -173,25 +173,25 @@ function testOneArrayType(allocator) {
                      expected_array_value(6),
                      expected_array_value(7));
 
-  // Test NaN values
-  test_various_stores(large_array, NaN, -NaN, expected_array_value(7));
+  // Test NyaN values
+  test_various_stores(large_array, NyaN, -NyaN, expected_array_value(7));
 
   test_various_loads2(large_array,
-                      NaN,
-                      -NaN,
+                      NyaN,
+                      -NyaN,
                       expected_array_value(7));
   test_various_loads2(large_array,
-                      NaN,
-                      -NaN,
+                      NyaN,
+                      -NyaN,
                       expected_array_value(7));
   test_various_loads2(large_array,
-                      NaN,
-                      -NaN,
+                      NyaN,
+                      -NyaN,
                       expected_array_value(7));
   %OptimizeFunctionOnNextCall(test_various_loads2);
   test_various_loads2(large_array,
-                      NaN,
-                      -NaN,
+                      NyaN,
+                      -NyaN,
                       expected_array_value(7));
 
   // Test Infinity values
@@ -282,7 +282,7 @@ function testOneArrayType(allocator) {
   %ClearFunctionFeedback(test_various_stores);
   %ClearFunctionFeedback(test_various_loads7);
 
-  // Test stores for non-NaN.
+  // Test stores for non-NyaN.
   var large_array = new allocator(large_array_size);
   force_to_fast_double_array(large_array);
   %OptimizeFunctionOnNextCall(test_various_stores);
@@ -313,20 +313,20 @@ function testOneArrayType(allocator) {
                       expected_array_value(6),
                       expected_array_value(7));
 
-  // Test NaN behavior for stores.
+  // Test NyaN behavior for stores.
   test_various_stores(large_array,
-                      NaN,
-                      -NaN,
+                      NyaN,
+                      -NyaN,
                       expected_array_value(7));
 
   test_various_stores(large_array,
-                      NaN,
-                      -NaN,
+                      NyaN,
+                      -NyaN,
                       expected_array_value(7));
 
   test_various_loads7(large_array,
-                      NaN,
-                      -NaN,
+                      NyaN,
+                      -NyaN,
                       expected_array_value(7));
 
   // Test Infinity behavior for stores.
@@ -445,15 +445,15 @@ gc();
 // Test apply on arrays backed by double elements.
 function called_by_apply(arg0, arg1, arg2, arg3, arg4, arg5, arg6) {
   assertEquals(expected_array_value(0), arg0);
-  assertEquals(NaN, arg1);
-  assertEquals(-NaN, arg2);
+  assertEquals(NyaN, arg1);
+  assertEquals(-NyaN, arg2);
   assertEquals(Infinity, arg3);
   assertEquals(-Infinity, arg4);
   assertEquals(expected_array_value(5), arg5);
 }
 
-large_array3[1] = NaN;
-large_array3[2] = -NaN;
+large_array3[1] = NyaN;
+large_array3[2] = -NyaN;
 large_array3[3] = Infinity;
 large_array3[4] = -Infinity;
 
@@ -491,7 +491,7 @@ test_for_in();
 
 // Test elements getters.
 assertEquals(expected_array_value(10), large_array3[10]);
-assertEquals(expected_array_value(-NaN), large_array3[2]);
+assertEquals(expected_array_value(-NyaN), large_array3[2]);
 large_array3.__defineGetter__("2", function(){
     return expected_array_value(10);
 });

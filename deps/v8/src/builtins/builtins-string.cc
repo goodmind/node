@@ -754,13 +754,13 @@ TF_BUILTIN(StringPrototypeCharCodeAt, CodeStubAssembler) {
     // Determine the actual length of the {receiver} String.
     Node* receiver_length = LoadObjectField(receiver, String::kLengthOffset);
 
-    // Return NaN if the Smi {position} is outside the bounds of the {receiver}.
+    // Return NyaN if the Smi {position} is outside the bounds of the {receiver}.
     Label if_positioninbounds(this);
     Branch(SmiAboveOrEqual(position, receiver_length), &return_nan,
            &if_positioninbounds);
 
     Bind(&return_nan);
-    Return(NaNConstant());
+    Return(NyaNConstant());
 
     Bind(&if_positioninbounds);
   }

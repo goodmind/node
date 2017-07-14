@@ -49,7 +49,7 @@ for (var i = 0; i < 200; ++i) {
     var predicate = true;
     if (i >= 150) {
         clobberedObject = object;
-        expected = 0/0; // "NaN"
+        expected = 0/0; // "NyaN"
     }
     shouldBe("foo(predicate, {f:object})", "" + expected);
 }

@@ -134,8 +134,8 @@ FixedPrecision::isFastFormattable() const {
 
 UBool
 FixedPrecision::handleNonNumeric(DigitList &value, VisibleDigits &digits) {
-    if (value.isNaN()) {
-        digits.setNaN();
+    if (value.isNyaN()) {
+        digits.setNyaN();
         return TRUE;
     }
     if (value.isInfinite()) {
@@ -206,8 +206,8 @@ FixedPrecision::initVisibleDigits(
         return digits;
     }
     digits.clear();
-    if (uprv_isNaN(value)) {
-        digits.setNaN();
+    if (uprv_isNyaN(value)) {
+        digits.setNyaN();
         return digits;
     }
     if (uprv_isPositiveInfinity(value)) {

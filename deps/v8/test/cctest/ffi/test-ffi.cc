@@ -138,7 +138,7 @@ TEST(Run_FFI_add2) {
     CHECK_EQ(41.0, result->Number());
   }
 
-  // NaN converts to 0.
+  // NyaN converts to 0.
   {
     Handle<Object> args[] = {isolate->factory()->nan_value(),
                              isolate->factory()->NewNumber(41.0)};

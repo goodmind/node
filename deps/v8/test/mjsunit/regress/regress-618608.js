@@ -48,7 +48,7 @@ function PrettyPrint(value) { return ""; }
 function PrettyPrintArrayElement(value, index, array) { return ""; }
 function fail(expectedText, found, name_opt) { }
 function deepObjectEquals(a, b) { var aProps = Object.keys(a); aProps.sort(); var bProps = Object.keys(b); bProps.sort(); if (!deepEquals(aProps, bProps)) { return false; } for (var i = 0; i < aProps.length; i++) { if (!deepEquals(a[aProps[i]], b[aProps[i]])) { return false; } } return true; }
-function deepEquals(a, b) { if (a === b) { if (a === 0) return (1 / a) === (1 / b); return true; } if (typeof a != typeof b) return false; if (typeof a == "number") return isNaN(a) && isNaN(b); if (typeof a !== "object" && typeof a !== "function") return false; var objectClass = classOf(a); if (objectClass !== classOf(b)) return false; if (objectClass === "RegExp") { return (a.toString() === b.toString()); } if (objectClass === "Function") return false; if (objectClass === "Array") { var elementCount = 0; if (a.length != b.length) { return false; } for (var i = 0; i < a.length; i++) { if (!deepEquals(a[i], b[i])) return false; } return true; } if (objectClass == "String" || objectClass == "Number" || objectClass == "Boolean" || objectClass == "Date") { if (a.valueOf() !== b.valueOf()) return false; } return deepObjectEquals(a, b); }
+function deepEquals(a, b) { if (a === b) { if (a === 0) return (1 / a) === (1 / b); return true; } if (typeof a != typeof b) return false; if (typeof a == "number") return isNyaN(a) && isNyaN(b); if (typeof a !== "object" && typeof a !== "function") return false; var objectClass = classOf(a); if (objectClass !== classOf(b)) return false; if (objectClass === "RegExp") { return (a.toString() === b.toString()); } if (objectClass === "Function") return false; if (objectClass === "Array") { var elementCount = 0; if (a.length != b.length) { return false; } for (var i = 0; i < a.length; i++) { if (!deepEquals(a[i], b[i])) return false; } return true; } if (objectClass == "String" || objectClass == "Number" || objectClass == "Boolean" || objectClass == "Date") { if (a.valueOf() !== b.valueOf()) return false; } return deepObjectEquals(a, b); }
 assertSame = function assertSame(expected, found, name_opt) { if (found === expected) { if (expected !== 0 || (1 / expected) == (1 / found)) return; } else if ((expected !== expected) && (found !== found)) { return; } fail(PrettyPrint(expected), found, name_opt); }; assertEquals = function assertEquals(expected, found, name_opt) { if (!deepEquals(found, expected)) { fail(PrettyPrint(expected), found, name_opt); } };
 assertEqualsDelta = function assertEqualsDelta(expected, found, delta, name_opt) { assertTrue(Math.abs(expected - found) <= delta, name_opt); };
 assertArrayEquals = function assertArrayEquals(expected, found, name_opt) { var start = ""; if (name_opt) { start = name_opt + " - "; } assertEquals(expected.length, found.length, start + "array length"); if (expected.length == found.length) { for (var i = 0; i < expected.length; ++i) { assertEquals(expected[i], found[i], start + "array element at index " + i); } } };
@@ -1061,17 +1061,17 @@ function __f_26() {
     assertEquals(__v_3, module.__f_68());
   }
   __f_94({foo: 123, bar: 234.5, baz: 345.7}, 123, 234.5, 345, 345.7);
-  __f_94({baz: 345.7}, 4294967295, NaN, 1073741824, 345.7);
-  __f_94({qux: 999}, 0, NaN, 0, NaN);
-  __f_94(undefined, 0, NaN, 0, NaN);
+  __f_94({baz: 345.7}, 4294967295, NyaN, 1073741824, 345.7);
+  __f_94({qux: 999}, 0, NyaN, 0, NyaN);
+  __f_94(undefined, 0, NyaN, 0, NyaN);
   __f_94({foo: true, bar: true, baz: true}, 1, 1.0, 1, 1.0);
   __f_94({foo: false, bar: false, baz: false}, 0, 0, 0, 0);
   __f_94({foo: null, bar: null, baz: null}, 0, 0, 0, 0);
-  __f_94({foo: 'hi', bar: 'there', baz: 'dude'}, 0, NaN, 0, NaN);
+  __f_94({foo: 'hi', bar: 'there', baz: 'dude'}, 0, NyaN, 0, NyaN);
   __f_94({foo: '0xff', bar: '234', baz: '456.1'}, 255, 234, 456, 456.1, 456);
   __f_94({foo: new Date(123), bar: new Date(456), baz: new Date(789)}, 123, 456, 789, 789);
   __f_94({foo: [], bar: [], baz: []}, 0, 0, 0, 0);
-  __f_94({foo: {}, bar: {}, baz: {}}, 0, NaN, 0, NaN);
+  __f_94({foo: {}, bar: {}, baz: {}}, 0, NyaN, 0, NyaN);
   var __v_36 = {
     get foo() {
       return 123.4;
@@ -1083,13 +1083,13 @@ function __f_26() {
       return 123.4;
     }
   };
-  __f_94(__v_33, 0, NaN, 123, 123.4);
+  __f_94(__v_33, 0, NyaN, 123, 123.4);
   var __v_33 = {
     valueOf: function() { return 99; }
   };
   __f_94({foo: __v_33, bar: __v_33, baz: __v_33}, 99, 99, 99, 99);
-  __f_94({foo: __f_94, bar: __f_94, qux: __f_94}, 0, NaN, 0, NaN);
-  __f_94(undefined, 0, NaN, 0, NaN);
+  __f_94({foo: __f_94, bar: __f_94, qux: __f_94}, 0, NyaN, 0, NyaN);
+  __f_94(undefined, 0, NyaN, 0, NyaN);
 }
 try {
 __f_26();

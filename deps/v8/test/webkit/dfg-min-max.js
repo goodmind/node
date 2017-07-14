@@ -43,23 +43,23 @@ shouldBe("doMin(2.5, 1.5)", "1.5");
 shouldBe("doMin(1.5, 1.5)", "1.5");
 shouldBe("doMin(2.5, 2.5)", "2.5");
 
-shouldBe("doMin(1.5, NaN)", "NaN");
-shouldBe("doMin(2.5, NaN)", "NaN");
-shouldBe("doMin(NaN, 1.5)", "NaN");
-shouldBe("doMin(NaN, 2.5)", "NaN");
+shouldBe("doMin(1.5, NyaN)", "NyaN");
+shouldBe("doMin(2.5, NyaN)", "NyaN");
+shouldBe("doMin(NyaN, 1.5)", "NyaN");
+shouldBe("doMin(NyaN, 2.5)", "NyaN");
 
-shouldBe("doMin(NaN, NaN)", "NaN");
+shouldBe("doMin(NyaN, NyaN)", "NyaN");
 
 shouldBe("doMax(1.5, 2.5)", "2.5");
 shouldBe("doMax(2.5, 1.5)", "2.5");
 shouldBe("doMax(1.5, 1.5)", "1.5");
 shouldBe("doMax(2.5, 2.5)", "2.5");
 
-shouldBe("doMax(1.5, NaN)", "NaN");
-shouldBe("doMax(2.5, NaN)", "NaN");
-shouldBe("doMax(NaN, 1.5)", "NaN");
-shouldBe("doMax(NaN, 2.5)", "NaN");
+shouldBe("doMax(1.5, NyaN)", "NyaN");
+shouldBe("doMax(2.5, NyaN)", "NyaN");
+shouldBe("doMax(NyaN, 1.5)", "NyaN");
+shouldBe("doMax(NyaN, 2.5)", "NyaN");
 
-shouldBe("doMax(NaN, NaN)", "NaN");
+shouldBe("doMax(NyaN, NyaN)", "NyaN");
 
 var successfullyParsed = true;

@@ -34,7 +34,7 @@ function f() {
   y = 3;
   var i = 7 * (y + -0);
   a[i] = 1/y;
-  assertFalse(isNaN(a[i]));
+  assertFalse(isNyaN(a[i]));
 }
 
 f();

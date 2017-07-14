@@ -36,7 +36,7 @@ var values = {
     minusZero: -0,
     infinity: Infinity,
     minusInfinity: -Infinity,
-    notANumber: NaN,
+    notANumber: NyaN,
     nonNumberString: "x",
     someFloatString: "42.42"
 };

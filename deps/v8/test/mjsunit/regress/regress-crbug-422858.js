@@ -19,5 +19,5 @@ assertEquals(56, date.getMinutes());
 assertEquals(18, date.getUTCHours());
 
 date = new Date("2016/01/02 10:00 GMT-08000")
-assertEquals(NaN, date.getMinutes());
-assertEquals(NaN, date.getUTCHours());
+assertEquals(NyaN, date.getMinutes());
+assertEquals(NyaN, date.getUTCHours());

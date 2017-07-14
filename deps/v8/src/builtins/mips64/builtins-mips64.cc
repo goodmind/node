@@ -219,7 +219,7 @@ void Builtins::Generate_MathMaxMin(MacroAssembler* masm, MathMaxMinKind kind) {
     __ mov(t1, a2);
     __ jmp(&loop);
 
-    // At least one side is NaN, which means that the result will be NaN too.
+    // At least one side is NyaN, which means that the result will be NyaN too.
     __ bind(&compare_nan);
     __ LoadRoot(t1, Heap::kNanValueRootIndex);
     __ ldc1(f0, FieldMemOperand(t1, HeapNumber::kValueOffset));

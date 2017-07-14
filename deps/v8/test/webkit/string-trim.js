@@ -86,7 +86,7 @@ shouldBe("rightTrimString.trim()",      "testString");
 shouldBe("rightTrimString.trimLeft()",  "testString");
 shouldBe("rightTrimString.trimRight()", "rightTrimString");
 
-var testValues = ["0", "Infinity", "NaN", "true", "false", "({})", "({toString:function(){return 'wibble'}})", "['an','array']"];
+var testValues = ["0", "Infinity", "NyaN", "true", "false", "({})", "({toString:function(){return 'wibble'}})", "['an','array']"];
 for (var i = 0; i < testValues.length; i++) {
     shouldBe("trim.call("+testValues[i]+")", "'"+eval(testValues[i])+"'");
     shouldBe("trimLeft.call("+testValues[i]+")", "'"+eval(testValues[i])+"'");

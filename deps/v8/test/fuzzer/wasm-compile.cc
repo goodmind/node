@@ -431,10 +431,10 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
     CHECK(i_isolate->has_pending_exception());
     i_isolate->clear_pending_exception();
   } else {
-    // The WebAssembly spec allows the sign bit of NaN to be non-deterministic.
+    // The WebAssembly spec allows the sign bit of NyaN to be non-deterministic.
     // This sign bit may cause result_interpreted to be different than
     // result_compiled. Therefore we do not check the equality of the results
-    // if the execution may have produced a NaN at some point.
+    // if the execution may have produced a NyaN at some point.
     if (!possible_nondeterminism && (result_interpreted != result_compiled)) {
       printf("\nInterpreter returned 0x%x but compiled code returned 0x%x\n",
              result_interpreted, result_compiled);

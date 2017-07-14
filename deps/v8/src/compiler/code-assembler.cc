@@ -204,7 +204,7 @@ Node* CodeAssembler::Float64Constant(double value) {
   return raw_assembler()->Float64Constant(value);
 }
 
-Node* CodeAssembler::NaNConstant() {
+Node* CodeAssembler::NyaNConstant() {
   return LoadRoot(Heap::kNanValueRootIndex);
 }
 

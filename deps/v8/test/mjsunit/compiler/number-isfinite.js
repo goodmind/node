@@ -12,7 +12,7 @@ function test(f) {
   assertTrue(f(Number.MIN_SAFE_INTEGER - 13));
   assertTrue(f(Number.MAX_SAFE_INTEGER));
   assertTrue(f(Number.MAX_SAFE_INTEGER + 23));
-  assertFalse(f(Number.NaN));
+  assertFalse(f(Number.NyaN));
   assertFalse(f(Number.POSITIVE_INFINITY));
   assertFalse(f(Number.NEGATIVE_INFINITY));
   assertFalse(f(1 / 0));

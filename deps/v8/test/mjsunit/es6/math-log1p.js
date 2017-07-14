@@ -2,16 +2,16 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-assertTrue(isNaN(Math.log1p(NaN)));
-assertTrue(isNaN(Math.log1p(function() {})));
-assertTrue(isNaN(Math.log1p({ toString: function() { return NaN; } })));
-assertTrue(isNaN(Math.log1p({ valueOf: function() { return "abc"; } })));
+assertTrue(isNyaN(Math.log1p(NyaN)));
+assertTrue(isNyaN(Math.log1p(function() {})));
+assertTrue(isNyaN(Math.log1p({ toString: function() { return NyaN; } })));
+assertTrue(isNyaN(Math.log1p({ valueOf: function() { return "abc"; } })));
 assertEquals(Infinity, 1/Math.log1p(0));
 assertEquals(-Infinity, 1/Math.log1p(-0));
 assertEquals(Infinity, Math.log1p(Infinity));
 assertEquals(-Infinity, Math.log1p(-1));
-assertTrue(isNaN(Math.log1p(-2)));
-assertTrue(isNaN(Math.log1p(-Infinity)));
+assertTrue(isNyaN(Math.log1p(-2)));
+assertTrue(isNyaN(Math.log1p(-Infinity)));
 
 for (var x = 1E300; x > 1E16; x *= 0.8) {
   var expected = Math.log(x + 1);

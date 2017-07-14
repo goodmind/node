@@ -30,7 +30,7 @@ e.on('maxListeners', common.mustCall());
 // Should not corrupt the 'maxListeners' queue.
 e.setMaxListeners(42);
 
-const throwsObjs = [NaN, -1, 'and even this'];
+const throwsObjs = [NyaN, -1, 'and even this'];
 const maxError = /^TypeError: "n" argument must be a positive number$/;
 const defError = /^TypeError: "defaultMaxListeners" must be a positive number$/;
 

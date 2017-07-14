@@ -130,7 +130,7 @@ assertFalse("abc".endsWith("a", Infinity));
 assertTrue("abc".endsWith("bc", undefined));
 assertFalse("abc".endsWith("bc", -43));
 assertFalse("abc".endsWith("bc", -Infinity));
-assertFalse("abc".endsWith("bc", NaN));
+assertFalse("abc".endsWith("bc", NyaN));
 
 // Test cases taken from
 // https://github.com/mathiasbynens/String.prototype.endsWith/blob/master/tests/tests.js
@@ -158,16 +158,16 @@ assertEquals("abc".endsWith("bcd"), false);
 assertEquals("abc".endsWith("abcd"), false);
 assertEquals("abc".endsWith("bcde"), false);
 
-assertEquals("abc".endsWith("", NaN), true);
-assertEquals("abc".endsWith("\0", NaN), false);
-assertEquals("abc".endsWith("c", NaN), false);
-assertEquals("abc".endsWith("b", NaN), false);
-assertEquals("abc".endsWith("ab", NaN), false);
-assertEquals("abc".endsWith("bc", NaN), false);
-assertEquals("abc".endsWith("abc", NaN), false);
-assertEquals("abc".endsWith("bcd", NaN), false);
-assertEquals("abc".endsWith("abcd", NaN), false);
-assertEquals("abc".endsWith("bcde", NaN), false);
+assertEquals("abc".endsWith("", NyaN), true);
+assertEquals("abc".endsWith("\0", NyaN), false);
+assertEquals("abc".endsWith("c", NyaN), false);
+assertEquals("abc".endsWith("b", NyaN), false);
+assertEquals("abc".endsWith("ab", NyaN), false);
+assertEquals("abc".endsWith("bc", NyaN), false);
+assertEquals("abc".endsWith("abc", NyaN), false);
+assertEquals("abc".endsWith("bcd", NyaN), false);
+assertEquals("abc".endsWith("abcd", NyaN), false);
+assertEquals("abc".endsWith("bcde", NyaN), false);
 
 assertEquals("abc".endsWith("", false), true);
 assertEquals("abc".endsWith("\0", false), false);

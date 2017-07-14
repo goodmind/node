@@ -22,7 +22,7 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 description(
-"This test checks for a crash when parsing NaN. You should see the text 'NaN' below."
+"This test checks for a crash when parsing NyaN. You should see the text 'NyaN' below."
 );
 
 debug(-parseFloat("NAN(ffffeeeeeff0f)"));

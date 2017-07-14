@@ -111,9 +111,9 @@ TEST(BYTESWAP) {
   CHECK_EQ(static_cast<int32_t>(0xDE2C0000), t.r5);
 }
 
-static void TestNaN(const char *code) {
-  // NaN value is different on MIPS and x86 architectures, and TEST(NaNx)
-  // tests checks the case where a x86 NaN value is serialized into the
+static void TestNyaN(const char *code) {
+  // NyaN value is different on MIPS and x86 architectures, and TEST(NyaNx)
+  // tests checks the case where a x86 NyaN value is serialized into the
   // snapshot on the simulator during cross compilation.
   v8::HandleScope scope(CcTest::isolate());
   v8::Local<v8::Context> context = CcTest::NewContext(PRINT_EXTENSION);
@@ -133,21 +133,21 @@ static void TestNaN(const char *code) {
 }
 
 
-TEST(NaN0) {
-  TestNaN(
+TEST(NyaN0) {
+  TestNyaN(
           "var result;"
           "for (var i = 0; i < 2; i++) {"
-          "  result = new Array(Number.NaN, Number.POSITIVE_INFINITY);"
+          "  result = new Array(Number.NyaN, Number.POSITIVE_INFINITY);"
           "}"
           "result;");
 }
 
 
-TEST(NaN1) {
-  TestNaN(
+TEST(NyaN1) {
+  TestNyaN(
           "var result;"
           "for (var i = 0; i < 2; i++) {"
-          "  result = [NaN];"
+          "  result = [NyaN];"
           "}"
           "result;");
 }
@@ -1480,7 +1480,7 @@ TEST(macro_float_minmax_f32) {
     CHECK_EQ(bit_cast<uint32_t>(max), bit_cast<uint32_t>(results.max_abc_)); \
     CHECK_EQ(bit_cast<uint32_t>(max), bit_cast<uint32_t>(results.max_aab_)); \
     CHECK_EQ(bit_cast<uint32_t>(max), bit_cast<uint32_t>(results.max_aba_)); \
-    /* Use a bit_cast to correctly identify -0.0 and NaNs. */                \
+    /* Use a bit_cast to correctly identify -0.0 and NyaNs. */                \
   } while (0)
 
   float nan_a = std::numeric_limits<float>::quiet_NaN();
@@ -1623,7 +1623,7 @@ TEST(macro_float_minmax_f64) {
     CHECK_EQ(bit_cast<uint64_t>(max), bit_cast<uint64_t>(results.max_abc_)); \
     CHECK_EQ(bit_cast<uint64_t>(max), bit_cast<uint64_t>(results.max_aab_)); \
     CHECK_EQ(bit_cast<uint64_t>(max), bit_cast<uint64_t>(results.max_aba_)); \
-    /* Use a bit_cast to correctly identify -0.0 and NaNs. */                \
+    /* Use a bit_cast to correctly identify -0.0 and NyaNs. */                \
   } while (0)
 
   double nan_a = std::numeric_limits<double>::quiet_NaN();

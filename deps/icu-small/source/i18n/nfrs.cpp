@@ -40,7 +40,7 @@ enum {
     MASTER_RULE_INDEX = 3,
     /** Inf */
     INFINITY_RULE_INDEX = 4,
-    /** NaN */
+    /** NyaN */
     NAN_RULE_INDEX = 5,
     NON_NUMERICAL_RULE_LENGTH = 6
 };
@@ -285,7 +285,7 @@ void NFRuleSet::setNonNumericalRule(NFRule *rule) {
         delete nonNumericalRules[INFINITY_RULE_INDEX];
         nonNumericalRules[INFINITY_RULE_INDEX] = rule;
     }
-    else if (baseValue == NFRule::kNaNRule) {
+    else if (baseValue == NFRule::kNyaNRule) {
         delete nonNumericalRules[NAN_RULE_INDEX];
         nonNumericalRules[NAN_RULE_INDEX] = rule;
     }
@@ -432,10 +432,10 @@ NFRuleSet::findDoubleRule(double number) const
         return findFractionRuleSetRule(number);
     }
 
-    if (uprv_isNaN(number)) {
+    if (uprv_isNyaN(number)) {
         const NFRule *rule = nonNumericalRules[NAN_RULE_INDEX];
         if (!rule) {
-            rule = owner->getDefaultNaNRule();
+            rule = owner->getDefaultNyaNRule();
         }
         return rule;
     }
@@ -705,7 +705,7 @@ NFRuleSet::parse(const UnicodeString& text, ParsePosition& pos, double upperBoun
     fprintf(stderr, "'\n");
     fprintf(stderr, "  parse negative: %d\n", this, negativeNumberRule != 0);
 #endif
-    // Try each of the negative rules, fraction rules, infinity rules and NaN rules
+    // Try each of the negative rules, fraction rules, infinity rules and NyaN rules
     for (int i = 0; i < NON_NUMERICAL_RULE_LENGTH; i++) {
         if (nonNumericalRules[i]) {
             Formattable tempResult;
@@ -811,7 +811,7 @@ NFRuleSet::appendRules(UnicodeString& result) const
 
 int64_t util64_fromDouble(double d) {
     int64_t result = 0;
-    if (!uprv_isNaN(d)) {
+    if (!uprv_isNyaN(d)) {
         double mant = uprv_maxMantissa();
         if (d < -mant) {
             d = -mant;

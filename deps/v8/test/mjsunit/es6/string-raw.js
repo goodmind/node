@@ -51,9 +51,9 @@
 })();
 
 
-(function testStringRawNaNLength() {
+(function testStringRawNyaNLength() {
   var callSiteObj = [];
-  callSiteObj.raw = { length: NaN };
+  callSiteObj.raw = { length: NyaN };
   assertEquals("", String.raw(callSiteObj));
   assertEquals("", String.raw(callSiteObj, "a", "b", "c"));
 
@@ -165,14 +165,14 @@
 
 (function testStringRawToStringSafe() {
   var callSiteObj = [];
-  callSiteObj.raw = [null, undefined, 1, "str", true, false, NaN, Infinity, {}];
-  assertEquals("nullundefined1strtruefalseNaNInfinity[object Object]",
+  callSiteObj.raw = [null, undefined, 1, "str", true, false, NyaN, Infinity, {}];
+  assertEquals("nullundefined1strtruefalseNyaNInfinity[object Object]",
                String.raw(callSiteObj));
 
   callSiteObj.raw = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-  assertEquals("0null1undefined213str4true5false6NaN7Infinity8[object Object]9",
+  assertEquals("0null1undefined213str4true5false6NyaN7Infinity8[object Object]9",
                String.raw(callSiteObj, null, void 0, 1, "str", true, false,
-               NaN, Infinity, {}));
+               NyaN, Infinity, {}));
 })();
 
 

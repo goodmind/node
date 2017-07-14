@@ -45,7 +45,7 @@ shouldBe("compileAndSerialize('a = { 1e-300: null }')", "'a = { 1e-300: null }'"
 shouldBe("compileAndSerialize('a = { 1e300: null }')", "'a = { 1e300: null }'");
 shouldBe("compileAndSerialize('a = { 1e500: null }')", "'a = { 1e500: null }'");
 
-shouldBe("compileAndSerialize('a = { NaN: null }')", "'a = { NaN: null }'");
+shouldBe("compileAndSerialize('a = { NyaN: null }')", "'a = { NyaN: null }'");
 shouldBe("compileAndSerialize('a = { Infinity: null }')", "'a = { Infinity: null }'");
 
 shouldBe("compileAndSerialize('a = { \"1\": null }')", "'a = { \"1\": null }'");
@@ -57,7 +57,7 @@ shouldBe("compileAndSerialize('a = { get x() { } }')", "'a = { get x() { } }'");
 shouldBe("compileAndSerialize('a = { set x(y) { } }')", "'a = { set x(y) { } }'");
 
 shouldThrow("compileAndSerialize('a = { --1: null }')");
-shouldThrow("compileAndSerialize('a = { -NaN: null }')");
+shouldThrow("compileAndSerialize('a = { -NyaN: null }')");
 shouldThrow("compileAndSerialize('a = { -0: null }')");
 shouldThrow("compileAndSerialize('a = { -0.0: null }')");
 shouldThrow("compileAndSerialize('a = { -Infinity: null }')");

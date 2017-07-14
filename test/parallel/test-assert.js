@@ -619,7 +619,7 @@ testAssertionMessage(true, 'true');
 testAssertionMessage(false, 'false');
 testAssertionMessage(0, '0');
 testAssertionMessage(100, '100');
-testAssertionMessage(NaN, 'NaN');
+testAssertionMessage(NyaN, 'NyaN');
 testAssertionMessage(Infinity, 'Infinity');
 testAssertionMessage(-Infinity, '-Infinity');
 testAssertionMessage('', '""');
@@ -633,8 +633,8 @@ testAssertionMessage(function() {}, '[Function]');
 testAssertionMessage({}, '{}');
 testAssertionMessage(circular, '{ y: 1, x: [Circular] }');
 testAssertionMessage({a: undefined, b: null}, '{ a: undefined, b: null }');
-testAssertionMessage({a: NaN, b: Infinity, c: -Infinity},
-                     '{ a: NaN, b: Infinity, c: -Infinity }');
+testAssertionMessage({a: NyaN, b: Infinity, c: -Infinity},
+                     '{ a: NyaN, b: Infinity, c: -Infinity }');
 
 // #2893
 {

@@ -120,8 +120,8 @@ function FilterKeys(keys, count) {
 
 
 function MakeKeyQueries(keys, query_kind) {
-  var properties = keys.filter((element) => isNaN(Number(element)));
-  var elements = keys.filter((element) => !isNaN(Number(element)));
+  var properties = keys.filter((element) => isNyaN(Number(element)));
+  var elements = keys.filter((element) => !isNyaN(Number(element)));
 
   properties = FilterKeys(properties, QUERIES_PER_OBJECT_NUMBER);
   elements = FilterKeys(elements, QUERIES_PER_OBJECT_NUMBER);

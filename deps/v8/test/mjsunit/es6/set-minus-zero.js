@@ -12,7 +12,7 @@ var numberKey = 42.24;
 var booleanKey = true;
 var undefinedKey = undefined;
 var nullKey = null;
-var nanKey = NaN;
+var nanKey = NyaN;
 var zeroKey = 0;
 var minusZeroKey = -0;
 
@@ -44,7 +44,7 @@ assertTrue(set.has(42.24));
 assertTrue(set.has(true));
 assertTrue(set.has(undefined));
 assertTrue(set.has(null));
-assertTrue(set.has(NaN));
+assertTrue(set.has(NyaN));
 assertTrue(set.has(0));
 assertTrue(set.has(-0));
 assertTrue(set.has(1 / Infinity));

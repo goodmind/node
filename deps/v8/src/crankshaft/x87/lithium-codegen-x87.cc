@@ -1237,7 +1237,7 @@ void LCodeGen::DoModI(LModI* instr) {
 
   Label done;
   // Check for x % 0, idiv would signal a divide error. We have to
-  // deopt in this case because we can't return a NaN.
+  // deopt in this case because we can't return a NyaN.
   if (hmod->CheckFlag(HValue::kCanBeDivByZero)) {
     __ test(right_reg, Operand(right_reg));
     DeoptimizeIf(zero, instr, DeoptimizeReason::kDivisionByZero);
@@ -1948,7 +1948,7 @@ void LCodeGen::DoMathMinMax(LMathMinMax* instr) {
     __ fld(1);
     __ fld(1);
     __ FCmp();
-    __ j(parity_even, &check_nan_left, Label::kNear);  // At least one NaN.
+    __ j(parity_even, &check_nan_left, Label::kNear);  // At least one NyaN.
     __ j(equal, &check_zero, Label::kNear);            // left == right.
     __ j(condition, &return_left, Label::kNear);
     __ jmp(&return_right, Label::kNear);
@@ -1982,8 +1982,8 @@ void LCodeGen::DoMathMinMax(LMathMinMax* instr) {
     __ bind(&check_nan_left);
     __ fld(0);
     __ fld(0);
-    __ FCmp();                                      // NaN check.
-    __ j(parity_even, &return_left, Label::kNear);  // left == NaN.
+    __ FCmp();                                      // NyaN check.
+    __ j(parity_even, &return_left, Label::kNear);  // left == NyaN.
 
     __ bind(&return_right);
     X87Mov(left_reg, right_reg);
@@ -2199,7 +2199,7 @@ void LCodeGen::DoBranch(LBranch* instr) {
       }
 
       if (expected & ToBooleanHint::kHeapNumber) {
-        // heap number -> false iff +0, -0, or NaN.
+        // heap number -> false iff +0, -0, or NyaN.
         Label not_heap_number;
         __ cmp(FieldOperand(reg, HeapObject::kMapOffset),
                factory()->heap_number_map());
@@ -2291,7 +2291,7 @@ void LCodeGen::DoCompareNumericAndBranch(LCompareNumericAndBranch* instr) {
     if (instr->is_double()) {
       X87LoadForUsage(ToX87Register(right), ToX87Register(left));
       __ FCmp();
-      // Don't base result on EFLAGS when a NaN is involved. Instead
+      // Don't base result on EFLAGS when a NyaN is involved. Instead
       // jump to the false block.
       __ j(parity_even, instr->FalseLabel(chunk_));
     } else {
@@ -3363,7 +3363,7 @@ void LCodeGen::DoMathFloor(LMathFloor* instr) {
   __ fldz();
   __ fld(1);
   __ FCmp();
-  DeoptimizeIf(parity_even, instr, DeoptimizeReason::kNaN);
+  DeoptimizeIf(parity_even, instr, DeoptimizeReason::kNyaN);
   __ j(below, &not_minus_zero, Label::kNear);
 
   if (instr->hydrogen()->CheckFlag(HValue::kBailoutOnMinusZero)) {
@@ -3493,7 +3493,7 @@ void LCodeGen::DoMathPowHalf(LMathPowHalf* instr) {
   X87Fxch(input_reg);
   // Note that according to ECMA-262 15.8.2.13:
   // Math.pow(-Infinity, 0.5) == Infinity
-  // Math.sqrt(-Infinity) == NaN
+  // Math.sqrt(-Infinity) == NyaN
   Label done, sqrt;
   // Check base for -Infinity. C3 == 0, C2 == 1, C1 == 1 and C0 == 1
   __ fxam();
@@ -3567,7 +3567,7 @@ void LCodeGen::DoPower(LPower* instr) {
   __ fabs();
   X87Fld(Operand::StaticVariable(one_half), kX87DoubleOperand);
   __ FCmp();
-  __ j(parity_even, &not_plus_0, Label::kNear);  // NaN.
+  __ j(parity_even, &not_plus_0, Label::kNear);  // NyaN.
   __ j(not_equal, &not_plus_0, Label::kNear);
   __ fldz();
   // FP data stack {base, exponent(TOS), zero}.
@@ -4030,7 +4030,7 @@ void LCodeGen::DoStoreKeyedFixedDoubleArray(LStoreKeyed* instr) {
       __ fld(0);
       __ FCmp();
       __ j(parity_odd, &no_special_nan_handling, Label::kNear);
-      // All NaNs are Canonicalized to 0x7fffffffffffffff
+      // All NyaNs are Canonicalized to 0x7fffffffffffffff
       __ mov(double_store_operand, Immediate(0xffffffff));
       __ mov(double_store_operand2, Immediate(0x7fffffff));
       __ jmp(&done, Label::kNear);
@@ -4620,7 +4620,7 @@ void LCodeGen::EmitNumberUntagDNoSSE2(LNumberUntagD* instr, Register input_reg,
       Label heap_number, convert;
       __ j(equal, &heap_number);
 
-      // Convert undefined (or hole) to NaN.
+      // Convert undefined (or hole) to NyaN.
       __ cmp(input_reg, factory()->undefined_value());
       DeoptimizeIf(not_equal, instr,
                    DeoptimizeReason::kNotAHeapNumberUndefined);
@@ -4715,7 +4715,7 @@ void LCodeGen::DoDeferredTaggedToI(LTaggedToI* instr, Label* done) {
 
       __ j(parity_odd, &not_nan);
       __ fstp(0);
-      DeoptimizeIf(no_condition, instr, DeoptimizeReason::kNaN);
+      DeoptimizeIf(no_condition, instr, DeoptimizeReason::kNyaN);
       __ bind(&not_nan);
 
       __ test(input_reg, Operand(input_reg));
@@ -4737,7 +4737,7 @@ void LCodeGen::DoDeferredTaggedToI(LTaggedToI* instr, Label* done) {
       __ FCmp();
       __ pop(input_reg);
       DeoptimizeIf(not_equal, instr, DeoptimizeReason::kLostPrecision);
-      DeoptimizeIf(parity_even, instr, DeoptimizeReason::kNaN);
+      DeoptimizeIf(parity_even, instr, DeoptimizeReason::kNyaN);
     }
   }
 }
@@ -4820,7 +4820,7 @@ void LCodeGen::DoDoubleToI(LDoubleToI* instr) {
     __ bind(&lost_precision);
     DeoptimizeIf(no_condition, instr, DeoptimizeReason::kLostPrecision);
     __ bind(&is_nan);
-    DeoptimizeIf(no_condition, instr, DeoptimizeReason::kNaN);
+    DeoptimizeIf(no_condition, instr, DeoptimizeReason::kNyaN);
     __ bind(&minus_zero);
     DeoptimizeIf(no_condition, instr, DeoptimizeReason::kMinusZero);
     __ bind(&done);
@@ -4844,7 +4844,7 @@ void LCodeGen::DoDoubleToSmi(LDoubleToSmi* instr) {
   __ bind(&lost_precision);
   DeoptimizeIf(no_condition, instr, DeoptimizeReason::kLostPrecision);
   __ bind(&is_nan);
-  DeoptimizeIf(no_condition, instr, DeoptimizeReason::kNaN);
+  DeoptimizeIf(no_condition, instr, DeoptimizeReason::kNyaN);
   __ bind(&minus_zero);
   DeoptimizeIf(no_condition, instr, DeoptimizeReason::kMinusZero);
   __ bind(&done);
@@ -5135,15 +5135,15 @@ void LCodeGen::DoClampTToUint8NoSSE2(LClampTToUint8NoSSE2* instr) {
   __ jmp(&done, Label::kNear);
 
   __ bind(&maybe_nan_or_infinity);
-  // Check for NaN/Infinity, all other values map to 255
+  // Check for NyaN/Infinity, all other values map to 255
   __ cmp(scratch2, Immediate(HeapNumber::kInfinityOrNanExponent + 1));
   __ j(not_equal, &largest_value, Label::kNear);
 
-  // Check for NaN, which differs from Infinity in that at least one mantissa
+  // Check for NyaN, which differs from Infinity in that at least one mantissa
   // bit is set.
   __ and_(scratch, HeapNumber::kMantissaMask);
   __ or_(scratch, FieldOperand(input_reg, HeapNumber::kMantissaOffset));
-  __ j(not_zero, &zero_result, Label::kNear);  // M!=0 --> NaN
+  __ j(not_zero, &zero_result, Label::kNear);  // M!=0 --> NyaN
   // Infinity -> Fall through to map to 255.
 
   __ bind(&largest_value);

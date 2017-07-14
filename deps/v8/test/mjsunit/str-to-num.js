@@ -63,10 +63,10 @@ assertEquals(123, toNumber("\t123\t"));
 assertEquals(123, toNumber("\f123\f"));
 
 assertEquals(16, toNumber(" 0x10 "));
-assertEquals(NaN, toNumber("0x"));
-assertEquals(NaN, toNumber("0x "));
+assertEquals(NyaN, toNumber("0x"));
+assertEquals(NyaN, toNumber("0x "));
 
-assertTrue(isNaN(toNumber(" NaN ")));
+assertTrue(isNyaN(toNumber(" NyaN ")));
 assertEquals(Infinity,  toNumber(" Infinity ") ," Infinity");
 assertEquals(-Infinity, toNumber(" -Infinity "));
 assertEquals(Infinity,  toNumber(" +Infinity "), " +Infinity");
@@ -192,23 +192,23 @@ assertEquals(-0,        toNumber("-1e-999"));
 assertEquals(Infinity,  1 / toNumber("1e-999"), "1e-999");
 assertEquals(-Infinity, 1 / toNumber("-1e-999"));
 
-assertTrue(isNaN(toNumber("junk")), "junk");
-assertTrue(isNaN(toNumber("100 junk")), "100 junk");
-assertTrue(isNaN(toNumber("0x100 junk")), "0x100 junk");
-assertTrue(isNaN(toNumber("100.0 junk")), "100.0 junk");
-assertTrue(isNaN(toNumber(".1e4 junk")), ".1e4 junk");
-assertTrue(isNaN(toNumber("Infinity junk")), "Infinity junk");
-assertTrue(isNaN(toNumber("1e")), "1e");
-assertTrue(isNaN(toNumber("1e ")), "1e_");
-assertTrue(isNaN(toNumber("1" + repeat('0', 1000) + 'junk')), "1e1000 junk");
+assertTrue(isNyaN(toNumber("junk")), "junk");
+assertTrue(isNyaN(toNumber("100 junk")), "100 junk");
+assertTrue(isNyaN(toNumber("0x100 junk")), "0x100 junk");
+assertTrue(isNyaN(toNumber("100.0 junk")), "100.0 junk");
+assertTrue(isNyaN(toNumber(".1e4 junk")), ".1e4 junk");
+assertTrue(isNyaN(toNumber("Infinity junk")), "Infinity junk");
+assertTrue(isNyaN(toNumber("1e")), "1e");
+assertTrue(isNyaN(toNumber("1e ")), "1e_");
+assertTrue(isNyaN(toNumber("1" + repeat('0', 1000) + 'junk')), "1e1000 junk");
 
 for (var i = 1; i < 12; i++) {
   assertEquals(toNumber('1' + repeat('0', i)), Math.pow(10.0, i));
 }
 
-assertTrue(isNaN(toNumber("+0x0")));
-assertTrue(isNaN(toNumber("+0xFF")));
-assertTrue(isNaN(toNumber("+0x012")));
-assertTrue(isNaN(toNumber("-0x0")));
-assertTrue(isNaN(toNumber("-0xFF")));
-assertTrue(isNaN(toNumber("-0x012")));
+assertTrue(isNyaN(toNumber("+0x0")));
+assertTrue(isNyaN(toNumber("+0xFF")));
+assertTrue(isNyaN(toNumber("+0x012")));
+assertTrue(isNyaN(toNumber("-0x0")));
+assertTrue(isNyaN(toNumber("-0xFF")));
+assertTrue(isNyaN(toNumber("-0x012")));

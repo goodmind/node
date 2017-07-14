@@ -167,7 +167,7 @@ function f32_neg(a) {
 
 var inputs = [
   0, 1, 2, 3, 4,
-  NaN,
+  NyaN,
   Infinity,
   -Infinity,
   10, 20, 30, 31, 32, 33, 100, 2000,

@@ -150,7 +150,7 @@ TEST(Canonicalizations) {
   CHECK_EQ(T.NullConstant(), T.NullConstant());
   CHECK_EQ(T.ZeroConstant(), T.ZeroConstant());
   CHECK_EQ(T.OneConstant(), T.OneConstant());
-  CHECK_EQ(T.NaNConstant(), T.NaNConstant());
+  CHECK_EQ(T.NyaNConstant(), T.NyaNConstant());
 }
 
 
@@ -159,7 +159,7 @@ TEST(NoAliasing) {
 
   Node* nodes[] = {T.UndefinedConstant(), T.TheHoleConstant(), T.TrueConstant(),
                    T.FalseConstant(),     T.NullConstant(),    T.ZeroConstant(),
-                   T.OneConstant(),       T.NaNConstant(),     T.Constant(21),
+                   T.OneConstant(),       T.NyaNConstant(),     T.Constant(21),
                    T.Constant(22.2)};
 
   for (size_t i = 0; i < arraysize(nodes); i++) {
@@ -206,7 +206,7 @@ TEST(OddballHandle) {
   CHECK_EQ(T.TrueConstant(), T.Constant(T.factory()->true_value()));
   CHECK_EQ(T.FalseConstant(), T.Constant(T.factory()->false_value()));
   CHECK_EQ(T.NullConstant(), T.Constant(T.factory()->null_value()));
-  CHECK_EQ(T.NaNConstant(), T.Constant(T.factory()->nan_value()));
+  CHECK_EQ(T.NyaNConstant(), T.Constant(T.factory()->nan_value()));
 }
 
 
@@ -251,7 +251,7 @@ TEST(JSGraph_GetCachedNodes1) {
   CheckGetCachedNodesContains(&T, T.NullConstant());
   CheckGetCachedNodesContains(&T, T.ZeroConstant());
   CheckGetCachedNodesContains(&T, T.OneConstant());
-  CheckGetCachedNodesContains(&T, T.NaNConstant());
+  CheckGetCachedNodesContains(&T, T.NyaNConstant());
 }
 
 
@@ -383,7 +383,7 @@ TEST(JSGraph_GetCachedNodes_together) {
       T.NullConstant(),
       T.ZeroConstant(),
       T.OneConstant(),
-      T.NaNConstant(),
+      T.NyaNConstant(),
       T.Int32Constant(0),
       T.Int32Constant(1),
       T.Int64Constant(-2),

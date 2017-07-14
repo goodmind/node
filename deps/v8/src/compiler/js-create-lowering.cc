@@ -1099,7 +1099,7 @@ Node* JSCreateLowering::AllocateElements(Node* effect, Node* control,
                              : AccessBuilder::ForFixedArrayElement();
   Node* value;
   if (IsFastDoubleElementsKind(elements_kind)) {
-    // Load the hole NaN pattern from the canonical location.
+    // Load the hole NyaN pattern from the canonical location.
     value = effect = graph()->NewNode(
         simplified()->LoadField(AccessBuilder::ForExternalDoubleValue()),
         jsgraph()->ExternalConstant(
@@ -1259,7 +1259,7 @@ Node* JSCreateLowering::AllocateFastLiteralElements(
     for (int i = 0; i < elements_length; ++i) {
       if (elements->is_the_hole(i)) {
         if (the_hole_value == nullptr) {
-          // Load the hole NaN pattern from the canonical location.
+          // Load the hole NyaN pattern from the canonical location.
           the_hole_value = effect = graph()->NewNode(
               simplified()->LoadField(AccessBuilder::ForExternalDoubleValue()),
               jsgraph()->ExternalConstant(

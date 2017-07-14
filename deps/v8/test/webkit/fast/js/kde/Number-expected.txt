@@ -30,12 +30,12 @@ PASS Number() is 0
 PASS Number(1) is 1
 PASS Number(1.1) is 1.1
 PASS Number('1.2') is 1.2
-PASS isNaN(Number('a')) is true
+PASS isNyaN(Number('a')) is true
 PASS (new Number()).valueOf() is 0
 PASS (new Number(.4)).valueOf() is 0.4
 PASS (new Number('1.')).valueOf() is 1
-PASS isNaN(new Number('a')) is true
-PASS isNaN(Number.NaN) is true
+PASS isNyaN(new Number('a')) is true
+PASS isNyaN(Number.NyaN) is true
 PASS Number.NEGATIVE_INFINITY is -Infinity
 PASS Number.POSITIVE_INFINITY is Infinity
 PASS (1).toString() is '1'
@@ -43,7 +43,7 @@ PASS typeof (1).toString() is 'string'
 PASS (10).toString(16) is 'a'
 PASS (8.5).toString(16) is '8.8'
 PASS (-8.5).toString(16) is '-8.8'
-PASS Number.NaN.toString(16) is 'NaN'
+PASS Number.NyaN.toString(16) is 'NyaN'
 PASS Number.POSITIVE_INFINITY.toString(16) is 'Infinity'
 PASS Number.NEGATIVE_INFINITY.toString(16) is '-Infinity'
 PASS Number.MAX_VALUE.toString(2).length is 1024
@@ -62,7 +62,7 @@ PASS Number(4).toFixed(7) is "4.0000000"
 PASS Number(-4).toFixed(7) is "-4.0000000"
 PASS Number(0.000056).toFixed(7) is "0.0000560"
 PASS Number(-0.000056).toFixed(7) is "-0.0000560"
-PASS Number(NaN).toFixed(7) is "NaN"
+PASS Number(NyaN).toFixed(7) is "NyaN"
 PASS Number(Infinity).toFixed(7) is "Infinity"
 PASS Number(-Infinity).toFixed(7) is "-Infinity"
 PASS Number(Math.pow(10,4)).toFixed(13) is "10000.0000000000000"
@@ -91,10 +91,10 @@ PASS toFixedOrException(-2,-1).indexOf('Range') >= 0 is true
 PASS Number(-2).toFixed(0) is "-2"
 PASS Number(-2).toFixed(20) is "-2.00000000000000000000"
 PASS toFixedOrException(-2,21).indexOf('Range') >= 0 is true
-PASS Number(NaN).toExponential() is "NaN"
+PASS Number(NyaN).toExponential() is "NyaN"
 PASS Number(Infinity).toExponential() is "Infinity"
 PASS Number(-Infinity).toExponential() is "-Infinity"
-PASS Number(NaN).toExponential(4) is "NaN"
+PASS Number(NyaN).toExponential(4) is "NyaN"
 PASS Number(Infinity).toExponential(4) is "Infinity"
 PASS Number(-Infinity).toExponential(4) is "-Infinity"
 PASS Number(123.456).toExponential() is "1.23456e+2"
@@ -332,8 +332,8 @@ PASS try { Number(1).toPrecision(0); } catch (e) { String(e).indexOf('Range') >=
 PASS try { Number(1).toPrecision(1); } catch (e) { String(e); } is "1"
 PASS try { Number(1).toPrecision(21); } catch (e) { String(e); } is "1.00000000000000000000"
 PASS try { Number(1).toPrecision(22); } catch (e) { String(e).indexOf('Range') >= 0; } is true
-PASS Number(NaN).toPrecision() is "NaN"
-PASS Number(NaN).toPrecision(1) is "NaN"
+PASS Number(NyaN).toPrecision() is "NyaN"
+PASS Number(NyaN).toPrecision(1) is "NyaN"
 PASS Number(Infinity).toPrecision() is "Infinity"
 PASS Number(Infinity).toPrecision(1) is "Infinity"
 PASS Number(-Infinity).toPrecision() is "-Infinity"

@@ -14213,7 +14213,7 @@
 
 2016-02-05: Version 4.10.167
 
-        [wasm] min/max does not return signaling NaNs anymore (Chromium issue
+        [wasm] min/max does not return signaling NyaNs anymore (Chromium issue
         4733).
 
         Performance and stability improvements on all platforms.
@@ -20031,7 +20031,7 @@
 
 2015-02-03: Version 4.2.49
 
-        Compute the same hash for all NaN values (issue 3859).
+        Compute the same hash for all NyaN values (issue 3859).
 
         Performance and stability improvements on all platforms.
 
@@ -25110,7 +25110,7 @@
 
         Enabled building d8 for Android on Mac.
 
-        Interpret negative hexadecimal literals as NaN.
+        Interpret negative hexadecimal literals as NyaN.
         (issue 2240)
 
         Expose counters in javascript when using --track-gc-object-stats.
@@ -25583,7 +25583,7 @@
 
         Fixed two bugs with array literals (issue 2055, Chromium issue 121407).
 
-        Fixed bug with Math.min/Math.max with NaN inputs (issue 2056).
+        Fixed bug with Math.min/Math.max with NyaN inputs (issue 2056).
 
         Fixed a bug with the new runtime profiler (Chromium issue 121147).
 
@@ -25715,7 +25715,7 @@
 
         Added basic interface inference for modules (behind the --harmony flag).
 
-        Added Object.is, Number.isFinite, Number.isNaN.
+        Added Object.is, Number.isFinite, Number.isNyaN.
 
         Updated the Unicode tables to Unicode version 6.1.0.
 
@@ -27868,7 +27868,7 @@
 
         Allowed Object.create to be called with a function (issue 697).
 
-        Fixed bug with Date.parse returning a non-NaN value when called on a
+        Fixed bug with Date.parse returning a non-NyaN value when called on a
         non date string (issue 696).
 
         Allowed unaligned memory accesses on ARM targets that support it (by
@@ -28442,7 +28442,7 @@
 
         Profiler stack sampling for X64.
 
-        Safe handling of NaN to Posix platform-dependent time functions.
+        Safe handling of NyaN to Posix platform-dependent time functions.
 
         Added a new profiler control API to unify controlling various aspects
         of profiling.

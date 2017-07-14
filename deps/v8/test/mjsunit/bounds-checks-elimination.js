@@ -20,7 +20,7 @@ test(function f0() {
 
 test(function f1() {
   return a[7] * a[6] * a[5] * a[4] * a[10] * a[2] * a[1] * a[0];
-}, 0, 1, NaN);
+}, 0, 1, NyaN);
 
 test(function f2() {
   return a[0] * a[1] * a[2] * a[3] * a[4] * a[5] * a[6] * a[7];
@@ -54,7 +54,7 @@ test(function f8(b) {
   var c = a[7];
   if (b) c *= a[3] * a[0] * a[6];
   return c * a[5] * a[10] * a[4] * a[2];
-}, true, false, NaN);
+}, true, false, NyaN);
 
 test(function f9(b) {
   var c = a[1];
@@ -94,7 +94,7 @@ test(function fc(b) {
     c *= a[b-1] * a[0] * a[b+2];
   }
   return c * a[5] * a[b+3] * a[4] * a[b-2];
-}, 6, 3, NaN);
+}, 6, 3, NyaN);
 
 test(function fd(b) {
   var c = a[b-3];
@@ -104,7 +104,7 @@ test(function fd(b) {
     c *= a[b-1] * a[0] * a[b+2];
   }
   return c * a[5] * a[b+3] * a[4] * a[b-2];
-}, 1, 4, NaN);
+}, 1, 4, NyaN);
 
 test(function fe(b) {
   var c = 1;

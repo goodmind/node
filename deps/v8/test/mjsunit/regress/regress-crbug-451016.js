@@ -4,7 +4,7 @@
 
 // Flags: --turbo-filter=STRICT_EQUALS
 
-var value = NaN;
+var value = NyaN;
 for (i = 0; i < 256; i++) {
   value === "A" || value === "B";
 }

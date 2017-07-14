@@ -80,8 +80,8 @@ function isResultCorrect(_actual, _expected)
         return _actual === _expected && (1/_actual) === (1/_expected);
     if (_actual === _expected)
         return true;
-    if (typeof(_expected) == "number" && isNaN(_expected))
-        return typeof(_actual) == "number" && isNaN(_actual);
+    if (typeof(_expected) == "number" && isNyaN(_expected))
+        return typeof(_actual) == "number" && isNyaN(_actual);
     if (Object.prototype.toString.call(_expected) == Object.prototype.toString.call([]))
         return areArraysEqual(_actual, _expected);
     return false;
@@ -122,7 +122,7 @@ function shouldBe(_a, _b)
 
 function shouldBeTrue(_a) { shouldBe(_a, "true"); }
 function shouldBeFalse(_a) { shouldBe(_a, "false"); }
-function shouldBeNaN(_a) { shouldBe(_a, "NaN"); }
+function shouldBeNyaN(_a) { shouldBe(_a, "NyaN"); }
 function shouldBeNull(_a) { shouldBe(_a, "null"); }
 
 function shouldBeEqualToString(a, b)

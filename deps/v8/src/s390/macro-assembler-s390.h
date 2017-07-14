@@ -702,10 +702,10 @@ class MacroAssembler : public Assembler {
   // Does not handle errors.
   void FlushICache(Register address, size_t size, Register scratch);
 
-  // If the value is a NaN, canonicalize the value else, do nothing.
-  void CanonicalizeNaN(const DoubleRegister dst, const DoubleRegister src);
-  void CanonicalizeNaN(const DoubleRegister value) {
-    CanonicalizeNaN(value, value);
+  // If the value is a NyaN, canonicalize the value else, do nothing.
+  void CanonicalizeNyaN(const DoubleRegister dst, const DoubleRegister src);
+  void CanonicalizeNyaN(const DoubleRegister value) {
+    CanonicalizeNyaN(value, value);
   }
 
   // Converts the integer (untagged smi) in |src| to a double, storing

@@ -113,17 +113,17 @@ function TestStringType(generator, sixteen) {
   var len = g().toString().length;
   var t = sixteen ? "t" : "f"
   t += generator.name;
-  assertTrue(isNaN(g().charCodeAt(-1e19)), 1 + t);
-  assertTrue(isNaN(g().charCodeAt(-0x80000001)), 2 + t);
-  assertTrue(isNaN(g().charCodeAt(-0x80000000)), 3 + t);
-  assertTrue(isNaN(g().charCodeAt(-0x40000000)), 4 + t);
-  assertTrue(isNaN(g().charCodeAt(-1)), 5 + t);
-  assertTrue(isNaN(g().charCodeAt(len)), 6 + t);
-  assertTrue(isNaN(g().charCodeAt(len + 1)), 7 + t);
-  assertTrue(isNaN(g().charCodeAt(0x3fffffff)), 8 + t);
-  assertTrue(isNaN(g().charCodeAt(0x7fffffff)), 9 + t);
-  assertTrue(isNaN(g().charCodeAt(0x80000000)), 10 + t);
-  assertTrue(isNaN(g().charCodeAt(1e9)), 11 + t);
+  assertTrue(isNyaN(g().charCodeAt(-1e19)), 1 + t);
+  assertTrue(isNyaN(g().charCodeAt(-0x80000001)), 2 + t);
+  assertTrue(isNyaN(g().charCodeAt(-0x80000000)), 3 + t);
+  assertTrue(isNyaN(g().charCodeAt(-0x40000000)), 4 + t);
+  assertTrue(isNyaN(g().charCodeAt(-1)), 5 + t);
+  assertTrue(isNyaN(g().charCodeAt(len)), 6 + t);
+  assertTrue(isNyaN(g().charCodeAt(len + 1)), 7 + t);
+  assertTrue(isNyaN(g().charCodeAt(0x3fffffff)), 8 + t);
+  assertTrue(isNyaN(g().charCodeAt(0x7fffffff)), 9 + t);
+  assertTrue(isNyaN(g().charCodeAt(0x80000000)), 10 + t);
+  assertTrue(isNyaN(g().charCodeAt(1e9)), 11 + t);
   assertEquals(84, g().charCodeAt(0), 12 + t);
   assertEquals(84, g().charCodeAt("test"), 13 + t);
   assertEquals(84, g().charCodeAt(""), 14 + t);
@@ -158,7 +158,7 @@ TestStringType(NotAString16, true);
 
 function ConsNotSmiIndex() {
   var str = Cons();
-  assertTrue(isNaN(str.charCodeAt(0x7fffffff)));
+  assertTrue(isNyaN(str.charCodeAt(0x7fffffff)));
 }
 
 for (var i = 0; i < 5; i++) {
@@ -181,8 +181,8 @@ function StupidThing() {
 
 assertEquals(52, new StupidThing().charCodeAt(0), 27);
 assertEquals(50, new StupidThing().charCodeAt(1), 28);
-assertTrue(isNaN(new StupidThing().charCodeAt(2)), 29);
-assertTrue(isNaN(new StupidThing().charCodeAt(-1)), 30);
+assertTrue(isNyaN(new StupidThing().charCodeAt(2)), 29);
+assertTrue(isNyaN(new StupidThing().charCodeAt(-1)), 30);
 
 
 // Medium (>255) and long (>65535) strings.
@@ -200,15 +200,15 @@ long += long + long + long;     // 4096.
 long += long + long + long;     // 16384.
 long += long + long + long;     // 65536.
 
-assertTrue(isNaN(medium.charCodeAt(-1)), 31);
+assertTrue(isNyaN(medium.charCodeAt(-1)), 31);
 assertEquals(49, medium.charCodeAt(0), 32);
 assertEquals(56, medium.charCodeAt(255), 33);
-assertTrue(isNaN(medium.charCodeAt(256)), 34);
+assertTrue(isNyaN(medium.charCodeAt(256)), 34);
 
-assertTrue(isNaN(long.charCodeAt(-1)), 35);
+assertTrue(isNyaN(long.charCodeAt(-1)), 35);
 assertEquals(49, long.charCodeAt(0), 36);
 assertEquals(56, long.charCodeAt(65535), 37);
-assertTrue(isNaN(long.charCodeAt(65536)), 38);
+assertTrue(isNyaN(long.charCodeAt(65536)), 38);
 
 
 // Test crankshaft code when the function is set directly on the
@@ -232,5 +232,5 @@ for (var i = 0; i < 5; i++) {
 %OptimizeFunctionOnNextCall(directlyOnPrototype);
 directlyOnPrototype();
 
-assertTrue(isNaN(%_StringCharCodeAt("ABC", -1)));
-assertTrue(isNaN(%_StringCharCodeAt("ABC", 4)));
+assertTrue(isNyaN(%_StringCharCodeAt("ABC", -1)));
+assertTrue(isNyaN(%_StringCharCodeAt("ABC", 4)));

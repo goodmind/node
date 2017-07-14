@@ -443,7 +443,7 @@ Type* Typer::Visitor::ToInteger(Type* type, Typer* t) {
   // ES6 section 7.1.4 ToInteger ( argument )
   type = ToNumber(type, t);
   if (type->Is(t->cache_.kIntegerOrMinusZero)) return type;
-  if (type->Is(t->cache_.kIntegerOrMinusZeroOrNaN)) {
+  if (type->Is(t->cache_.kIntegerOrMinusZeroOrNyaN)) {
     return Type::Union(
         Type::Intersect(type, t->cache_.kIntegerOrMinusZero, t->zone()),
         t->cache_.kSingletonZero, t->zone());
@@ -868,7 +868,7 @@ Type* Typer::Visitor::TypeDead(Node* node) { return Type::None(); }
 
 
 Type* Typer::Visitor::JSEqualTyper(Type* lhs, Type* rhs, Typer* t) {
-  if (lhs->Is(Type::NaN()) || rhs->Is(Type::NaN())) return t->singleton_false_;
+  if (lhs->Is(Type::NyaN()) || rhs->Is(Type::NyaN())) return t->singleton_false_;
   if (lhs->Is(Type::NullOrUndefined()) && rhs->Is(Type::NullOrUndefined())) {
     return t->singleton_true_;
   }
@@ -904,7 +904,7 @@ static Type* JSType(Type* type) {
 
 Type* Typer::Visitor::JSStrictEqualTyper(Type* lhs, Type* rhs, Typer* t) {
   if (!JSType(lhs)->Maybe(JSType(rhs))) return t->singleton_false_;
-  if (lhs->Is(Type::NaN()) || rhs->Is(Type::NaN())) return t->singleton_false_;
+  if (lhs->Is(Type::NyaN()) || rhs->Is(Type::NyaN())) return t->singleton_false_;
   if (lhs->Is(Type::Number()) && rhs->Is(Type::Number()) &&
       (lhs->Max() < rhs->Min() || lhs->Min() > rhs->Max())) {
     return t->singleton_false_;
@@ -942,8 +942,8 @@ Typer::Visitor::ComparisonOutcome Typer::Visitor::JSCompareTyper(Type* lhs,
   lhs = ToNumber(lhs, t);
   rhs = ToNumber(rhs, t);
 
-  // Shortcut for NaNs.
-  if (lhs->Is(Type::NaN()) || rhs->Is(Type::NaN())) return kComparisonUndefined;
+  // Shortcut for NyaNs.
+  if (lhs->Is(Type::NyaN()) || rhs->Is(Type::NyaN())) return kComparisonUndefined;
 
   ComparisonOutcome result;
   if (lhs->IsHeapConstant() && rhs->Is(lhs)) {
@@ -960,8 +960,8 @@ Typer::Visitor::ComparisonOutcome Typer::Visitor::JSCompareTyper(Type* lhs,
     return ComparisonOutcome(kComparisonTrue) |
            ComparisonOutcome(kComparisonFalse);
   }
-  // Add the undefined if we could see NaN.
-  if (lhs->Maybe(Type::NaN()) || rhs->Maybe(Type::NaN())) {
+  // Add the undefined if we could see NyaN.
+  if (lhs->Maybe(Type::NyaN()) || rhs->Maybe(Type::NyaN())) {
     result |= kComparisonUndefined;
   }
   return result;
@@ -1345,12 +1345,12 @@ Type* Typer::Visitor::JSCallTyper(Type* fun, Typer* t) {
         case kMathCeil:
         case kMathRound:
         case kMathTrunc:
-          return t->cache_.kIntegerOrMinusZeroOrNaN;
+          return t->cache_.kIntegerOrMinusZeroOrNyaN;
         // Unary math functions.
         case kMathAbs:
         case kMathExp:
         case kMathExpm1:
-          return Type::Union(Type::PlainNumber(), Type::NaN(), t->zone());
+          return Type::Union(Type::PlainNumber(), Type::NyaN(), t->zone());
         case kMathAcos:
         case kMathAcosh:
         case kMathAsin:
@@ -1369,7 +1369,7 @@ Type* Typer::Visitor::JSCallTyper(Type* fun, Typer* t) {
         case kMathTan:
           return Type::Number();
         case kMathSign:
-          return t->cache_.kMinusOneToOneOrMinusZeroOrNaN;
+          return t->cache_.kMinusOneToOneOrMinusZeroOrNyaN;
         // Binary math functions.
         case kMathAtan2:
         case kMathPow:
@@ -1392,7 +1392,7 @@ Type* Typer::Visitor::JSCallTyper(Type* fun, Typer* t) {
         case kDateGetHours:
           return t->cache_.kJSDateHourType;
         case kDateGetMilliseconds:
-          return Type::Union(Type::Range(0.0, 999.0, t->zone()), Type::NaN(),
+          return Type::Union(Type::Range(0.0, 999.0, t->zone()), Type::NyaN(),
                              t->zone());
         case kDateGetMinutes:
           return t->cache_.kJSDateMinuteType;
@@ -1406,19 +1406,19 @@ Type* Typer::Visitor::JSCallTyper(Type* fun, Typer* t) {
         // Number functions.
         case kNumberIsFinite:
         case kNumberIsInteger:
-        case kNumberIsNaN:
+        case kNumberIsNyaN:
         case kNumberIsSafeInteger:
           return Type::Boolean();
         case kNumberParseFloat:
           return Type::Number();
         case kNumberParseInt:
-          return t->cache_.kIntegerOrMinusZeroOrNaN;
+          return t->cache_.kIntegerOrMinusZeroOrNyaN;
         case kNumberToString:
           return Type::String();
 
         // String functions.
         case kStringCharCodeAt:
-          return Type::Union(Type::Range(0, kMaxUInt16, t->zone()), Type::NaN(),
+          return Type::Union(Type::Range(0, kMaxUInt16, t->zone()), Type::NyaN(),
                              t->zone());
         case kStringCharAt:
           return Type::String();
@@ -1533,7 +1533,7 @@ Type* Typer::Visitor::JSCallTyper(Type* fun, Typer* t) {
         case kGlobalUnescape:
           return Type::String();
         case kGlobalIsFinite:
-        case kGlobalIsNaN:
+        case kGlobalIsNyaN:
           return Type::Boolean();
 
         // Map functions.

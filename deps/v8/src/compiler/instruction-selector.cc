@@ -1223,10 +1223,10 @@ void InstructionSelector::VisitNode(Node* node) {
       return MarkAsWord32(node), VisitChangeFloat64ToInt32(node);
     case IrOpcode::kChangeFloat64ToUint32:
       return MarkAsWord32(node), VisitChangeFloat64ToUint32(node);
-    case IrOpcode::kFloat64SilenceNaN:
+    case IrOpcode::kFloat64SilenceNyaN:
       MarkAsFloat64(node);
-      if (CanProduceSignalingNaN(node->InputAt(0))) {
-        return VisitFloat64SilenceNaN(node);
+      if (CanProduceSignalingNyaN(node->InputAt(0))) {
+        return VisitFloat64SilenceNyaN(node);
       } else {
         return EmitIdentity(node);
       }
@@ -2577,7 +2577,7 @@ void InstructionSelector::VisitRetain(Node* node) {
   Emit(kArchNop, g.NoOutput(), g.UseAny(node->InputAt(0)));
 }
 
-bool InstructionSelector::CanProduceSignalingNaN(Node* node) {
+bool InstructionSelector::CanProduceSignalingNyaN(Node* node) {
   // TODO(jarin) Improve the heuristic here.
   if (node->opcode() == IrOpcode::kFloat64Add ||
       node->opcode() == IrOpcode::kFloat64Sub ||

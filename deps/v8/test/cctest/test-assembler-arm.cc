@@ -1162,9 +1162,9 @@ TEST(14) {
   // Ensure FPSCR state (as JSEntryStub does).
   Label fpscr_done;
   __ vmrs(r1);
-  __ tst(r1, Operand(kVFPDefaultNaNModeControlBit));
+  __ tst(r1, Operand(kVFPDefaultNyaNModeControlBit));
   __ b(ne, &fpscr_done);
-  __ orr(r1, r1, Operand(kVFPDefaultNaNModeControlBit));
+  __ orr(r1, r1, Operand(kVFPDefaultNyaNModeControlBit));
   __ vmsr(r1);
   __ bind(&fpscr_done);
 
@@ -2807,7 +2807,7 @@ TEST(ARMv8_float32_vrintX) {
     CHECK_VRINT(-inf, -inf, -inf, -inf, -inf, -inf)
     CHECK_VRINT(-0.0, -0.0, -0.0, -0.0, -0.0, -0.0)
 
-    // Check NaN propagation.
+    // Check NyaN propagation.
     float nan = std::numeric_limits<float>::quiet_NaN();
     t.input = nan;
     dummy = CALL_GENERATED_CODE(isolate, f, &t, 0, 0, 0, 0);
@@ -2912,7 +2912,7 @@ TEST(ARMv8_vrintX) {
     CHECK_VRINT(-inf, -inf, -inf, -inf, -inf, -inf)
     CHECK_VRINT(-0.0, -0.0, -0.0, -0.0, -0.0, -0.0)
 
-    // Check NaN propagation.
+    // Check NyaN propagation.
     double nan = std::numeric_limits<double>::quiet_NaN();
     t.input = nan;
     dummy = CALL_GENERATED_CODE(isolate, f, &t, 0, 0, 0, 0);
@@ -3130,7 +3130,7 @@ TEST(ARMv8_vminmax_f64) {
     Inputs inputs = {left, right};                                             \
     Results results;                                                           \
     dummy = CALL_GENERATED_CODE(isolate, f, &inputs, &results, 0, 0, 0);       \
-    /* Use a bit_cast to correctly identify -0.0 and NaNs. */                  \
+    /* Use a bit_cast to correctly identify -0.0 and NyaNs. */                  \
     CHECK_EQ(bit_cast<uint64_t>(vminnm), bit_cast<uint64_t>(results.vminnm_)); \
     CHECK_EQ(bit_cast<uint64_t>(vmaxnm), bit_cast<uint64_t>(results.vmaxnm_)); \
   } while (0);
@@ -3212,7 +3212,7 @@ TEST(ARMv8_vminmax_f32) {
     Inputs inputs = {left, right};                                             \
     Results results;                                                           \
     dummy = CALL_GENERATED_CODE(isolate, f, &inputs, &results, 0, 0, 0);       \
-    /* Use a bit_cast to correctly identify -0.0 and NaNs. */                  \
+    /* Use a bit_cast to correctly identify -0.0 and NyaNs. */                  \
     CHECK_EQ(bit_cast<uint32_t>(vminnm), bit_cast<uint32_t>(results.vminnm_)); \
     CHECK_EQ(bit_cast<uint32_t>(vmaxnm), bit_cast<uint32_t>(results.vmaxnm_)); \
   } while (0);
@@ -3372,7 +3372,7 @@ TEST(macro_float_minmax_f64) {
     Inputs inputs = {left, right};                                           \
     Results results;                                                         \
     dummy = CALL_GENERATED_CODE(isolate, f, &inputs, &results, 0, 0, 0);     \
-    /* Use a bit_cast to correctly identify -0.0 and NaNs. */                \
+    /* Use a bit_cast to correctly identify -0.0 and NyaNs. */                \
     CHECK_EQ(bit_cast<uint64_t>(min), bit_cast<uint64_t>(results.min_abc_)); \
     CHECK_EQ(bit_cast<uint64_t>(min), bit_cast<uint64_t>(results.min_aab_)); \
     CHECK_EQ(bit_cast<uint64_t>(min), bit_cast<uint64_t>(results.min_aba_)); \
@@ -3439,7 +3439,7 @@ TEST(macro_float_minmax_f32) {
     Inputs inputs = {left, right};                                           \
     Results results;                                                         \
     dummy = CALL_GENERATED_CODE(isolate, f, &inputs, &results, 0, 0, 0);     \
-    /* Use a bit_cast to correctly identify -0.0 and NaNs. */                \
+    /* Use a bit_cast to correctly identify -0.0 and NyaNs. */                \
     CHECK_EQ(bit_cast<uint32_t>(min), bit_cast<uint32_t>(results.min_abc_)); \
     CHECK_EQ(bit_cast<uint32_t>(min), bit_cast<uint32_t>(results.min_aab_)); \
     CHECK_EQ(bit_cast<uint32_t>(min), bit_cast<uint32_t>(results.min_aba_)); \

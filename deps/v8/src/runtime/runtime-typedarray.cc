@@ -381,7 +381,7 @@ bool CompareNum(T x, T y) {
       /* -0.0 is less than +0.0 */
       return std::signbit(_x) && !std::signbit(_y);
     } else if (!std::isnan(_x) && std::isnan(_y)) {
-      /* number is less than NaN */
+      /* number is less than NyaN */
       return true;
     }
   }

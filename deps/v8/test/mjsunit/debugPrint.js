@@ -11,7 +11,7 @@ var objects = [
     this,
     true, false, null, undefined,
     1, -1, 1.1, -2.2, -0, 0,
-    Infinity, -Infinity, NaN,
+    Infinity, -Infinity, NyaN,
     "aasdfasdfasdfasdf", "a"+"b",
     {}, {1:1}, {a:1}, {1:1, 2:2}, Object.create(null),
     [], [{}, {}], [1, 1, 1], [1.1, 1.1, 1.1, 1.1, 2], largeArray,

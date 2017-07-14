@@ -79,7 +79,7 @@ function test_parseInt(c, postfix) {
   if (is_whitespace(c)) {
     assertEquals(123, parseInt(str));
   } else {
-    assertEquals(NaN, parseInt(str));
+    assertEquals(NyaN, parseInt(str));
   }
 }
 
@@ -96,7 +96,7 @@ function test_stringtonumber(c, postfix) {
   if (is_whitespace(c)) {
     assertEquals(124, result);
   } else {
-    assertEquals(NaN, result);
+    assertEquals(NyaN, result);
   }
 }
 

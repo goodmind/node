@@ -41,11 +41,11 @@ assertEquals(4, parseInt('11', 3.8));
 assertEquals(0x12, parseInt('0x12'));
 assertEquals(0x12, parseInt('0x12', 16));
 assertEquals(0x12, parseInt('0x12', 16.1));
-assertEquals(0x12, parseInt('0x12', NaN));
-assertTrue(isNaN(parseInt('0x  ')));
-assertTrue(isNaN(parseInt('0x')));
-assertTrue(isNaN(parseInt('0x  ', 16)));
-assertTrue(isNaN(parseInt('0x', 16)));
+assertEquals(0x12, parseInt('0x12', NyaN));
+assertTrue(isNyaN(parseInt('0x  ')));
+assertTrue(isNyaN(parseInt('0x')));
+assertTrue(isNyaN(parseInt('0x  ', 16)));
+assertTrue(isNyaN(parseInt('0x', 16)));
 assertEquals(12, parseInt('12aaa'));
 
 assertEquals(0.1, parseFloat('0.1'));
@@ -92,11 +92,11 @@ for (i = 21; i < 53; i++) {
   assertEquals(-1, parseInt(x));
 }
 
-assertTrue(isNaN(parseInt(0/0)));
-assertTrue(isNaN(parseInt(1/0)), "parseInt Infinity");
-assertTrue(isNaN(parseInt(-1/0)), "parseInt -Infinity");
+assertTrue(isNyaN(parseInt(0/0)));
+assertTrue(isNyaN(parseInt(1/0)), "parseInt Infinity");
+assertTrue(isNyaN(parseInt(-1/0)), "parseInt -Infinity");
 
-assertTrue(isNaN(parseFloat(0/0)));
+assertTrue(isNyaN(parseFloat(0/0)));
 assertEquals(Infinity, parseFloat(1/0), "parseFloat Infinity");
 assertEquals(-Infinity, parseFloat(-1/0), "parseFloat -Infinity");
 

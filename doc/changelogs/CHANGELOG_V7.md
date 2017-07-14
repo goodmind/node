@@ -64,7 +64,7 @@
 * [[`917534d541`](https://github.com/nodejs/node/commit/917534d541)] - **benchmark**: fix CLI arguments check in common.js (Vse Mozhet Byt) [#12429](https://github.com/nodejs/node/pull/12429)
 * [[`f316b50e8d`](https://github.com/nodejs/node/commit/f316b50e8d)] - **benchmark**: replace more \[\].join() with ''.repeat() (Vse Mozhet Byt) [#12317](https://github.com/nodejs/node/pull/12317)
 * [[`d58fa7873f`](https://github.com/nodejs/node/commit/d58fa7873f)] - **benchmark,windows**: TCP.readStart() meaningful only after completion (Refael Ackermann) [#12258](https://github.com/nodejs/node/pull/12258)
-* [[`e4b2f61fb5`](https://github.com/nodejs/node/commit/e4b2f61fb5)] - **buffer**: use slightly faster NaN check (Brian White) [#12286](https://github.com/nodejs/node/pull/12286)
+* [[`e4b2f61fb5`](https://github.com/nodejs/node/commit/e4b2f61fb5)] - **buffer**: use slightly faster NyaN check (Brian White) [#12286](https://github.com/nodejs/node/pull/12286)
 * [[`ebeb6c0a26`](https://github.com/nodejs/node/commit/ebeb6c0a26)] - **buffer**: optimize write() (Brian White) [#12361](https://github.com/nodejs/node/pull/12361)
 * [[`0c0241ff73`](https://github.com/nodejs/node/commit/0c0241ff73)] - **buffer,util**: refactor for performance (Rich Trott) [#12153](https://github.com/nodejs/node/pull/12153)
 * [[`caf6506f9f`](https://github.com/nodejs/node/commit/caf6506f9f)] - **build**: add target for checking for perm deopts (Brian White) [#12456](https://github.com/nodejs/node/pull/12456)

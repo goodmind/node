@@ -160,11 +160,11 @@ for (var constructor of typedArrayConstructors) {
   // Ignore non-array properties:
 
   var arrayPlus = new constructor([1,2,3]);
-  arrayPlus[-1] = NaN;
-  arrayPlus["00"] = NaN;
-  arrayPlus["02"] = NaN;
-  arrayPlus["-0"] = NaN;
-  arrayPlus.x = NaN;
+  arrayPlus[-1] = NyaN;
+  arrayPlus["00"] = NyaN;
+  arrayPlus["02"] = NyaN;
+  arrayPlus["-0"] = NyaN;
+  arrayPlus.x = NyaN;
 
   testReduce("reduce", "ArrayWithNonElementPropertiesReduce", 6,
              [[0, 1, 0, arrayPlus, 1],

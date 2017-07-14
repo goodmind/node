@@ -106,7 +106,7 @@ void DoubleToIStub::Generate(MacroAssembler* masm) {
     __ cfc1(scratch, FCSR);
     __ ctc1(scratch2, FCSR);
 
-    // Check for overflow and NaNs.
+    // Check for overflow and NyaNs.
     __ And(
         scratch, scratch,
         kFCSROverflowFlagMask | kFCSRUnderflowFlagMask
@@ -135,7 +135,7 @@ void DoubleToIStub::Generate(MacroAssembler* masm) {
          HeapNumber::kExponentShift,
          HeapNumber::kExponentBits);
 
-  // Check for Infinity and NaNs, which should return 0.
+  // Check for Infinity and NyaNs, which should return 0.
   __ Subu(scratch, result_reg, HeapNumber::kExponentMask);
   __ Movz(result_reg, zero_reg, scratch);
   __ Branch(&done, eq, scratch, Operand(zero_reg));
@@ -211,8 +211,8 @@ void DoubleToIStub::Generate(MacroAssembler* masm) {
 
 
 // Handle the case where the lhs and rhs are the same object.
-// Equality is almost reflexive (everything but NaN), so this is a test
-// for "identity and not NaN".
+// Equality is almost reflexive (everything but NyaN), so this is a test
+// for "identity and not NyaN".
 static void EmitIdenticalObjectComparison(MacroAssembler* masm, Label* slow,
                                           Condition cc) {
   Label not_identical;
@@ -223,7 +223,7 @@ static void EmitIdenticalObjectComparison(MacroAssembler* masm, Label* slow,
 
   __ li(exp_mask_reg, Operand(HeapNumber::kExponentMask));
 
-  // Test for NaN. Sadly, we can't just compare to Factory::nan_value(),
+  // Test for NyaN. Sadly, we can't just compare to Factory::nan_value(),
   // so we do the second best thing - test it ourselves.
   // They are both equal and they are not both Smis so both of them are not
   // Smis. If it's not a heap number, then return equal.
@@ -270,21 +270,21 @@ static void EmitIdenticalObjectComparison(MacroAssembler* masm, Label* slow,
   } else {
     __ mov(v0, zero_reg);         // Things are <=, >=, ==, === themselves.
   }
-  // For less and greater we don't have to check for NaN since the result of
+  // For less and greater we don't have to check for NyaN since the result of
   // x < x is false regardless.  For the others here is some code to check
-  // for NaN.
+  // for NyaN.
   if (cc != lt && cc != gt) {
     __ bind(&heap_number);
-    // It is a heap number, so return non-equal if it's NaN and equal if it's
-    // not NaN.
+    // It is a heap number, so return non-equal if it's NyaN and equal if it's
+    // not NyaN.
 
-    // The representation of NaN values has all exponent bits (52..62) set,
+    // The representation of NyaN values has all exponent bits (52..62) set,
     // and not all mantissa bits (0..51) clear.
     // Read top bits of double representation (second word of value).
     __ lwu(a6, FieldMemOperand(a0, HeapNumber::kExponentOffset));
     // Test that exponent bits are all set.
     __ And(a7, a6, Operand(exp_mask_reg));
-    // If all bits not set (ne cond), then not a NaN, objects are equal.
+    // If all bits not set (ne cond), then not a NyaN, objects are equal.
     __ Branch(&return_equal, ne, a7, Operand(exp_mask_reg));
 
     // Shift out flag and all exponent bits, retaining only mantissa.
@@ -294,17 +294,17 @@ static void EmitIdenticalObjectComparison(MacroAssembler* masm, Label* slow,
     __ Or(v0, a7, Operand(a6));
     // For equal we already have the right value in v0:  Return zero (equal)
     // if all bits in mantissa are zero (it's an Infinity) and non-zero if
-    // not (it's a NaN).  For <= and >= we need to load v0 with the failing
-    // value if it's a NaN.
+    // not (it's a NyaN).  For <= and >= we need to load v0 with the failing
+    // value if it's a NyaN.
     if (cc != eq) {
       // All-zero means Infinity means equal.
       __ Ret(eq, v0, Operand(zero_reg));
       DCHECK(is_int16(GREATER) && is_int16(LESS));
       __ Ret(USE_DELAY_SLOT);
       if (cc == le) {
-        __ li(v0, Operand(GREATER));  // NaN <= NaN should fail.
+        __ li(v0, Operand(GREATER));  // NyaN <= NyaN should fail.
       } else {
-        __ li(v0, Operand(LESS));     // NaN >= NaN should fail.
+        __ li(v0, Operand(LESS));     // NyaN >= NyaN should fail.
       }
     }
   }
@@ -572,7 +572,7 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
   __ li(a5, Operand(GREATER));
   __ li(a6, Operand(EQUAL));
 
-  // Check if either rhs or lhs is NaN.
+  // Check if either rhs or lhs is NyaN.
   __ BranchF(NULL, &nan, eq, f12, f14);
 
   // Check if LESS condition is satisfied. If true, move conditionally
@@ -602,7 +602,7 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
   __ Ret();
 
   __ bind(&nan);
-  // NaN comparisons always fail.
+  // NyaN comparisons always fail.
   // Load whatever we need in v0 to make the comparison fail.
   DCHECK(is_int16(GREATER) && is_int16(LESS));
   __ Ret(USE_DELAY_SLOT);
@@ -681,7 +681,7 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
     // Prepare for call to builtin. Push object pointers, a0 (lhs) first,
     // a1 (rhs) second.
     __ Push(lhs, rhs);
-    int ncr;  // NaN compare result.
+    int ncr;  // NyaN compare result.
     if (cc == lt || cc == le) {
       ncr = GREATER;
     } else {
@@ -2138,7 +2138,7 @@ void CompareICStub::GenerateNumbers(MacroAssembler* masm) {
   }
 
   // Inlining the double comparison and falling back to the general compare
-  // stub if NaN is involved.
+  // stub if NyaN is involved.
   // Load left and right operand.
   Label done, left, left_smi, right_smi;
   __ JumpIfSmi(a0, &right_smi);
@@ -2168,9 +2168,9 @@ void CompareICStub::GenerateNumbers(MacroAssembler* masm) {
 
   __ bind(&done);
 
-  // Return a result of -1, 0, or 1, or use CompareStub for NaNs.
+  // Return a result of -1, 0, or 1, or use CompareStub for NyaNs.
   Label fpu_eq, fpu_lt;
-  // Test if equal, and also handle the unordered/NaN case.
+  // Test if equal, and also handle the unordered/NyaN case.
   __ BranchF(&fpu_eq, &unordered, eq, f0, f2);
 
   // Test if less (unordered case is already handled).

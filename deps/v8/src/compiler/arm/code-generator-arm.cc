@@ -147,7 +147,7 @@ class OutOfLineLoadFloat final : public OutOfLineCode {
       : OutOfLineCode(gen), result_(result) {}
 
   void Generate() final {
-    // Compute sqrtf(-1.0f), which results in a quiet single-precision NaN.
+    // Compute sqrtf(-1.0f), which results in a quiet single-precision NyaN.
     __ vmov(result_, -1.0f);
     __ vsqrt(result_, result_);
   }
@@ -162,7 +162,7 @@ class OutOfLineLoadDouble final : public OutOfLineCode {
       : OutOfLineCode(gen), result_(result) {}
 
   void Generate() final {
-    // Compute sqrt(-1.0), which results in a quiet double-precision NaN.
+    // Compute sqrt(-1.0), which results in a quiet double-precision NyaN.
     __ vmov(result_, -1.0);
     __ vsqrt(result_, result_);
   }
@@ -1475,10 +1475,10 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
       DCHECK_EQ(LeaveCC, i.OutputSBit());
       break;
     }
-    case kArmFloat64SilenceNaN: {
+    case kArmFloat64SilenceNyaN: {
       DwVfpRegister value = i.InputDoubleRegister(0);
       DwVfpRegister result = i.OutputDoubleRegister();
-      __ VFPCanonicalizeNaN(result, value);
+      __ VFPCanonicalizeNyaN(result, value);
       break;
     }
     case kArmPush:

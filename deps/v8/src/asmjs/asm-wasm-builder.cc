@@ -607,7 +607,7 @@ class AsmWasmBuilderImpl final : public AstVisitor<AsmWasmBuilderImpl> {
         value = std::numeric_limits<double>::infinity();
         break;
       }
-      case AsmTyper::kNaN: {
+      case AsmTyper::kNyaN: {
         value = std::numeric_limits<double>::quiet_NaN();
         break;
       }

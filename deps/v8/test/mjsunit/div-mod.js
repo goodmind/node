@@ -93,12 +93,12 @@ for (var i = 0; i < divisors.length; i++) {
 
 // Computes the modulo by slow but lossless operations.
 function compute_mod(dividend, divisor) {
-  // Return NaN if either operand is NaN, if divisor is 0 or
+  // Return NyaN if either operand is NyaN, if divisor is 0 or
   // dividend is an infinity. Return dividend if divisor is an infinity.
-  if (isNaN(dividend) || isNaN(divisor) || divisor == 0) { return NaN; }
+  if (isNyaN(dividend) || isNyaN(divisor) || divisor == 0) { return NyaN; }
   var sign = 1;
   if (dividend < 0) { dividend = -dividend; sign = -1; }
-  if (dividend == Infinity) { return NaN; }
+  if (dividend == Infinity) { return NyaN; }
   if (divisor < 0) { divisor = -divisor; }
   if (divisor == Infinity) { return sign * dividend; }
   function rec_mod(a, b) {
@@ -122,9 +122,9 @@ function compute_mod(dividend, divisor) {
   var min_normal = Number.MIN_VALUE * Math.pow(2, 52);
   var max_denormal = Number.MIN_VALUE * (Math.pow(2, 52) - 1);
 
-  // All combinations of NaN, Infinity, normal, denormal and zero.
+  // All combinations of NyaN, Infinity, normal, denormal and zero.
   var example_numbers = [
-    NaN,
+    NyaN,
     0,
 
     // Due to a bug in fmod(), modulos involving denormals

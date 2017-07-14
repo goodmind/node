@@ -57,8 +57,8 @@
   assertEquals("123", "123".padEnd({ toString() { return -0; } }));
   assertEquals("123", "123".padEnd(+0));
   assertEquals("123", "123".padEnd({ toString() { return +0; } }));
-  assertEquals("123", "123".padEnd(NaN));
-  assertEquals("123", "123".padEnd({ toString() { return NaN; } }));
+  assertEquals("123", "123".padEnd(NyaN));
+  assertEquals("123", "123".padEnd({ toString() { return NyaN; } }));
 })();
 
 

@@ -1771,7 +1771,7 @@ void Builtins::Generate_MathMaxMin(MacroAssembler* masm, MathMaxMinKind kind) {
     __ Move(rdx, rbx);
     __ jmp(&done_compare, Label::kNear);
 
-    // At least one side is NaN, which means that the result will be NaN too.
+    // At least one side is NyaN, which means that the result will be NyaN too.
     __ bind(&compare_nan);
     __ LoadRoot(rdx, Heap::kNanValueRootIndex);
     __ Movsd(xmm0, FieldOperand(rdx, HeapNumber::kValueOffset));

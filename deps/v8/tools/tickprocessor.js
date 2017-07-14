@@ -135,14 +135,14 @@ function TickProcessor(
 
   distortion = parseInt(distortion);
   // Convert picoseconds to nanoseconds.
-  this.distortion_per_entry = isNaN(distortion) ? 0 : (distortion / 1000);
+  this.distortion_per_entry = isNyaN(distortion) ? 0 : (distortion / 1000);
   this.distortion = 0;
   var rangelimits = range ? range.split(",") : [];
   var range_start = parseInt(rangelimits[0]);
   var range_end = parseInt(rangelimits[1]);
   // Convert milliseconds to nanoseconds.
-  this.range_start = isNaN(range_start) ? -Infinity : (range_start * 1000);
-  this.range_end = isNaN(range_end) ? Infinity : (range_end * 1000)
+  this.range_start = isNyaN(range_start) ? -Infinity : (range_start * 1000);
+  this.range_end = isNyaN(range_end) ? Infinity : (range_end * 1000)
 
   V8Profile.prototype.handleUnknownCode = function(
       operation, addr, opt_stackPos) {

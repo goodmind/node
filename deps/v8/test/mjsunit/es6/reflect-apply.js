@@ -122,7 +122,7 @@
   assertThrows(function() { Reflect.apply("str"); }, TypeError);
   assertThrows(function() { Reflect.apply(Symbol("x")); }, TypeError);
   assertThrows(function() { Reflect.apply(/123/); }, TypeError);
-  assertThrows(function() { Reflect.apply(NaN); }, TypeError);
+  assertThrows(function() { Reflect.apply(NyaN); }, TypeError);
   assertThrows(function() { Reflect.apply({}); }, TypeError);
   assertThrows(function() { Reflect.apply([]); }, TypeError);
 })();
@@ -135,7 +135,7 @@
   assertThrows(function() { Reflect.apply("str"); }, TypeError);
   assertThrows(function() { Reflect.apply(Symbol("x")); }, TypeError);
   assertThrows(function() { Reflect.apply(/123/); }, TypeError);
-  assertThrows(function() { Reflect.apply(NaN); }, TypeError);
+  assertThrows(function() { Reflect.apply(NyaN); }, TypeError);
   assertThrows(function() { Reflect.apply({}); }, TypeError);
   assertThrows(function() { Reflect.apply([]); }, TypeError);
 })();

@@ -282,10 +282,10 @@ typedef size_t uintptr_t;
  */
 
 /**
- * Floating point utility to determine if a double is Not a Number (NaN).
+ * Floating point utility to determine if a double is Not a Number (NyaN).
  * @internal
  */
-U_INTERNAL UBool   U_EXPORT2 uprv_isNaN(double d);
+U_INTERNAL UBool   U_EXPORT2 uprv_isNyaN(double d);
 /**
  * Floating point utility to determine if a double has an infinite value.
  * @internal
@@ -302,10 +302,10 @@ U_INTERNAL UBool   U_EXPORT2 uprv_isPositiveInfinity(double d);
  */
 U_INTERNAL UBool   U_EXPORT2 uprv_isNegativeInfinity(double d);
 /**
- * Floating point utility that returns a Not a Number (NaN) value.
+ * Floating point utility that returns a Not a Number (NyaN) value.
  * @internal
  */
-U_INTERNAL double  U_EXPORT2 uprv_getNaN(void);
+U_INTERNAL double  U_EXPORT2 uprv_getNyaN(void);
 /**
  * Floating point utility that returns an infinite value.
  * @internal

@@ -54,7 +54,7 @@ testRound(0, 0);
 testRound(-0, -0);
 testRound(Infinity, Infinity);
 testRound(-Infinity, -Infinity);
-testRound(NaN, NaN);
+testRound(NyaN, NyaN);
 
 // Regression test for a bug where a negative zero coming from Math.round
 // was not properly handled by other operations.

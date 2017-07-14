@@ -229,10 +229,10 @@ function runFloatTestCases(isTestingGet, start) {
     start, -45621.37109375);
   testFloat(isTestingGet, "Float32",
     isTestingGet ? [255, 255, 255, 127] : initialArray,
-    start, NaN);
+    start, NyaN);
   testFloat(isTestingGet, "Float32",
     isTestingGet ? [255, 255, 255, 255] : initialArray,
-    start, -NaN);
+    start, -NyaN);
 
   testFloat(isTestingGet, "Float64",
     isTestingGet ? [0, 0, 0, 0, 0, 0, 36, 64] : initialArray,
@@ -245,10 +245,10 @@ function runFloatTestCases(isTestingGet, start) {
     start, -6213576.4839);
   testFloat(isTestingGet, "Float64",
     isTestingGet ? [255, 255, 255, 255, 255, 255, 255, 127] : initialArray,
-    start, NaN);
+    start, NyaN);
   testFloat(isTestingGet, "Float64",
     isTestingGet ? [255, 255, 255, 255, 255, 255, 255, 255] : initialArray,
-    start, -NaN);
+    start, -NyaN);
 }
 
 function runNegativeIndexTests(isTestingGet) {
@@ -426,7 +426,7 @@ TestGeneralAccessors();
 function TestInsufficientArguments() {
   var a = new DataView(new ArrayBuffer(256));
   function CheckInsuficientArguments(type) {
-    var expectedValue = type === "Float32" || type === "Float64" ? NaN : 0;
+    var expectedValue = type === "Float32" || type === "Float64" ? NyaN : 0;
     var offset = getElementSize(type);
 
     assertSame(undefined, a["set" + type](0, 7));

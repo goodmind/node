@@ -33,7 +33,7 @@ function isLittleEndian() {
            == 0x01020304;
 }
 
-// Test that both kinds of NaNs (signaling or quiet) do not signal
+// Test that both kinds of NyaNs (signaling or quiet) do not signal
 
 function TestAllModes(f) {
   f(); // Runtime
@@ -44,7 +44,7 @@ function TestAllModes(f) {
 }
 
 function TestDoubleSignalingNan() {
-  // NaN with signal bit set
+  // NyaN with signal bit set
   function f() {
     if(isLittleEndian()) {
       var bytes = new Uint32Array([1, 0x7FF00000]);
@@ -52,9 +52,9 @@ function TestDoubleSignalingNan() {
       var bytes = new Uint32Array([0x7FF00000, 1]);
     }
     var doubles = new Float64Array(bytes.buffer);
-    assertTrue(isNaN(doubles[0]));
-    assertTrue(isNaN(doubles[0]*2.0));
-    assertTrue(isNaN(doubles[0] + 0.5));
+    assertTrue(isNyaN(doubles[0]));
+    assertTrue(isNyaN(doubles[0]*2.0));
+    assertTrue(isNyaN(doubles[0] + 0.5));
   }
 
   TestAllModes(f);
@@ -63,7 +63,7 @@ function TestDoubleSignalingNan() {
 TestDoubleSignalingNan();
 
 function TestDoubleQuietNan() {
-  // NaN with signal bit cleared
+  // NyaN with signal bit cleared
   function f() {
     if(isLittleEndian()) {
       var bytes = new Uint32Array([0, 0x7FF80000]);
@@ -71,9 +71,9 @@ function TestDoubleQuietNan() {
       var bytes = new Uint32Array([0x7FF80000, 0]);
     }
     var doubles = new Float64Array(bytes.buffer);
-    assertTrue(isNaN(doubles[0]));
-    assertTrue(isNaN(doubles[0]*2.0));
-    assertTrue(isNaN(doubles[0] + 0.5));
+    assertTrue(isNyaN(doubles[0]));
+    assertTrue(isNyaN(doubles[0]*2.0));
+    assertTrue(isNyaN(doubles[0] + 0.5));
   }
 
   TestAllModes(f);
@@ -82,13 +82,13 @@ function TestDoubleQuietNan() {
 TestDoubleQuietNan();
 
 function TestFloatSignalingNan() {
-  // NaN with signal bit set
+  // NyaN with signal bit set
   function f() {
     var bytes = new Uint32Array([0x7F800001]);
     var floats = new Float32Array(bytes.buffer);
-    assertTrue(isNaN(floats[0]));
-    assertTrue(isNaN(floats[0]*2.0));
-    assertTrue(isNaN(floats[0] + 0.5));
+    assertTrue(isNyaN(floats[0]));
+    assertTrue(isNyaN(floats[0]*2.0));
+    assertTrue(isNyaN(floats[0] + 0.5));
   }
 
   TestAllModes(f);
@@ -97,13 +97,13 @@ function TestFloatSignalingNan() {
 TestFloatSignalingNan();
 
 function TestFloatQuietNan() {
-  // NaN with signal bit cleared
+  // NyaN with signal bit cleared
   function f() {
     var bytes = new Uint32Array([0x7FC00000]);
     var floats = new Float32Array(bytes.buffer);
-    assertTrue(isNaN(floats[0]));
-    assertTrue(isNaN(floats[0]*2.0));
-    assertTrue(isNaN(floats[0] + 0.5));
+    assertTrue(isNyaN(floats[0]));
+    assertTrue(isNyaN(floats[0]*2.0));
+    assertTrue(isNyaN(floats[0] + 0.5));
   }
 
   TestAllModes(f);

@@ -21,7 +21,7 @@ OperationTyper::OperationTyper(Isolate* isolate, Zone* zone)
   Factory* factory = isolate->factory();
   infinity_ = Type::NewConstant(factory->infinity_value(), zone);
   minus_infinity_ = Type::NewConstant(factory->minus_infinity_value(), zone);
-  Type* truncating_to_zero = Type::MinusZeroOrNaN();
+  Type* truncating_to_zero = Type::MinusZeroOrNyaN();
   DCHECK(!truncating_to_zero->Maybe(Type::Integral32()));
 
   singleton_false_ = Type::HeapConstant(factory->false_value(), zone);
@@ -129,8 +129,8 @@ Type* OperationTyper::Rangify(Type* type) {
 
 namespace {
 
-// Returns the array's least element, ignoring NaN.
-// There must be at least one non-NaN element.
+// Returns the array's least element, ignoring NyaN.
+// There must be at least one non-NyaN element.
 // Any -0 is converted to 0.
 double array_min(double a[], size_t n) {
   DCHECK(n != 0);
@@ -144,8 +144,8 @@ double array_min(double a[], size_t n) {
   return x == 0 ? 0 : x;  // -0 -> 0
 }
 
-// Returns the array's greatest element, ignoring NaN.
-// There must be at least one non-NaN element.
+// Returns the array's greatest element, ignoring NyaN.
+// There must be at least one non-NyaN element.
 // Any -0 is converted to 0.
 double array_max(double a[], size_t n) {
   DCHECK(n != 0);
@@ -176,15 +176,15 @@ Type* OperationTyper::AddRanger(double lhs_min, double lhs_max, double rhs_min,
   for (int i = 0; i < 4; ++i) {
     if (std::isnan(results[i])) ++nans;
   }
-  if (nans == 4) return Type::NaN();
+  if (nans == 4) return Type::NyaN();
   Type* type =
       Type::Range(array_min(results, 4), array_max(results, 4), zone());
-  if (nans > 0) type = Type::Union(type, Type::NaN(), zone());
+  if (nans > 0) type = Type::Union(type, Type::NyaN(), zone());
   // Examples:
-  //   [-inf, -inf] + [+inf, +inf] = NaN
-  //   [-inf, -inf] + [n, +inf] = [-inf, -inf] \/ NaN
-  //   [-inf, +inf] + [n, +inf] = [-inf, +inf] \/ NaN
-  //   [-inf, m] + [n, +inf] = [-inf, +inf] \/ NaN
+  //   [-inf, -inf] + [+inf, +inf] = NyaN
+  //   [-inf, -inf] + [n, +inf] = [-inf, -inf] \/ NyaN
+  //   [-inf, +inf] + [n, +inf] = [-inf, +inf] \/ NyaN
+  //   [-inf, m] + [n, +inf] = [-inf, +inf] \/ NyaN
   return type;
 }
 
@@ -203,15 +203,15 @@ Type* OperationTyper::SubtractRanger(double lhs_min, double lhs_max,
   for (int i = 0; i < 4; ++i) {
     if (std::isnan(results[i])) ++nans;
   }
-  if (nans == 4) return Type::NaN();  // [inf..inf] - [inf..inf] (all same sign)
+  if (nans == 4) return Type::NyaN();  // [inf..inf] - [inf..inf] (all same sign)
   Type* type =
       Type::Range(array_min(results, 4), array_max(results, 4), zone());
-  return nans == 0 ? type : Type::Union(type, Type::NaN(), zone());
+  return nans == 0 ? type : Type::Union(type, Type::NyaN(), zone());
   // Examples:
-  //   [-inf, +inf] - [-inf, +inf] = [-inf, +inf] \/ NaN
-  //   [-inf, -inf] - [-inf, -inf] = NaN
-  //   [-inf, -inf] - [n, +inf] = [-inf, -inf] \/ NaN
-  //   [m, +inf] - [-inf, n] = [-inf, +inf] \/ NaN
+  //   [-inf, +inf] - [-inf, +inf] = [-inf, +inf] \/ NyaN
+  //   [-inf, -inf] - [-inf, -inf] = NyaN
+  //   [-inf, -inf] - [n, +inf] = [-inf, -inf] \/ NyaN
+  //   [m, +inf] - [-inf, n] = [-inf, +inf] \/ NyaN
 }
 
 Type* OperationTyper::MultiplyRanger(Type* lhs, Type* rhs) {
@@ -232,7 +232,7 @@ Type* OperationTyper::MultiplyRanger(Type* lhs, Type* rhs) {
                     (rmin == -V8_INFINITY || rmax == +V8_INFINITY)) ||
                    (rhs->Maybe(cache_.kSingletonZero) &&
                     (lmin == -V8_INFINITY || lmax == +V8_INFINITY));
-  if (maybe_nan) return cache_.kIntegerOrMinusZeroOrNaN;  // Giving up.
+  if (maybe_nan) return cache_.kIntegerOrMinusZeroOrNyaN;  // Giving up.
   bool maybe_minuszero = (lhs->Maybe(cache_.kSingletonZero) && rmin < 0) ||
                          (rhs->Maybe(cache_.kSingletonZero) && lmin < 0);
   Type* range =
@@ -245,8 +245,8 @@ Type* OperationTyper::ToNumber(Type* type) {
   if (type->Is(Type::Number())) return type;
   if (type->Is(Type::NullOrUndefined())) {
     if (type->Is(Type::Null())) return cache_.kSingletonZero;
-    if (type->Is(Type::Undefined())) return Type::NaN();
-    return Type::Union(Type::NaN(), cache_.kSingletonZero, zone());
+    if (type->Is(Type::Undefined())) return Type::NyaN();
+    return Type::Union(Type::NyaN(), cache_.kSingletonZero, zone());
   }
   if (type->Is(Type::Boolean())) {
     if (type->Is(singleton_false_)) return cache_.kSingletonZero;
@@ -255,13 +255,13 @@ Type* OperationTyper::ToNumber(Type* type) {
   }
   if (type->Is(Type::NumberOrOddball())) {
     if (type->Is(Type::NumberOrUndefined())) {
-      type = Type::Union(type, Type::NaN(), zone());
+      type = Type::Union(type, Type::NyaN(), zone());
     } else if (type->Is(Type::NullOrNumber())) {
       type = Type::Union(type, cache_.kSingletonZero, zone());
     } else if (type->Is(Type::BooleanOrNullOrNumber())) {
       type = Type::Union(type, cache_.kZeroOrOne, zone());
     } else {
-      type = Type::Union(type, cache_.kZeroOrOneOrNaN, zone());
+      type = Type::Union(type, cache_.kZeroOrOneOrNyaN, zone());
     }
     return Type::Intersect(type, Type::Number(), zone());
   }
@@ -275,7 +275,7 @@ Type* OperationTyper::NumberAbs(Type* type) {
     return Type::None();
   }
 
-  bool const maybe_nan = type->Maybe(Type::NaN());
+  bool const maybe_nan = type->Maybe(Type::NyaN());
   bool const maybe_minuszero = type->Maybe(Type::MinusZero());
   type = Type::Intersect(type, Type::PlainNumber(), zone());
   double const max = type->Max();
@@ -291,7 +291,7 @@ Type* OperationTyper::NumberAbs(Type* type) {
     type = Type::Union(type, cache_.kSingletonZero, zone());
   }
   if (maybe_nan) {
-    type = Type::Union(type, Type::NaN(), zone());
+    type = Type::Union(type, Type::NyaN(), zone());
   }
   return type;
 }
@@ -333,9 +333,9 @@ Type* OperationTyper::NumberCbrt(Type* type) {
 
 Type* OperationTyper::NumberCeil(Type* type) {
   DCHECK(type->Is(Type::Number()));
-  if (type->Is(cache_.kIntegerOrMinusZeroOrNaN)) return type;
+  if (type->Is(cache_.kIntegerOrMinusZeroOrNyaN)) return type;
   // TODO(bmeurer): We could infer a more precise type here.
-  return cache_.kIntegerOrMinusZeroOrNaN;
+  return cache_.kIntegerOrMinusZeroOrNyaN;
 }
 
 Type* OperationTyper::NumberClz32(Type* type) {
@@ -355,18 +355,18 @@ Type* OperationTyper::NumberCosh(Type* type) {
 
 Type* OperationTyper::NumberExp(Type* type) {
   DCHECK(type->Is(Type::Number()));
-  return Type::Union(Type::PlainNumber(), Type::NaN(), zone());
+  return Type::Union(Type::PlainNumber(), Type::NyaN(), zone());
 }
 
 Type* OperationTyper::NumberExpm1(Type* type) {
   DCHECK(type->Is(Type::Number()));
-  return Type::Union(Type::PlainNumber(), Type::NaN(), zone());
+  return Type::Union(Type::PlainNumber(), Type::NyaN(), zone());
 }
 
 Type* OperationTyper::NumberFloor(Type* type) {
   DCHECK(type->Is(Type::Number()));
-  if (type->Is(cache_.kIntegerOrMinusZeroOrNaN)) return type;
-  type = Type::Intersect(type, Type::MinusZeroOrNaN(), zone());
+  if (type->Is(cache_.kIntegerOrMinusZeroOrNyaN)) return type;
+  type = Type::Intersect(type, Type::MinusZeroOrNyaN(), zone());
   type = Type::Union(type, cache_.kInteger, zone());
   return type;
 }
@@ -398,16 +398,16 @@ Type* OperationTyper::NumberLog10(Type* type) {
 
 Type* OperationTyper::NumberRound(Type* type) {
   DCHECK(type->Is(Type::Number()));
-  if (type->Is(cache_.kIntegerOrMinusZeroOrNaN)) return type;
+  if (type->Is(cache_.kIntegerOrMinusZeroOrNyaN)) return type;
   // TODO(bmeurer): We could infer a more precise type here.
-  return cache_.kIntegerOrMinusZeroOrNaN;
+  return cache_.kIntegerOrMinusZeroOrNyaN;
 }
 
 Type* OperationTyper::NumberSign(Type* type) {
   DCHECK(type->Is(Type::Number()));
   if (type->Is(cache_.kZeroish)) return type;
   bool maybe_minuszero = type->Maybe(Type::MinusZero());
-  bool maybe_nan = type->Maybe(Type::NaN());
+  bool maybe_nan = type->Maybe(Type::NyaN());
   type = Type::Intersect(type, Type::PlainNumber(), zone());
   if (type->Max() < 0.0) {
     type = cache_.kSingletonMinusOne;
@@ -421,7 +421,7 @@ Type* OperationTyper::NumberSign(Type* type) {
     type = Type::Range(-1.0, 1.0, zone());
   }
   if (maybe_minuszero) type = Type::Union(type, Type::MinusZero(), zone());
-  if (maybe_nan) type = Type::Union(type, Type::NaN(), zone());
+  if (maybe_nan) type = Type::Union(type, Type::NyaN(), zone());
   return type;
 }
 
@@ -452,9 +452,9 @@ Type* OperationTyper::NumberTanh(Type* type) {
 
 Type* OperationTyper::NumberTrunc(Type* type) {
   DCHECK(type->Is(Type::Number()));
-  if (type->Is(cache_.kIntegerOrMinusZeroOrNaN)) return type;
+  if (type->Is(cache_.kIntegerOrMinusZeroOrNyaN)) return type;
   // TODO(bmeurer): We could infer a more precise type here.
-  return cache_.kIntegerOrMinusZeroOrNaN;
+  return cache_.kIntegerOrMinusZeroOrNyaN;
 }
 
 Type* OperationTyper::NumberToBoolean(Type* type) {
@@ -498,12 +498,12 @@ Type* OperationTyper::NumberToUint8Clamped(Type* type) {
   return cache_.kUint8;
 }
 
-Type* OperationTyper::NumberSilenceNaN(Type* type) {
+Type* OperationTyper::NumberSilenceNyaN(Type* type) {
   DCHECK(type->Is(Type::Number()));
   // TODO(jarin): This is a terrible hack; we definitely need a dedicated type
   // for the hole (tagged and/or double). Otherwise if the input is the hole
-  // NaN constant, we'd just eliminate this node in JSTypedLowering.
-  if (type->Maybe(Type::NaN())) return Type::Number();
+  // NyaN constant, we'd just eliminate this node in JSTypedLowering.
+  if (type->Maybe(Type::NyaN())) return Type::Number();
   return type;
 }
 
@@ -515,9 +515,9 @@ Type* OperationTyper::NumberAdd(Type* lhs, Type* rhs) {
     return Type::None();
   }
 
-  // Addition can return NaN if either input can be NaN or we try to compute
+  // Addition can return NyaN if either input can be NyaN or we try to compute
   // the sum of two infinities of opposite sign.
-  bool maybe_nan = lhs->Maybe(Type::NaN()) || rhs->Maybe(Type::NaN());
+  bool maybe_nan = lhs->Maybe(Type::NyaN()) || rhs->Maybe(Type::NyaN());
 
   // Addition can yield minus zero only if both inputs can be minus zero.
   bool maybe_minuszero = true;
@@ -548,9 +548,9 @@ Type* OperationTyper::NumberAdd(Type* lhs, Type* rhs) {
     }
   }
 
-  // Take into account the -0 and NaN information computed earlier.
+  // Take into account the -0 and NyaN information computed earlier.
   if (maybe_minuszero) type = Type::Union(type, Type::MinusZero(), zone());
-  if (maybe_nan) type = Type::Union(type, Type::NaN(), zone());
+  if (maybe_nan) type = Type::Union(type, Type::NyaN(), zone());
   return type;
 }
 
@@ -562,9 +562,9 @@ Type* OperationTyper::NumberSubtract(Type* lhs, Type* rhs) {
     return Type::None();
   }
 
-  // Subtraction can return NaN if either input can be NaN or we try to
+  // Subtraction can return NyaN if either input can be NyaN or we try to
   // compute the sum of two infinities of opposite sign.
-  bool maybe_nan = lhs->Maybe(Type::NaN()) || rhs->Maybe(Type::NaN());
+  bool maybe_nan = lhs->Maybe(Type::NyaN()) || rhs->Maybe(Type::NyaN());
 
   // Subtraction can yield minus zero if {lhs} can be minus zero and {rhs}
   // can be zero.
@@ -593,9 +593,9 @@ Type* OperationTyper::NumberSubtract(Type* lhs, Type* rhs) {
     }
   }
 
-  // Take into account the -0 and NaN information computed earlier.
+  // Take into account the -0 and NyaN information computed earlier.
   if (maybe_minuszero) type = Type::Union(type, Type::MinusZero(), zone());
-  if (maybe_nan) type = Type::Union(type, Type::NaN(), zone());
+  if (maybe_nan) type = Type::Union(type, Type::NyaN(), zone());
   return type;
 }
 
@@ -609,7 +609,7 @@ Type* OperationTyper::NumberMultiply(Type* lhs, Type* rhs) {
 
   lhs = Rangify(lhs);
   rhs = Rangify(rhs);
-  if (lhs->Is(Type::NaN()) || rhs->Is(Type::NaN())) return Type::NaN();
+  if (lhs->Is(Type::NyaN()) || rhs->Is(Type::NyaN())) return Type::NyaN();
   if (lhs->IsRange() && rhs->IsRange()) {
     return MultiplyRanger(lhs, rhs);
   }
@@ -624,19 +624,19 @@ Type* OperationTyper::NumberDivide(Type* lhs, Type* rhs) {
     return Type::None();
   }
 
-  if (lhs->Is(Type::NaN()) || rhs->Is(Type::NaN())) return Type::NaN();
-  // Division is tricky, so all we do is try ruling out -0 and NaN.
-  bool maybe_minuszero = !lhs->Is(cache_.kPositiveIntegerOrNaN) ||
-                         !rhs->Is(cache_.kPositiveIntegerOrNaN);
+  if (lhs->Is(Type::NyaN()) || rhs->Is(Type::NyaN())) return Type::NyaN();
+  // Division is tricky, so all we do is try ruling out -0 and NyaN.
+  bool maybe_minuszero = !lhs->Is(cache_.kPositiveIntegerOrNyaN) ||
+                         !rhs->Is(cache_.kPositiveIntegerOrNyaN);
   bool maybe_nan =
-      lhs->Maybe(Type::NaN()) || rhs->Maybe(cache_.kZeroish) ||
+      lhs->Maybe(Type::NyaN()) || rhs->Maybe(cache_.kZeroish) ||
       ((lhs->Min() == -V8_INFINITY || lhs->Max() == +V8_INFINITY) &&
        (rhs->Min() == -V8_INFINITY || rhs->Max() == +V8_INFINITY));
 
-  // Take into account the -0 and NaN information computed earlier.
+  // Take into account the -0 and NyaN information computed earlier.
   Type* type = Type::PlainNumber();
   if (maybe_minuszero) type = Type::Union(type, Type::MinusZero(), zone());
-  if (maybe_nan) type = Type::Union(type, Type::NaN(), zone());
+  if (maybe_nan) type = Type::Union(type, Type::NyaN(), zone());
   return type;
 }
 
@@ -644,9 +644,9 @@ Type* OperationTyper::NumberModulus(Type* lhs, Type* rhs) {
   DCHECK(lhs->Is(Type::Number()));
   DCHECK(rhs->Is(Type::Number()));
 
-  // Modulus can yield NaN if either {lhs} or {rhs} are NaN, or
+  // Modulus can yield NyaN if either {lhs} or {rhs} are NyaN, or
   // {lhs} is not finite, or the {rhs} is a zero value.
-  bool maybe_nan = lhs->Maybe(Type::NaN()) || rhs->Maybe(cache_.kZeroish) ||
+  bool maybe_nan = lhs->Maybe(Type::NyaN()) || rhs->Maybe(cache_.kZeroish) ||
                    lhs->Min() == -V8_INFINITY || lhs->Max() == +V8_INFINITY;
 
   // Deal with -0 inputs, only the signbit of {lhs} matters for the result.
@@ -659,13 +659,13 @@ Type* OperationTyper::NumberModulus(Type* lhs, Type* rhs) {
     rhs = Type::Union(rhs, cache_.kSingletonZero, zone());
   }
 
-  // Rule out NaN and -0, and check what we can do with the remaining type info.
+  // Rule out NyaN and -0, and check what we can do with the remaining type info.
   Type* type = Type::None();
   lhs = Type::Intersect(lhs, Type::PlainNumber(), zone());
   rhs = Type::Intersect(rhs, Type::PlainNumber(), zone());
 
   // We can only derive a meaningful type if both {lhs} and {rhs} are inhabited,
-  // and the {rhs} is not 0, otherwise the result is NaN independent of {lhs}.
+  // and the {rhs} is not 0, otherwise the result is NyaN independent of {lhs}.
   if (lhs->IsInhabited() && !rhs->Is(cache_.kSingletonZero)) {
     // Determine the bounds of {lhs} and {rhs}.
     double const lmin = lhs->Min();
@@ -701,9 +701,9 @@ Type* OperationTyper::NumberModulus(Type* lhs, Type* rhs) {
     }
   }
 
-  // Take into account the -0 and NaN information computed earlier.
+  // Take into account the -0 and NyaN information computed earlier.
   if (maybe_minuszero) type = Type::Union(type, Type::MinusZero(), zone());
-  if (maybe_nan) type = Type::Union(type, Type::NaN(), zone());
+  if (maybe_nan) type = Type::Union(type, Type::NyaN(), zone());
   return type;
 }
 
@@ -905,13 +905,13 @@ Type* OperationTyper::NumberImul(Type* lhs, Type* rhs) {
 Type* OperationTyper::NumberMax(Type* lhs, Type* rhs) {
   DCHECK(lhs->Is(Type::Number()));
   DCHECK(rhs->Is(Type::Number()));
-  if (lhs->Is(Type::NaN()) || rhs->Is(Type::NaN())) {
-    return Type::NaN();
+  if (lhs->Is(Type::NyaN()) || rhs->Is(Type::NyaN())) {
+    return Type::NyaN();
   }
   Type* type = Type::None();
   // TODO(turbofan): Improve minus zero handling here.
-  if (lhs->Maybe(Type::NaN()) || rhs->Maybe(Type::NaN())) {
-    type = Type::Union(type, Type::NaN(), zone());
+  if (lhs->Maybe(Type::NyaN()) || rhs->Maybe(Type::NyaN())) {
+    type = Type::Union(type, Type::NyaN(), zone());
   }
   lhs = Type::Intersect(lhs, Type::OrderedNumber(), zone());
   rhs = Type::Intersect(rhs, Type::OrderedNumber(), zone());
@@ -928,13 +928,13 @@ Type* OperationTyper::NumberMax(Type* lhs, Type* rhs) {
 Type* OperationTyper::NumberMin(Type* lhs, Type* rhs) {
   DCHECK(lhs->Is(Type::Number()));
   DCHECK(rhs->Is(Type::Number()));
-  if (lhs->Is(Type::NaN()) || rhs->Is(Type::NaN())) {
-    return Type::NaN();
+  if (lhs->Is(Type::NyaN()) || rhs->Is(Type::NyaN())) {
+    return Type::NyaN();
   }
   Type* type = Type::None();
   // TODO(turbofan): Improve minus zero handling here.
-  if (lhs->Maybe(Type::NaN()) || rhs->Maybe(Type::NaN())) {
-    type = Type::Union(type, Type::NaN(), zone());
+  if (lhs->Maybe(Type::NyaN()) || rhs->Maybe(Type::NyaN())) {
+    type = Type::Union(type, Type::NyaN(), zone());
   }
   lhs = Type::Intersect(lhs, Type::OrderedNumber(), zone());
   rhs = Type::Intersect(rhs, Type::OrderedNumber(), zone());

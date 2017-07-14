@@ -128,7 +128,7 @@ var globalFunctions = [
     "escape", "unescape", "decodeURI", "decodeURIComponent",
     "encodeURI", "encodeURIComponent", "Error", "TypeError",
     "RangeError", "SyntaxError", "ReferenceError", "EvalError",
-    "URIError", "isNaN", "isFinite", "parseInt", "parseFloat",
+    "URIError", "isNyaN", "isFinite", "parseInt", "parseFloat",
     "eval"];
 
 TestFunctionNames(this, globalFunctions);

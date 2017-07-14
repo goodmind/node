@@ -114,7 +114,7 @@ ExternalArrayType ExternalArrayTypeOf(const Operator* op) WARN_UNUSED_RESULT;
 
 enum class CheckFloat64HoleMode : uint8_t {
   kNeverReturnHole,  // Never return the hole (deoptimize instead).
-  kAllowReturnHole   // Allow to return the hole (signaling NaN).
+  kAllowReturnHole   // Allow to return the hole (signaling NyaN).
 };
 
 size_t hash_value(CheckFloat64HoleMode);
@@ -329,7 +329,7 @@ class V8_EXPORT_PRIVATE SimplifiedOperatorBuilder final
   const Operator* NumberToUint32();
   const Operator* NumberToUint8Clamped();
 
-  const Operator* NumberSilenceNaN();
+  const Operator* NumberSilenceNyaN();
 
   const Operator* SpeculativeNumberAdd(NumberOperationHint hint);
   const Operator* SpeculativeNumberSubtract(NumberOperationHint hint);

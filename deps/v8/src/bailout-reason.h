@@ -48,7 +48,7 @@ namespace internal {
   V(kDebuggerStatement, "DebuggerStatement")                                   \
   V(kDeclarationInCatchContext, "Declaration in catch context")                \
   V(kDeclarationInWithContext, "Declaration in with context")                  \
-  V(kDefaultNaNModeNotSet, "Default NaN mode not set")                         \
+  V(kDefaultNyaNModeNotSet, "Default NyaN mode not set")                         \
   V(kDeleteWithGlobalVariable, "Delete with global variable")                  \
   V(kDeleteWithNonGlobalVariable, "Delete with non-global variable")           \
   V(kDestinationOfCopyNotAligned, "Destination of copy not aligned")           \

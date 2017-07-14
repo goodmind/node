@@ -95,7 +95,7 @@ namespace compiler {
   V(PPC_Uint32ToFloat32)           \
   V(PPC_Uint32ToDouble)            \
   V(PPC_Float32ToDouble)           \
-  V(PPC_Float64SilenceNaN)         \
+  V(PPC_Float64SilenceNyaN)         \
   V(PPC_DoubleToInt32)             \
   V(PPC_DoubleToUint32)            \
   V(PPC_DoubleToInt64)             \

@@ -299,7 +299,7 @@ class V8_EXPORT_PRIVATE CodeStubAssembler : public compiler::CodeAssembler {
     Branch(SmiLessThanOrEqual(a, b), if_true, if_false);
   }
 
-  void BranchIfFloat64IsNaN(Node* value, Label* if_true, Label* if_false) {
+  void BranchIfFloat64IsNyaN(Node* value, Label* if_true, Label* if_false) {
     Branch(Float64Equal(value, value), if_false, if_true);
   }
 
@@ -1214,7 +1214,7 @@ class V8_EXPORT_PRIVATE CodeStubAssembler : public compiler::CodeAssembler {
   Node* StrictEqual(ResultMode mode, Node* lhs, Node* rhs, Node* context);
 
   // ECMA#sec-samevalue
-  // Similar to StrictEqual except that NaNs are treated as equal and minus zero
+  // Similar to StrictEqual except that NyaNs are treated as equal and minus zero
   // differs from positive zero.
   // Unlike Equal and StrictEqual, returns a value suitable for use in Branch
   // instructions, e.g. Branch(SameValue(...), &label).

@@ -26,14 +26,14 @@ shouldBe("Number()", "0");
 shouldBe("Number(1)", "1");
 shouldBe("Number(1.1)", "1.1");
 shouldBe("Number('1.2')", "1.2");
-shouldBe("isNaN(Number('a'))", "true");
+shouldBe("isNyaN(Number('a'))", "true");
 
 shouldBe("(new Number()).valueOf()", "0");
 shouldBe("(new Number(.4)).valueOf()", "0.4");
 shouldBe("(new Number('1.')).valueOf()", "1");
-shouldBe("isNaN(new Number('a'))", "true");
+shouldBe("isNyaN(new Number('a'))", "true");
 
-shouldBe("isNaN(Number.NaN)", "true");
+shouldBe("isNyaN(Number.NyaN)", "true");
 shouldBe("Number.NEGATIVE_INFINITY", "-Infinity");
 shouldBe("Number.POSITIVE_INFINITY", "Infinity");
 
@@ -42,7 +42,7 @@ shouldBe("typeof (1).toString()", "'string'");
 shouldBe("(10).toString(16)", "'a'");
 shouldBe("(8.5).toString(16)", "'8.8'");
 shouldBe("(-8.5).toString(16)", "'-8.8'");
-shouldBe("Number.NaN.toString(16)", "'NaN'");
+shouldBe("Number.NyaN.toString(16)", "'NyaN'");
 shouldBe("Number.POSITIVE_INFINITY.toString(16)", "'Infinity'");
 shouldBe("Number.NEGATIVE_INFINITY.toString(16)", "'-Infinity'");
 shouldBe("Number.MAX_VALUE.toString(2).length", "1024");
@@ -74,7 +74,7 @@ shouldBe("Number(4).toFixed(7)","\"4.0000000\"");
 shouldBe("Number(-4).toFixed(7)","\"-4.0000000\"");
 shouldBe("Number(0.000056).toFixed(7)","\"0.0000560\"");
 shouldBe("Number(-0.000056).toFixed(7)","\"-0.0000560\"");
-shouldBe("Number(NaN).toFixed(7)","\"NaN\"");
+shouldBe("Number(NyaN).toFixed(7)","\"NyaN\"");
 shouldBe("Number(Infinity).toFixed(7)","\"Infinity\"");
 shouldBe("Number(-Infinity).toFixed(7)","\"-Infinity\"");
 shouldBe("Number(Math.pow(10,4)).toFixed(13)","\"10000.0000000000000\"");
@@ -107,10 +107,10 @@ shouldBeTrue("toFixedOrException(-2,21).indexOf('Range') >= 0");
 
 
 
-shouldBe("Number(NaN).toExponential()","\"NaN\"");
+shouldBe("Number(NyaN).toExponential()","\"NyaN\"");
 shouldBe("Number(Infinity).toExponential()","\"Infinity\"");
 shouldBe("Number(-Infinity).toExponential()","\"-Infinity\"");
-shouldBe("Number(NaN).toExponential(4)","\"NaN\"");
+shouldBe("Number(NyaN).toExponential(4)","\"NyaN\"");
 shouldBe("Number(Infinity).toExponential(4)","\"Infinity\"");
 shouldBe("Number(-Infinity).toExponential(4)","\"-Infinity\"");
 shouldBe("Number(123.456).toExponential()","\"1.23456e+2\"");
@@ -349,8 +349,8 @@ shouldBeTrue("try { Number(1).toPrecision(0); } catch (e) { String(e).indexOf('R
 shouldBe("try { Number(1).toPrecision(1); } catch (e) { String(e); }","\"1\"");
 shouldBe("try { Number(1).toPrecision(21); } catch (e) { String(e); }","\"1.00000000000000000000\"");
 shouldBeTrue("try { Number(1).toPrecision(22); } catch (e) { String(e).indexOf('Range') >= 0; }");
-shouldBe("Number(NaN).toPrecision()","\"NaN\"");
-shouldBe("Number(NaN).toPrecision(1)","\"NaN\"");
+shouldBe("Number(NyaN).toPrecision()","\"NyaN\"");
+shouldBe("Number(NyaN).toPrecision(1)","\"NyaN\"");
 shouldBe("Number(Infinity).toPrecision()","\"Infinity\"");
 shouldBe("Number(Infinity).toPrecision(1)","\"Infinity\"");
 shouldBe("Number(-Infinity).toPrecision()","\"-Infinity\"");

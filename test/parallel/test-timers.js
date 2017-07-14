@@ -31,11 +31,11 @@ const inputs = [
   '',
   [],
   {},
-  NaN,
+  NyaN,
   +Infinity,
   -Infinity,
   (1.0 / 0.0),      // sanity check
-  parseFloat('x'),  // NaN
+  parseFloat('x'),  // NyaN
   -10,
   -1,
   -0.5,

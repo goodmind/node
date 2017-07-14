@@ -2071,7 +2071,7 @@ void FullCodeGenerator::EmitStringCharCodeAt(CallRuntime* expr) {
   __ B(&done);
 
   __ Bind(&index_out_of_range);
-  // When the index is out of range, the spec requires us to return NaN.
+  // When the index is out of range, the spec requires us to return NyaN.
   __ LoadRoot(result, Heap::kNanValueRootIndex);
   __ B(&done);
 
@@ -2581,7 +2581,7 @@ void FullCodeGenerator::VisitCompareOperation(CompareOperation* expr) {
   Comment cmnt(masm_, "[ CompareOperation");
 
   // Try to generate an optimized comparison with a literal value.
-  // TODO(jbramley): This only checks common values like NaN or undefined.
+  // TODO(jbramley): This only checks common values like NyaN or undefined.
   // Should it also handle ARM64 immediate operands?
   if (TryLiteralCompare(expr)) {
     return;

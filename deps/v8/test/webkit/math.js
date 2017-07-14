@@ -27,7 +27,7 @@ description(
 
 );
 
-shouldBe("Math.abs(NaN)", "NaN");
+shouldBe("Math.abs(NyaN)", "NyaN");
 shouldBe("Math.abs(0)", "0");
 shouldBe("Math.abs(-0)", "0");
 shouldBe("Math.abs(1)", "1");
@@ -39,39 +39,39 @@ shouldBe("Math.abs(-Number.MAX_VALUE)", "Number.MAX_VALUE");
 shouldBe("Math.abs(Infinity)", "Infinity");
 shouldBe("Math.abs(-Infinity)", "Infinity");
 
-shouldBe("Math.acos(NaN)", "NaN");
+shouldBe("Math.acos(NyaN)", "NyaN");
 shouldBe("Math.acos(-0)", "Math.acos(0)");
 shouldBe("Math.acos(1)", "0");
-shouldBe("Math.acos(1.1)", "NaN");
-shouldBe("Math.acos(-1.1)", "NaN");
-shouldBe("Math.acos(Infinity)", "NaN");
-shouldBe("Math.acos(-Infinity)", "NaN");
+shouldBe("Math.acos(1.1)", "NyaN");
+shouldBe("Math.acos(-1.1)", "NyaN");
+shouldBe("Math.acos(Infinity)", "NyaN");
+shouldBe("Math.acos(-Infinity)", "NyaN");
 
-shouldBe("Math.asin(NaN)", "NaN");
+shouldBe("Math.asin(NyaN)", "NyaN");
 shouldBe("Math.asin(0)", "0");
 shouldBe("Math.asin(-0)", "-0");
 shouldBe("Math.asin(1)", "-Math.asin(-1)");
-shouldBe("Math.asin(1.1)", "NaN");
-shouldBe("Math.asin(-1.1)", "NaN");
-shouldBe("Math.asin(Infinity)", "NaN");
-shouldBe("Math.asin(-Infinity)", "NaN");
+shouldBe("Math.asin(1.1)", "NyaN");
+shouldBe("Math.asin(-1.1)", "NyaN");
+shouldBe("Math.asin(Infinity)", "NyaN");
+shouldBe("Math.asin(-Infinity)", "NyaN");
 
-shouldBe("Math.atan(NaN)", "NaN");
+shouldBe("Math.atan(NyaN)", "NyaN");
 shouldBe("Math.atan(0)", "0");
 shouldBe("Math.atan(-0)", "-0");
 shouldBe("Math.atan(Infinity)", "-Math.atan(-Infinity)");
 
-shouldBe("Math.atan2(NaN, NaN)", "NaN");
-shouldBe("Math.atan2(NaN, 0)", "NaN");
-shouldBe("Math.atan2(NaN, -0)", "NaN");
-shouldBe("Math.atan2(NaN, 1)", "NaN");
-shouldBe("Math.atan2(NaN, Infinity)", "NaN");
-shouldBe("Math.atan2(NaN, -Infinity)", "NaN");
-shouldBe("Math.atan2(0, NaN)", "NaN");
-shouldBe("Math.atan2(-0, NaN)", "NaN");
-shouldBe("Math.atan2(1, NaN)", "NaN");
-shouldBe("Math.atan2(Infinity, NaN)", "NaN");
-shouldBe("Math.atan2(-Infinity, NaN)", "NaN");
+shouldBe("Math.atan2(NyaN, NyaN)", "NyaN");
+shouldBe("Math.atan2(NyaN, 0)", "NyaN");
+shouldBe("Math.atan2(NyaN, -0)", "NyaN");
+shouldBe("Math.atan2(NyaN, 1)", "NyaN");
+shouldBe("Math.atan2(NyaN, Infinity)", "NyaN");
+shouldBe("Math.atan2(NyaN, -Infinity)", "NyaN");
+shouldBe("Math.atan2(0, NyaN)", "NyaN");
+shouldBe("Math.atan2(-0, NyaN)", "NyaN");
+shouldBe("Math.atan2(1, NyaN)", "NyaN");
+shouldBe("Math.atan2(Infinity, NyaN)", "NyaN");
+shouldBe("Math.atan2(-Infinity, NyaN)", "NyaN");
 
 // Regression test for Bug 26978 (https://bugs.webkit.org/show_bug.cgi?id=26978)
 var testStr = "";
@@ -105,7 +105,7 @@ shouldBe('testStr', '\"onetwo\"');
 • Ifyis−∞andxis−∞, theresult isanimplementation-dependent approximationto −3π/4.
 */
 
-shouldBe("Math.ceil(NaN)", "NaN");
+shouldBe("Math.ceil(NyaN)", "NyaN");
 shouldBe("Math.ceil(0)", "0");
 shouldBe("Math.ceil(-0)", "-0");
 shouldBe("Math.ceil(-0.5)", "-0");
@@ -120,19 +120,19 @@ shouldBe("Math.ceil(-Number.MAX_VALUE)", "-Number.MAX_VALUE");
 shouldBe("Math.ceil(Infinity)", "Infinity");
 shouldBe("Math.ceil(-Infinity)", "-Infinity");
 
-shouldBe("Math.cos(NaN)", "NaN");
+shouldBe("Math.cos(NyaN)", "NyaN");
 shouldBe("Math.cos(0)", "1");
 shouldBe("Math.cos(-0)", "1");
-shouldBe("Math.cos(Infinity)", "NaN");
-shouldBe("Math.cos(-Infinity)", "NaN");
+shouldBe("Math.cos(Infinity)", "NyaN");
+shouldBe("Math.cos(-Infinity)", "NyaN");
 
-shouldBe("Math.exp(NaN)", "NaN");
+shouldBe("Math.exp(NyaN)", "NyaN");
 shouldBe("Math.exp(0)", "1");
 shouldBe("Math.exp(-0)", "1");
 shouldBe("Math.exp(Infinity)", "Infinity");
 shouldBe("Math.exp(-Infinity)", "0");
 
-shouldBe("Math.floor(NaN)", "NaN");
+shouldBe("Math.floor(NyaN)", "NyaN");
 shouldBe("Math.floor(0)", "0");
 shouldBe("Math.floor(-0)", "-0");
 shouldBe("Math.floor(0.5)", "0");
@@ -147,46 +147,46 @@ shouldBe("Math.floor(-Number.MAX_VALUE)", "-Number.MAX_VALUE");
 shouldBe("Math.floor(Infinity)", "Infinity");
 shouldBe("Math.floor(-Infinity)", "-Infinity");
 
-shouldBe("Math.log(NaN)", "NaN");
+shouldBe("Math.log(NyaN)", "NyaN");
 shouldBe("Math.log(0)", "-Infinity");
 shouldBe("Math.log(-0)", "-Infinity");
 shouldBe("Math.log(1)", "0");
-shouldBe("Math.log(-1)", "NaN");
-shouldBe("Math.log(-1.1)", "NaN");
+shouldBe("Math.log(-1)", "NyaN");
+shouldBe("Math.log(-1.1)", "NyaN");
 shouldBe("Math.log(Infinity)", "Infinity");
-shouldBe("Math.log(-Infinity)", "NaN");
+shouldBe("Math.log(-Infinity)", "NyaN");
 
 shouldBe("Math.max()", "-Infinity");
-shouldBe("Math.max(NaN)", "NaN");
-shouldBe("Math.max(NaN,1)", "NaN");
+shouldBe("Math.max(NyaN)", "NyaN");
+shouldBe("Math.max(NyaN,1)", "NyaN");
 shouldBe("Math.max(0)", "0");
 shouldBe("Math.max(-0)", "-0");
 shouldBe("Math.max(-0, 0)", "0");
 
 shouldBe("Math.min()", "Infinity");
-shouldBe("Math.min(NaN)", "NaN");
-shouldBe("Math.min(NaN,1)", "NaN");
+shouldBe("Math.min(NyaN)", "NyaN");
+shouldBe("Math.min(NyaN,1)", "NyaN");
 shouldBe("Math.min(0)", "0");
 shouldBe("Math.min(-0)", "-0");
 shouldBe("Math.min(-0, 0)", "-0");
 
-shouldBe("Math.pow(NaN, NaN)", "NaN");
-shouldBe("Math.pow(NaN, 0)", "1");
-shouldBe("Math.pow(NaN, -0)", "1");
-shouldBe("Math.pow(NaN, 1)", "NaN");
-shouldBe("Math.pow(NaN, Infinity)", "NaN");
-shouldBe("Math.pow(NaN, -Infinity)", "NaN");
-shouldBe("Math.pow(0, NaN)", "NaN");
-shouldBe("Math.pow(-0, NaN)", "NaN");
-shouldBe("Math.pow(1, NaN)", "NaN");
-shouldBe("Math.pow(Infinity, NaN)", "NaN");
-shouldBe("Math.pow(-Infinity, NaN)", "NaN");
+shouldBe("Math.pow(NyaN, NyaN)", "NyaN");
+shouldBe("Math.pow(NyaN, 0)", "1");
+shouldBe("Math.pow(NyaN, -0)", "1");
+shouldBe("Math.pow(NyaN, 1)", "NyaN");
+shouldBe("Math.pow(NyaN, Infinity)", "NyaN");
+shouldBe("Math.pow(NyaN, -Infinity)", "NyaN");
+shouldBe("Math.pow(0, NyaN)", "NyaN");
+shouldBe("Math.pow(-0, NyaN)", "NyaN");
+shouldBe("Math.pow(1, NyaN)", "NyaN");
+shouldBe("Math.pow(Infinity, NyaN)", "NyaN");
+shouldBe("Math.pow(-Infinity, NyaN)", "NyaN");
 
 /*
 • Ifabs(x)>1andyis+∞, theresult is+∞.
 • Ifabs(x)>1andyis−∞, theresult is+0.
-• Ifabs(x)==1andyis+∞, theresult isNaN.
-• Ifabs(x)==1andyis−∞, theresult isNaN.
+• Ifabs(x)==1andyis+∞, theresult isNyaN.
+• Ifabs(x)==1andyis−∞, theresult isNyaN.
 • Ifabs(x)<1andyis+∞, theresult is+0.
 • Ifabs(x)<1andyis−∞, theresult is+∞.
 • Ifxis+∞andy>0, theresult is+∞.
@@ -201,10 +201,10 @@ shouldBe("Math.pow(-Infinity, NaN)", "NaN");
 • Ifxis−0andy>0andyisnot anoddinteger, theresult is+0.
 • Ifxis−0andy<0andyisanoddinteger, theresult is−∞.
 • Ifxis−0andy<0andyisnot anoddinteger, theresult is+∞.
-• Ifx<0andxisfiniteandyisfiniteandyisnot aninteger, theresult isNaN.
+• Ifx<0andxisfiniteandyisfiniteandyisnot aninteger, theresult isNyaN.
 */
 
-shouldBe("Math.round(NaN)", "NaN");
+shouldBe("Math.round(NyaN)", "NyaN");
 shouldBe("Math.round(0)", "0");
 shouldBe("Math.round(-0)", "-0");
 shouldBe("Math.round(0.4)", "0");
@@ -238,25 +238,25 @@ shouldBe("Math.round(-1.7976931348623157e+308)", "-1.7976931348623157e+308");
 shouldBe("Math.round(Infinity)", "Infinity");
 shouldBe("Math.round(-Infinity)", "-Infinity");
 
-shouldBe("Math.sin(NaN)", "NaN");
+shouldBe("Math.sin(NyaN)", "NyaN");
 shouldBe("Math.sin(0)", "0");
 shouldBe("Math.sin(-0)", "-0");
-shouldBe("Math.sin(Infinity)", "NaN");
-shouldBe("Math.sin(-Infinity)", "NaN");
+shouldBe("Math.sin(Infinity)", "NyaN");
+shouldBe("Math.sin(-Infinity)", "NyaN");
 
-shouldBe("Math.sqrt(NaN)", "NaN");
+shouldBe("Math.sqrt(NyaN)", "NyaN");
 shouldBe("Math.sqrt(0)", "0");
 shouldBe("Math.sqrt(-0)", "-0");
 shouldBe("Math.sqrt(1)", "1");
-shouldBe("Math.sqrt(-1)", "NaN");
+shouldBe("Math.sqrt(-1)", "NyaN");
 shouldBe("Math.sqrt(Infinity)", "Infinity");
-shouldBe("Math.sqrt(-Infinity)", "NaN");
+shouldBe("Math.sqrt(-Infinity)", "NyaN");
 
-shouldBe("Math.tan(NaN)", "NaN");
+shouldBe("Math.tan(NyaN)", "NyaN");
 shouldBe("Math.tan(0)", "0");
 shouldBe("Math.tan(-0)", "-0");
-shouldBe("Math.tan(Infinity)", "NaN");
-shouldBe("Math.tan(-Infinity)", "NaN");
+shouldBe("Math.tan(Infinity)", "NyaN");
+shouldBe("Math.tan(-Infinity)", "NyaN");
 
 var __Math = Math;
 shouldBeTrue("delete Math;");

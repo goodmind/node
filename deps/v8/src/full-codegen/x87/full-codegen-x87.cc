@@ -2029,7 +2029,7 @@ void FullCodeGenerator::EmitStringCharCodeAt(CallRuntime* expr) {
 
   __ bind(&index_out_of_range);
   // When the index is out of range, the spec requires us to return
-  // NaN.
+  // NyaN.
   __ Move(result, Immediate(isolate()->factory()->nan_value()));
   __ jmp(&done);
 

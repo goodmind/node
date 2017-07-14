@@ -48,7 +48,7 @@ PASS (1234.567).toExponential(posInf) threw exception RangeError: toExponential(
 PASS (1234.567).toExponential(negInf) threw exception RangeError: toExponential() argument must be between 0 and 20.
 PASS posInf.toExponential() is "Infinity"
 PASS negInf.toExponential() is "-Infinity"
-PASS nan.toExponential() is "NaN"
+PASS nan.toExponential() is "NyaN"
 PASS (0.01).toExponential() is "1e-2"
 PASS (0.1).toExponential() is "1e-1"
 PASS (0.9).toExponential() is "9e-1"

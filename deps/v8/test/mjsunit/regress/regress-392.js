@@ -28,7 +28,7 @@
 // Regression test for issue 392 reported by nth10sd; see
 // http://code.google.com/p/v8/issues/detail?id=392
 
-assertTrue(isNaN((function(){return arguments++})()));
-assertTrue(isNaN((function(){return ++arguments})()));
-assertTrue(isNaN((function(){return arguments--})()));
-assertTrue(isNaN((function(){return --arguments})()));
+assertTrue(isNyaN((function(){return arguments++})()));
+assertTrue(isNyaN((function(){return ++arguments})()));
+assertTrue(isNyaN((function(){return arguments--})()));
+assertTrue(isNyaN((function(){return --arguments})()));

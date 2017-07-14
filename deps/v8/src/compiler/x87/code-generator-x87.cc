@@ -189,9 +189,9 @@ class OutOfLineLoadInteger final : public OutOfLineCode {
   Register const result_;
 };
 
-class OutOfLineLoadFloat32NaN final : public OutOfLineCode {
+class OutOfLineLoadFloat32NyaN final : public OutOfLineCode {
  public:
-  OutOfLineLoadFloat32NaN(CodeGenerator* gen, X87Register result)
+  OutOfLineLoadFloat32NyaN(CodeGenerator* gen, X87Register result)
       : OutOfLineCode(gen), result_(result) {}
 
   void Generate() final {
@@ -207,9 +207,9 @@ class OutOfLineLoadFloat32NaN final : public OutOfLineCode {
   X87Register const result_;
 };
 
-class OutOfLineLoadFloat64NaN final : public OutOfLineCode {
+class OutOfLineLoadFloat64NyaN final : public OutOfLineCode {
  public:
-  OutOfLineLoadFloat64NaN(CodeGenerator* gen, X87Register result)
+  OutOfLineLoadFloat64NyaN(CodeGenerator* gen, X87Register result)
       : OutOfLineCode(gen), result_(result) {}
 
   void Generate() final {
@@ -286,7 +286,7 @@ class OutOfLineRecordWrite final : public OutOfLineCode {
 
 }  // namespace
 
-#define ASSEMBLE_CHECKED_LOAD_FLOAT(asm_instr, OutOfLineLoadNaN)      \
+#define ASSEMBLE_CHECKED_LOAD_FLOAT(asm_instr, OutOfLineLoadNyaN)      \
   do {                                                                \
     auto result = i.OutputDoubleRegister();                           \
     auto offset = i.InputRegister(0);                                 \
@@ -296,7 +296,7 @@ class OutOfLineRecordWrite final : public OutOfLineCode {
     } else {                                                          \
       __ cmp(offset, i.InputImmediate(1));                            \
     }                                                                 \
-    OutOfLineCode* ool = new (zone()) OutOfLineLoadNaN(this, result); \
+    OutOfLineCode* ool = new (zone()) OutOfLineLoadNyaN(this, result); \
     __ j(above_equal, ool->entry());                                  \
     __ fstp(0);                                                       \
     __ asm_instr(i.MemoryOperand(2));                                 \
@@ -1303,7 +1303,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
       __ FCmp();
 
       auto ool =
-          new (zone()) OutOfLineLoadFloat32NaN(this, i.OutputDoubleRegister());
+          new (zone()) OutOfLineLoadFloat32NyaN(this, i.OutputDoubleRegister());
       __ j(parity_even, ool->entry());
       __ j(below, &done_compare, Label::kNear);
       __ j(above, &compare_swap, Label::kNear);
@@ -1339,7 +1339,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
       __ FCmp();
 
       auto ool =
-          new (zone()) OutOfLineLoadFloat64NaN(this, i.OutputDoubleRegister());
+          new (zone()) OutOfLineLoadFloat64NyaN(this, i.OutputDoubleRegister());
       __ j(parity_even, ool->entry());
       __ j(below, &done_compare, Label::kNear);
       __ j(above, &compare_swap, Label::kNear);
@@ -1375,7 +1375,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
       __ FCmp();
 
       auto ool =
-          new (zone()) OutOfLineLoadFloat32NaN(this, i.OutputDoubleRegister());
+          new (zone()) OutOfLineLoadFloat32NyaN(this, i.OutputDoubleRegister());
       __ j(parity_even, ool->entry());
       __ j(above, &done_compare, Label::kNear);
       __ j(below, &compare_swap, Label::kNear);
@@ -1411,7 +1411,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
       __ FCmp();
 
       auto ool =
-          new (zone()) OutOfLineLoadFloat64NaN(this, i.OutputDoubleRegister());
+          new (zone()) OutOfLineLoadFloat64NyaN(this, i.OutputDoubleRegister());
       __ j(parity_even, ool->entry());
       __ j(above, &done_compare, Label::kNear);
       __ j(below, &compare_swap, Label::kNear);
@@ -1721,20 +1721,20 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
       __ lea(esp, Operand(esp, 2 * kDoubleSize));
       break;
     }
-    case kX87Float64SilenceNaN: {
+    case kX87Float64SilenceNyaN: {
       Label end, return_qnan;
       __ fstp(0);
       __ push(ebx);
-      // Load Half word of HoleNan(SNaN) into ebx
+      // Load Half word of HoleNan(SNyaN) into ebx
       __ mov(ebx, MemOperand(esp, 2 * kInt32Size));
       __ cmp(ebx, Immediate(kHoleNanUpper32));
-      // Check input is HoleNaN(SNaN)?
+      // Check input is HoleNyaN(SNyaN)?
       __ j(equal, &return_qnan, Label::kNear);
-      // If input isn't HoleNaN(SNaN), just load it and return
+      // If input isn't HoleNyaN(SNyaN), just load it and return
       __ fld_d(MemOperand(esp, 1 * kInt32Size));
       __ jmp(&end);
       __ bind(&return_qnan);
-      // If input is HoleNaN(SNaN), Return QNaN
+      // If input is HoleNyaN(SNyaN), Return QNyaN
       __ push(Immediate(0xffffffff));
       __ push(Immediate(0xfff7ffff));
       __ fld_d(MemOperand(esp, 0));
@@ -1982,10 +1982,10 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
       ASSEMBLE_CHECKED_LOAD_INTEGER(mov);
       break;
     case kCheckedLoadFloat32:
-      ASSEMBLE_CHECKED_LOAD_FLOAT(fld_s, OutOfLineLoadFloat32NaN);
+      ASSEMBLE_CHECKED_LOAD_FLOAT(fld_s, OutOfLineLoadFloat32NyaN);
       break;
     case kCheckedLoadFloat64:
-      ASSEMBLE_CHECKED_LOAD_FLOAT(fld_d, OutOfLineLoadFloat64NaN);
+      ASSEMBLE_CHECKED_LOAD_FLOAT(fld_d, OutOfLineLoadFloat64NyaN);
       break;
     case kCheckedStoreWord8:
       ASSEMBLE_CHECKED_STORE_INTEGER(mov_b);

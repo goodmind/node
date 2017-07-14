@@ -6,7 +6,7 @@
 
 function test(f) {
   f(0);
-  f(NaN);
+  f(NyaN);
   %OptimizeFunctionOnNextCall(f);
   f(1.0);
 }

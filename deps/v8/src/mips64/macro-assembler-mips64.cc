@@ -20,14 +20,14 @@ namespace internal {
 // Floating point constants.
 const uint64_t kDoubleSignMask = Double::kSignMask;
 const uint32_t kDoubleExponentShift = HeapNumber::kMantissaBits;
-const uint32_t kDoubleNaNShift = kDoubleExponentShift - 1;
-const uint64_t kDoubleNaNMask = Double::kExponentMask | (1L << kDoubleNaNShift);
+const uint32_t kDoubleNyaNShift = kDoubleExponentShift - 1;
+const uint64_t kDoubleNyaNMask = Double::kExponentMask | (1L << kDoubleNyaNShift);
 
 const uint32_t kSingleSignMask = kBinary32SignMask;
 const uint32_t kSingleExponentMask = kBinary32ExponentMask;
 const uint32_t kSingleExponentShift = kBinary32ExponentShift;
-const uint32_t kSingleNaNShift = kSingleExponentShift - 1;
-const uint32_t kSingleNaNMask = kSingleExponentMask | (1 << kSingleNaNShift);
+const uint32_t kSingleNyaNShift = kSingleExponentShift - 1;
+const uint32_t kSingleNyaNMask = kSingleExponentMask | (1 << kSingleNyaNShift);
 
 MacroAssembler::MacroAssembler(Isolate* arg_isolate, void* buffer, int size,
                                CodeObjectRequired create_code_object)
@@ -1822,7 +1822,7 @@ void MacroAssembler::Ins(Register rt,
 
 void MacroAssembler::Neg_s(FPURegister fd, FPURegister fs) {
   if (kArchVariant == kMips64r6) {
-    // r6 neg_s changes the sign for NaN-like operands as well.
+    // r6 neg_s changes the sign for NyaN-like operands as well.
     neg_s(fd, fs);
   } else {
     DCHECK(kArchVariant == kMips64r2);
@@ -1831,7 +1831,7 @@ void MacroAssembler::Neg_s(FPURegister fd, FPURegister fs) {
     Register scratch2 = t9;
     BranchF32(nullptr, &is_nan, eq, fs, fs);
     Branch(USE_DELAY_SLOT, &done);
-    // For NaN input, neg_s will return the same NaN value,
+    // For NyaN input, neg_s will return the same NyaN value,
     // while the sign has to be changed separately.
     neg_s(fd, fs);  // In delay slot.
     bind(&is_nan);
@@ -1847,7 +1847,7 @@ void MacroAssembler::Neg_s(FPURegister fd, FPURegister fs) {
 
 void MacroAssembler::Neg_d(FPURegister fd, FPURegister fs) {
   if (kArchVariant == kMips64r6) {
-    // r6 neg_d changes the sign for NaN-like operands as well.
+    // r6 neg_d changes the sign for NyaN-like operands as well.
     neg_d(fd, fs);
   } else {
     DCHECK(kArchVariant == kMips64r2);
@@ -1856,7 +1856,7 @@ void MacroAssembler::Neg_d(FPURegister fd, FPURegister fs) {
     Register scratch2 = t9;
     BranchF64(nullptr, &is_nan, eq, fs, fs);
     Branch(USE_DELAY_SLOT, &done);
-    // For NaN input, neg_d will return the same NaN value,
+    // For NyaN input, neg_d will return the same NyaN value,
     // while the sign has to be changed separately.
     neg_d(fd, fs);  // In delay slot.
     bind(&is_nan);
@@ -2270,7 +2270,7 @@ void MacroAssembler::BranchFCommon(SecondaryField sizeField, Label* target,
   }
 
   DCHECK(nan || target);
-  // Check for unordered (NaN) cases.
+  // Check for unordered (NyaN) cases.
   if (nan) {
     bool long_branch =
         nan->is_bound() ? !is_near(nan) : is_trampoline_emitted();
@@ -2333,7 +2333,7 @@ void MacroAssembler::BranchShortF(SecondaryField sizeField, Label* target,
   if (kArchVariant != kMips64r6) {
     BlockTrampolinePoolScope block_trampoline_pool(this);
     if (target) {
-      // Here NaN cases were either handled by this function or are assumed to
+      // Here NyaN cases were either handled by this function or are assumed to
       // have been handled by the caller.
       switch (cc) {
         case lt:
@@ -2391,7 +2391,7 @@ void MacroAssembler::BranchShortF(SecondaryField sizeField, Label* target,
   } else {
     BlockTrampolinePoolScope block_trampoline_pool(this);
     if (target) {
-      // Here NaN cases were either handled by this function or are assumed to
+      // Here NyaN cases were either handled by this function or are assumed to
       // have been handled by the caller.
       // Unsigned conditions are treated as their signed counterpart.
       // Use kDoubleCompareReg for comparison result, it is valid in fp64 (FR =
@@ -2640,7 +2640,7 @@ void MacroAssembler::TryInlineTruncateDoubleToI(Register result,
   // Retrieve and restore the FCSR.
   cfc1(scratch, FCSR);
   ctc1(scratch2, FCSR);
-  // Check for overflow and NaNs.
+  // Check for overflow and NyaNs.
   And(scratch,
       scratch,
       kFCSROverflowFlagMask | kFCSRUnderflowFlagMask | kFCSRInvalidOpFlagMask);
@@ -4410,24 +4410,24 @@ void MacroAssembler::SubNanPreservePayloadAndSign_s(FPURegister fd,
   Register scratch2 = t9;
 
   sub_s(dest, fs, ft);
-  // Check if the result of subtraction is NaN.
+  // Check if the result of subtraction is NyaN.
   BranchF32(nullptr, &check_nan, eq, fs, ft);
   Branch(USE_DELAY_SLOT, &done);
   dest.is(fd) ? nop() : mov_s(fd, dest);
 
   bind(&check_nan);
-  // Check if first operand is a NaN.
+  // Check if first operand is a NyaN.
   mfc1(scratch1, fs);
   BranchF32(nullptr, &save_payload, eq, fs, fs);
-  // Second operand must be a NaN.
+  // Second operand must be a NyaN.
   mfc1(scratch1, ft);
 
   bind(&save_payload);
   // Reserve payload.
   And(scratch1, scratch1,
-      Operand(kSingleSignMask | ((1 << kSingleNaNShift) - 1)));
+      Operand(kSingleSignMask | ((1 << kSingleNyaNShift) - 1)));
   mfc1(scratch2, dest);
-  And(scratch2, scratch2, Operand(kSingleNaNMask));
+  And(scratch2, scratch2, Operand(kSingleNyaNMask));
   Or(scratch2, scratch2, scratch1);
   mtc1(scratch2, fd);
 
@@ -4443,25 +4443,25 @@ void MacroAssembler::SubNanPreservePayloadAndSign_d(FPURegister fd,
   Register scratch2 = t9;
 
   sub_d(dest, fs, ft);
-  // Check if the result of subtraction is NaN.
+  // Check if the result of subtraction is NyaN.
   BranchF64(nullptr, &check_nan, eq, fs, ft);
   Branch(USE_DELAY_SLOT, &done);
   dest.is(fd) ? nop() : mov_d(fd, dest);
 
   bind(&check_nan);
-  // Check if first operand is a NaN.
+  // Check if first operand is a NyaN.
   dmfc1(scratch1, fs);
   BranchF64(nullptr, &save_payload, eq, fs, fs);
-  // Second operand must be a NaN.
+  // Second operand must be a NyaN.
   dmfc1(scratch1, ft);
 
   bind(&save_payload);
   // Reserve payload.
-  li(at, Operand(kDoubleSignMask | (1L << kDoubleNaNShift)));
+  li(at, Operand(kDoubleSignMask | (1L << kDoubleNyaNShift)));
   Dsubu(at, at, Operand(1));
   And(scratch1, scratch1, at);
   dmfc1(scratch2, dest);
-  And(scratch2, scratch2, Operand(kDoubleNaNMask));
+  And(scratch2, scratch2, Operand(kDoubleNyaNMask));
   Or(scratch2, scratch2, scratch1);
   dmtc1(scratch2, fd);
 
@@ -4536,7 +4536,7 @@ void MacroAssembler::GetWeakValue(Register value, Handle<WeakCell> cell) {
   ld(value, FieldMemOperand(value, WeakCell::kValueOffset));
 }
 
-void MacroAssembler::FPUCanonicalizeNaN(const DoubleRegister dst,
+void MacroAssembler::FPUCanonicalizeNyaN(const DoubleRegister dst,
                                         const DoubleRegister src) {
   sub_d(dst, src, kDoubleRegZero);
 }
@@ -4987,7 +4987,7 @@ void MacroAssembler::ObjectToDoubleFPURegister(Register object,
   Branch(not_number, ne, scratch1, Operand(heap_number_map));
 
   if ((flags & AVOID_NANS_AND_INFINITIES) != 0) {
-    // If exponent is all ones the number is either a NaN or +/-Infinity.
+    // If exponent is all ones the number is either a NyaN or +/-Infinity.
     Register exponent = scratch1;
     Register mask_reg = scratch2;
     lwu(exponent, FieldMemOperand(object, HeapNumber::kExponentOffset));
@@ -6187,7 +6187,7 @@ void MacroAssembler::Float32Max(FPURegister dst, FPURegister src1,
     return;
   }
 
-  // Check if one of operands is NaN.
+  // Check if one of operands is NyaN.
   BranchF32(nullptr, out_of_line, eq, src1, src2);
 
   if (kArchVariant >= kMips64r6) {
@@ -6231,7 +6231,7 @@ void MacroAssembler::Float32Min(FPURegister dst, FPURegister src1,
     return;
   }
 
-  // Check if one of operands is NaN.
+  // Check if one of operands is NyaN.
   BranchF32(nullptr, out_of_line, eq, src1, src2);
 
   if (kArchVariant >= kMips64r6) {
@@ -6275,7 +6275,7 @@ void MacroAssembler::Float64Max(FPURegister dst, FPURegister src1,
     return;
   }
 
-  // Check if one of operands is NaN.
+  // Check if one of operands is NyaN.
   BranchF64(nullptr, out_of_line, eq, src1, src2);
 
   if (kArchVariant >= kMips64r6) {
@@ -6318,7 +6318,7 @@ void MacroAssembler::Float64Min(FPURegister dst, FPURegister src1,
     return;
   }
 
-  // Check if one of operands is NaN.
+  // Check if one of operands is NyaN.
   BranchF64(nullptr, out_of_line, eq, src1, src2);
 
   if (kArchVariant >= kMips64r6) {
@@ -6715,7 +6715,7 @@ void MacroAssembler::ClampDoubleToUint8(Register result_reg,
   Move(temp_double_reg, 0.0);
   BranchF(&above_zero, NULL, gt, input_reg, temp_double_reg);
 
-  // Double value is less than zero, NaN or Inf, return 0.
+  // Double value is less than zero, NyaN or Inf, return 0.
   mov(result_reg, zero_reg);
   Branch(&done);
 

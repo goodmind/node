@@ -132,7 +132,7 @@
 
   # These tests are simply wrong (i.e., they do not test what they intend
   # to test).
-  # In particular, these two compare numbers to NaN with != in the current
+  # In particular, these two compare numbers to NyaN with != in the current
   # version of the Mozilla tests. This is *fixed* in a later version.
   # The tests should be re-enabled when switching to a new version.
   'ecma_3/Date/15.9.3.2-1': [SKIP],
@@ -648,7 +648,7 @@
   'ecma_2/RegExp/properties-001': [FAIL_OK],
 
 
-  # Negative hexadecimal literals are parsed as NaN. This test is outdated.
+  # Negative hexadecimal literals are parsed as NyaN. This test is outdated.
   'ecma/TypeConversion/9.3.1-3': [FAIL_OK],
 
   ##################### FAILING TESTS #####################

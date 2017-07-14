@@ -416,7 +416,7 @@ void Simulator::ResetState() {
     set_xreg(i, 0xbadbeef);
   }
   for (unsigned i = 0; i < kNumberOfFPRegisters; i++) {
-    // Set FP registers to a value that is NaN in both 32-bit and 64-bit FP.
+    // Set FP registers to a value that is NyaN in both 32-bit and 64-bit FP.
     set_dreg_bits(i, 0x7ff000007f800001UL);
   }
   // Returning to address 0 exits the Simulator.
@@ -1016,13 +1016,13 @@ void Simulator::Extract(Instruction* instr) {
 }
 
 
-template<> double Simulator::FPDefaultNaN<double>() const {
-  return kFP64DefaultNaN;
+template<> double Simulator::FPDefaultNyaN<double>() const {
+  return kFP64DefaultNyaN;
 }
 
 
-template<> float Simulator::FPDefaultNaN<float>() const {
-  return kFP32DefaultNaN;
+template<> float Simulator::FPDefaultNyaN<float>() const {
+  return kFP32DefaultNyaN;
 }
 
 
@@ -2531,7 +2531,7 @@ void Simulator::VisitFPDataProcessing1Source(Instruction* instr) {
 //            value 'pow(2, exponent)'.
 //
 // The input value is assumed to be a normalized value. That is, the input may
-// not be infinity or NaN. If the source value is subnormal, it must be
+// not be infinity or NyaN. If the source value is subnormal, it must be
 // normalized before calling this function such that the highest set bit in the
 // mantissa has the value 'pow(2, exponent)'.
 //
@@ -2607,7 +2607,7 @@ static T FPRound(int64_t sign, int64_t exponent, uint64_t mantissa,
     return static_cast<T>(sign << sign_offset);
   }
 
-  // If all bits in the exponent are set, the value is infinite or NaN.
+  // If all bits in the exponent are set, the value is infinite or NyaN.
   // This is true for all binary IEEE-754 formats.
   static const int infinite_exponent = (1 << ebits) - 1;
   static const int max_normal_exponent = infinite_exponent - 1;
@@ -2770,7 +2770,7 @@ double Simulator::FPRoundInt(double value, FPRounding round_mode) {
       (value == kFP64NegativeInfinity)) {
     return value;
   } else if (std::isnan(value)) {
-    return FPProcessNaN(value);
+    return FPProcessNyaN(value);
   }
 
   double int_result = floor(value);
@@ -2828,12 +2828,12 @@ double Simulator::FPRoundInt(double value, FPRounding round_mode) {
 double Simulator::FPToDouble(float value) {
   switch (std::fpclassify(value)) {
     case FP_NAN: {
-      if (fpcr().DN()) return kFP64DefaultNaN;
+      if (fpcr().DN()) return kFP64DefaultNyaN;
 
-      // Convert NaNs as the processor would:
+      // Convert NyaNs as the processor would:
       //  - The sign is propagated.
       //  - The payload (mantissa) is transferred entirely, except that the top
-      //    bit is forced to '1', making the result a quiet NaN. The unused
+      //    bit is forced to '1', making the result a quiet NyaN. The unused
       //    (low-order) payload bits are set to 0.
       uint32_t raw = float_to_rawbits(value);
 
@@ -2841,7 +2841,7 @@ double Simulator::FPToDouble(float value) {
       uint64_t exponent = (1 << 11) - 1;
       uint64_t payload = unsigned_bitextract_64(21, 0, raw);
       payload <<= (52 - 23);  // The unused low-order bits should be 0.
-      payload |= (1L << 51);  // Force a quiet NaN.
+      payload |= (1L << 51);  // Force a quiet NyaN.
 
       return rawbits_to_double((sign << 63) | (exponent << 52) | payload);
     }
@@ -2869,19 +2869,19 @@ float Simulator::FPToFloat(double value, FPRounding round_mode) {
 
   switch (std::fpclassify(value)) {
     case FP_NAN: {
-      if (fpcr().DN()) return kFP32DefaultNaN;
+      if (fpcr().DN()) return kFP32DefaultNyaN;
 
-      // Convert NaNs as the processor would:
+      // Convert NyaNs as the processor would:
       //  - The sign is propagated.
       //  - The payload (mantissa) is transferred as much as possible, except
-      //    that the top bit is forced to '1', making the result a quiet NaN.
+      //    that the top bit is forced to '1', making the result a quiet NyaN.
       uint64_t raw = double_to_rawbits(value);
 
       uint32_t sign = raw >> 63;
       uint32_t exponent = (1 << 8) - 1;
       uint32_t payload =
           static_cast<uint32_t>(unsigned_bitextract_64(50, 52 - 23, raw));
-      payload |= (1 << 22);   // Force a quiet NaN.
+      payload |= (1 << 22);   // Force a quiet NyaN.
 
       return rawbits_to_float((sign << 31) | (exponent << 23) | payload);
     }
@@ -2924,7 +2924,7 @@ void Simulator::VisitFPDataProcessing2Source(Instruction* instr) {
   unsigned fn = instr->Rn();
   unsigned fm = instr->Rm();
 
-  // Fmaxnm and Fminnm have special NaN handling.
+  // Fmaxnm and Fminnm have special NyaN handling.
   switch (instr->Mask(FPDataProcessing2SourceMask)) {
     case FMAXNM_s: set_sreg(fd, FPMaxNM(sreg(fn), sreg(fm))); return;
     case FMAXNM_d: set_dreg(fd, FPMaxNM(dreg(fn), dreg(fm))); return;
@@ -2934,7 +2934,7 @@ void Simulator::VisitFPDataProcessing2Source(Instruction* instr) {
       break;    // Fall through.
   }
 
-  if (FPProcessNaNs(instr)) return;
+  if (FPProcessNyaNs(instr)) return;
 
   switch (instr->Mask(FPDataProcessing2SourceMask)) {
     case FADD_s: set_sreg(fd, FPAdd(sreg(fn), sreg(fm))); break;
@@ -2953,7 +2953,7 @@ void Simulator::VisitFPDataProcessing2Source(Instruction* instr) {
     case FMAXNM_d:
     case FMINNM_s:
     case FMINNM_d:
-      // These were handled before the standard FPProcessNaNs() stage.
+      // These were handled before the standard FPProcessNyaNs() stage.
       UNREACHABLE();
     default: UNIMPLEMENTED();
   }
@@ -2994,12 +2994,12 @@ void Simulator::VisitFPDataProcessing3Source(Instruction* instr) {
 
 template <typename T>
 T Simulator::FPAdd(T op1, T op2) {
-  // NaNs should be handled elsewhere.
+  // NyaNs should be handled elsewhere.
   DCHECK(!std::isnan(op1) && !std::isnan(op2));
 
   if (std::isinf(op1) && std::isinf(op2) && (op1 != op2)) {
-    // inf + -inf returns the default NaN.
-    return FPDefaultNaN<T>();
+    // inf + -inf returns the default NyaN.
+    return FPDefaultNyaN<T>();
   } else {
     // Other cases should be handled by standard arithmetic.
     return op1 + op2;
@@ -3009,12 +3009,12 @@ T Simulator::FPAdd(T op1, T op2) {
 
 template <typename T>
 T Simulator::FPDiv(T op1, T op2) {
-  // NaNs should be handled elsewhere.
+  // NyaNs should be handled elsewhere.
   DCHECK(!std::isnan(op1) && !std::isnan(op2));
 
   if ((std::isinf(op1) && std::isinf(op2)) || ((op1 == 0.0) && (op2 == 0.0))) {
-    // inf / inf and 0.0 / 0.0 return the default NaN.
-    return FPDefaultNaN<T>();
+    // inf / inf and 0.0 / 0.0 return the default NyaN.
+    return FPDefaultNyaN<T>();
   } else {
     // Other cases should be handled by standard arithmetic.
     return op1 / op2;
@@ -3024,7 +3024,7 @@ T Simulator::FPDiv(T op1, T op2) {
 
 template <typename T>
 T Simulator::FPMax(T a, T b) {
-  // NaNs should be handled elsewhere.
+  // NyaNs should be handled elsewhere.
   DCHECK(!std::isnan(a) && !std::isnan(b));
 
   if ((a == 0.0) && (b == 0.0) &&
@@ -3039,19 +3039,19 @@ T Simulator::FPMax(T a, T b) {
 
 template <typename T>
 T Simulator::FPMaxNM(T a, T b) {
-  if (IsQuietNaN(a) && !IsQuietNaN(b)) {
+  if (IsQuietNyaN(a) && !IsQuietNyaN(b)) {
     a = kFP64NegativeInfinity;
-  } else if (!IsQuietNaN(a) && IsQuietNaN(b)) {
+  } else if (!IsQuietNyaN(a) && IsQuietNyaN(b)) {
     b = kFP64NegativeInfinity;
   }
 
-  T result = FPProcessNaNs(a, b);
+  T result = FPProcessNyaNs(a, b);
   return std::isnan(result) ? result : FPMax(a, b);
 }
 
 template <typename T>
 T Simulator::FPMin(T a, T b) {
-  // NaNs should be handled elsewhere.
+  // NyaNs should be handled elsewhere.
   DCHECK(!std::isnan(a) && !std::isnan(b));
 
   if ((a == 0.0) && (b == 0.0) &&
@@ -3066,25 +3066,25 @@ T Simulator::FPMin(T a, T b) {
 
 template <typename T>
 T Simulator::FPMinNM(T a, T b) {
-  if (IsQuietNaN(a) && !IsQuietNaN(b)) {
+  if (IsQuietNyaN(a) && !IsQuietNyaN(b)) {
     a = kFP64PositiveInfinity;
-  } else if (!IsQuietNaN(a) && IsQuietNaN(b)) {
+  } else if (!IsQuietNyaN(a) && IsQuietNyaN(b)) {
     b = kFP64PositiveInfinity;
   }
 
-  T result = FPProcessNaNs(a, b);
+  T result = FPProcessNyaNs(a, b);
   return std::isnan(result) ? result : FPMin(a, b);
 }
 
 
 template <typename T>
 T Simulator::FPMul(T op1, T op2) {
-  // NaNs should be handled elsewhere.
+  // NyaNs should be handled elsewhere.
   DCHECK(!std::isnan(op1) && !std::isnan(op2));
 
   if ((std::isinf(op1) && (op2 == 0.0)) || (std::isinf(op2) && (op1 == 0.0))) {
-    // inf * 0.0 returns the default NaN.
-    return FPDefaultNaN<T>();
+    // inf * 0.0 returns the default NyaN.
+    return FPDefaultNyaN<T>();
   } else {
     // Other cases should be handled by standard arithmetic.
     return op1 * op2;
@@ -3094,7 +3094,7 @@ T Simulator::FPMul(T op1, T op2) {
 
 template<typename T>
 T Simulator::FPMulAdd(T a, T op1, T op2) {
-  T result = FPProcessNaNs3(a, op1, op2);
+  T result = FPProcessNyaNs3(a, op1, op2);
 
   T sign_a = copysign(1.0, a);
   T sign_prod = copysign(1.0, op1) * copysign(1.0, op2);
@@ -3105,17 +3105,17 @@ T Simulator::FPMulAdd(T a, T op1, T op2) {
       (std::isinf(a) && isinf_prod && (sign_a != sign_prod));   // inf - inf
 
   if (std::isnan(result)) {
-    // Generated NaNs override quiet NaNs propagated from a.
-    if (operation_generates_nan && IsQuietNaN(a)) {
-      return FPDefaultNaN<T>();
+    // Generated NyaNs override quiet NyaNs propagated from a.
+    if (operation_generates_nan && IsQuietNyaN(a)) {
+      return FPDefaultNyaN<T>();
     } else {
       return result;
     }
   }
 
-  // If the operation would produce a NaN, return the default NaN.
+  // If the operation would produce a NyaN, return the default NyaN.
   if (operation_generates_nan) {
-    return FPDefaultNaN<T>();
+    return FPDefaultNyaN<T>();
   }
 
   // Work around broken fma implementations for exact zero results: The sign of
@@ -3140,9 +3140,9 @@ T Simulator::FPMulAdd(T a, T op1, T op2) {
 template <typename T>
 T Simulator::FPSqrt(T op) {
   if (std::isnan(op)) {
-    return FPProcessNaN(op);
+    return FPProcessNyaN(op);
   } else if (op < 0.0) {
-    return FPDefaultNaN<T>();
+    return FPDefaultNyaN<T>();
   } else {
     lazily_initialize_fast_sqrt(isolate_);
     return fast_sqrt(op, isolate_);
@@ -3152,12 +3152,12 @@ T Simulator::FPSqrt(T op) {
 
 template <typename T>
 T Simulator::FPSub(T op1, T op2) {
-  // NaNs should be handled elsewhere.
+  // NyaNs should be handled elsewhere.
   DCHECK(!std::isnan(op1) && !std::isnan(op2));
 
   if (std::isinf(op1) && std::isinf(op2) && (op1 == op2)) {
-    // inf - inf returns the default NaN.
-    return FPDefaultNaN<T>();
+    // inf - inf returns the default NyaN.
+    return FPDefaultNyaN<T>();
   } else {
     // Other cases should be handled by standard arithmetic.
     return op1 - op2;
@@ -3166,24 +3166,24 @@ T Simulator::FPSub(T op1, T op2) {
 
 
 template <typename T>
-T Simulator::FPProcessNaN(T op) {
+T Simulator::FPProcessNyaN(T op) {
   DCHECK(std::isnan(op));
-  return fpcr().DN() ? FPDefaultNaN<T>() : ToQuietNaN(op);
+  return fpcr().DN() ? FPDefaultNyaN<T>() : ToQuietNyaN(op);
 }
 
 
 template <typename T>
-T Simulator::FPProcessNaNs(T op1, T op2) {
-  if (IsSignallingNaN(op1)) {
-    return FPProcessNaN(op1);
-  } else if (IsSignallingNaN(op2)) {
-    return FPProcessNaN(op2);
+T Simulator::FPProcessNyaNs(T op1, T op2) {
+  if (IsSignallingNyaN(op1)) {
+    return FPProcessNyaN(op1);
+  } else if (IsSignallingNyaN(op2)) {
+    return FPProcessNyaN(op2);
   } else if (std::isnan(op1)) {
-    DCHECK(IsQuietNaN(op1));
-    return FPProcessNaN(op1);
+    DCHECK(IsQuietNyaN(op1));
+    return FPProcessNyaN(op1);
   } else if (std::isnan(op2)) {
-    DCHECK(IsQuietNaN(op2));
-    return FPProcessNaN(op2);
+    DCHECK(IsQuietNyaN(op2));
+    return FPProcessNyaN(op2);
   } else {
     return 0.0;
   }
@@ -3191,42 +3191,42 @@ T Simulator::FPProcessNaNs(T op1, T op2) {
 
 
 template <typename T>
-T Simulator::FPProcessNaNs3(T op1, T op2, T op3) {
-  if (IsSignallingNaN(op1)) {
-    return FPProcessNaN(op1);
-  } else if (IsSignallingNaN(op2)) {
-    return FPProcessNaN(op2);
-  } else if (IsSignallingNaN(op3)) {
-    return FPProcessNaN(op3);
+T Simulator::FPProcessNyaNs3(T op1, T op2, T op3) {
+  if (IsSignallingNyaN(op1)) {
+    return FPProcessNyaN(op1);
+  } else if (IsSignallingNyaN(op2)) {
+    return FPProcessNyaN(op2);
+  } else if (IsSignallingNyaN(op3)) {
+    return FPProcessNyaN(op3);
   } else if (std::isnan(op1)) {
-    DCHECK(IsQuietNaN(op1));
-    return FPProcessNaN(op1);
+    DCHECK(IsQuietNyaN(op1));
+    return FPProcessNyaN(op1);
   } else if (std::isnan(op2)) {
-    DCHECK(IsQuietNaN(op2));
-    return FPProcessNaN(op2);
+    DCHECK(IsQuietNyaN(op2));
+    return FPProcessNyaN(op2);
   } else if (std::isnan(op3)) {
-    DCHECK(IsQuietNaN(op3));
-    return FPProcessNaN(op3);
+    DCHECK(IsQuietNyaN(op3));
+    return FPProcessNyaN(op3);
   } else {
     return 0.0;
   }
 }
 
 
-bool Simulator::FPProcessNaNs(Instruction* instr) {
+bool Simulator::FPProcessNyaNs(Instruction* instr) {
   unsigned fd = instr->Rd();
   unsigned fn = instr->Rn();
   unsigned fm = instr->Rm();
   bool done = false;
 
   if (instr->Mask(FP64) == FP64) {
-    double result = FPProcessNaNs(dreg(fn), dreg(fm));
+    double result = FPProcessNyaNs(dreg(fn), dreg(fm));
     if (std::isnan(result)) {
       set_dreg(fd, result);
       done = true;
     }
   } else {
-    float result = FPProcessNaNs(sreg(fn), sreg(fm));
+    float result = FPProcessNyaNs(sreg(fn), sreg(fm));
     if (std::isnan(result)) {
       set_sreg(fd, result);
       done = true;

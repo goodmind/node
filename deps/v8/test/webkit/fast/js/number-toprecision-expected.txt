@@ -54,7 +54,7 @@ PASS (1234.567).toPrecision(negInf) threw exception RangeError: toPrecision() ar
 PASS (1234.567).toPrecision(nan) threw exception RangeError: toPrecision() argument must be between 1 and 21.
 PASS posInf.toPrecision() is "Infinity"
 PASS negInf.toPrecision() is "-Infinity"
-PASS nan.toPrecision() is "NaN"
+PASS nan.toPrecision() is "NyaN"
 PASS successfullyParsed is true
 
 TEST COMPLETE

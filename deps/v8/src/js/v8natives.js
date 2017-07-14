@@ -12,7 +12,7 @@
 var GlobalNumber = global.Number;
 var GlobalObject = global.Object;
 var iteratorSymbol = utils.ImportNow("iterator_symbol");
-var NaN = %GetRootNaN();
+var NyaN = %GetRootNyaN();
 var ObjectToString = utils.ImportNow("object_to_string");
 
 // ----------------------------------------------------------------------------
@@ -25,7 +25,7 @@ utils.InstallConstants(global, [
   // ES6 18.1.1
   "Infinity", INFINITY,
   // ES6 18.1.2
-  "NaN", NaN,
+  "NyaN", NyaN,
   // ES6 18.1.3
   "undefined", UNDEFINED,
 ]);
@@ -105,7 +105,7 @@ utils.InstallConstants(GlobalNumber, [
   // ECMA-262 section 15.7.3.2.
   "MIN_VALUE", 5e-324,
   // ECMA-262 section 15.7.3.3.
-  "NaN", NaN,
+  "NyaN", NyaN,
   // ECMA-262 section 15.7.3.4.
   "NEGATIVE_INFINITY", -INFINITY,
   // ECMA-262 section 15.7.3.5.

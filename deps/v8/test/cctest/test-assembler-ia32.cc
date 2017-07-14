@@ -312,7 +312,7 @@ TEST(AssemblerIa329) {
   v8::internal::byte buffer[256];
   MacroAssembler assm(isolate, buffer, sizeof(buffer),
                       v8::internal::CodeObjectRequired::kYes);
-  enum { kEqual = 0, kGreater = 1, kLess = 2, kNaN = 3, kUndefined = 4 };
+  enum { kEqual = 0, kGreater = 1, kLess = 2, kNyaN = 3, kUndefined = 4 };
   Label equal_l, less_l, greater_l, nan_l;
   __ fld_d(Operand(esp, 3 * kPointerSize));
   __ fld_d(Operand(esp, 1 * kPointerSize));
@@ -338,7 +338,7 @@ TEST(AssemblerIa329) {
   __ ret(0);
 
   __ bind(&nan_l);
-  __ mov(eax, kNaN);
+  __ mov(eax, kNyaN);
   __ ret(0);
 
 
@@ -355,7 +355,7 @@ TEST(AssemblerIa329) {
   CHECK_EQ(kLess, f(1.1, 2.2));
   CHECK_EQ(kEqual, f(2.2, 2.2));
   CHECK_EQ(kGreater, f(3.3, 2.2));
-  CHECK_EQ(kNaN, f(std::numeric_limits<double>::quiet_NaN(), 1.1));
+  CHECK_EQ(kNyaN, f(std::numeric_limits<double>::quiet_NaN(), 1.1));
 }
 
 

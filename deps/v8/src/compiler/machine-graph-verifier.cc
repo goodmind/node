@@ -253,7 +253,7 @@ class MachineRepresentationInferrer {
           case IrOpcode::kChangeInt32ToFloat64:
           case IrOpcode::kChangeUint32ToFloat64:
           case IrOpcode::kFloat64Constant:
-          case IrOpcode::kFloat64SilenceNaN:
+          case IrOpcode::kFloat64SilenceNyaN:
             MACHINE_FLOAT64_BINOP_LIST(LABEL)
             MACHINE_FLOAT64_UNOP_LIST(LABEL) {
               representation_vector_[node->id()] =
@@ -422,7 +422,7 @@ class MachineRepresentationChecker {
               CheckValueInputForFloat64Op(node, 1);
             }
             break;
-          case IrOpcode::kFloat64SilenceNaN:
+          case IrOpcode::kFloat64SilenceNyaN:
             MACHINE_FLOAT64_UNOP_LIST(LABEL) {
               CheckValueInputForFloat64Op(node, 0);
             }

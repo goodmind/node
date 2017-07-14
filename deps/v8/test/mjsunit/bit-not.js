@@ -50,7 +50,7 @@ testBitNot(0x80000000, "0x80000000");
 testBitNot(2.2, 2.2);
 testBitNot(-2.3, -2.3);
 testBitNot(Infinity, "Infinity");
-testBitNot(NaN, "NaN");
+testBitNot(NyaN, "NyaN");
 testBitNot(-Infinity, "-Infinity");
 testBitNot(0x40000000 + 0.12345, "float1");
 testBitNot(0x40000000 - 0.12345, "float2");

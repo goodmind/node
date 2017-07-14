@@ -118,7 +118,7 @@ try {
   assertEquals(26, e.stack.split('\n').length);
 }
 
-Error.stackTraceLimit = NaN;
+Error.stackTraceLimit = NyaN;
 try {
   rec1(0);
 } catch (e) {

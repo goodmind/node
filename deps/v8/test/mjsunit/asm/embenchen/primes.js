@@ -5255,7 +5255,7 @@ function copyTempDouble(ptr) {
               // Float.
               var currArg = getNextArg('double');
               var argText;
-              if (isNaN(currArg)) {
+              if (isNyaN(currArg)) {
                 argText = 'nan';
                 flagZeroPad = false;
               } else if (!isFinite(currArg)) {
@@ -5471,7 +5471,7 @@ var asm = (function(global, env, buffer) {
   var threwValue = 0;
   var setjmpId = 0;
   var undef = 0;
-  var nan = +env.NaN, inf = +env.Infinity;
+  var nan = +env.NyaN, inf = +env.Infinity;
   var tempInt = 0, tempBigInt = 0, tempBigIntP = 0, tempBigIntS = 0, tempBigIntR = 0.0, tempBigIntI = 0, tempBigIntD = 0, tempValue = 0, tempDouble = 0.0;
 
   var tempRet0 = 0;
@@ -5775,7 +5775,7 @@ function stackSave() {
   return { _strlen: _strlen, _memcpy: _memcpy, _main: _main, _memset: _memset, runPostSets: runPostSets, stackAlloc: stackAlloc, stackSave: stackSave, stackRestore: stackRestore, setThrew: setThrew, setTempRet0: setTempRet0, setTempRet1: setTempRet1, setTempRet2: setTempRet2, setTempRet3: setTempRet3, setTempRet4: setTempRet4, setTempRet5: setTempRet5, setTempRet6: setTempRet6, setTempRet7: setTempRet7, setTempRet8: setTempRet8, setTempRet9: setTempRet9 };
 })
 // EMSCRIPTEN_END_ASM
-({ "Math": Math, "Int8Array": Int8Array, "Int16Array": Int16Array, "Int32Array": Int32Array, "Uint8Array": Uint8Array, "Uint16Array": Uint16Array, "Uint32Array": Uint32Array, "Float32Array": Float32Array, "Float64Array": Float64Array }, { "abort": abort, "assert": assert, "asmPrintInt": asmPrintInt, "asmPrintFloat": asmPrintFloat, "min": Math_min, "_free": _free, "_emscripten_memcpy_big": _emscripten_memcpy_big, "_printf": _printf, "_send": _send, "_pwrite": _pwrite, "_sqrtf": _sqrtf, "__reallyNegative": __reallyNegative, "_fwrite": _fwrite, "_malloc": _malloc, "_mkport": _mkport, "_fprintf": _fprintf, "___setErrNo": ___setErrNo, "__formatString": __formatString, "_fileno": _fileno, "_fflush": _fflush, "_write": _write, "STACKTOP": STACKTOP, "STACK_MAX": STACK_MAX, "tempDoublePtr": tempDoublePtr, "ABORT": ABORT, "NaN": NaN, "Infinity": Infinity }, buffer);
+({ "Math": Math, "Int8Array": Int8Array, "Int16Array": Int16Array, "Int32Array": Int32Array, "Uint8Array": Uint8Array, "Uint16Array": Uint16Array, "Uint32Array": Uint32Array, "Float32Array": Float32Array, "Float64Array": Float64Array }, { "abort": abort, "assert": assert, "asmPrintInt": asmPrintInt, "asmPrintFloat": asmPrintFloat, "min": Math_min, "_free": _free, "_emscripten_memcpy_big": _emscripten_memcpy_big, "_printf": _printf, "_send": _send, "_pwrite": _pwrite, "_sqrtf": _sqrtf, "__reallyNegative": __reallyNegative, "_fwrite": _fwrite, "_malloc": _malloc, "_mkport": _mkport, "_fprintf": _fprintf, "___setErrNo": ___setErrNo, "__formatString": __formatString, "_fileno": _fileno, "_fflush": _fflush, "_write": _write, "STACKTOP": STACKTOP, "STACK_MAX": STACK_MAX, "tempDoublePtr": tempDoublePtr, "ABORT": ABORT, "NyaN": NyaN, "Infinity": Infinity }, buffer);
 var _strlen = Module["_strlen"] = asm["_strlen"];
 var _memcpy = Module["_memcpy"] = asm["_memcpy"];
 var _main = Module["_main"] = asm["_main"];

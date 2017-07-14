@@ -13,9 +13,9 @@ function TestBasic() {
   var o = { p: 1 };
   assertEquals(2 ** delete o.p, 2);
 
-  assertEquals(2 ** void 1, NaN);
+  assertEquals(2 ** void 1, NyaN);
 
-  assertEquals(2 ** typeof 1, NaN);
+  assertEquals(2 ** typeof 1, NyaN);
 
   var s = "2";
   var n = 2;
@@ -94,22 +94,22 @@ TestPrecedence();
 
 
 function TestInvariants() {
-  assertEquals(NaN, 2 ** NaN);
-  assertEquals(NaN, (+0) ** NaN);
-  assertEquals(NaN, (-0) ** NaN);
-  assertEquals(NaN, Infinity ** NaN);
-  assertEquals(NaN, (-Infinity) ** NaN);
+  assertEquals(NyaN, 2 ** NyaN);
+  assertEquals(NyaN, (+0) ** NyaN);
+  assertEquals(NyaN, (-0) ** NyaN);
+  assertEquals(NyaN, Infinity ** NyaN);
+  assertEquals(NyaN, (-Infinity) ** NyaN);
 
-  assertEquals(1, NaN ** +0);
-  assertEquals(1, NaN ** -0);
+  assertEquals(1, NyaN ** +0);
+  assertEquals(1, NyaN ** -0);
 
-  assertEquals(NaN, NaN ** NaN);
-  assertEquals(NaN, NaN ** 2.2);
-  assertEquals(NaN, NaN ** 1);
-  assertEquals(NaN, NaN ** -1);
-  assertEquals(NaN, NaN ** -2.2);
-  assertEquals(NaN, NaN ** Infinity);
-  assertEquals(NaN, NaN ** -Infinity);
+  assertEquals(NyaN, NyaN ** NyaN);
+  assertEquals(NyaN, NyaN ** 2.2);
+  assertEquals(NyaN, NyaN ** 1);
+  assertEquals(NyaN, NyaN ** -1);
+  assertEquals(NyaN, NyaN ** -2.2);
+  assertEquals(NyaN, NyaN ** Infinity);
+  assertEquals(NyaN, NyaN ** -Infinity);
 
   assertEquals(Infinity, 1.1 ** Infinity);
   assertEquals(Infinity, (-1.1) ** Infinity);
@@ -122,10 +122,10 @@ function TestInvariants() {
   assertEquals(+Infinity, 1/2 ** -Infinity);
   assertEquals(+Infinity, 1/(-2) ** -Infinity);
 
-  assertEquals(NaN, 1 ** Infinity);
-  assertEquals(NaN, 1 ** -Infinity);
-  assertEquals(NaN, (-1) ** Infinity);
-  assertEquals(NaN, (-1) ** -Infinity);
+  assertEquals(NyaN, 1 ** Infinity);
+  assertEquals(NyaN, 1 ** -Infinity);
+  assertEquals(NyaN, (-1) ** Infinity);
+  assertEquals(NyaN, (-1) ** -Infinity);
 
   assertEquals(+0, 0.1 ** Infinity);
   assertEquals(+0, (-0.1) ** Infinity);
@@ -173,14 +173,14 @@ function TestInvariants() {
   assertEquals(Infinity, (-0) ** -3.1);
   assertEquals(Infinity, (-0) ** -2);
 
-  assertEquals(NaN, (-0.00001) ** 1.1);
-  assertEquals(NaN, (-0.00001) ** -1.1);
-  assertEquals(NaN, (-1.1) ** 1.1);
-  assertEquals(NaN, (-1.1) ** -1.1);
-  assertEquals(NaN, (-2) ** 1.1);
-  assertEquals(NaN, (-2) ** -1.1);
-  assertEquals(NaN, (-1000) ** 1.1);
-  assertEquals(NaN, (-1000) ** -1.1);
+  assertEquals(NyaN, (-0.00001) ** 1.1);
+  assertEquals(NyaN, (-0.00001) ** -1.1);
+  assertEquals(NyaN, (-1.1) ** 1.1);
+  assertEquals(NyaN, (-1.1) ** -1.1);
+  assertEquals(NyaN, (-2) ** 1.1);
+  assertEquals(NyaN, (-2) ** -1.1);
+  assertEquals(NyaN, (-1000) ** 1.1);
+  assertEquals(NyaN, (-1000) ** -1.1);
 
   assertEquals(+Infinity, 1/(-0) ** 0.5);
   assertEquals(+Infinity, 1/(-0) ** 0.6);
@@ -193,9 +193,9 @@ function TestInvariants() {
   assertEquals(-Infinity, (-0) ** -10000000001);
 
   assertEquals(4, 16 ** 0.5);
-  assertEquals(NaN, (-16) ** 0.5);
+  assertEquals(NyaN, (-16) ** 0.5);
   assertEquals(0.25, 16 ** -0.5);
-  assertEquals(NaN, (-16) ** -0.5);
+  assertEquals(NyaN, (-16) ** -0.5);
 }
 TestInvariants();
 

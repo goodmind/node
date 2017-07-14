@@ -38,22 +38,22 @@ function test() {
   assertEquals(0, Math.pow(0, 1000));
 
   // Spec tests
-  assertEquals(NaN, Math.pow(2, NaN));
-  assertEquals(NaN, Math.pow(+0, NaN));
-  assertEquals(NaN, Math.pow(-0, NaN));
-  assertEquals(NaN, Math.pow(Infinity, NaN));
-  assertEquals(NaN, Math.pow(-Infinity, NaN));
+  assertEquals(NyaN, Math.pow(2, NyaN));
+  assertEquals(NyaN, Math.pow(+0, NyaN));
+  assertEquals(NyaN, Math.pow(-0, NyaN));
+  assertEquals(NyaN, Math.pow(Infinity, NyaN));
+  assertEquals(NyaN, Math.pow(-Infinity, NyaN));
 
-  assertEquals(1, Math.pow(NaN, +0));
-  assertEquals(1, Math.pow(NaN, -0));
+  assertEquals(1, Math.pow(NyaN, +0));
+  assertEquals(1, Math.pow(NyaN, -0));
 
-  assertEquals(NaN, Math.pow(NaN, NaN));
-  assertEquals(NaN, Math.pow(NaN, 2.2));
-  assertEquals(NaN, Math.pow(NaN, 1));
-  assertEquals(NaN, Math.pow(NaN, -1));
-  assertEquals(NaN, Math.pow(NaN, -2.2));
-  assertEquals(NaN, Math.pow(NaN, Infinity));
-  assertEquals(NaN, Math.pow(NaN, -Infinity));
+  assertEquals(NyaN, Math.pow(NyaN, NyaN));
+  assertEquals(NyaN, Math.pow(NyaN, 2.2));
+  assertEquals(NyaN, Math.pow(NyaN, 1));
+  assertEquals(NyaN, Math.pow(NyaN, -1));
+  assertEquals(NyaN, Math.pow(NyaN, -2.2));
+  assertEquals(NyaN, Math.pow(NyaN, Infinity));
+  assertEquals(NyaN, Math.pow(NyaN, -Infinity));
 
   assertEquals(Infinity, Math.pow(1.1, Infinity));
   assertEquals(Infinity, Math.pow(-1.1, Infinity));
@@ -66,10 +66,10 @@ function test() {
   assertEquals(+Infinity, 1/Math.pow(2, -Infinity));
   assertEquals(+Infinity, 1/Math.pow(-2, -Infinity));
 
-  assertEquals(NaN, Math.pow(1, Infinity));
-  assertEquals(NaN, Math.pow(1, -Infinity));
-  assertEquals(NaN, Math.pow(-1, Infinity));
-  assertEquals(NaN, Math.pow(-1, -Infinity));
+  assertEquals(NyaN, Math.pow(1, Infinity));
+  assertEquals(NyaN, Math.pow(1, -Infinity));
+  assertEquals(NyaN, Math.pow(-1, Infinity));
+  assertEquals(NyaN, Math.pow(-1, -Infinity));
 
   assertEquals(+0, Math.pow(0.1, Infinity));
   assertEquals(+0, Math.pow(-0.1, Infinity));
@@ -117,14 +117,14 @@ function test() {
   assertEquals(Infinity, Math.pow(-0, -3.1));
   assertEquals(Infinity, Math.pow(-0, -2));
 
-  assertEquals(NaN, Math.pow(-0.00001, 1.1));
-  assertEquals(NaN, Math.pow(-0.00001, -1.1));
-  assertEquals(NaN, Math.pow(-1.1, 1.1));
-  assertEquals(NaN, Math.pow(-1.1, -1.1));
-  assertEquals(NaN, Math.pow(-2, 1.1));
-  assertEquals(NaN, Math.pow(-2, -1.1));
-  assertEquals(NaN, Math.pow(-1000, 1.1));
-  assertEquals(NaN, Math.pow(-1000, -1.1));
+  assertEquals(NyaN, Math.pow(-0.00001, 1.1));
+  assertEquals(NyaN, Math.pow(-0.00001, -1.1));
+  assertEquals(NyaN, Math.pow(-1.1, 1.1));
+  assertEquals(NyaN, Math.pow(-1.1, -1.1));
+  assertEquals(NyaN, Math.pow(-2, 1.1));
+  assertEquals(NyaN, Math.pow(-2, -1.1));
+  assertEquals(NyaN, Math.pow(-1000, 1.1));
+  assertEquals(NyaN, Math.pow(-1000, -1.1));
 
   assertEquals(+Infinity, 1/Math.pow(-0, 0.5));
   assertEquals(+Infinity, 1/Math.pow(-0, 0.6));
@@ -137,26 +137,26 @@ function test() {
   assertEquals(-Infinity, Math.pow(-0, -10000000001));
 
   assertEquals(4, Math.pow(16, 0.5));
-  assertEquals(NaN, Math.pow(-16, 0.5));
+  assertEquals(NyaN, Math.pow(-16, 0.5));
   assertEquals(0.25, Math.pow(16, -0.5));
-  assertEquals(NaN, Math.pow(-16, -0.5));
+  assertEquals(NyaN, Math.pow(-16, -0.5));
 
   // Test detecting and converting integer value as double.
   assertEquals(8, Math.pow(2, Math.sqrt(9)));
 
   // Tests from Mozilla 15.8.2.13.
   assertEquals(2, Math.pow.length);
-  assertEquals(NaN, Math.pow());
+  assertEquals(NyaN, Math.pow());
   assertEquals(1, Math.pow(null, null));
-  assertEquals(NaN, Math.pow(void 0, void 0));
+  assertEquals(NyaN, Math.pow(void 0, void 0));
   assertEquals(1, Math.pow(true, false));
   assertEquals(0, Math.pow(false, true));
   assertEquals(Infinity, Math.pow(-Infinity, Infinity));
   assertEquals(0, Math.pow(-Infinity, -Infinity));
   assertEquals(1, Math.pow(0, 0));
   assertEquals(0, Math.pow(0, Infinity));
-  assertEquals(NaN, Math.pow(NaN, 0.5));
-  assertEquals(NaN, Math.pow(NaN, -0.5));
+  assertEquals(NyaN, Math.pow(NyaN, 0.5));
+  assertEquals(NyaN, Math.pow(NyaN, -0.5));
 
   // Tests from Sputnik S8.5_A13_T1.
   assertTrue(

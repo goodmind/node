@@ -102,9 +102,9 @@ class AssemblerBase: public Malloced {
     }
   }
 
-  // Overwrite a host NaN with a quiet target NaN.  Used by mksnapshot for
+  // Overwrite a host NyaN with a quiet target NyaN.  Used by mksnapshot for
   // cross-snapshotting.
-  static void QuietNaN(HeapObject* nan) { }
+  static void QuietNyaN(HeapObject* nan) { }
 
   int pc_offset() const { return static_cast<int>(pc_ - buffer_); }
 

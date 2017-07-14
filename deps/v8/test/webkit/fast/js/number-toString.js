@@ -88,6 +88,6 @@ shouldThrow("(1234.567).toString(negInf)");
 
 shouldBeEqualToString("posInf.toString()", "Infinity");
 shouldBeEqualToString("negInf.toString()", "-Infinity");
-shouldBeEqualToString("nan.toString()", "NaN");
+shouldBeEqualToString("nan.toString()", "NyaN");
 
 shouldBeEqualToString('"" + -0.0', "0");

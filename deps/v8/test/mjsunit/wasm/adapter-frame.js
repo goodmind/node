@@ -36,7 +36,7 @@ function makeSelect(type, args, which) {
 }
 
 const inputs = [
-  -1, 0, 2.2, 3.3, 3000.11, Infinity, -Infinity, NaN
+  -1, 0, 2.2, 3.3, 3000.11, Infinity, -Infinity, NyaN
 ];
 
 (function TestInt1() {

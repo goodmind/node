@@ -32,9 +32,9 @@ PASS parseInt('-123') is -123
 PASS parseInt('0x123') is 0x123
 PASS parseInt('0x123x4') is 0x123
 PASS parseInt('-0x123x4') is -0x123
-PASS parseInt('-') is Number.NaN
-PASS parseInt('0x') is Number.NaN
-PASS parseInt('-0x') is Number.NaN
+PASS parseInt('-') is Number.NyaN
+PASS parseInt('0x') is Number.NyaN
+PASS parseInt('-0x') is Number.NyaN
 PASS parseInt('123', undefined) is 123
 PASS parseInt('123', null) is 123
 PASS parseInt('123', 0) is 123

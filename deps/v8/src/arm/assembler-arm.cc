@@ -2776,7 +2776,7 @@ void Assembler::vmov(const DwVfpRegister dst,
     //           choose.
     //           We could also add a few peepholes here like detecting 0.0 and
     //           -0.0 and doing a vmov from the sequestered d14, forcing denorms
-    //           to zero (we set flush-to-zero), and normalizing NaN values.
+    //           to zero (we set flush-to-zero), and normalizing NyaN values.
     //           We could also detect redundant values.
     //           The code could also randomize the order of values, though
     //           that's tricky because vldr has a limited reach. Furthermore

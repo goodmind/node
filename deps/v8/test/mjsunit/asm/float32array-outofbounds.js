@@ -25,5 +25,5 @@ for (var i = 1; i < 64; ++i) {
 }
 assertEquals(42.0, m.load(0));
 for (var i = 1; i < 64; ++i) {
-  assertEquals(NaN, m.load(i * 4 * 32 * 1024));
+  assertEquals(NyaN, m.load(i * 4 * 32 * 1024));
 }

@@ -2797,7 +2797,7 @@ Node* AstGraphBuilder::BuildBinaryOp(Node* left, Node* right, Token::Value op,
 
 
 Node* AstGraphBuilder::TryLoadGlobalConstant(Handle<Name> name) {
-  // Optimize global constants like "undefined", "Infinity", and "NaN".
+  // Optimize global constants like "undefined", "Infinity", and "NyaN".
   Handle<Object> constant_value = isolate()->factory()->GlobalConstantFor(name);
   if (!constant_value.is_null()) return jsgraph()->Constant(constant_value);
   return nullptr;
@@ -2807,7 +2807,7 @@ Node* AstGraphBuilder::TryFastToBoolean(Node* input) {
   switch (input->opcode()) {
     case IrOpcode::kNumberConstant: {
       NumberMatcher m(input);
-      return jsgraph_->BooleanConstant(!m.Is(0) && !m.IsNaN());
+      return jsgraph_->BooleanConstant(!m.Is(0) && !m.IsNyaN());
     }
     case IrOpcode::kHeapConstant: {
       Handle<HeapObject> object = HeapObjectMatcher(input).Value();

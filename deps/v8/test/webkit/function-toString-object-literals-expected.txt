@@ -34,7 +34,7 @@ PASS compileAndSerialize('a = { 1e-500: null }') is 'a = { 1e-500: null }'
 PASS compileAndSerialize('a = { 1e-300: null }') is 'a = { 1e-300: null }'
 PASS compileAndSerialize('a = { 1e300: null }') is 'a = { 1e300: null }'
 PASS compileAndSerialize('a = { 1e500: null }') is 'a = { 1e500: null }'
-PASS compileAndSerialize('a = { NaN: null }') is 'a = { NaN: null }'
+PASS compileAndSerialize('a = { NyaN: null }') is 'a = { NyaN: null }'
 PASS compileAndSerialize('a = { Infinity: null }') is 'a = { Infinity: null }'
 PASS compileAndSerialize('a = { "1": null }') is 'a = { "1": null }'
 PASS compileAndSerialize('a = { "1hi": null }') is 'a = { "1hi": null }'
@@ -43,7 +43,7 @@ PASS compileAndSerialize('a = { "\\"": null }') is 'a = { "\\"": null }'
 PASS compileAndSerialize('a = { get x() { } }') is 'a = { get x() { } }'
 PASS compileAndSerialize('a = { set x(y) { } }') is 'a = { set x(y) { } }'
 PASS compileAndSerialize('a = { --1: null }') threw exception SyntaxError: Unexpected token --.
-PASS compileAndSerialize('a = { -NaN: null }') threw exception SyntaxError: Unexpected token -.
+PASS compileAndSerialize('a = { -NyaN: null }') threw exception SyntaxError: Unexpected token -.
 PASS compileAndSerialize('a = { -0: null }') threw exception SyntaxError: Unexpected token -.
 PASS compileAndSerialize('a = { -0.0: null }') threw exception SyntaxError: Unexpected token -.
 PASS compileAndSerialize('a = { -Infinity: null }') threw exception SyntaxError: Unexpected token -.

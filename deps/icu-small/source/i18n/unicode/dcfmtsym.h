@@ -122,7 +122,7 @@ public:
         /** Infinity symbol */
         kInfinitySymbol,
         /** Nan symbol */
-        kNaNSymbol,
+        kNyaNSymbol,
         /** Significant digit symbol
          * @stable ICU 3.0 */
         kSignificantDigitSymbol,
@@ -203,7 +203,7 @@ public:
      *
      * The last-resort symbols are similar to those for the root data,
      * except that the grouping separators are empty,
-     * the NaN symbol is U+FFFD rather than "NaN",
+     * the NyaN symbol is U+FFFD rather than "NyaN",
      * and the CurrencySpacing patterns are empty.
      *
      * @param status    Input/output parameter, set to success or

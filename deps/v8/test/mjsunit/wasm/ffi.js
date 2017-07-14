@@ -106,7 +106,7 @@ print("Native function");
   // The result of the call to Object.prototype.toString should be
   // [object Undefined]. However, we cannot test for this result because wasm
   // cannot return objects but converts them to float64 in this test.
-  assertEquals(NaN, main());
+  assertEquals(NyaN, main());
 })();
 
 print("Callable JSObject");

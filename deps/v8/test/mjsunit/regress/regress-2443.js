@@ -82,8 +82,8 @@ assertEquals("1.00",
 var f_flag = false;
 var f_obj = { valueOf: function() { f_flag = true; return 1000; } };
 
-assertEquals("NaN",
-             Number.prototype.toExponential.call(NaN, f_obj));
+assertEquals("NyaN",
+             Number.prototype.toExponential.call(NyaN, f_obj));
 assertTrue(f_flag);
 
 f_flag = false;
@@ -97,8 +97,8 @@ assertEquals("-Infinity",
 assertTrue(f_flag);
 
 f_flag = false;
-assertEquals("NaN",
-             Number.prototype.toPrecision.call(NaN, f_obj));
+assertEquals("NyaN",
+             Number.prototype.toPrecision.call(NyaN, f_obj));
 assertTrue(f_flag);
 
 f_flag = false;
@@ -114,7 +114,7 @@ assertTrue(f_flag);
 // The odd man out: toFixed.
 
 f_flag = false;
-assertThrows(function() { Number.prototype.toFixed.call(NaN, f_obj) },
+assertThrows(function() { Number.prototype.toFixed.call(NyaN, f_obj) },
              RangeError);
 assertTrue(f_flag);
 

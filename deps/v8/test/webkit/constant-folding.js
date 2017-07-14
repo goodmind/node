@@ -474,16 +474,16 @@ shouldBe('"10.3" / 0', 'Infinity');
 shouldBe('-10.3 / 0', '-Infinity');
 shouldBe('"-10.3" / 0', '-Infinity');
 shouldBe('true / 0', 'Infinity');
-shouldBe('false / 0', 'NaN');
-shouldBe('0 / 0', 'NaN');
+shouldBe('false / 0', 'NyaN');
+shouldBe('0 / 0', 'NyaN');
 
 shouldBe('10.3 / -0', '-Infinity');
 shouldBe('"10.3" / -0', '-Infinity');
 shouldBe('-10.3 / -0', 'Infinity');
 shouldBe('"-10.3" / -0', 'Infinity');
 shouldBe('true / -0', '-Infinity');
-shouldBe('false / -0', 'NaN');
-shouldBe('0 / -0', 'NaN');
+shouldBe('false / -0', 'NyaN');
+shouldBe('0 / -0', 'NyaN');
 
 shouldBe('1 / -0', '-Infinity');
 shouldBe('1 / - 0', '-Infinity');

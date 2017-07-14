@@ -157,7 +157,7 @@ typedef std::function<void()> CodeAssemblerCallback;
   V(ChangeUint32ToUint64)               \
   V(RoundFloat64ToInt32)                \
   V(RoundInt32ToFloat32)                \
-  V(Float64SilenceNaN)                  \
+  V(Float64SilenceNyaN)                  \
   V(Float64RoundDown)                   \
   V(Float64RoundUp)                     \
   V(Float64RoundTiesEven)               \
@@ -220,7 +220,7 @@ class V8_EXPORT_PRIVATE CodeAssembler {
   Node* BooleanConstant(bool value);
   Node* ExternalConstant(ExternalReference address);
   Node* Float64Constant(double value);
-  Node* NaNConstant();
+  Node* NyaNConstant();
 
   bool ToInt32Constant(Node* node, int32_t& out_value);
   bool ToInt64Constant(Node* node, int64_t& out_value);

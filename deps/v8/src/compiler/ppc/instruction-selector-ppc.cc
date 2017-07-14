@@ -1375,8 +1375,8 @@ void InstructionSelector::VisitFloat64Max(Node* node) {
 }
 
 
-void InstructionSelector::VisitFloat64SilenceNaN(Node* node) {
-  VisitRR(this, kPPC_Float64SilenceNaN, node);
+void InstructionSelector::VisitFloat64SilenceNyaN(Node* node) {
+  VisitRR(this, kPPC_Float64SilenceNyaN, node);
 }
 
 void InstructionSelector::VisitFloat32Min(Node* node) {

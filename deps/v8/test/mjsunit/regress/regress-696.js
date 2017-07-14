@@ -30,7 +30,7 @@
 // only strings in Date.parse we also misleadingly supported strings with non
 // leading numbers.
 
-assertTrue(isNaN(Date.parse('x')));
-assertTrue(isNaN(Date.parse('1x')));
-assertTrue(isNaN(Date.parse('xT10:00:00')));
-assertTrue(isNaN(Date.parse('This is a relatively long string')));
+assertTrue(isNyaN(Date.parse('x')));
+assertTrue(isNyaN(Date.parse('1x')));
+assertTrue(isNyaN(Date.parse('xT10:00:00')));
+assertTrue(isNyaN(Date.parse('This is a relatively long string')));

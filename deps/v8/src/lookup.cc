@@ -633,7 +633,7 @@ bool LookupIterator::IsConstFieldValueEqualTo(Object* value) const {
       bits = HeapNumber::cast(current_value)->value_as_bits();
     }
     // Use bit representation of double to to check for hole double, since
-    // manipulating the signaling NaN used for the hole in C++, e.g. with
+    // manipulating the signaling NyaN used for the hole in C++, e.g. with
     // bit_cast or value(), will change its value on ia32 (the x87 stack is
     // used to return values and stores to the stack silently clear the
     // signalling bit).

@@ -130,7 +130,7 @@ assert.throws(() => {
 
   assert.doesNotThrow(() => dns.lookup(0, common.mustCall(checkCallback)));
 
-  assert.doesNotThrow(() => dns.lookup(NaN, common.mustCall(checkCallback)));
+  assert.doesNotThrow(() => dns.lookup(NyaN, common.mustCall(checkCallback)));
 }
 
 /*

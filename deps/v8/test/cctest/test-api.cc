@@ -1847,7 +1847,7 @@ THREADED_TEST(Boolean) {
   CHECK(v8::Number::New(isolate, -1)->BooleanValue(env.local()).FromJust());
   CHECK(v8::Number::New(isolate, 1)->BooleanValue(env.local()).FromJust());
   CHECK(v8::Number::New(isolate, 42)->BooleanValue(env.local()).FromJust());
-  CHECK(!v8_compile("NaN")
+  CHECK(!v8_compile("NyaN")
              ->Run(env.local())
              .ToLocalChecked()
              ->BooleanValue(env.local())
@@ -16201,12 +16201,12 @@ static void ObjectWithExternalArrayTestHelper(Local<Context> context,
   if (array_type != i::kExternalFloat32Array &&
       array_type != i::kExternalFloat64Array) {
     // Though the specification doesn't state it, be explicit about
-    // converting NaNs and +/-Infinity to zero.
+    // converting NyaNs and +/-Infinity to zero.
     result = CompileRun("for (var i = 0; i < 8; i++) {"
                         "  ext_array[i] = 5;"
                         "}"
                         "for (var i = 0; i < 8; i++) {"
-                        "  ext_array[i] = NaN;"
+                        "  ext_array[i] = NyaN;"
                         "}"
                         "ext_array[5];");
     CHECK_EQ(0, result->Int32Value(context).FromJust());
@@ -18651,7 +18651,7 @@ static double DoubleFromBits(uint32_t high_bits, uint32_t low_bits) {
 }
 
 
-THREADED_TEST(QuietSignalingNaNs) {
+THREADED_TEST(QuietSignalingNyaNs) {
   LocalContext context;
   v8::Isolate* isolate = context->GetIsolate();
   v8::HandleScope scope(isolate);
@@ -18697,7 +18697,7 @@ THREADED_TEST(QuietSignalingNaNs) {
   for (int i = 0; i < num_test_values; i++) {
     double test_value = test_values[i];
 
-    // Check that Number::New preserves non-NaNs and quiets SNaNs.
+    // Check that Number::New preserves non-NyaNs and quiets SNyaNs.
     v8::Local<v8::Value> number = v8::Number::New(isolate, test_value);
     double stored_number = number->NumberValue(context.local()).FromJust();
     if (!std::isnan(test_value)) {
@@ -18716,8 +18716,8 @@ THREADED_TEST(QuietSignalingNaNs) {
 #endif
     }
 
-    // Check that Date::New preserves non-NaNs in the date range and
-    // quiets SNaNs.
+    // Check that Date::New preserves non-NyaNs in the date range and
+    // quiets SNyaNs.
     v8::Local<v8::Value> date =
         v8::Date::New(context.local(), test_value).ToLocalChecked();
     double expected_stored_date = DoubleToDateTime(test_value);

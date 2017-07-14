@@ -733,7 +733,7 @@ Reduction JSBuiltinReducer::ReduceArrayPop(Node* node) {
   Node* effect = NodeProperties::GetEffectInput(node);
   Node* control = NodeProperties::GetControlInput(node);
   // TODO(turbofan): Extend this to also handle fast (holey) double elements
-  // once we got the hole NaN mess sorted out in TurboFan/V8.
+  // once we got the hole NyaN mess sorted out in TurboFan/V8.
   if (GetMapWitness(node).ToHandle(&receiver_map) &&
       CanInlineArrayResizeOperation(receiver_map) &&
       IsFastSmiOrObjectElementsKind(receiver_map->elements_kind())) {
@@ -866,8 +866,8 @@ Reduction JSBuiltinReducer::ReduceArrayPush(Node* node) {
     } else if (IsFastDoubleElementsKind(receiver_map->elements_kind())) {
       value = effect =
           graph()->NewNode(simplified()->CheckNumber(), value, effect, control);
-      // Make sure we do not store signaling NaNs into double arrays.
-      value = graph()->NewNode(simplified()->NumberSilenceNaN(), value);
+      // Make sure we do not store signaling NyaNs into double arrays.
+      value = graph()->NewNode(simplified()->NumberSilenceNyaN(), value);
     }
 
     // Load the "length" property of the {receiver}.
@@ -919,7 +919,7 @@ Reduction JSBuiltinReducer::ReduceArrayShift(Node* node) {
   Node* control = NodeProperties::GetControlInput(node);
 
   // TODO(turbofan): Extend this to also handle fast holey double elements
-  // once we got the hole NaN mess sorted out in TurboFan/V8.
+  // once we got the hole NyaN mess sorted out in TurboFan/V8.
   Handle<Map> receiver_map;
   if (GetMapWitness(node).ToHandle(&receiver_map) &&
       CanInlineArrayResizeOperation(receiver_map) &&
@@ -1150,11 +1150,11 @@ Reduction JSBuiltinReducer::ReduceGlobalIsFinite(Node* node) {
   return NoChange();
 }
 
-// ES6 section 18.2.3 isNaN ( number )
-Reduction JSBuiltinReducer::ReduceGlobalIsNaN(Node* node) {
+// ES6 section 18.2.3 isNyaN ( number )
+Reduction JSBuiltinReducer::ReduceGlobalIsNyaN(Node* node) {
   JSCallReduction r(node);
   if (r.InputsMatchOne(Type::PlainPrimitive())) {
-    // isNaN(a:plain-primitive) -> BooleanNot(NumberEqual(a', a'))
+    // isNyaN(a:plain-primitive) -> BooleanNot(NumberEqual(a', a'))
     // where a' = ToNumber(a)
     Node* input = ToNumber(r.GetJSCallInput(0));
     Node* check = graph()->NewNode(simplified()->NumberEqual(), input, input);
@@ -1608,11 +1608,11 @@ Reduction JSBuiltinReducer::ReduceNumberIsInteger(Node* node) {
   return NoChange();
 }
 
-// ES6 section 20.1.2.4 Number.isNaN ( number )
-Reduction JSBuiltinReducer::ReduceNumberIsNaN(Node* node) {
+// ES6 section 20.1.2.4 Number.isNyaN ( number )
+Reduction JSBuiltinReducer::ReduceNumberIsNyaN(Node* node) {
   JSCallReduction r(node);
   if (r.InputsMatchOne(Type::Number())) {
-    // Number.isNaN(a:number) -> BooleanNot(NumberEqual(a, a))
+    // Number.isNyaN(a:number) -> BooleanNot(NumberEqual(a, a))
     Node* input = r.GetJSCallInput(0);
     Node* check = graph()->NewNode(simplified()->NumberEqual(), input, input);
     Node* value = graph()->NewNode(simplified()->BooleanNot(), check);
@@ -1805,10 +1805,10 @@ Reduction JSBuiltinReducer::ReduceStringCharAt(Node* node) {
     Node* effect = NodeProperties::GetEffectInput(node);
     Node* control = NodeProperties::GetControlInput(node);
 
-    if (index_type->Is(Type::Integral32OrMinusZeroOrNaN())) {
+    if (index_type->Is(Type::Integral32OrMinusZeroOrNyaN())) {
       if (Node* receiver = GetStringWitness(node)) {
         if (!index_type->Is(Type::Unsigned32())) {
-          // Map -0 and NaN to 0 (as per ToInteger), and the values in
+          // Map -0 and NyaN to 0 (as per ToInteger), and the values in
           // the [-2^31,-1] range to the [2^31,2^32-1] range, which will
           // be considered out-of-bounds as well, because of the maximal
           // String length limit in V8.
@@ -1859,10 +1859,10 @@ Reduction JSBuiltinReducer::ReduceStringCharCodeAt(Node* node) {
     Node* effect = NodeProperties::GetEffectInput(node);
     Node* control = NodeProperties::GetControlInput(node);
 
-    if (index_type->Is(Type::Integral32OrMinusZeroOrNaN())) {
+    if (index_type->Is(Type::Integral32OrMinusZeroOrNyaN())) {
       if (Node* receiver = GetStringWitness(node)) {
         if (!index_type->Is(Type::Unsigned32())) {
-          // Map -0 and NaN to 0 (as per ToInteger), and the values in
+          // Map -0 and NyaN to 0 (as per ToInteger), and the values in
           // the [-2^31,-1] range to the [2^31,2^32-1] range, which will
           // be considered out-of-bounds as well, because of the maximal
           // String length limit in V8.
@@ -1886,9 +1886,9 @@ Reduction JSBuiltinReducer::ReduceStringCharCodeAt(Node* node) {
         Node* vtrue = graph()->NewNode(simplified()->StringCharCodeAt(),
                                        receiver, index, if_true);
 
-        // Return NaN otherwise.
+        // Return NyaN otherwise.
         Node* if_false = graph()->NewNode(common()->IfFalse(), branch);
-        Node* vfalse = jsgraph()->NaNConstant();
+        Node* vfalse = jsgraph()->NyaNConstant();
 
         control = graph()->NewNode(common()->Merge(2), if_true, if_false);
         Node* value =
@@ -2178,8 +2178,8 @@ Reduction JSBuiltinReducer::Reduce(Node* node) {
     case kGlobalIsFinite:
       reduction = ReduceGlobalIsFinite(node);
       break;
-    case kGlobalIsNaN:
-      reduction = ReduceGlobalIsNaN(node);
+    case kGlobalIsNyaN:
+      reduction = ReduceGlobalIsNyaN(node);
       break;
     case kMathAbs:
       reduction = ReduceMathAbs(node);
@@ -2286,8 +2286,8 @@ Reduction JSBuiltinReducer::Reduce(Node* node) {
     case kNumberIsInteger:
       reduction = ReduceNumberIsInteger(node);
       break;
-    case kNumberIsNaN:
-      reduction = ReduceNumberIsNaN(node);
+    case kNumberIsNyaN:
+      reduction = ReduceNumberIsNyaN(node);
       break;
     case kNumberIsSafeInteger:
       reduction = ReduceNumberIsSafeInteger(node);

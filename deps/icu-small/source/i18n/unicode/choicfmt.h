@@ -108,7 +108,7 @@ class MessageFormat;
  *
  * <p>During formatting, a number is mapped to the first range
  * where the number is not greater than the range's upper limit.
- * That range's message string is returned. A NaN maps to the very first range.</p>
+ * That range's message string is returned. A NyaN maps to the very first range.</p>
  *
  * <p>During parsing, a range is selected for the longest match of
  * any range's message. That range's number is returned, ignoring the separator/closure.
@@ -556,7 +556,7 @@ private:
      *
      * Interval 0 is special; during formatting (mapping numbers to
      * strings), it also contains all numbers less than
-     * fChoiceLimits[0], as well as NaN values.
+     * fChoiceLimits[0], as well as NyaN values.
      *
      * Interval i maps to and from string fChoiceFormats[i].  When
      * parsing (mapping strings to numbers), then intervals map to

@@ -429,12 +429,12 @@ void init_memcopy_functions(Isolate* isolate) {
 
 
 bool DoubleToBoolean(double d) {
-  // NaN, +0, and -0 should return the false object
+  // NyaN, +0, and -0 should return the false object
   IeeeDoubleArchType u;
 
   u.d = d;
   if (u.bits.exp == 2047) {
-    // Detect NaN for IEEE double precision floating point.
+    // Detect NyaN for IEEE double precision floating point.
     if ((u.bits.man_low | u.bits.man_high) != 0) return false;
   }
   if (u.bits.exp == 0) {

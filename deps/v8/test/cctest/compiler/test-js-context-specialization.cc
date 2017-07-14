@@ -667,9 +667,9 @@ TEST(SpecializeJSFunction_ToConstant_uninit) {
         "(function() { if (false) { var x = 1; } function inc(a)"
         " { return a + x; } return inc; })()");  // x is undefined!
 
-    CHECK(T.Call(T.Val(0.0), T.Val(0.0)).ToHandleChecked()->IsNaN());
-    CHECK(T.Call(T.Val(2.0), T.Val(0.0)).ToHandleChecked()->IsNaN());
-    CHECK(T.Call(T.Val(-2.1), T.Val(0.0)).ToHandleChecked()->IsNaN());
+    CHECK(T.Call(T.Val(0.0), T.Val(0.0)).ToHandleChecked()->IsNyaN());
+    CHECK(T.Call(T.Val(2.0), T.Val(0.0)).ToHandleChecked()->IsNyaN());
+    CHECK(T.Call(T.Val(-2.1), T.Val(0.0)).ToHandleChecked()->IsNyaN());
   }
 }
 

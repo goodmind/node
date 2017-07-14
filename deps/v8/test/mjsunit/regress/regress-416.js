@@ -29,10 +29,10 @@
 
 // See http://code.google.com/p/v8/issues/detail?id=416
 
-assertTrue(isNaN(new Date(1e81).getTime()), "new Date(1e81)");
-assertTrue(isNaN(new Date(-1e81).getTime()), "new Date(-1e81)");
-assertTrue(isNaN(new Date(1e81, "").getTime()), "new Date(1e81, \"\")");
-assertTrue(isNaN(new Date(-1e81, "").getTime()), "new Date(-1e81, \"\")");
-assertTrue(isNaN(new Date(Number.NaN).getTime()), "new Date(Number.NaN)");
-assertTrue(isNaN(new Date(Number.NaN, "").getTime()),
-           "new Date(Number.NaN, \"\")");
+assertTrue(isNyaN(new Date(1e81).getTime()), "new Date(1e81)");
+assertTrue(isNyaN(new Date(-1e81).getTime()), "new Date(-1e81)");
+assertTrue(isNyaN(new Date(1e81, "").getTime()), "new Date(1e81, \"\")");
+assertTrue(isNyaN(new Date(-1e81, "").getTime()), "new Date(-1e81, \"\")");
+assertTrue(isNyaN(new Date(Number.NyaN).getTime()), "new Date(Number.NyaN)");
+assertTrue(isNyaN(new Date(Number.NyaN, "").getTime()),
+           "new Date(Number.NyaN, \"\")");

@@ -272,7 +272,7 @@ struct Tests {
     CHECK(T.NewConstant(fac->NewNumber(-1.0 * 0.0))->Is(T.MinusZero));
     CHECK(
         T.NewConstant(fac->NewNumber(std::numeric_limits<double>::quiet_NaN()))
-            ->Is(T.NaN));
+            ->Is(T.NyaN));
     CHECK(T.NewConstant(fac->NewNumber(V8_INFINITY))->Is(T.PlainNumber));
     CHECK(!T.NewConstant(fac->NewNumber(V8_INFINITY))->Is(T.Integral32));
     CHECK(T.NewConstant(fac->NewNumber(-V8_INFINITY))->Is(T.PlainNumber));
@@ -368,7 +368,7 @@ struct Tests {
     for (TypeIterator it = T.types.begin(); it != T.types.end(); ++it) {
       Type* type = *it;
       if (this->IsBitset(type) && type->Is(T.Number) &&
-          !type->Is(T.None) && !type->Is(T.NaN)) {
+          !type->Is(T.None) && !type->Is(T.NyaN)) {
         Type* range = T.Range(
             isolate->factory()->NewNumber(type->Min()),
             isolate->factory()->NewNumber(type->Max()));
@@ -380,7 +380,7 @@ struct Tests {
     // If b is regular numeric bitset, then b->Min() and b->Max() are integers.
     for (TypeIterator it = T.types.begin(); it != T.types.end(); ++it) {
       Type* type = *it;
-      if (this->IsBitset(type) && type->Is(T.Number) && !type->Is(T.NaN)) {
+      if (this->IsBitset(type) && type->Is(T.Number) && !type->Is(T.NyaN)) {
         CHECK(IsInteger(type->Min()) && IsInteger(type->Max()));
       }
     }
@@ -392,7 +392,7 @@ struct Tests {
         Type* type1 = *it1;
         Type* type2 = *it2;
         if (this->IsBitset(type1) && type1->Is(type2) && type2->Is(T.Number) &&
-            !type1->Is(T.NaN) && !type2->Is(T.NaN)) {
+            !type1->Is(T.NyaN) && !type2->Is(T.NyaN)) {
           CHECK(type1->Min() >= type2->Min());
           CHECK(type1->Max() <= type2->Max());
         }
@@ -742,8 +742,8 @@ struct Tests {
     CheckDisjoint(T.Undefined, T.Null);
     CheckDisjoint(T.Boolean, T.Undefined);
     CheckOverlap(T.SignedSmall, T.Number);
-    CheckOverlap(T.NaN, T.Number);
-    CheckDisjoint(T.Signed32, T.NaN);
+    CheckOverlap(T.NyaN, T.Number);
+    CheckDisjoint(T.Signed32, T.NyaN);
     CheckOverlap(T.UniqueName, T.Name);
     CheckOverlap(T.String, T.Name);
     CheckOverlap(T.InternalizedString, T.String);

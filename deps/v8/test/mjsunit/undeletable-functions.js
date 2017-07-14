@@ -69,11 +69,11 @@ CheckDontDelete(Math, array, "Math2");
 
 array = [
   "escape", "unescape", "decodeURI", "decodeURIComponent", "encodeURI",
-  "encodeURIComponent", "isNaN", "isFinite", "parseInt", "parseFloat", "eval",
+  "encodeURIComponent", "isNyaN", "isFinite", "parseInt", "parseFloat", "eval",
   "execScript"];
 CheckEcmaSemantics(this, array, "Global");
 CheckReadOnlyAttr(this, "Infinity");
-CheckReadOnlyAttr(this, "NaN");
+CheckReadOnlyAttr(this, "NyaN");
 CheckReadOnlyAttr(this, "undefined");
 
 array = ["exec", "test", "toString", "compile"];

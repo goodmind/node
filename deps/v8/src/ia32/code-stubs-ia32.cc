@@ -301,13 +301,13 @@ void FloatingPointHelper::CheckFloatOperands(MacroAssembler* masm,
   __ mov(scratch, FieldOperand(edx, HeapObject::kMapOffset));
   Factory* factory = masm->isolate()->factory();
   __ cmp(scratch, factory->heap_number_map());
-  __ j(not_equal, non_float);  // argument in edx is not a number -> NaN
+  __ j(not_equal, non_float);  // argument in edx is not a number -> NyaN
 
   __ bind(&test_other);
   __ JumpIfSmi(eax, &done, Label::kNear);
   __ mov(scratch, FieldOperand(eax, HeapObject::kMapOffset));
   __ cmp(scratch, factory->heap_number_map());
-  __ j(not_equal, non_float);  // argument in eax is not a number -> NaN
+  __ j(not_equal, non_float);  // argument in eax is not a number -> NyaN
 
   // Fall-through: Both operands are numbers.
   __ bind(&done);
@@ -348,7 +348,7 @@ void MathPowStub::Generate(MacroAssembler* masm) {
     __ jmp(&int_exponent);
 
     __ bind(&try_arithmetic_simplification);
-    // Skip to runtime if possibly NaN (indicated by the indefinite integer).
+    // Skip to runtime if possibly NyaN (indicated by the indefinite integer).
     __ cvttsd2si(exponent, Operand(double_exponent));
     __ cmp(exponent, Immediate(0x1));
     __ j(overflow, &call_runtime);
@@ -434,7 +434,7 @@ void MathPowStub::Generate(MacroAssembler* masm) {
   // Test whether result is zero.  Bail out to check for subnormal result.
   // Due to subnormals, x^-y == (1/x)^y does not hold in all cases.
   __ xorps(double_scratch2, double_scratch2);
-  __ ucomisd(double_scratch2, double_result);  // Result cannot be NaN.
+  __ ucomisd(double_scratch2, double_result);  // Result cannot be NyaN.
   // double_exponent aliased as double_scratch2 has already been overwritten
   // and may not have contained the exponent value in the first place when the
   // exponent is a smi.  We reset it with exponent value before bailing out.
@@ -941,7 +941,7 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
   // it is certain that at least one operand isn't a smi.
 
   // Identical objects can be compared fast, but there are some tricky cases
-  // for NaN and undefined.
+  // for NyaN and undefined.
   Label generic_heap_number_comparison;
   {
     Label not_identical;
@@ -959,8 +959,8 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
       __ bind(&check_for_nan);
     }
 
-    // Test for NaN. Compare heap numbers in a general way,
-    // to handle NaNs correctly.
+    // Test for NyaN. Compare heap numbers in a general way,
+    // to handle NyaNs correctly.
     __ cmp(FieldOperand(edx, HeapObject::kMapOffset),
            Immediate(isolate()->factory()->heap_number_map()));
     __ j(equal, &generic_heap_number_comparison, Label::kNear);
@@ -1060,7 +1060,7 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
 
   FloatingPointHelper::LoadSSE2Operands(masm, &non_number_comparison);
   __ ucomisd(xmm0, xmm1);
-  // Don't base result on EFLAGS when a NaN is involved.
+  // Don't base result on EFLAGS when a NyaN is involved.
   __ j(parity_even, &unordered, Label::kNear);
 
   __ mov(eax, 0);  // equal
@@ -1070,7 +1070,7 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
   __ cmov(below, eax, ecx);
   __ ret(0);
 
-  // If one of the numbers was NaN, then the result is always false.
+  // If one of the numbers was NyaN, then the result is always false.
   // The cc is never not-equal.
   __ bind(&unordered);
   DCHECK(cc != not_equal);
@@ -1978,7 +1978,7 @@ void CompareICStub::GenerateNumbers(MacroAssembler* masm) {
   // Compare operands.
   __ ucomisd(xmm0, xmm1);
 
-  // Don't base result on EFLAGS when a NaN is involved.
+  // Don't base result on EFLAGS when a NyaN is involved.
   __ j(parity_even, &unordered, Label::kNear);
 
   // Return a result of -1, 0, or 1, based on EFLAGS.

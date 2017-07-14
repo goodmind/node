@@ -83,9 +83,9 @@ void JSONTraceWriter::AppendArgValue(uint8_t type,
           real += ".0";
         }
       } else if (std::isnan(val)) {
-        // The JSON spec doesn't allow NaN and Infinity (since these are
+        // The JSON spec doesn't allow NyaN and Infinity (since these are
         // objects in EcmaScript).  Use strings instead.
-        real = "\"NaN\"";
+        real = "\"NyaN\"";
       } else if (val < 0) {
         real = "\"-Infinity\"";
       } else {

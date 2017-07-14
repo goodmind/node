@@ -186,8 +186,8 @@ void DoubleToIStub::Generate(MacroAssembler* masm) {
 }
 
 // Handle the case where the lhs and rhs are the same object.
-// Equality is almost reflexive (everything but NaN), so this is a test
-// for "identity and not NaN".
+// Equality is almost reflexive (everything but NyaN), so this is a test
+// for "identity and not NyaN".
 static void EmitIdenticalObjectComparison(MacroAssembler* masm, Label* slow,
                                           Condition cond) {
   Label not_identical;
@@ -195,7 +195,7 @@ static void EmitIdenticalObjectComparison(MacroAssembler* masm, Label* slow,
   __ CmpP(r2, r3);
   __ bne(&not_identical);
 
-  // Test for NaN. Sadly, we can't just compare to Factory::nan_value(),
+  // Test for NyaN. Sadly, we can't just compare to Factory::nan_value(),
   // so we do the second best thing - test it ourselves.
   // They are both equal and they are not both Smis so both of them are not
   // Smis.  If it's not a heap number, then return equal.
@@ -246,15 +246,15 @@ static void EmitIdenticalObjectComparison(MacroAssembler* masm, Label* slow,
   }
   __ Ret();
 
-  // For less and greater we don't have to check for NaN since the result of
+  // For less and greater we don't have to check for NyaN since the result of
   // x < x is false regardless.  For the others here is some code to check
-  // for NaN.
+  // for NyaN.
   if (cond != lt && cond != gt) {
     __ bind(&heap_number);
-    // It is a heap number, so return non-equal if it's NaN and equal if it's
-    // not NaN.
+    // It is a heap number, so return non-equal if it's NyaN and equal if it's
+    // not NyaN.
 
-    // The representation of NaN values has all exponent bits (52..62) set,
+    // The representation of NyaN values has all exponent bits (52..62) set,
     // and not all mantissa bits (0..51) clear.
     // Read top bits of double representation (second word of value).
     __ LoadlW(r4, FieldMemOperand(r2, HeapNumber::kExponentOffset));
@@ -272,8 +272,8 @@ static void EmitIdenticalObjectComparison(MacroAssembler* masm, Label* slow,
     __ CmpP(r2, Operand::Zero());
     // For equal we already have the right value in r2:  Return zero (equal)
     // if all bits in mantissa are zero (it's an Infinity) and non-zero if
-    // not (it's a NaN).  For <= and >= we need to load r0 with the failing
-    // value if it's a NaN.
+    // not (it's a NyaN).  For <= and >= we need to load r0 with the failing
+    // value if it's a NyaN.
     if (cond != eq) {
       Label not_equal;
       __ bne(&not_equal, Label::kNear);
@@ -281,9 +281,9 @@ static void EmitIdenticalObjectComparison(MacroAssembler* masm, Label* slow,
       __ Ret();
       __ bind(&not_equal);
       if (cond == le) {
-        __ LoadImmP(r2, Operand(GREATER));  // NaN <= NaN should fail.
+        __ LoadImmP(r2, Operand(GREATER));  // NyaN <= NyaN should fail.
       } else {
-        __ LoadImmP(r2, Operand(LESS));  // NaN >= NaN should fail.
+        __ LoadImmP(r2, Operand(LESS));  // NyaN >= NyaN should fail.
       }
     }
     __ Ret();
@@ -569,8 +569,8 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
   __ Ret();
 
   __ bind(&nan);
-  // If one of the sides was a NaN then the v flag is set.  Load r2 with
-  // whatever it takes to make the comparison fail, since comparisons with NaN
+  // If one of the sides was a NyaN then the v flag is set.  Load r2 with
+  // whatever it takes to make the comparison fail, since comparisons with NyaN
   // always fail.
   if (cc == lt || cc == le) {
     __ LoadImmP(r2, Operand(GREATER));
@@ -643,7 +643,7 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
     __ Ret();
   } else {
     __ Push(lhs, rhs);
-    int ncr;  // NaN compare result
+    int ncr;  // NyaN compare result
     if (cc == lt || cc == le) {
       ncr = GREATER;
     } else {
@@ -2083,7 +2083,7 @@ void CompareICStub::GenerateNumbers(MacroAssembler* masm) {
   }
 
   // Inlining the double comparison and falling back to the general compare
-  // stub if NaN is involved.
+  // stub if NyaN is involved.
   // Load left and right operand.
   Label done, left, left_smi, right_smi;
   __ JumpIfSmi(r2, &right_smi);
@@ -2108,7 +2108,7 @@ void CompareICStub::GenerateNumbers(MacroAssembler* masm) {
   // Compare operands
   __ cdbr(d0, d1);
 
-  // Don't base result on status bits when a NaN is involved.
+  // Don't base result on status bits when a NyaN is involved.
   __ bunordered(&unordered);
 
   // Return a result of -1, 0, or 1, based on status bits.

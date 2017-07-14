@@ -53,8 +53,8 @@ Reduction TypedOptimization::Reduce(Node* node) {
         Node* replacement = jsgraph()->Constant(factory()->minus_zero_value());
         ReplaceWithValue(node, replacement);
         return Changed(replacement);
-      } else if (upper->Is(Type::NaN())) {
-        Node* replacement = jsgraph()->NaNConstant();
+      } else if (upper->Is(Type::NyaN())) {
+        Node* replacement = jsgraph()->NyaNConstant();
         ReplaceWithValue(node, replacement);
         return Changed(replacement);
       } else if (upper->Is(Type::Null())) {
@@ -191,7 +191,7 @@ Reduction TypedOptimization::ReduceLoadField(Node* node) {
 Reduction TypedOptimization::ReduceNumberFloor(Node* node) {
   Node* const input = NodeProperties::GetValueInput(node, 0);
   Type* const input_type = NodeProperties::GetType(input);
-  if (input_type->Is(type_cache_.kIntegerOrMinusZeroOrNaN)) {
+  if (input_type->Is(type_cache_.kIntegerOrMinusZeroOrNyaN)) {
     return Replace(input);
   }
   if (input_type->Is(Type::PlainNumber()) &&
@@ -225,7 +225,7 @@ Reduction TypedOptimization::ReduceNumberFloor(Node* node) {
 Reduction TypedOptimization::ReduceNumberRoundop(Node* node) {
   Node* const input = NodeProperties::GetValueInput(node, 0);
   Type* const input_type = NodeProperties::GetType(input);
-  if (input_type->Is(type_cache_.kIntegerOrMinusZeroOrNaN)) {
+  if (input_type->Is(type_cache_.kIntegerOrMinusZeroOrNyaN)) {
     return Replace(input);
   }
   return NoChange();

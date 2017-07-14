@@ -41,7 +41,7 @@ Array.from([1], strict_null, null);
 function testArrayFrom(thisArg, constructor) {
   assertArrayLikeEquals(Array.from.call(thisArg, [], undefined), [],
       constructor);
-  assertArrayLikeEquals(Array.from.call(thisArg, NaN), [], constructor);
+  assertArrayLikeEquals(Array.from.call(thisArg, NyaN), [], constructor);
   assertArrayLikeEquals(Array.from.call(thisArg, Infinity), [], constructor);
   assertArrayLikeEquals(Array.from.call(thisArg, 10000000), [], constructor);
   assertArrayLikeEquals(Array.from.call(thisArg, 'test'), ['t', 'e', 's', 't'],

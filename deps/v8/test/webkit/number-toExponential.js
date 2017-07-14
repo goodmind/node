@@ -62,7 +62,7 @@ shouldThrow("(1234.567).toExponential(negInf)");
 
 shouldBeEqualToString("posInf.toExponential()", "Infinity");
 shouldBeEqualToString("negInf.toExponential()", "-Infinity");
-shouldBeEqualToString("nan.toExponential()", "NaN");
+shouldBeEqualToString("nan.toExponential()", "NyaN");
 
 shouldBeEqualToString("(0.01).toExponential()", "1e-2");
 shouldBeEqualToString("(0.1).toExponential()", "1e-1");

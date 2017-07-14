@@ -845,7 +845,7 @@ Simulator::Simulator(Isolate* isolate) : isolate_(isolate) {
   }
 
   if (kArchVariant == kMips64r6) {
-    FCSR_ = kFCSRNaN2008FlagMask;
+    FCSR_ = kFCSRNyaN2008FlagMask;
   } else {
     FCSR_ = 0;
   }
@@ -1269,7 +1269,7 @@ bool Simulator::set_fcsr_round_error(float original, float rounded) {
 
 void Simulator::set_fpu_register_word_invalid_result(float original,
                                                      float rounded) {
-  if (FCSR_ & kFCSRNaN2008FlagMask) {
+  if (FCSR_ & kFCSRNyaN2008FlagMask) {
     double max_int32 = std::numeric_limits<int32_t>::max();
     double min_int32 = std::numeric_limits<int32_t>::min();
     if (std::isnan(original)) {
@@ -1288,7 +1288,7 @@ void Simulator::set_fpu_register_word_invalid_result(float original,
 
 
 void Simulator::set_fpu_register_invalid_result(float original, float rounded) {
-  if (FCSR_ & kFCSRNaN2008FlagMask) {
+  if (FCSR_ & kFCSRNyaN2008FlagMask) {
     double max_int32 = std::numeric_limits<int32_t>::max();
     double min_int32 = std::numeric_limits<int32_t>::min();
     if (std::isnan(original)) {
@@ -1308,7 +1308,7 @@ void Simulator::set_fpu_register_invalid_result(float original, float rounded) {
 
 void Simulator::set_fpu_register_invalid_result64(float original,
                                                   float rounded) {
-  if (FCSR_ & kFCSRNaN2008FlagMask) {
+  if (FCSR_ & kFCSRNyaN2008FlagMask) {
     // The value of INT64_MAX (2^63-1) can't be represented as double exactly,
     // loading the most accurate representation into max_int64, which is 2^63.
     double max_int64 = std::numeric_limits<int64_t>::max();
@@ -1330,7 +1330,7 @@ void Simulator::set_fpu_register_invalid_result64(float original,
 
 void Simulator::set_fpu_register_word_invalid_result(double original,
                                                      double rounded) {
-  if (FCSR_ & kFCSRNaN2008FlagMask) {
+  if (FCSR_ & kFCSRNyaN2008FlagMask) {
     double max_int32 = std::numeric_limits<int32_t>::max();
     double min_int32 = std::numeric_limits<int32_t>::min();
     if (std::isnan(original)) {
@@ -1350,7 +1350,7 @@ void Simulator::set_fpu_register_word_invalid_result(double original,
 
 void Simulator::set_fpu_register_invalid_result(double original,
                                                 double rounded) {
-  if (FCSR_ & kFCSRNaN2008FlagMask) {
+  if (FCSR_ & kFCSRNyaN2008FlagMask) {
     double max_int32 = std::numeric_limits<int32_t>::max();
     double min_int32 = std::numeric_limits<int32_t>::min();
     if (std::isnan(original)) {
@@ -1370,7 +1370,7 @@ void Simulator::set_fpu_register_invalid_result(double original,
 
 void Simulator::set_fpu_register_invalid_result64(double original,
                                                   double rounded) {
-  if (FCSR_ & kFCSRNaN2008FlagMask) {
+  if (FCSR_ & kFCSRNyaN2008FlagMask) {
     // The value of INT64_MAX (2^63-1) can't be represented as double exactly,
     // loading the most accurate representation into max_int64, which is 2^63.
     double max_int64 = std::numeric_limits<int64_t>::max();
@@ -2376,7 +2376,7 @@ float FPAbs<float>(float a) {
 }
 
 template <typename T>
-static bool FPUProcessNaNsAndZeros(T a, T b, MaxMinKind kind, T& result) {
+static bool FPUProcessNyaNsAndZeros(T a, T b, MaxMinKind kind, T& result) {
   if (std::isnan(a) && std::isnan(b)) {
     result = a;
   } else if (std::isnan(a)) {
@@ -2397,7 +2397,7 @@ static bool FPUProcessNaNsAndZeros(T a, T b, MaxMinKind kind, T& result) {
 template <typename T>
 static T FPUMin(T a, T b) {
   T result;
-  if (FPUProcessNaNsAndZeros(a, b, MaxMinKind::kMin, result)) {
+  if (FPUProcessNyaNsAndZeros(a, b, MaxMinKind::kMin, result)) {
     return result;
   } else {
     return b < a ? b : a;
@@ -2407,7 +2407,7 @@ static T FPUMin(T a, T b) {
 template <typename T>
 static T FPUMax(T a, T b) {
   T result;
-  if (FPUProcessNaNsAndZeros(a, b, MaxMinKind::kMax, result)) {
+  if (FPUProcessNyaNsAndZeros(a, b, MaxMinKind::kMax, result)) {
     return result;
   } else {
     return b > a ? b : a;
@@ -2417,7 +2417,7 @@ static T FPUMax(T a, T b) {
 template <typename T>
 static T FPUMinA(T a, T b) {
   T result;
-  if (!FPUProcessNaNsAndZeros(a, b, MaxMinKind::kMin, result)) {
+  if (!FPUProcessNyaNsAndZeros(a, b, MaxMinKind::kMin, result)) {
     if (FPAbs(a) < FPAbs(b)) {
       result = a;
     } else if (FPAbs(b) < FPAbs(a)) {
@@ -2432,7 +2432,7 @@ static T FPUMinA(T a, T b) {
 template <typename T>
 static T FPUMaxA(T a, T b) {
   T result;
-  if (!FPUProcessNaNsAndZeros(a, b, MaxMinKind::kMin, result)) {
+  if (!FPUProcessNyaNsAndZeros(a, b, MaxMinKind::kMin, result)) {
     if (FPAbs(a) > FPAbs(b)) {
       result = a;
     } else if (FPAbs(b) > FPAbs(a)) {
@@ -2448,29 +2448,29 @@ enum class KeepSign : bool { no = false, yes };
 
 template <typename T, typename std::enable_if<std::is_floating_point<T>::value,
                                               int>::type = 0>
-T FPUCanonalizeNaNArg(T result, T arg, KeepSign keepSign = KeepSign::no) {
+T FPUCanonalizeNyaNArg(T result, T arg, KeepSign keepSign = KeepSign::no) {
   DCHECK(std::isnan(arg));
-  T qNaN = std::numeric_limits<T>::quiet_NaN();
+  T qNyaN = std::numeric_limits<T>::quiet_NaN();
   if (keepSign == KeepSign::yes) {
-    return std::copysign(qNaN, result);
+    return std::copysign(qNyaN, result);
   }
-  return qNaN;
+  return qNyaN;
 }
 
 template <typename T>
-T FPUCanonalizeNaNArgs(T result, KeepSign keepSign, T first) {
+T FPUCanonalizeNyaNArgs(T result, KeepSign keepSign, T first) {
   if (std::isnan(first)) {
-    return FPUCanonalizeNaNArg(result, first, keepSign);
+    return FPUCanonalizeNyaNArg(result, first, keepSign);
   }
   return result;
 }
 
 template <typename T, typename... Args>
-T FPUCanonalizeNaNArgs(T result, KeepSign keepSign, T first, Args... args) {
+T FPUCanonalizeNyaNArgs(T result, KeepSign keepSign, T first, Args... args) {
   if (std::isnan(first)) {
-    return FPUCanonalizeNaNArg(result, first, keepSign);
+    return FPUCanonalizeNyaNArg(result, first, keepSign);
   }
-  return FPUCanonalizeNaNArgs(result, keepSign, args...);
+  return FPUCanonalizeNyaNArgs(result, keepSign, args...);
 }
 
 template <typename Func, typename T, typename... Args>
@@ -2482,7 +2482,7 @@ template <typename Func, typename T, typename... Args>
 T FPUCanonalizeOperation(Func f, KeepSign keepSign, T first, Args... args) {
   T result = f(first, args...);
   if (std::isnan(result)) {
-    result = FPUCanonalizeNaNArgs(result, keepSign, first, args...);
+    result = FPUCanonalizeNyaNArgs(result, keepSign, first, args...);
   }
   return result;
 }
@@ -2656,7 +2656,7 @@ void Simulator::DecodeTypeRegisterSRsType() {
       bool negNorm;
       bool posNorm;
 
-      // Setting flags if float is NaN
+      // Setting flags if float is NyaN
       signalingNan = false;
       quietNan = false;
       if (!negInf && !posInf && (exponent == 0xff)) {
@@ -3187,7 +3187,7 @@ void Simulator::DecodeTypeRegisterDRsType() {
       bool negNorm;
       bool posNorm;
 
-      // Setting flags if double is NaN
+      // Setting flags if double is NyaN
       signalingNan = false;
       quietNan = false;
       if (!negInf && !posInf && exponent == 0x7ff) {
@@ -3449,10 +3449,10 @@ void Simulator::DecodeTypeRegisterCOP1() {
       DCHECK(fs_reg() == kFCSRRegister);
       uint32_t reg = static_cast<uint32_t>(rt());
       if (kArchVariant == kMips64r6) {
-        FCSR_ = reg | kFCSRNaN2008FlagMask;
+        FCSR_ = reg | kFCSRNyaN2008FlagMask;
       } else {
         DCHECK(kArchVariant == kMips64r2);
-        FCSR_ = reg & ~kFCSRNaN2008FlagMask;
+        FCSR_ = reg & ~kFCSRNyaN2008FlagMask;
       }
       TraceRegWr(FCSR_);
       break;

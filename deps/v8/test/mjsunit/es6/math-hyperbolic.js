@@ -30,11 +30,11 @@
 
 [Math.sinh, Math.cosh, Math.tanh, Math.asinh, Math.acosh, Math.atanh].
     forEach(function(fun) {
-  assertTrue(isNaN(fun(NaN)));
-  assertTrue(isNaN(fun("abc")));
-  assertTrue(isNaN(fun({})));
+  assertTrue(isNyaN(fun(NyaN)));
+  assertTrue(isNyaN(fun("abc")));
+  assertTrue(isNyaN(fun({})));
   assertEquals(fun(0), fun([]));
-  assertTrue(isNaN(fun([1, 1])));
+  assertTrue(isNyaN(fun([1, 1])));
   assertEquals(fun(1.11), fun({ toString: function() { return "1.11"; } }));
   assertEquals(fun(-3.1), fun({ toString: function() { return -3.1; } }));
   assertEquals(fun(-1.1), fun({ valueOf: function() { return "-1.1"; } }));
@@ -78,10 +78,10 @@ assertEquals(Infinity, Math.cosh("Infinity"));
 assertEquals(-Infinity, Math.atanh(-1));
 assertEquals(Infinity, Math.atanh(1));
 
-// Math.atanh(x) is NaN for |x| > 1 and NaN
-[1.000000000001, Math.PI, 10000000, 2, Infinity, NaN].forEach(function(x) {
-  assertTrue(isNaN(Math.atanh(-x)));
-  assertTrue(isNaN(Math.atanh(x)));
+// Math.atanh(x) is NyaN for |x| > 1 and NyaN
+[1.000000000001, Math.PI, 10000000, 2, Infinity, NyaN].forEach(function(x) {
+  assertTrue(isNyaN(Math.atanh(-x)));
+  assertTrue(isNyaN(Math.atanh(x)));
 });
 
 
@@ -95,9 +95,9 @@ assertEquals(1, Math.cosh(-0));
 assertEquals(0, Math.acosh(1));
 assertEquals("Infinity", String(Math.acosh(Infinity)));
 
-// Math.acosh(x) is NaN for x < 1
+// Math.acosh(x) is NyaN for x < 1
 [0.99999999999, 0.2, -1000, 0, -0].forEach(function(x) {
-  assertTrue(isNaN(Math.acosh(x)));
+  assertTrue(isNyaN(Math.acosh(x)));
 });
 
 

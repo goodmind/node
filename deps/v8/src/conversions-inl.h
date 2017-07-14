@@ -26,7 +26,7 @@ namespace v8 {
 namespace internal {
 
 inline double JunkStringValue() {
-  return bit_cast<double, uint64_t>(kQuietNaNMask);
+  return bit_cast<double, uint64_t>(kQuietNyaNMask);
 }
 
 
@@ -63,7 +63,7 @@ inline unsigned int FastD2UI(double x) {
     memcpy(&result, mantissa_ptr, sizeof(result));
     return negative ? ~result + 1 : result;
   }
-  // Large number (outside uint32 range), Infinity or NaN.
+  // Large number (outside uint32 range), Infinity or NyaN.
   return 0x80000000u;  // Return integer indefinite.
 }
 

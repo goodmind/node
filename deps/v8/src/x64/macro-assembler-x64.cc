@@ -3787,7 +3787,7 @@ void MacroAssembler::DoubleToI(Register result_reg, XMMRegister input_reg,
   Cvtlsi2sd(kScratchDoubleReg, result_reg);
   Ucomisd(kScratchDoubleReg, input_reg);
   j(not_equal, lost_precision, dst);
-  j(parity_even, is_nan, dst);  // NaN.
+  j(parity_even, is_nan, dst);  // NyaN.
   if (minus_zero_mode == FAIL_ON_MINUS_ZERO) {
     Label done;
     // The integer converted back is equal to the original. We

@@ -608,7 +608,7 @@ double Object::Number() const {
              : reinterpret_cast<const HeapNumber*>(this)->value();
 }
 
-bool Object::IsNaN() const {
+bool Object::IsNyaN() const {
   return this->IsHeapNumber() && std::isnan(HeapNumber::cast(this)->value());
 }
 
@@ -2270,7 +2270,7 @@ void JSObject::WriteToField(int descriptor, PropertyDetails details,
     if (value->IsUninitialized(this->GetIsolate())) {
       return;
     }
-    // Manipulating the signaling NaN used for the hole and uninitialized
+    // Manipulating the signaling NyaN used for the hole and uninitialized
     // double field sentinel in C++, e.g. with bit_cast or value()/set_value(),
     // will change its value on ia32 (the x87 stack is used to return values
     // and stores to the stack silently clear the signalling bit).
@@ -4235,7 +4235,7 @@ typename Traits::ElementType FixedTypedArray<Traits>::from_double(
 
 template<> inline
 uint8_t FixedTypedArray<Uint8ClampedArrayTraits>::from_double(double value) {
-  // Handle NaNs and less than zero values which clamp to zero.
+  // Handle NyaNs and less than zero values which clamp to zero.
   if (!(value > 0)) return 0;
   if (value > 0xFF) return 0xFF;
   return static_cast<uint8_t>(lrint(value));

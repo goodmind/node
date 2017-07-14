@@ -63,7 +63,7 @@ var IntegerTypedArrayConstructors = [
   var si32a2 = new Int32Array(sab, 4);
 
   // Non-integer indexes should throw RangeError.
-  var nonInteger = [1.4, '1.4', NaN, -Infinity, Infinity, undefined, 'hi', {}];
+  var nonInteger = [1.4, '1.4', NyaN, -Infinity, Infinity, undefined, 'hi', {}];
   nonInteger.forEach(function(i) {
     assertThrows(function() { Atomics.compareExchange(si32a, i, 0); },
                  RangeError);
@@ -389,7 +389,7 @@ function clearArray(sab) {
   // Various invalid cases.
   var valueOf = {valueOf: function(){ return 3;}};
   var toString = {toString: function(){ return '3';}};
-  var invalid = [3.14, 'foo', Infinity, NaN, false, undefined, valueOf,
+  var invalid = [3.14, 'foo', Infinity, NyaN, false, undefined, valueOf,
                  toString];
   invalid.forEach(function(v) {
     assertEquals(false, Atomics.isLockFree(v), JSON.stringify(v));

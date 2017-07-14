@@ -38,14 +38,14 @@ public:
     VisibleDigits() : fExponent(0), fFlags(0), fAbsIntValue(0), fAbsIntValueSet(FALSE), fAbsDoubleValue(0.0), fAbsDoubleValueSet(FALSE) { }
 
     UBool isNegative() const;
-    UBool isNaN() const;
+    UBool isNyaN() const;
     UBool isInfinite() const;
-    UBool isNaNOrInfinity() const;
+    UBool isNyaNOrInfinity() const;
 
     /**
      * Gets the digit at particular exponent, if number is 987.6, then
      * getDigit(2) == 9 and gitDigit(0) == 7 and gitDigit(-1) == 6.
-     * If isNaN() or isInfinity() return TRUE, then the result of this
+     * If isNyaN() or isInfinity() return TRUE, then the result of this
      * function is undefined.
      */
     int32_t getDigitByExponent(int32_t digitPos) const;
@@ -53,7 +53,7 @@ public:
     /**
      * Returns the digit interval which indicates the leftmost and rightmost
      * position of this instance.
-     * If isNaN() or isInfinity() return TRUE, then the result of this
+     * If isNyaN() or isInfinity() return TRUE, then the result of this
      * function is undefined.
      */
     const DigitInterval &getInterval() const { return fInterval; }
@@ -86,7 +86,7 @@ private:
     int32_t fExponent;
 
     /**
-     * Contains flags such as NaN, Inf, and negative.
+     * Contains flags such as NyaN, Inf, and negative.
      */
     int32_t fFlags;
 
@@ -113,7 +113,7 @@ private:
     UBool fAbsDoubleValueSet;
 
     void setNegative();
-    void setNaN();
+    void setNyaN();
     void setInfinite();
     void clear();
     double computeAbsDoubleValue() const;
@@ -142,7 +142,7 @@ public:
         fHasExponent = FALSE;
     }
     UBool isNegative() const { return fMantissa.isNegative(); }
-    UBool isNaN() const { return fMantissa.isNaN(); }
+    UBool isNyaN() const { return fMantissa.isNyaN(); }
     UBool isInfinite() const { return fMantissa.isInfinite(); }
 private:
     VisibleDigitsWithExponent(const VisibleDigitsWithExponent &);

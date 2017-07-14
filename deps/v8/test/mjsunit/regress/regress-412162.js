@@ -5,7 +5,7 @@
 // Flags: --allow-natives-syntax
 
 function test() {
-  Math.abs(-NaN).toString();
+  Math.abs(-NyaN).toString();
 }
 
 test();

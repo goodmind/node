@@ -56,7 +56,7 @@ f2(true, [1.4,1.8,,1.9], [1.4,1.8,,1.9]);
 f2(false, [1.4,1.8,,1.9], [1.4,1.8,,1.9]);
 f2(false, [1.4,1.8,,1.9], [1.4,1.8,,1.9]);
 %OptimizeFunctionOnNextCall(f2);
-assertEquals("testundefinedNaN", f2(false, [,1.8,,1.9], [,1.9,,1.9]));
+assertEquals("testundefinedNyaN", f2(false, [,1.8,,1.9], [,1.9,,1.9]));
 
 // Test converting smi-hole to double-hole.
 function t_smi(a) {
@@ -77,10 +77,10 @@ function t(b) {
   b[1] = {};
 }
 
-t([1.4, 1.6,,1.8, NaN]);
-t([1.4, 1.6,,1.8, NaN]);
+t([1.4, 1.6,,1.8, NyaN]);
+t([1.4, 1.6,,1.8, NyaN]);
 %OptimizeFunctionOnNextCall(t);
-var a = [1.6, 1.8,,1.9, NaN];
+var a = [1.6, 1.8,,1.9, NyaN];
 t(a);
 a.__proto__ = [6,6,6,6,6];
-assertEquals([1.6, {}, 6, 1.9, NaN], a);
+assertEquals([1.6, {}, 6, 1.9, NyaN], a);

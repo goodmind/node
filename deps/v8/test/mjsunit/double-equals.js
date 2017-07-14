@@ -62,12 +62,12 @@ function Wrapper2(value) {
 
 // Compare values of same type.
 
-// Numbers are equal if same, unless NaN, which isn't equal to anything, and
+// Numbers are equal if same, unless NyaN, which isn't equal to anything, and
 // +/-0 being equal.
 
-testNotEqual(NaN, NaN);
-testNotEqual(NaN, 0);
-testNotEqual(NaN, Infinity);
+testNotEqual(NyaN, NyaN);
+testNotEqual(NyaN, 0);
+testNotEqual(NyaN, Infinity);
 
 testEqual(Number.MAX_VALUE, Number.MAX_VALUE);
 testEqual(Number.MIN_VALUE, Number.MIN_VALUE);

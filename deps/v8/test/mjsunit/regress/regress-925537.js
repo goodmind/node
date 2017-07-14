@@ -33,7 +33,7 @@ function assertClose(expected, actual) {
   }
 }
 
-assertEquals(1, Math.pow(NaN, 0));
+assertEquals(1, Math.pow(NyaN, 0));
 var pinf = Number.POSITIVE_INFINITY, ninf = Number.NEGATIVE_INFINITY;
 assertClose( Math.PI / 4, Math.atan2(pinf, pinf));
 assertClose(-Math.PI / 4, Math.atan2(ninf, pinf));

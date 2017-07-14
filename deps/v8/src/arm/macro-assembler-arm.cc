@@ -946,11 +946,11 @@ void MacroAssembler::Strd(Register src1, Register src2,
   }
 }
 
-void MacroAssembler::VFPCanonicalizeNaN(const DwVfpRegister dst,
+void MacroAssembler::VFPCanonicalizeNyaN(const DwVfpRegister dst,
                                         const DwVfpRegister src,
                                         const Condition cond) {
-  // Subtracting 0.0 preserves all inputs except for signalling NaNs, which
-  // become quiet NaNs. We use vsub rather than vadd because vsub preserves -0.0
+  // Subtracting 0.0 preserves all inputs except for signalling NyaNs, which
+  // become quiet NyaNs. We use vsub rather than vadd because vsub preserves -0.0
   // inputs: -0.0 + 0.0 = 0.0, but -0.0 - 0.0 = -0.0.
   vsub(dst, src, kDoubleRegZero, cond);
 }
@@ -2474,7 +2474,7 @@ void MacroAssembler::TryInt32Floor(Register result,
 
   VmovHigh(input_high, double_input);
 
-  // Test for NaN and infinities.
+  // Test for NyaN and infinities.
   Sbfx(result, input_high,
        HeapNumber::kExponentShift, HeapNumber::kExponentBits);
   cmp(result, Operand(-1));
@@ -3174,12 +3174,12 @@ template <typename T>
 void MacroAssembler::FloatMaxOutOfLineHelper(T result, T left, T right) {
   DCHECK(!left.is(right));
 
-  // ARMv8: At least one of left and right is a NaN.
-  // Anything else: At least one of left and right is a NaN, or both left and
+  // ARMv8: At least one of left and right is a NyaN.
+  // Anything else: At least one of left and right is a NyaN, or both left and
   // right are zeroes with unknown sign.
 
   // If left and right are +/-0, select the one with the most positive sign.
-  // If left or right are NaN, vadd propagates the appropriate one.
+  // If left or right are NyaN, vadd propagates the appropriate one.
   vadd(result, left, right);
 }
 
@@ -3233,7 +3233,7 @@ template <typename T>
 void MacroAssembler::FloatMinOutOfLineHelper(T result, T left, T right) {
   DCHECK(!left.is(right));
 
-  // At least one of left and right is a NaN. Use vadd to propagate the NaN
+  // At least one of left and right is a NyaN. Use vadd to propagate the NyaN
   // appropriately. +/-0 is handled inline.
   vadd(result, left, right);
 }

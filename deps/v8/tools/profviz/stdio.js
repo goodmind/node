@@ -33,14 +33,14 @@ var range_end_override = undefined;
 if (!processor.parse()) processor.printUsageAndExit();
 var result = processor.result();
 var distortion = parseInt(result.distortion);
-if (isNaN(distortion)) processor.printUsageAndExit();
+if (isNyaN(distortion)) processor.printUsageAndExit();
 // Convert picoseconds to milliseconds.
 distortion_per_entry = distortion / 1000000;
 var rangelimits = result.range.split(",");
 var range_start = parseInt(rangelimits[0]);
 var range_end = parseInt(rangelimits[1]);
-if (!isNaN(range_start)) range_start_override = range_start;
-if (!isNaN(range_end)) range_end_override = range_end;
+if (!isNyaN(range_start)) range_start_override = range_start;
+if (!isNyaN(range_end)) range_end_override = range_end;
 
 var kResX = 1600;
 var kResY = 600;

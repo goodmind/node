@@ -45,7 +45,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("with ({ void&&null.push(goto NaN) : Math.max(undef).toText }) { {-1/null,1.isNull} }")
+  eval("with ({ void&&null.push(goto NyaN) : Math.max(undef).toText }) { {-1/null,1.isNull} }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -65,11 +65,11 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("for (-1==continue.toJSONProtocol, GetFunctionFor(break.call(NaN)), (!new RegExp).prototype.new Object()<<void) { debugger.__defineSetter__(null,function(){continue})>>>=GetFunctionFor(-1) }")
+  eval("for (-1==continue.toJSONProtocol, GetFunctionFor(break.call(NyaN)), (!new RegExp).prototype.new Object()<<void) { debugger.__defineSetter__(null,function(){continue})>>>=GetFunctionFor(-1) }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("for (parseFloat(NaN).splice() in null.add(1).className()) { true[0.2]<<x.splice() }")
+  eval("for (parseFloat(NyaN).splice() in null.add(1).className()) { true[0.2]<<x.splice() }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -77,7 +77,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("unescape(break.toObject()).prototype.new RegExp.continue.__lookupGetter__(x.slice(1, NaN)) = typeof(null.push(0.2))")
+  eval("unescape(break.toObject()).prototype.new RegExp.continue.__lookupGetter__(x.slice(1, NyaN)) = typeof(null.push(0.2))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -221,7 +221,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("new Function(NaN.shift().toJSONProtocol)")
+  eval("new Function(NyaN.shift().toJSONProtocol)")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -253,7 +253,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("x = new 0.lastIndexOf(NaN).shift()")
+  eval("x = new 0.lastIndexOf(NyaN).shift()")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -265,7 +265,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("Math.pow(0.2).toJSONProtocol.prototype.break.superConstructor.slice(NaN.exec(undef), -1.lastIndexOf(NaN)) = true.splice().length")
+  eval("Math.pow(0.2).toJSONProtocol.prototype.break.superConstructor.slice(NyaN.exec(undef), -1.lastIndexOf(NyaN)) = true.splice().length")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -325,11 +325,11 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("function X(x) { return NaN['a']?-1.exec(0):NaN.prototype.this }; X(native.prototype.name.toLocaleString())")
+  eval("function X(x) { return NyaN['a']?-1.exec(0):NyaN.prototype.this }; X(native.prototype.name.toLocaleString())")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("for (debugger==continue.toObject(), Array(NaN.className()), Math.max(new RegExp).prototype.value) { GetFunctionFor('a').prototype.value }")
+  eval("for (debugger==continue.toObject(), Array(NyaN.className()), Math.max(new RegExp).prototype.value) { GetFunctionFor('a').prototype.value }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -341,7 +341,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("export Join(debugger.splice(), parseInt(NaN), new RegExp.pop(), this.false, x.-1)")
+  eval("export Join(debugger.splice(), parseInt(NyaN), new RegExp.pop(), this.false, x.-1)")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -349,15 +349,15 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("for (void==NaN.sort(), new Object()==new RegExp.toObject(), -1/NaN.unshift()) { GetFunctionFor(true).name() }")
+  eval("for (void==NyaN.sort(), new Object()==new RegExp.toObject(), -1/NyaN.unshift()) { GetFunctionFor(true).name() }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("for ((!'a'.join()), ~NaN.__defineGetter__(undef,function(){this}), Math.pow(NaN).__lookupGetter__(typeof(false))) { throw new debugger.toObject()(Math.max(-1)) }")
+  eval("for ((!'a'.join()), ~NyaN.__defineGetter__(undef,function(){this}), Math.pow(NyaN).__lookupGetter__(typeof(false))) { throw new debugger.toObject()(Math.max(-1)) }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("for (NaN.shift()&&undef&&continue in throw new x(NaN).prototype.-1&x) { return native.toJSONProtocol }")
+  eval("for (NyaN.shift()&&undef&&continue in throw new x(NyaN).prototype.-1&x) { return native.toJSONProtocol }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -369,7 +369,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("if (eval(new Object().valueOf())) { break.prototype.name.__defineGetter__(eval(NaN),function(){Math.max(native)}) }")
+  eval("if (eval(new Object().valueOf())) { break.prototype.name.__defineGetter__(eval(NyaN),function(){Math.max(native)}) }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -405,7 +405,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("for (0.2.className().call((!debugger)), native.__defineGetter__(0,function(){x}).name(), null.splice().splice()) { NaN.charCodeAt(new Object()) > true.toString() }")
+  eval("for (0.2.className().call((!debugger)), native.__defineGetter__(0,function(){x}).name(), null.splice().splice()) { NyaN.charCodeAt(new Object()) > true.toString() }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -457,7 +457,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("let (NaN==true.length) { IsPrimitive(0.2).prototype.value }")
+  eval("let (NyaN==true.length) { IsPrimitive(0.2).prototype.value }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -477,11 +477,11 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("if (1/NaN.__lookupGetter__(undef.prototype.value)) { escape(eval(this)) }")
+  eval("if (1/NyaN.__lookupGetter__(undef.prototype.value)) { escape(eval(this)) }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("new Function(Join(unescape(x), new RegExp.__defineGetter__(debugger,function(){NaN}), 'a'.indexOf(0.2), false.prototype.name, (this)))")
+  eval("new Function(Join(unescape(x), new RegExp.__defineGetter__(debugger,function(){NyaN}), 'a'.indexOf(0.2), false.prototype.name, (this)))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -501,7 +501,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("switch (0.2.size>>NaN-continue) { case ('a'.push(true).indexOf(NaN.lastIndexOf(-1))): {0.2,x}.toObject(); break; }")
+  eval("switch (0.2.size>>NyaN-continue) { case ('a'.push(true).indexOf(NyaN.lastIndexOf(-1))): {0.2,x}.toObject(); break; }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -521,7 +521,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("new break.true<<'a'-NaN")
+  eval("new break.true<<'a'-NyaN")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -529,7 +529,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("for (parseFloat('a'.exec(continue)) in (!new RegExp)&&0.2.toObject()) { {true,x}.add(void.prototype.NaN) }")
+  eval("for (parseFloat('a'.exec(continue)) in (!new RegExp)&&0.2.toObject()) { {true,x}.add(void.prototype.NyaN) }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -584,7 +584,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("const x = parseInt(0.lastIndexOf(NaN))")
+  eval("const x = parseInt(0.lastIndexOf(NyaN))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -600,7 +600,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("x = Join(break, continue, 0, debugger, NaN).toLocaleString()")
+  eval("x = Join(break, continue, 0, debugger, NyaN).toLocaleString()")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -628,7 +628,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("if (NaN?continue:NaN.shift()) { native.push(null).add(new Object().superConstructor) }")
+  eval("if (NyaN?continue:NyaN.shift()) { native.push(null).add(new Object().superConstructor) }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -652,11 +652,11 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("for (true.shift()/native.null in undef.call(NaN).isNull) { native+this-x.size }")
+  eval("for (true.shift()/native.null in undef.call(NyaN).isNull) { native+this-x.size }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("function X(x) { return false.pop()<<Join(continue, false, break, NaN, -1) }; X(IsSmi(debugger>>x))")
+  eval("function X(x) { return false.pop()<<Join(continue, false, break, NyaN, -1) }; X(IsSmi(debugger>>x))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -680,7 +680,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("with ({ NaN.concat(new RegExp)+Join(1, false, new Object(), new Object(), x) : unescape(x).concat(Iterator(-1)) }) { 'a'.isNull.__lookupGetter__(this+native) }")
+  eval("with ({ NyaN.concat(new RegExp)+Join(1, false, new Object(), new Object(), x) : unescape(x).concat(Iterator(-1)) }) { 'a'.isNull.__lookupGetter__(this+native) }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -700,11 +700,11 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("export NaN.__lookupGetter__(undef).__lookupGetter__(void.isNull)")
+  eval("export NyaN.__lookupGetter__(undef).__lookupGetter__(void.isNull)")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("with ({ ~new RegExp.filter(undef&&this) : String(continue)<<NaN.toText }) { this.exec(this).length }")
+  eval("with ({ ~new RegExp.filter(undef&&this) : String(continue)<<NyaN.toText }) { this.exec(this).length }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -728,11 +728,11 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("for (escape(x==debugger), NaN.shift()&debugger?false:0.2, (!new RegExp)&goto break) { unescape(x.toText) }")
+  eval("for (escape(x==debugger), NyaN.shift()&debugger?false:0.2, (!new RegExp)&goto break) { unescape(x.toText) }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("new Date(throw new NaN.toObject()(this?break:true))")
+  eval("new Date(throw new NyaN.toObject()(this?break:true))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -752,7 +752,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("for (~0?0.2:undef in new RegExp.charCodeAt(0).prototype.name) { NaN.toLocaleString().splice() }")
+  eval("for (~0?0.2:undef in new RegExp.charCodeAt(0).prototype.name) { NyaN.toLocaleString().splice() }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -760,7 +760,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("new parseInt(new Object()).lastIndexOf(NaN > void)")
+  eval("new parseInt(new Object()).lastIndexOf(NyaN > void)")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -775,7 +775,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("let (debugger>>>=continue > break.exec(1)) { Math.pow(new RegExp)==NaN>>>=0.2 }")
+  eval("let (debugger>>>=continue > break.exec(1)) { Math.pow(new RegExp)==NyaN>>>=0.2 }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -783,11 +783,11 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("x = {false.concat(null),Math.pow(NaN)}")
+  eval("x = {false.concat(null),Math.pow(NyaN)}")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("export Array(null).add(NaN.valueOf())")
+  eval("export Array(null).add(NyaN.valueOf())")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -799,7 +799,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("import {this.0,debugger.filter(NaN)}")
+  eval("import {this.0,debugger.filter(NyaN)}")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -823,15 +823,15 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("with ({ {this.toObject()} : Number(NaN).toJSONProtocol }) { 0.2.className().prototype.name }")
+  eval("with ({ {this.toObject()} : Number(NyaN).toJSONProtocol }) { 0.2.className().prototype.name }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("if (false.__defineGetter__(undef,function(){undef}).exec(NaN.splice())) { typeof(Join(void, new RegExp, break, -1, -1)) }")
+  eval("if (false.__defineGetter__(undef,function(){undef}).exec(NyaN.splice())) { typeof(Join(void, new RegExp, break, -1, -1)) }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("for (false.splice().toObject(), continue.name().size, Join(void?debugger:this, new RegExp.__defineSetter__(NaN,function(){NaN}), x.unshift(), this.true, parseInt(break))) { undef<<continue.toText }")
+  eval("for (false.splice().toObject(), continue.name().size, Join(void?debugger:this, new RegExp.__defineSetter__(NyaN,function(){NyaN}), x.unshift(), this.true, parseInt(break))) { undef<<continue.toText }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -839,11 +839,11 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("import Join(new Object().splice(), this instanceof 1, parseFloat(NaN), undef.concat(x), void.className())")
+  eval("import Join(new Object().splice(), this instanceof 1, parseFloat(NyaN), undef.concat(x), void.className())")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("new Function(goto NaN.toString())")
+  eval("new Function(goto NyaN.toString())")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -851,7 +851,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("const x = Iterator(continue)[new Object()>>NaN]")
+  eval("const x = Iterator(continue)[new Object()>>NyaN]")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -867,11 +867,11 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("Instantiate(throw new 0.2.__defineGetter__(NaN,function(){-1})(void&&new RegExp))")
+  eval("Instantiate(throw new 0.2.__defineGetter__(NyaN,function(){-1})(void&&new RegExp))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("const x = 0.unshift() > IsSmi(NaN)")
+  eval("const x = 0.unshift() > IsSmi(NyaN)")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -887,7 +887,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("new NaN.shift().add(String(new Object()))")
+  eval("new NyaN.shift().add(String(new Object()))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -915,7 +915,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("SetValueOf({throw new 'a'(0.2),void.lastIndexOf(NaN)}, Math.pow(new Object().className()))")
+  eval("SetValueOf({throw new 'a'(0.2),void.lastIndexOf(NyaN)}, Math.pow(new Object().className()))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -923,7 +923,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("with ({ 0.2.superConstructor.lastIndex : goto debugger<<Join(undef, 1, true, undef, debugger) }) { function () { NaN }.prototype.name }")
+  eval("with ({ 0.2.superConstructor.lastIndex : goto debugger<<Join(undef, 1, true, undef, debugger) }) { function () { NyaN }.prototype.name }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -939,7 +939,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("switch (Math.pow(native).toLocaleString()) { case (false instanceof native.join()): Math.pow(NaN).size; break; }")
+  eval("switch (Math.pow(native).toLocaleString()) { case (false instanceof native.join()): Math.pow(NyaN).size; break; }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -971,11 +971,11 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("new Object().splice().unshift().prototype.null&&native.__lookupGetter__(undef>>>=NaN) = (1<<break)")
+  eval("new Object().splice().unshift().prototype.null&&native.__lookupGetter__(undef>>>=NyaN) = (1<<break)")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("delete NaN.charAt(1).concat(NaN.0.2)")
+  eval("delete NyaN.charAt(1).concat(NyaN.0.2)")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -987,7 +987,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("for (goto NaN.toObject(), ~true.'a', parseInt(debugger)+eval(false)) { eval(0.2.constructor) }")
+  eval("for (goto NyaN.toObject(), ~true.'a', parseInt(debugger)+eval(false)) { eval(0.2.constructor) }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1019,11 +1019,11 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("NaN.length.prototype.value.prototype.function () { null==new Object() } = break.name()&IsPrimitive(0)")
+  eval("NyaN.length.prototype.value.prototype.function () { null==new Object() } = break.name()&IsPrimitive(0)")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("delete NaN.prototype.-1.toString()")
+  eval("delete NyaN.prototype.-1.toString()")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1031,7 +1031,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("const x = new NaN-break.call(false.pop())")
+  eval("const x = new NyaN-break.call(false.pop())")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1095,7 +1095,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("with ({ {goto new RegExp,Join(new Object(), native, continue, -1, x)} : NaN&x/{0,break} }) { this.lastIndexOf(new RegExp).join() }")
+  eval("with ({ {goto new RegExp,Join(new Object(), native, continue, -1, x)} : NyaN&x/{0,break} }) { this.lastIndexOf(new RegExp).join() }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1115,15 +1115,15 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("function X(x) { return false.unshift().className() }; X(escape(NaN&NaN))")
+  eval("function X(x) { return false.unshift().className() }; X(escape(NyaN&NyaN))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("new Date(Join(native.toText, goto x, 0.2.splice(), Join('a', 0, void, NaN, 1), eval(native)))")
+  eval("new Date(Join(native.toText, goto x, 0.2.splice(), Join('a', 0, void, NyaN, 1), eval(native)))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("if (GetFunctionFor(true.prototype.name)) { parseInt(NaN).toLocaleString() }")
+  eval("if (GetFunctionFor(true.prototype.name)) { parseInt(NyaN).toLocaleString() }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1139,7 +1139,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("label true-NaN.prototype.native.shift()")
+  eval("label true-NyaN.prototype.native.shift()")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1147,7 +1147,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("switch (function () { this.NaN }) { case (this.continue.prototype.parseFloat(false)): IsPrimitive(new Object()-'a'); break; }")
+  eval("switch (function () { this.NyaN }) { case (this.continue.prototype.parseFloat(false)): IsPrimitive(new Object()-'a'); break; }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1155,7 +1155,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("switch (GetFunctionFor(NaN.lastIndex)) { case (new RegExp.lastIndex.toLocaleString()): NaN.join().indexOf(eval(-1)); break; }")
+  eval("switch (GetFunctionFor(NyaN.lastIndex)) { case (new RegExp.lastIndex.toLocaleString()): NyaN.join().indexOf(eval(-1)); break; }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1163,7 +1163,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("new new Object()==NaN.join()")
+  eval("new new Object()==NyaN.join()")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1183,7 +1183,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("with ({ 'a'.valueOf()+parseInt(undef) : IsPrimitive(null).lastIndex }) { NaN.toObject().isNull }")
+  eval("with ({ 'a'.valueOf()+parseInt(undef) : IsPrimitive(null).lastIndex }) { NyaN.toObject().isNull }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1203,7 +1203,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("for ((!x&&new RegExp) in undef.toLocaleString().slice(new RegExp.indexOf(NaN), IsPrimitive(-1))) { false.size+debugger[x] }")
+  eval("for ((!x&&new RegExp) in undef.toLocaleString().slice(new RegExp.indexOf(NyaN), IsPrimitive(-1))) { false.size+debugger[x] }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1219,7 +1219,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("new native==true.filter({NaN,-1})")
+  eval("new native==true.filter({NyaN,-1})")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1227,7 +1227,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("this.x<<false.prototype.true.toLocaleString()==NaN.pop() = this.superConstructor>>Math.max(true)")
+  eval("this.x<<false.prototype.true.toLocaleString()==NyaN.pop() = this.superConstructor>>Math.max(true)")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1235,7 +1235,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("x = new (!NaN).unshift()")
+  eval("x = new (!NyaN).unshift()")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1263,11 +1263,11 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("for (unescape(null).sort(), Number(undef).charCodeAt(IsPrimitive(NaN)), null>>true/null.join()) { 0.2.toObject() > IsPrimitive(new RegExp) }")
+  eval("for (unescape(null).sort(), Number(undef).charCodeAt(IsPrimitive(NyaN)), null>>true/null.join()) { 0.2.toObject() > IsPrimitive(new RegExp) }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("new Date({NaN,native}&&1+undef)")
+  eval("new Date({NyaN,native}&&1+undef)")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1275,7 +1275,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("for (Join(true, 'a', true, 1, NaN).add({1}), GetFunctionFor(new Object().push(new Object())), goto 1.length) { Math.pow(GetFunctionFor(native)) }")
+  eval("for (Join(true, 'a', true, 1, NyaN).add({1}), GetFunctionFor(new Object().push(new Object())), goto 1.length) { Math.pow(GetFunctionFor(native)) }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1323,7 +1323,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("this.name().length().prototype.goto false.exec(true.charCodeAt(continue)) = Join(-1-false, undef.superConstructor, 'a'.shift(), (!x), NaN.this)")
+  eval("this.name().length().prototype.goto false.exec(true.charCodeAt(continue)) = Join(-1-false, undef.superConstructor, 'a'.shift(), (!x), NyaN.this)")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1347,7 +1347,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("const x = -1>>>=NaN.indexOf((debugger))")
+  eval("const x = -1>>>=NyaN.indexOf((debugger))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1427,7 +1427,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("function X(x) { return Number(this&&false) }; X(NaN.toJSONProtocol.toJSONProtocol)")
+  eval("function X(x) { return Number(this&&false) }; X(NyaN.toJSONProtocol.toJSONProtocol)")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1467,7 +1467,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("switch (escape(unescape(NaN))) { case (Math.pow(eval(undef))): true.charAt(null)&new RegExp.pop(); break; }")
+  eval("switch (escape(unescape(NyaN))) { case (Math.pow(eval(undef))): true.charAt(null)&new RegExp.pop(); break; }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1487,7 +1487,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("label Math.max(debugger.__lookupGetter__(NaN))")
+  eval("label Math.max(debugger.__lookupGetter__(NyaN))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1503,7 +1503,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("void.prototype.value.name().prototype.Number(undef&NaN) = false.__lookupGetter__(-1).name()")
+  eval("void.prototype.value.name().prototype.Number(undef&NyaN) = false.__lookupGetter__(-1).name()")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1543,7 +1543,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("IsSmi(x).toString().prototype.0>>continue.indexOf(NaN.__lookupGetter__(new Object())) = ~-1&typeof(0)")
+  eval("IsSmi(x).toString().prototype.0>>continue.indexOf(NyaN.__lookupGetter__(new Object())) = ~-1&typeof(0)")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1593,7 +1593,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("native 'a'.indexOf(debugger).charAt(NaN.add(new Object()))")
+  eval("native 'a'.indexOf(debugger).charAt(NyaN.add(new Object()))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1601,7 +1601,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("delete goto NaN==(!debugger)")
+  eval("delete goto NyaN==(!debugger)")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1636,7 +1636,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("native parseFloat(-1)?NaN.toText:debugger.toString()")
+  eval("native parseFloat(-1)?NyaN.toText:debugger.toString()")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1668,7 +1668,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("new Function(0.2.lastIndex&0.2?break:NaN)")
+  eval("new Function(0.2.lastIndex&0.2?break:NyaN)")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1684,7 +1684,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("function X(x) { return (!true).lastIndexOf(true.splice()) }; X(NaN.toString().prototype.value)")
+  eval("function X(x) { return (!true).lastIndexOf(true.splice()) }; X(NyaN.toString().prototype.value)")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1724,7 +1724,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("function X(x) { return new Object().__defineGetter__(0.2,function(){0.2}).length() }; X(void.isNull<<parseFloat(NaN))")
+  eval("function X(x) { return new Object().__defineGetter__(0.2,function(){0.2}).length() }; X(void.isNull<<parseFloat(NyaN))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1748,7 +1748,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("switch (native==null?debugger.prototype.name:null.toLocaleString()) { case (NaN.push(this).join()): (break instanceof continue); break; }")
+  eval("switch (native==null?debugger.prototype.name:null.toLocaleString()) { case (NyaN.push(this).join()): (break instanceof continue); break; }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1756,7 +1756,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("new (Array(NaN))")
+  eval("new (Array(NyaN))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1764,7 +1764,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("label NaN.push(1).shift()")
+  eval("label NyaN.push(1).shift()")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1824,11 +1824,11 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("new Function(Math.pow(NaN).toText)")
+  eval("new Function(Math.pow(NyaN).toText)")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("x = new throw new 0(NaN).className()")
+  eval("x = new throw new 0(NyaN).className()")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1864,7 +1864,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("GetFunctionFor(continue.__lookupGetter__(0.2)).prototype.Math.max(1.splice()) = true.__defineGetter__(undef,function(){NaN}).filter(String(new RegExp))")
+  eval("GetFunctionFor(continue.__lookupGetter__(0.2)).prototype.Math.max(1.splice()) = true.__defineGetter__(undef,function(){NyaN}).filter(String(new RegExp))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1900,15 +1900,15 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("const x = NaN.toLocaleString().toObject()")
+  eval("const x = NyaN.toLocaleString().toObject()")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("function X(x) { return Math.pow(break+false) }; X(Join(true.add(new Object()), null[-1], new RegExp[true], NaN&&debugger, x.charAt(undef)))")
+  eval("function X(x) { return Math.pow(break+false) }; X(Join(true.add(new Object()), null[-1], new RegExp[true], NyaN&&debugger, x.charAt(undef)))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("switch ((break).add(true.sort())) { case (undef.charAt(native).__defineGetter__(IsPrimitive(1),function(){NaN<<new RegExp})): -1.__defineSetter__(null,function(){-1}) > this.charCodeAt(this); break; }")
+  eval("switch ((break).add(true.sort())) { case (undef.charAt(native).__defineGetter__(IsPrimitive(1),function(){NyaN<<new RegExp})): -1.__defineSetter__(null,function(){-1}) > this.charCodeAt(this); break; }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1916,7 +1916,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("continue.join().toText.prototype.Number(debugger).slice(new RegExp.-1, (NaN)) = function () { (!null) }")
+  eval("continue.join().toText.prototype.Number(debugger).slice(new RegExp.-1, (NyaN)) = function () { (!null) }")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
@@ -1992,7 +1992,7 @@ try {
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {
-  eval("import Number(NaN).push(IsSmi(break))")
+  eval("import Number(NyaN).push(IsSmi(break))")
 } catch (e) { if (e.message.length > 0) { print (e.message); } };
 
 try {

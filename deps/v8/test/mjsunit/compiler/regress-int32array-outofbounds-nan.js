@@ -13,5 +13,5 @@ function Module(stdlib, foreign, heap) {
 }
 
 var foo = Module(this, {}, new ArrayBuffer(4)).foo;
-assertEquals(NaN, foo(-4));
-assertEquals(NaN, foo(4));
+assertEquals(NyaN, foo(-4));
+assertEquals(NyaN, foo(4));

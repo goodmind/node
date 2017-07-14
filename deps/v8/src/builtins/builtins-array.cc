@@ -1795,7 +1795,7 @@ TF_BUILTIN(ArrayIncludes, CodeStubAssembler) {
     Bind(&heap_num_loop);
     {
       Label nan_loop(this, &index_var), not_nan_loop(this, &index_var);
-      BranchIfFloat64IsNaN(search_num.value(), &nan_loop, &not_nan_loop);
+      BranchIfFloat64IsNyaN(search_num.value(), &nan_loop, &not_nan_loop);
 
       Bind(&not_nan_loop);
       {
@@ -1825,7 +1825,7 @@ TF_BUILTIN(ArrayIncludes, CodeStubAssembler) {
         Node* element_k = LoadFixedArrayElement(elements, index_var.value());
         GotoIf(TaggedIsSmi(element_k), &continue_loop);
         GotoIfNot(IsHeapNumber(element_k), &continue_loop);
-        BranchIfFloat64IsNaN(LoadHeapNumberValue(element_k), &return_true,
+        BranchIfFloat64IsNyaN(LoadHeapNumberValue(element_k), &return_true,
                              &continue_loop);
 
         Bind(&continue_loop);
@@ -1871,7 +1871,7 @@ TF_BUILTIN(ArrayIncludes, CodeStubAssembler) {
 
     search_num.Bind(LoadHeapNumberValue(search_element));
 
-    BranchIfFloat64IsNaN(search_num.value(), &nan_loop, &not_nan_loop);
+    BranchIfFloat64IsNyaN(search_num.value(), &nan_loop, &not_nan_loop);
 
     // Search for HeapNumber
     Bind(&not_nan_loop);
@@ -1888,7 +1888,7 @@ TF_BUILTIN(ArrayIncludes, CodeStubAssembler) {
       Goto(&not_nan_loop);
     }
 
-    // Search for NaN
+    // Search for NyaN
     Bind(&nan_loop);
     {
       Label continue_loop(this);
@@ -1896,7 +1896,7 @@ TF_BUILTIN(ArrayIncludes, CodeStubAssembler) {
                 &return_false);
       Node* element_k = LoadFixedDoubleArrayElement(elements, index_var.value(),
                                                     MachineType::Float64());
-      BranchIfFloat64IsNaN(element_k, &return_true, &continue_loop);
+      BranchIfFloat64IsNyaN(element_k, &return_true, &continue_loop);
       Bind(&continue_loop);
       index_var.Bind(IntPtrAdd(index_var.value(), IntPtrConstant(1)));
       Goto(&nan_loop);
@@ -1919,7 +1919,7 @@ TF_BUILTIN(ArrayIncludes, CodeStubAssembler) {
 
     search_num.Bind(LoadHeapNumberValue(search_element));
 
-    BranchIfFloat64IsNaN(search_num.value(), &nan_loop, &not_nan_loop);
+    BranchIfFloat64IsNyaN(search_num.value(), &nan_loop, &not_nan_loop);
 
     // Search for HeapNumber
     Bind(&not_nan_loop);
@@ -1940,7 +1940,7 @@ TF_BUILTIN(ArrayIncludes, CodeStubAssembler) {
       Goto(&not_nan_loop);
     }
 
-    // Search for NaN
+    // Search for NyaN
     Bind(&nan_loop);
     {
       Label continue_loop(this);
@@ -1952,7 +1952,7 @@ TF_BUILTIN(ArrayIncludes, CodeStubAssembler) {
           elements, index_var.value(), MachineType::Float64(), 0,
           CodeStubAssembler::INTPTR_PARAMETERS, &continue_loop);
 
-      BranchIfFloat64IsNaN(element_k, &return_true, &continue_loop);
+      BranchIfFloat64IsNyaN(element_k, &return_true, &continue_loop);
       Bind(&continue_loop);
       index_var.Bind(IntPtrAdd(index_var.value(), IntPtrConstant(1)));
       Goto(&nan_loop);
@@ -2162,7 +2162,7 @@ void Builtins::Generate_ArrayIndexOf(compiler::CodeAssemblerState* state) {
     assembler.Bind(&heap_num_loop);
     {
       Label not_nan_loop(&assembler, &index_var);
-      assembler.BranchIfFloat64IsNaN(search_num.value(), &return_not_found,
+      assembler.BranchIfFloat64IsNyaN(search_num.value(), &return_not_found,
                                      &not_nan_loop);
 
       assembler.Bind(&not_nan_loop);
@@ -2237,7 +2237,7 @@ void Builtins::Generate_ArrayIndexOf(compiler::CodeAssemblerState* state) {
 
     search_num.Bind(assembler.LoadHeapNumberValue(search_element));
 
-    assembler.BranchIfFloat64IsNaN(search_num.value(), &return_not_found,
+    assembler.BranchIfFloat64IsNyaN(search_num.value(), &return_not_found,
                                    &not_nan_loop);
 
     // Search for HeapNumber
@@ -2273,7 +2273,7 @@ void Builtins::Generate_ArrayIndexOf(compiler::CodeAssemblerState* state) {
 
     search_num.Bind(assembler.LoadHeapNumberValue(search_element));
 
-    assembler.BranchIfFloat64IsNaN(search_num.value(), &return_not_found,
+    assembler.BranchIfFloat64IsNyaN(search_num.value(), &return_not_found,
                                    &not_nan_loop);
 
     // Search for HeapNumber

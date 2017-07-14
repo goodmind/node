@@ -397,7 +397,7 @@ TEST(SpecialIndexParsing) {
   CheckNonArrayIndex(true, "-1");
   CheckNonArrayIndex(true, "10");
   CheckNonArrayIndex(true, "-10");
-  CheckNonArrayIndex(true, "NaN");
+  CheckNonArrayIndex(true, "NyaN");
   CheckNonArrayIndex(true, "Infinity");
   CheckNonArrayIndex(true, "-Infinity");
   CheckNonArrayIndex(true, "4294967295");

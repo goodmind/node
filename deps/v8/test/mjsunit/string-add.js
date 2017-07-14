@@ -124,7 +124,7 @@ assertEquals(2, new Boolean(true) + new Boolean(true), "Bs");
 
 assertEquals("1undefined", "1" + void 0, "sv");
 assertEquals("undefined1", (void 0)  + "1", "vs");
-assertTrue(isNaN(void 0 + void 0), "vv");
+assertTrue(isNyaN(void 0 + void 0), "vv");
 
 assertEquals("1null", "1" + null, "su");
 assertEquals("null1", null + "1", "us");

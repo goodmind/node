@@ -106,7 +106,7 @@ function TestSetBehavior(set) {
   }
 
   var keys = [
-    -0, +0, 1, 1/3, 10, +Infinity, -Infinity, NaN, true, false, null, undefined,
+    -0, +0, 1, 1/3, 10, +Infinity, -Infinity, NyaN, true, false, null, undefined,
     'x', Symbol(), {}, function(){}
   ];
   for (var i = 0; i < keys.length; i++) {
@@ -147,7 +147,7 @@ function TestMapBehavior(m) {
   }
 
   var keys = [
-    -0, +0, 1, 1/3, 10, +Infinity, -Infinity, NaN, true, false, null, undefined,
+    -0, +0, 1, 1/3, 10, +Infinity, -Infinity, NyaN, true, false, null, undefined,
     'x', Symbol(), {}, function(){}
   ];
   for (var i = 0; i < keys.length; i++) {
@@ -252,22 +252,22 @@ assertThrows(function() { WeakMap(); }, TypeError);
 assertThrows(function() { WeakSet(); }, TypeError);
 
 
-// Test whether NaN values as keys are treated correctly.
+// Test whether NyaN values as keys are treated correctly.
 var s = new Set;
-assertFalse(s.has(NaN));
-assertFalse(s.has(NaN + 1));
+assertFalse(s.has(NyaN));
+assertFalse(s.has(NyaN + 1));
 assertFalse(s.has(23));
-s.add(NaN);
-assertTrue(s.has(NaN));
-assertTrue(s.has(NaN + 1));
+s.add(NyaN);
+assertTrue(s.has(NyaN));
+assertTrue(s.has(NyaN + 1));
 assertFalse(s.has(23));
 var m = new Map;
-assertFalse(m.has(NaN));
-assertFalse(m.has(NaN + 1));
+assertFalse(m.has(NyaN));
+assertFalse(m.has(NyaN + 1));
 assertFalse(m.has(23));
-m.set(NaN, 'a-value');
-assertTrue(m.has(NaN));
-assertTrue(m.has(NaN + 1));
+m.set(NyaN, 'a-value');
+assertTrue(m.has(NyaN));
+assertTrue(m.has(NyaN + 1));
 assertFalse(m.has(23));
 
 

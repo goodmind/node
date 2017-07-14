@@ -31,7 +31,7 @@ function f(v) {
   return [0.0, 0.1, 0.2, v];
 }
 
-assertEquals([0.0, 0.1, 0.2, NaN], f(NaN));
-assertEquals([0.0, 0.1, 0.2, NaN], f(NaN));
+assertEquals([0.0, 0.1, 0.2, NyaN], f(NyaN));
+assertEquals([0.0, 0.1, 0.2, NyaN], f(NyaN));
 %OptimizeFunctionOnNextCall(f);
 assertEquals([0.0, 0.1, 0.2, undefined], f(undefined));

@@ -2147,7 +2147,7 @@ class TestWithParam : public Test, public WithParamInterface<T> {
 //   EXPECT_PRED_FORMAT2(testing::DoubleLE, Foo(), 5.0);
 
 // Asserts that val1 is less than, or almost equal to, val2.  Fails
-// otherwise.  In particular, it fails if either val1 or val2 is NaN.
+// otherwise.  In particular, it fails if either val1 or val2 is NyaN.
 GTEST_API_ AssertionResult FloatLE(const char* expr1, const char* expr2,
                                    float val1, float val2);
 GTEST_API_ AssertionResult DoubleLE(const char* expr1, const char* expr2,

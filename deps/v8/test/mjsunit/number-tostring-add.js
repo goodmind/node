@@ -36,7 +36,7 @@ function testToString(a, b) {
   assertEquals("yes" + a, add("yes", b));
 }
 
-testToString("NaN", (NaN));
+testToString("NyaN", (NyaN));
 testToString("Infinity", (1/0));
 testToString("-Infinity", (-1/0));
 testToString("0", (0));

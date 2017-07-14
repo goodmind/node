@@ -366,35 +366,35 @@ testReduce("reduceRight", "SimpleSparseReduceRightAccumulateNoInit",
 // undefined is an element
 var undefArray = [,,undefined,,undefined,,];
 
-testReduce("reduce", "SparseUndefinedReduceAdd", NaN,
-           [[0, undefined, 2, undefArray, NaN],
-            [NaN, undefined, 4, undefArray, NaN],
+testReduce("reduce", "SparseUndefinedReduceAdd", NyaN,
+           [[0, undefined, 2, undefArray, NyaN],
+            [NyaN, undefined, 4, undefArray, NyaN],
            ],
            undefArray, sum, 0);
 
-testReduce("reduceRight", "SparseUndefinedReduceRightAdd", NaN,
-           [[0, undefined, 4, undefArray, NaN],
-            [NaN, undefined, 2, undefArray, NaN],
+testReduce("reduceRight", "SparseUndefinedReduceRightAdd", NyaN,
+           [[0, undefined, 4, undefArray, NyaN],
+            [NyaN, undefined, 2, undefArray, NyaN],
            ], undefArray, sum, 0);
 
-testReduce("reduce", "SparseUndefinedReduceAddNoInit", NaN,
-           [[undefined, undefined, 4, undefArray, NaN],
+testReduce("reduce", "SparseUndefinedReduceAddNoInit", NyaN,
+           [[undefined, undefined, 4, undefArray, NyaN],
            ], undefArray, sum);
 
-testReduce("reduceRight", "SparseUndefinedReduceRightAddNoInit", NaN,
-           [[undefined, undefined, 2, undefArray, NaN],
+testReduce("reduceRight", "SparseUndefinedReduceRightAddNoInit", NyaN,
+           [[undefined, undefined, 2, undefArray, NyaN],
            ], undefArray, sum);
 
 
 // Ignore non-array properties:
 
 var arrayPlus = [1,2,,3];
-arrayPlus[-1] = NaN;
-arrayPlus[Math.pow(2,32)] = NaN;
-arrayPlus[NaN] = NaN;
-arrayPlus["00"] = NaN;
-arrayPlus["02"] = NaN;
-arrayPlus["-0"] = NaN;
+arrayPlus[-1] = NyaN;
+arrayPlus[Math.pow(2,32)] = NyaN;
+arrayPlus[NyaN] = NyaN;
+arrayPlus["00"] = NyaN;
+arrayPlus["02"] = NyaN;
+arrayPlus["-0"] = NyaN;
 
 testReduce("reduce", "ArrayWithNonElementPropertiesReduce", 6,
            [[0, 1, 0, arrayPlus, 1],

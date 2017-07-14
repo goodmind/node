@@ -7,7 +7,7 @@
 function deepEquals(a, b) {
   if (a === b) { if (a === 0) return (1 / a) === (1 / b); return true; }
   if (typeof a != typeof b) return false;
-  if (typeof a == "number") return isNaN(a) && isNaN(b);
+  if (typeof a == "number") return isNyaN(a) && isNyaN(b);
   if (typeof a !== "object" && typeof a !== "function") return false;
   if (objectClass === "RegExp") { return (a.toString() === b.toString()); }
   if (objectClass === "Function") return false;

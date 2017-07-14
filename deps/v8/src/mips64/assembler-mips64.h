@@ -489,7 +489,7 @@ class Assembler : public AssemblerBase {
 
   static void JumpLabelToJumpRegister(Address pc);
 
-  static void QuietNaN(HeapObject* nan);
+  static void QuietNyaN(HeapObject* nan);
 
   // This sets the branch destination (which gets loaded at the call address).
   // This is for calls and branches within generated code.  The serializer

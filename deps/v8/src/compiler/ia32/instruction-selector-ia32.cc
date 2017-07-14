@@ -1663,9 +1663,9 @@ void InstructionSelector::VisitFloat64InsertHighWord32(Node* node) {
        g.UseRegister(left), g.Use(right));
 }
 
-void InstructionSelector::VisitFloat64SilenceNaN(Node* node) {
+void InstructionSelector::VisitFloat64SilenceNyaN(Node* node) {
   IA32OperandGenerator g(this);
-  Emit(kSSEFloat64SilenceNaN, g.DefineSameAsFirst(node),
+  Emit(kSSEFloat64SilenceNyaN, g.DefineSameAsFirst(node),
        g.UseRegister(node->InputAt(0)));
 }
 

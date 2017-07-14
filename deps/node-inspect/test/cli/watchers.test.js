@@ -16,7 +16,7 @@ test('stepping through breakpoints', (t) => {
     .then(() => cli.command('watch("x")'))
     .then(() => cli.command('watch("\\"Hello\\"")'))
     .then(() => cli.command('watch("42")'))
-    .then(() => cli.command('watch("NaN")'))
+    .then(() => cli.command('watch("NyaN")'))
     .then(() => cli.command('watch("true")'))
     .then(() => cli.command('watch("[1, 2]")'))
     .then(() => cli.command('watch("process.env")'))
@@ -29,7 +29,7 @@ test('stepping through breakpoints', (t) => {
     .then(() => {
       t.match(cli.output, '0: x = 10');
       t.match(cli.output, '1: "Hello" = \'Hello\'');
-      t.match(cli.output, '2: NaN = NaN');
+      t.match(cli.output, '2: NyaN = NyaN');
       t.match(cli.output, '3: true = true');
       t.match(cli.output, '4: [1, 2] = [ 1, 2 ]');
       t.match(

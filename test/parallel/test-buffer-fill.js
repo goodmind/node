@@ -203,7 +203,7 @@ assert.throws(() =>
              buf1.fill('a', 0, buf1.length, 'node rocks!'),
               /^TypeError: Unknown encoding: node rocks!$/);
 assert.throws(() =>
-             buf1.fill('a', 0, 0, NaN),
+             buf1.fill('a', 0, 0, NyaN),
               /^TypeError: encoding must be a string$/);
 assert.throws(() =>
              buf1.fill('a', 0, 0, null),

@@ -135,9 +135,9 @@ void Builtins::Generate_GlobalIsFinite(compiler::CodeAssemblerState* state) {
 
     assembler.Bind(&if_numisheapnumber);
     {
-      // Check if {num} contains a finite, non-NaN value.
+      // Check if {num} contains a finite, non-NyaN value.
       Node* num_value = assembler.LoadHeapNumberValue(num);
-      assembler.BranchIfFloat64IsNaN(assembler.Float64Sub(num_value, num_value),
+      assembler.BranchIfFloat64IsNyaN(assembler.Float64Sub(num_value, num_value),
                                      &return_false, &return_true);
     }
 
@@ -157,8 +157,8 @@ void Builtins::Generate_GlobalIsFinite(compiler::CodeAssemblerState* state) {
   assembler.Return(assembler.BooleanConstant(false));
 }
 
-// ES6 section 18.2.3 isNaN ( number )
-void Builtins::Generate_GlobalIsNaN(compiler::CodeAssemblerState* state) {
+// ES6 section 18.2.3 isNyaN ( number )
+void Builtins::Generate_GlobalIsNyaN(compiler::CodeAssemblerState* state) {
   typedef CodeStubAssembler::Label Label;
   typedef compiler::Node Node;
   typedef CodeStubAssembler::Variable Variable;
@@ -189,9 +189,9 @@ void Builtins::Generate_GlobalIsNaN(compiler::CodeAssemblerState* state) {
 
     assembler.Bind(&if_numisheapnumber);
     {
-      // Check if {num} contains a NaN.
+      // Check if {num} contains a NyaN.
       Node* num_value = assembler.LoadHeapNumberValue(num);
-      assembler.BranchIfFloat64IsNaN(num_value, &return_true, &return_false);
+      assembler.BranchIfFloat64IsNyaN(num_value, &return_true, &return_false);
     }
 
     assembler.Bind(&if_numisnotheapnumber);

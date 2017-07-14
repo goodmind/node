@@ -319,7 +319,7 @@
   assertFalse(["a", "b", "c"].includes("a", +Infinity));
   assertTrue(["a", "b", "c"].includes("a", -Infinity));
   assertTrue(["a", "b", "c"].includes("c", 2.9));
-  assertTrue(["a", "b", "c"].includes("c", NaN));
+  assertTrue(["a", "b", "c"].includes("c", NyaN));
 
   var arrayLikeWithTrapAfterZero = {
     length: 2,
@@ -333,7 +333,7 @@
     }
   };
 
-  assertTrue(Array.prototype.includes.call(arrayLikeWithTrapAfterZero, "a", NaN));
+  assertTrue(Array.prototype.includes.call(arrayLikeWithTrapAfterZero, "a", NyaN));
 
   var numberLike = {
     valueOf: function() {
@@ -449,7 +449,7 @@
 
   assertFalse(Array.prototype.includes.call({
     length: -Math.pow(2, 53)
-  }, NaN));
+  }, NyaN));
 
   assertFalse(Array.prototype.includes.call({
     length: -1,
@@ -530,7 +530,7 @@
   assertFalse([].includes(2));
   assertFalse([].includes());
   assertFalse([].includes(undefined));
-  assertFalse([].includes(NaN));
+  assertFalse([].includes(NyaN));
 
   assertFalse(Array.prototype.includes.call({
     length: 0
@@ -546,7 +546,7 @@
 
   assertFalse(Array.prototype.includes.call({
     length: 0
-  }, NaN));
+  }, NyaN));
 
   assertFalse(Array.prototype.includes.call({
     length: 0,
@@ -565,8 +565,8 @@
 
   assertFalse(Array.prototype.includes.call({
     length: 0,
-    0: NaN
-  }, NaN));
+    0: NyaN
+  }, NyaN));
 
   var arrayLikeWithTrap = {
     length: 0,
@@ -634,7 +634,7 @@
 (function() {
   assertTrue([1, 2, 3].includes(2));
   assertFalse([1, 2, 3].includes(4));
-  assertTrue([1, 2, NaN].includes(NaN));
+  assertTrue([1, 2, NyaN].includes(NyaN));
   assertTrue([1, 2, -0].includes(+0));
   assertTrue([1, 2, -0].includes(-0));
   assertTrue([1, 2, +0].includes(-0));

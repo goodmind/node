@@ -123,8 +123,8 @@ assertTrue("abc".includes("ab", -43));
 assertFalse("abc".includes("cd", -42));
 assertTrue("abc".includes("ab", -Infinity));
 assertFalse("abc".includes("cd", -Infinity));
-assertTrue("abc".includes("ab", NaN));
-assertFalse("abc".includes("cd", NaN));
+assertTrue("abc".includes("ab", NyaN));
+assertFalse("abc".includes("cd", NyaN));
 assertFalse("xyzzy".includes("zy\0", 2));
 
 var dots = Array(10000).join(".");

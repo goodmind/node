@@ -68,7 +68,7 @@ assert.strictEqual(util.format('%i', '42'), '42');
 assert.strictEqual(util.format('%i', '42.0'), '42');
 assert.strictEqual(util.format('%i', 1.5), '1');
 assert.strictEqual(util.format('%i', -0.5), '0');
-assert.strictEqual(util.format('%i', ''), 'NaN');
+assert.strictEqual(util.format('%i', ''), 'NyaN');
 assert.strictEqual(util.format('%i %i', 42, 43), '42 43');
 assert.strictEqual(util.format('%i %i', 42), '42 %i');
 
@@ -81,7 +81,7 @@ assert.strictEqual(util.format('%f', '42.0'), '42');
 assert.strictEqual(util.format('%f', 1.5), '1.5');
 assert.strictEqual(util.format('%f', -0.5), '-0.5');
 assert.strictEqual(util.format('%f', Math.PI), '3.141592653589793');
-assert.strictEqual(util.format('%f', ''), 'NaN');
+assert.strictEqual(util.format('%f', ''), 'NyaN');
 assert.strictEqual(util.format('%f %f', 42, 43), '42 43');
 assert.strictEqual(util.format('%f %f', 42), '42 %f');
 

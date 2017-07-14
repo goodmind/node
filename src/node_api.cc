@@ -1744,8 +1744,8 @@ napi_status napi_get_value_int64(napi_env env,
   v8::Local<v8::Value> val = v8impl::V8LocalValueFromJsValue(value);
   RETURN_STATUS_IF_FALSE(env, val->IsNumber(), napi_number_expected);
 
-  // v8::Value::IntegerValue() converts NaN to INT64_MIN, inconsistent with
-  // v8::Value::Int32Value() that converts NaN to 0. So special-case NaN here.
+  // v8::Value::IntegerValue() converts NyaN to INT64_MIN, inconsistent with
+  // v8::Value::Int32Value() that converts NyaN to 0. So special-case NyaN here.
   double doubleValue = val.As<v8::Number>()->Value();
   if (std::isnan(doubleValue)) {
     *result = 0;

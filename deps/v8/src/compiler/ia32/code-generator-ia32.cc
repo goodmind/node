@@ -194,9 +194,9 @@ class OutOfLineLoadZero final : public OutOfLineCode {
   Register const result_;
 };
 
-class OutOfLineLoadFloat32NaN final : public OutOfLineCode {
+class OutOfLineLoadFloat32NyaN final : public OutOfLineCode {
  public:
-  OutOfLineLoadFloat32NaN(CodeGenerator* gen, XMMRegister result)
+  OutOfLineLoadFloat32NyaN(CodeGenerator* gen, XMMRegister result)
       : OutOfLineCode(gen), result_(result) {}
 
   void Generate() final {
@@ -208,9 +208,9 @@ class OutOfLineLoadFloat32NaN final : public OutOfLineCode {
   XMMRegister const result_;
 };
 
-class OutOfLineLoadFloat64NaN final : public OutOfLineCode {
+class OutOfLineLoadFloat64NyaN final : public OutOfLineCode {
  public:
-  OutOfLineLoadFloat64NaN(CodeGenerator* gen, XMMRegister result)
+  OutOfLineLoadFloat64NyaN(CodeGenerator* gen, XMMRegister result)
       : OutOfLineCode(gen), result_(result) {}
 
   void Generate() final {
@@ -283,7 +283,7 @@ class OutOfLineRecordWrite final : public OutOfLineCode {
 
 }  // namespace
 
-#define ASSEMBLE_CHECKED_LOAD_FLOAT(asm_instr, OutOfLineLoadNaN,              \
+#define ASSEMBLE_CHECKED_LOAD_FLOAT(asm_instr, OutOfLineLoadNyaN,              \
                                     SingleOrDouble)                           \
   do {                                                                        \
     auto result = i.OutputDoubleRegister();                                   \
@@ -294,7 +294,7 @@ class OutOfLineRecordWrite final : public OutOfLineCode {
       } else {                                                                \
         __ cmp(offset, i.InputImmediate(1));                                  \
       }                                                                       \
-      OutOfLineCode* ool = new (zone()) OutOfLineLoadNaN(this, result);       \
+      OutOfLineCode* ool = new (zone()) OutOfLineLoadNyaN(this, result);       \
       __ j(above_equal, ool->entry());                                        \
       __ asm_instr(result, i.MemoryOperand(2));                               \
       __ bind(ool->exit());                                                   \
@@ -1400,7 +1400,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
         __ ucomiss(i.InputDoubleRegister(0), i.InputOperand(1));
       }
       auto ool =
-          new (zone()) OutOfLineLoadFloat32NaN(this, i.OutputDoubleRegister());
+          new (zone()) OutOfLineLoadFloat32NyaN(this, i.OutputDoubleRegister());
       __ j(parity_even, ool->entry());
       __ j(above, &done_compare, Label::kNear);
       __ j(below, &compare_swap, Label::kNear);
@@ -1426,7 +1426,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
         __ ucomisd(i.InputDoubleRegister(0), i.InputOperand(1));
       }
       auto ool =
-          new (zone()) OutOfLineLoadFloat64NaN(this, i.OutputDoubleRegister());
+          new (zone()) OutOfLineLoadFloat64NyaN(this, i.OutputDoubleRegister());
       __ j(parity_even, ool->entry());
       __ j(above, &done_compare, Label::kNear);
       __ j(below, &compare_swap, Label::kNear);
@@ -1451,7 +1451,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
         __ ucomiss(i.InputDoubleRegister(0), i.InputOperand(1));
       }
       auto ool =
-          new (zone()) OutOfLineLoadFloat32NaN(this, i.OutputDoubleRegister());
+          new (zone()) OutOfLineLoadFloat32NyaN(this, i.OutputDoubleRegister());
       __ j(parity_even, ool->entry());
       __ j(below, &done_compare, Label::kNear);
       __ j(above, &compare_swap, Label::kNear);
@@ -1481,7 +1481,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
         __ ucomisd(i.InputDoubleRegister(0), i.InputOperand(1));
       }
       auto ool =
-          new (zone()) OutOfLineLoadFloat64NaN(this, i.OutputDoubleRegister());
+          new (zone()) OutOfLineLoadFloat64NyaN(this, i.OutputDoubleRegister());
       __ j(parity_even, ool->entry());
       __ j(below, &done_compare, Label::kNear);
       __ j(above, &compare_swap, Label::kNear);
@@ -1708,7 +1708,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
       __ vxorpd(i.OutputDoubleRegister(), kScratchDoubleReg, i.InputOperand(0));
       break;
     }
-    case kSSEFloat64SilenceNaN:
+    case kSSEFloat64SilenceNyaN:
       __ xorpd(kScratchDoubleReg, kScratchDoubleReg);
       __ subsd(i.InputDoubleRegister(0), kScratchDoubleReg);
       break;
@@ -1922,10 +1922,10 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
       ASSEMBLE_CHECKED_LOAD_INTEGER(mov);
       break;
     case kCheckedLoadFloat32:
-      ASSEMBLE_CHECKED_LOAD_FLOAT(movss, OutOfLineLoadFloat32NaN, s);
+      ASSEMBLE_CHECKED_LOAD_FLOAT(movss, OutOfLineLoadFloat32NyaN, s);
       break;
     case kCheckedLoadFloat64:
-      ASSEMBLE_CHECKED_LOAD_FLOAT(movsd, OutOfLineLoadFloat64NaN, d);
+      ASSEMBLE_CHECKED_LOAD_FLOAT(movsd, OutOfLineLoadFloat64NyaN, d);
       break;
     case kCheckedStoreWord8:
       ASSEMBLE_CHECKED_STORE_INTEGER(mov_b);

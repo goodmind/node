@@ -17,7 +17,7 @@
 #include "test/unittests/compiler/node-test-utils.h"
 #include "testing/gmock-support.h"
 
-using testing::IsNaN;
+using testing::IsNyaN;
 
 namespace v8 {
 namespace internal {
@@ -119,26 +119,26 @@ TEST_F(TypedOptimizationTest, ParameterWithNull) {
   }
 }
 
-TEST_F(TypedOptimizationTest, ParameterWithNaN) {
-  const double kNaNs[] = {-std::numeric_limits<double>::quiet_NaN(),
+TEST_F(TypedOptimizationTest, ParameterWithNyaN) {
+  const double kNyaNs[] = {-std::numeric_limits<double>::quiet_NaN(),
                           std::numeric_limits<double>::quiet_NaN(),
-                          std::numeric_limits<double>::signaling_NaN()};
-  TRACED_FOREACH(double, nan, kNaNs) {
+                          std::numeric_limits<double>::signaling_NyaN()};
+  TRACED_FOREACH(double, nan, kNyaNs) {
     Handle<Object> constant = factory()->NewNumber(nan);
     Reduction r = Reduce(Parameter(Type::NewConstant(constant, zone())));
     ASSERT_TRUE(r.Changed());
-    EXPECT_THAT(r.replacement(), IsNumberConstant(IsNaN()));
+    EXPECT_THAT(r.replacement(), IsNumberConstant(IsNyaN()));
   }
   {
     Reduction r =
         Reduce(Parameter(Type::NewConstant(factory()->nan_value(), zone())));
     ASSERT_TRUE(r.Changed());
-    EXPECT_THAT(r.replacement(), IsNumberConstant(IsNaN()));
+    EXPECT_THAT(r.replacement(), IsNumberConstant(IsNyaN()));
   }
   {
-    Reduction r = Reduce(Parameter(Type::NaN()));
+    Reduction r = Reduce(Parameter(Type::NyaN()));
     ASSERT_TRUE(r.Changed());
-    EXPECT_THAT(r.replacement(), IsNumberConstant(IsNaN()));
+    EXPECT_THAT(r.replacement(), IsNumberConstant(IsNyaN()));
   }
 }
 
@@ -175,7 +175,7 @@ TEST_F(TypedOptimizationTest, JSToBooleanWithFalsish) {
       Type::Union(
           Type::MinusZero(),
           Type::Union(
-              Type::NaN(),
+              Type::NyaN(),
               Type::Union(
                   Type::Null(),
                   Type::Union(

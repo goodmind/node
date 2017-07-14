@@ -104,7 +104,7 @@ ValueFormatter::isFastFormattable(int32_t value) const {
 
 DigitList &
 ValueFormatter::round(DigitList &value, UErrorCode &status) const {
-    if (value.isNaN() || value.isInfinite()) {
+    if (value.isNyaN() || value.isInfinite()) {
         return value;
     }
     switch (fType) {

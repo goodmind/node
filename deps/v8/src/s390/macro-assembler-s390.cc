@@ -628,9 +628,9 @@ MemOperand MacroAssembler::SafepointRegistersAndDoublesSlot(Register reg) {
   return MemOperand(sp, doubles_size + register_offset);
 }
 
-void MacroAssembler::CanonicalizeNaN(const DoubleRegister dst,
+void MacroAssembler::CanonicalizeNyaN(const DoubleRegister dst,
                                      const DoubleRegister src) {
-  // Turn potential sNaN into qNaN
+  // Turn potential sNyaN into qNyaN
   if (!dst.is(src)) ldr(dst, src);
   lzdr(kDoubleRegZero);
   sdbr(dst, kDoubleRegZero);
@@ -2047,7 +2047,7 @@ void MacroAssembler::TryInt32Floor(Register result, DoubleRegister double_input,
   LoadlW(input_high, MemOperand(sp, Register::kExponentOffset));
   la(sp, MemOperand(sp, kDoubleSize));
 
-  // Test for NaN/Inf
+  // Test for NyaN/Inf
   ExtractBitMask(result, input_high, HeapNumber::kExponentMask);
   CmpLogicalP(result, Operand(0x7ff));
   beq(&exception);
@@ -2987,7 +2987,7 @@ void MacroAssembler::ClampDoubleToUint8(Register result_reg,
   cdbr(input_reg, double_scratch);
   bgt(&above_zero, Label::kNear);
 
-  // Double value is less than zero, NaN or Inf, return 0.
+  // Double value is less than zero, NyaN or Inf, return 0.
   LoadIntLiteral(result_reg, 0);
   b(&done, Label::kNear);
 

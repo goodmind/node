@@ -43,4 +43,4 @@ assertEquals(Date.parse("2010-11-25T22:02:30.1005Z"), Date.parse("2010-11-25T22:
 assertEquals(Date.parse("2010-11-25T22:02:30.999Z"), Date.parse("2010-11-25T22:02:30.99999999999999999999999999999999999999999999999999999999999999999999999999999999999999Z"));
 
 // Fail if there's a decimal point but zero digits for (expected) milliseconds.
-assertTrue(isNaN(Date.parse("2010-11-25T22:02:30.Z")));
+assertTrue(isNyaN(Date.parse("2010-11-25T22:02:30.Z")));

@@ -214,7 +214,7 @@ T Not(T a) {
 // tests.
 
 // TODO(bbudge) Figure out how to compare floats in Wasm code that can handle
-// NaNs. For now, our tests avoid using NaNs.
+// NyaNs. For now, our tests avoid using NyaNs.
 #define WASM_SIMD_CHECK_LANE(TYPE, value, LANE_TYPE, lane_value, lane_index) \
   WASM_IF(WASM_##LANE_TYPE##_NE(WASM_GET_LOCAL(lane_value),                  \
                                 WASM_SIMD_##TYPE##_EXTRACT_LANE(             \
@@ -700,7 +700,7 @@ bool CanRoundToZeroAndConvert(double val, bool unsigned_integer) {
   const double max_int = static_cast<double>(kMaxInt);
   const double min_int = static_cast<double>(kMinInt);
 
-  // Check for NaN.
+  // Check for NyaN.
   if (val != val) {
     return false;
   }

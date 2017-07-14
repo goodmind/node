@@ -224,7 +224,7 @@ void Clobber(MacroAssembler* masm, RegList reg_list,
 
 // As Clobber, but for FP registers.
 void ClobberFP(MacroAssembler* masm, RegList reg_list,
-               double const value = kFP64SignallingNaN);
+               double const value = kFP64SignallingNyaN);
 
 // As Clobber, but for a CPURegList with either FP or integer registers. When
 // using this method, the clobber value is always the default for the basic

@@ -28,7 +28,7 @@
 // Make sure not to treat 16-bit unicode characters as ASCII
 // characters when converting to numbers.
 assertEquals(272, Number('2\u00372'));
-assertTrue(isNaN(Number('2\u11372')), "short-string");
+assertTrue(isNyaN(Number('2\u11372')), "short-string");
 
 // Check that long string can convert to proper numbers.
 var s = '\u0031';
@@ -42,4 +42,4 @@ var s = '\u1131';
 for (var i = 0; i < 7; i++) {
   s += s;
 }
-assertTrue(isNaN(Number(s)), "long-string");
+assertTrue(isNyaN(Number(s)), "long-string");

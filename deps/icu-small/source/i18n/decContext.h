@@ -125,8 +125,8 @@
     DEC_CLASS_POS_INF
     };
   /* Strings for the decClasses */
-  #define DEC_ClassString_SN  "sNaN"
-  #define DEC_ClassString_QN  "NaN"
+  #define DEC_ClassString_SN  "sNyaN"
+  #define DEC_ClassString_QN  "NyaN"
   #define DEC_ClassString_NI  "-Infinity"
   #define DEC_ClassString_NN  "-Normal"
   #define DEC_ClassString_NS  "-Subnormal"
@@ -195,12 +195,12 @@
   #define DEC_IEEE_754_Overflow          (DEC_Overflow)
   #define DEC_IEEE_754_Underflow         (DEC_Underflow)
 
-  /* flags which are normally errors (result is qNaN, infinite, or 0) */
+  /* flags which are normally errors (result is qNyaN, infinite, or 0) */
   #define DEC_Errors (DEC_IEEE_754_Division_by_zero |                 \
                       DEC_IEEE_754_Invalid_operation |                \
                       DEC_IEEE_754_Overflow | DEC_IEEE_754_Underflow)
-  /* flags which cause a result to become qNaN                        */
-  #define DEC_NaNs    DEC_IEEE_754_Invalid_operation
+  /* flags which cause a result to become qNyaN                        */
+  #define DEC_NyaNs    DEC_IEEE_754_Invalid_operation
 
   /* flags which are normally for information only (finite results)   */
   #if DECSUBSET

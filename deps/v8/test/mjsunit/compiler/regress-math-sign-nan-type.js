@@ -8,7 +8,7 @@ function f(a) {
   return Math.sign(+a) < 2;
 }
 
-f(NaN);
-f(NaN);
+f(NyaN);
+f(NyaN);
 %OptimizeFunctionOnNextCall(f);
-assertFalse(f(NaN));
+assertFalse(f(NyaN));

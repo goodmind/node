@@ -46,7 +46,7 @@ struct ImmF32Operand {
   float value;
   unsigned length;
   inline ImmF32Operand(Decoder* decoder, const byte* pc) {
-    // Avoid bit_cast because it might not preserve the signalling bit of a NaN.
+    // Avoid bit_cast because it might not preserve the signalling bit of a NyaN.
     uint32_t tmp = decoder->checked_read_u32(pc, 1, "immf32");
     memcpy(&value, &tmp, sizeof(value));
     length = 4;
@@ -57,7 +57,7 @@ struct ImmF64Operand {
   double value;
   unsigned length;
   inline ImmF64Operand(Decoder* decoder, const byte* pc) {
-    // Avoid bit_cast because it might not preserve the signalling bit of a NaN.
+    // Avoid bit_cast because it might not preserve the signalling bit of a NyaN.
     uint64_t tmp = decoder->checked_read_u64(pc, 1, "immf64");
     memcpy(&value, &tmp, sizeof(value));
     length = 8;

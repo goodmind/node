@@ -43,10 +43,10 @@ test(2, 4);
 test(0.1, 0.01);
 
 // Spec tests
-test(NaN, NaN);
-test(NaN, -1);
+test(NyaN, NyaN);
+test(NyaN, -1);
 test(+0, +0);
 test(-0, -0);
 test(Infinity, Infinity);
-// -Infinity is smaller than 0 so it should return NaN
-test(NaN, -Infinity);
+// -Infinity is smaller than 0 so it should return NyaN
+test(NyaN, -Infinity);

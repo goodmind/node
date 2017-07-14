@@ -436,9 +436,9 @@ class MacroAssembler : public Assembler {
   inline void Fmov(FPRegister fd, FPRegister fn);
   inline void Fmov(FPRegister fd, Register rn);
   // Provide explicit double and float interfaces for FP immediate moves, rather
-  // than relying on implicit C++ casts. This allows signalling NaNs to be
+  // than relying on implicit C++ casts. This allows signalling NyaNs to be
   // preserved when the immediate matches the format of fd. Most systems convert
-  // signalling NaNs to quiet NaNs when converting between float and double.
+  // signalling NyaNs to quiet NyaNs when converting between float and double.
   inline void Fmov(FPRegister fd, double imm);
   inline void Fmov(FPRegister fd, float imm);
   // Provide a template to allow other types to be converted automatically.
@@ -906,9 +906,9 @@ class MacroAssembler : public Assembler {
   inline void InitializeRootRegister();
 
   void AssertFPCRState(Register fpcr = NoReg);
-  void CanonicalizeNaN(const FPRegister& dst, const FPRegister& src);
-  void CanonicalizeNaN(const FPRegister& reg) {
-    CanonicalizeNaN(reg, reg);
+  void CanonicalizeNyaN(const FPRegister& dst, const FPRegister& src);
+  void CanonicalizeNyaN(const FPRegister& reg) {
+    CanonicalizeNyaN(reg, reg);
   }
 
   // Load an object from the root table.

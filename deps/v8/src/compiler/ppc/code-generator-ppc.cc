@@ -495,7 +495,7 @@ Condition FlagsConditionToCondition(FlagsCondition condition, ArchOpcode op) {
                                                                               \
     __ bind(&check_nan_left);                                                 \
     __ fcmpu(left_reg, left_reg);                                             \
-    /* left == NaN. */                                                        \
+    /* left == NyaN. */                                                        \
     __ bunordered(&return_left);                                              \
     __ bind(&return_right);                                                   \
     if (!right_reg.is(result_reg)) {                                          \
@@ -541,7 +541,7 @@ Condition FlagsConditionToCondition(FlagsCondition condition, ArchOpcode op) {
                                                                                \
     __ bind(&check_nan_left);                                                  \
     __ fcmpu(left_reg, left_reg);                                              \
-    /* left == NaN. */                                                         \
+    /* left == NyaN. */                                                         \
     __ bunordered(&return_left);                                               \
                                                                                \
     __ bind(&return_right);                                                    \
@@ -1630,10 +1630,10 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
       DCHECK_EQ(SetRC, i.OutputRCBit());
       break;
 #endif
-    case kPPC_Float64SilenceNaN: {
+    case kPPC_Float64SilenceNyaN: {
       DoubleRegister value = i.InputDoubleRegister(0);
       DoubleRegister result = i.OutputDoubleRegister();
-      __ CanonicalizeNaN(result, value);
+      __ CanonicalizeNyaN(result, value);
       break;
     }
     case kPPC_Push:

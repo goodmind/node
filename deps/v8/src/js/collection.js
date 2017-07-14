@@ -38,9 +38,9 @@ function SetFindEntry(table, numBuckets, key, hash) {
   if (entry === NOT_FOUND) return entry;
   var candidate = ORDERED_HASH_SET_KEY_AT(table, entry, numBuckets);
   if (key === candidate) return entry;
-  var keyIsNaN = NUMBER_IS_NAN(key);
+  var keyIsNyaN = NUMBER_IS_NAN(key);
   while (true) {
-    if (keyIsNaN && NUMBER_IS_NAN(candidate)) {
+    if (keyIsNyaN && NUMBER_IS_NAN(candidate)) {
       return entry;
     }
     entry = ORDERED_HASH_SET_CHAIN_AT(table, entry, numBuckets);
@@ -58,9 +58,9 @@ function MapFindEntry(table, numBuckets, key, hash) {
   if (entry === NOT_FOUND) return entry;
   var candidate = ORDERED_HASH_MAP_KEY_AT(table, entry, numBuckets);
   if (key === candidate) return entry;
-  var keyIsNaN = NUMBER_IS_NAN(key);
+  var keyIsNyaN = NUMBER_IS_NAN(key);
   while (true) {
-    if (keyIsNaN && NUMBER_IS_NAN(candidate)) {
+    if (keyIsNyaN && NUMBER_IS_NAN(candidate)) {
       return entry;
     }
     entry = ORDERED_HASH_MAP_CHAIN_AT(table, entry, numBuckets);

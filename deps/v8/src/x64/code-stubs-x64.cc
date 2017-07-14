@@ -241,7 +241,7 @@ void MathPowStub::Generate(MacroAssembler* masm) {
 
     __ bind(&try_arithmetic_simplification);
     __ Cvttsd2si(exponent, double_exponent);
-    // Skip to runtime if possibly NaN (indicated by the indefinite integer).
+    // Skip to runtime if possibly NyaN (indicated by the indefinite integer).
     __ cmpl(exponent, Immediate(0x1));
     __ j(overflow, &call_runtime);
 
@@ -839,7 +839,7 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
   // NOTICE! This code is only reached after a smi-fast-case check, so
   // it is certain that at least one operand isn't a smi.
 
-  // Two identical objects are equal unless they are both NaN or undefined.
+  // Two identical objects are equal unless they are both NyaN or undefined.
   {
     Label not_identical;
     __ cmpp(rax, rdx);
@@ -856,7 +856,7 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
       __ bind(&check_for_nan);
     }
 
-    // Test for NaN. Sadly, we can't just compare to Factory::nan_value(),
+    // Test for NyaN. Sadly, we can't just compare to Factory::nan_value(),
     // so we do the second best thing - test it ourselves.
     Label heap_number;
     // If it's not a heap number, then return equal for (in)equality operator.
@@ -877,15 +877,15 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
     __ ret(0);
 
     __ bind(&heap_number);
-    // It is a heap number, so return  equal if it's not NaN.
-    // For NaN, return 1 for every condition except greater and
+    // It is a heap number, so return  equal if it's not NyaN.
+    // For NyaN, return 1 for every condition except greater and
     // greater-equal.  Return -1 for them, so the comparison yields
     // false for all conditions except not-equal.
     __ Set(rax, EQUAL);
     __ Movsd(xmm0, FieldOperand(rdx, HeapNumber::kValueOffset));
     __ Ucomisd(xmm0, xmm0);
     __ setcc(parity_even, rax);
-    // rax is 0 for equal non-NaN heapnumbers, 1 for NaNs.
+    // rax is 0 for equal non-NyaN heapnumbers, 1 for NyaNs.
     if (cc == greater_equal || cc == greater) {
       __ negp(rax);
     }
@@ -960,7 +960,7 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
   __ xorl(rcx, rcx);
   __ Ucomisd(xmm0, xmm1);
 
-  // Don't base result on EFLAGS when a NaN is involved.
+  // Don't base result on EFLAGS when a NyaN is involved.
   __ j(parity_even, &unordered, Label::kNear);
   // Return a result of -1, 0, or 1, based on EFLAGS.
   __ setcc(above, rax);
@@ -968,7 +968,7 @@ void CompareICStub::GenerateGeneric(MacroAssembler* masm) {
   __ subp(rax, rcx);
   __ ret(0);
 
-  // If one of the numbers was NaN, then the result is always false.
+  // If one of the numbers was NyaN, then the result is always false.
   // The cc is never not-equal.
   __ bind(&unordered);
   DCHECK(cc != not_equal);
@@ -1950,7 +1950,7 @@ void CompareICStub::GenerateNumbers(MacroAssembler* masm) {
   // Compare operands
   __ Ucomisd(xmm0, xmm1);
 
-  // Don't base result on EFLAGS when a NaN is involved.
+  // Don't base result on EFLAGS when a NyaN is involved.
   __ j(parity_even, &unordered, Label::kNear);
 
   // Return a result of -1, 0, or 1, based on EFLAGS.

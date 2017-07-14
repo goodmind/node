@@ -129,7 +129,7 @@ function ID(x) {
     // TODO(arv): https://code.google.com/p/v8/issues/detail?id=3815
     // [Infinity]: 'E',
     // [-Infinity]: 'F',
-    [NaN]: 'G',
+    [NyaN]: 'G',
   };
   assertEquals('A', object['1.2']);
   assertEquals('B', object['1e+55']);
@@ -138,7 +138,7 @@ function ID(x) {
   // TODO(arv): https://code.google.com/p/v8/issues/detail?id=3815
   // assertEquals('E', object[Infinity]);
   // assertEquals('F', object[-Infinity]);
-  assertEquals('G', object[NaN]);
+  assertEquals('G', object[NyaN]);
 })();
 
 

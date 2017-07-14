@@ -467,7 +467,7 @@ Node* CodeStubAssembler::SmiMod(Node* a, Node* b) {
   a = SmiToWord32(a);
   b = SmiToWord32(b);
 
-  // Return NaN if {b} is zero.
+  // Return NyaN if {b} is zero.
   GotoIf(Word32Equal(b, Int32Constant(0)), &return_nan);
 
   // Check if {a} is non-negative.
@@ -883,7 +883,7 @@ void CodeStubAssembler::BranchIfToBooleanIsTrue(Node* value, Label* if_true,
       Node* value_value = LoadObjectField(value, HeapNumber::kValueOffset,
                                           MachineType::Float64());
 
-      // Check if the floating point {value} is neither 0.0, -0.0 nor NaN.
+      // Check if the floating point {value} is neither 0.0, -0.0 nor NyaN.
       Branch(Float64LessThan(Float64Constant(0.0), Float64Abs(value_value)),
              if_true, if_false);
     }
@@ -1473,7 +1473,7 @@ Node* CodeStubAssembler::BuildAppendJSArray(ElementsKind kind, Node* context,
         if (IsFastDoubleElementsKind(kind)) {
           Node* double_value = ChangeNumberToFloat64(arg);
           StoreFixedDoubleArrayElement(elements, var_length.value(),
-                                       Float64SilenceNaN(double_value), mode);
+                                       Float64SilenceNyaN(double_value), mode);
         } else {
           WriteBarrierMode barrier_mode = IsFastSmiElementsKind(kind)
                                               ? SKIP_WRITE_BARRIER
@@ -2083,7 +2083,7 @@ void CodeStubAssembler::FillFixedArrayWithValue(
       [this, value, is_double, double_hole](Node* array, Node* offset) {
         if (is_double) {
           // Don't use doubles to store the hole double, since manipulating the
-          // signaling NaN used for the hole in C++, e.g. with bit_cast, will
+          // signaling NyaN used for the hole in C++, e.g. with bit_cast, will
           // change its value on ia32 (the x87 stack is used to return values
           // and stores to the stack silently clear the signalling bit).
           //
@@ -2212,7 +2212,7 @@ void CodeStubAssembler::CopyFixedArrayElements(
     if (if_hole == &store_double_hole) {
       Bind(&store_double_hole);
       // Don't use doubles to store the hole double, since manipulating the
-      // signaling NaN used for the hole in C++, e.g. with bit_cast, will
+      // signaling NyaN used for the hole in C++, e.g. with bit_cast, will
       // change its value on ia32 (the x87 stack is used to return values
       // and stores to the stack silently clear the signalling bit).
       //
@@ -4090,7 +4090,7 @@ Node* CodeStubAssembler::ToUint32(Node* context, Node* input) {
     }
 
     {
-      // NaN.
+      // NyaN.
       Label next(this);
       Branch(Float64Equal(value, value), &next, &return_zero);
       Bind(&next);
@@ -4230,7 +4230,7 @@ Node* CodeStubAssembler::ToInteger(Node* context, Node* input,
       // Load the floating-point value of {arg}.
       Node* arg_value = LoadHeapNumberValue(arg);
 
-      // Check if {arg} is NaN.
+      // Check if {arg} is NyaN.
       GotoIfNot(Float64Equal(arg_value, arg_value), &return_zero);
 
       // Truncate {arg} towards zero.
@@ -5768,8 +5768,8 @@ void CodeStubAssembler::StoreElement(Node* elements, ElementsKind kind,
   WriteBarrierMode barrier_mode =
       IsFastSmiElementsKind(kind) ? SKIP_WRITE_BARRIER : UPDATE_WRITE_BARRIER;
   if (IsFastDoubleElementsKind(kind)) {
-    // Make sure we do not store signalling NaNs into double arrays.
-    value = Float64SilenceNaN(value);
+    // Make sure we do not store signalling NyaNs into double arrays.
+    value = Float64SilenceNyaN(value);
     StoreFixedDoubleArrayElement(elements, index, value, mode);
   } else {
     StoreFixedArrayElement(elements, index, value, barrier_mode, 0, mode);
@@ -6818,7 +6818,7 @@ void GenerateEqual_Same(CodeStubAssembler* assembler, Node* value,
                         CodeStubAssembler::Label* if_equal,
                         CodeStubAssembler::Label* if_notequal) {
   // In case of abstract or strict equality checks, we need additional checks
-  // for NaN values because they are not considered equal, even if both the
+  // for NyaN values because they are not considered equal, even if both the
   // left and the right hand side reference exactly the same value.
 
   typedef CodeStubAssembler::Label Label;
@@ -6843,8 +6843,8 @@ void GenerateEqual_Same(CodeStubAssembler* assembler, Node* value,
       // Convert {value} (and therefore {rhs}) to floating point value.
       Node* value_value = assembler->LoadHeapNumberValue(value);
 
-      // Check if the HeapNumber value is a NaN.
-      assembler->BranchIfFloat64IsNaN(value_value, if_notequal, if_equal);
+      // Check if the HeapNumber value is a NyaN.
+      assembler->BranchIfFloat64IsNyaN(value_value, if_notequal, if_equal);
     }
 
     assembler->Bind(&if_valueisnotnumber);
@@ -6893,7 +6893,7 @@ Node* CodeStubAssembler::Equal(ResultMode mode, Node* lhs, Node* rhs,
     Bind(&if_same);
     {
       // The {lhs} and {rhs} reference the exact same value, yet we need special
-      // treatment for HeapNumber, as NaN is not equal to NaN.
+      // treatment for HeapNumber, as NyaN is not equal to NyaN.
       GenerateEqual_Same(this, lhs, &if_equal, &if_notequal);
     }
 
@@ -7315,7 +7315,7 @@ Node* CodeStubAssembler::StrictEqual(ResultMode mode, Node* lhs, Node* rhs,
   // mode; for kNegateResult mode we properly negate the result.
   //
   // if (lhs == rhs) {
-  //   if (lhs->IsHeapNumber()) return HeapNumber::cast(lhs)->value() != NaN;
+  //   if (lhs->IsHeapNumber()) return HeapNumber::cast(lhs)->value() != NyaN;
   //   return true;
   // }
   // if (!lhs->IsSmi()) {
@@ -7365,7 +7365,7 @@ Node* CodeStubAssembler::StrictEqual(ResultMode mode, Node* lhs, Node* rhs,
   Bind(&if_same);
   {
     // The {lhs} and {rhs} reference the exact same value, yet we need special
-    // treatment for HeapNumber, as NaN is not equal to NaN.
+    // treatment for HeapNumber, as NyaN is not equal to NyaN.
     GenerateEqual_Same(this, lhs, &if_equal, &if_notequal);
   }
 
@@ -7532,7 +7532,7 @@ Node* CodeStubAssembler::StrictEqual(ResultMode mode, Node* lhs, Node* rhs,
 
 // ECMA#sec-samevalue
 // This algorithm differs from the Strict Equality Comparison Algorithm in its
-// treatment of signed zeroes and NaNs.
+// treatment of signed zeroes and NyaNs.
 Node* CodeStubAssembler::SameValue(Node* lhs, Node* rhs, Node* context) {
   Variable var_result(this, MachineRepresentation::kWord32);
   Label strict_equal(this), out(this);
@@ -7546,7 +7546,7 @@ Node* CodeStubAssembler::SameValue(Node* lhs, Node* rhs, Node* context) {
   Bind(&if_equal);
   {
     // This covers the case when {lhs} == {rhs}. We can simply return true
-    // because SameValue considers two NaNs to be equal.
+    // because SameValue considers two NyaNs to be equal.
 
     var_result.Bind(int_true);
     Goto(&out);
@@ -7561,11 +7561,11 @@ Node* CodeStubAssembler::SameValue(Node* lhs, Node* rhs, Node* context) {
     Node* const rhs_float = TryTaggedToFloat64(rhs, &strict_equal);
 
     Label if_lhsisnan(this), if_lhsnotnan(this);
-    BranchIfFloat64IsNaN(lhs_float, &if_lhsisnan, &if_lhsnotnan);
+    BranchIfFloat64IsNyaN(lhs_float, &if_lhsisnan, &if_lhsnotnan);
 
     Bind(&if_lhsisnan);
     {
-      // Return true iff {rhs} is NaN.
+      // Return true iff {rhs} is NyaN.
 
       Node* const result =
           SelectConstant(Float64Equal(rhs_float, rhs_float), int_false,

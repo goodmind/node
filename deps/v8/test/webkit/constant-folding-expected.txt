@@ -448,15 +448,15 @@ PASS "10.3" / 0 is Infinity
 PASS -10.3 / 0 is -Infinity
 PASS "-10.3" / 0 is -Infinity
 PASS true / 0 is Infinity
-PASS false / 0 is NaN
-PASS 0 / 0 is NaN
+PASS false / 0 is NyaN
+PASS 0 / 0 is NyaN
 PASS 10.3 / -0 is -Infinity
 PASS "10.3" / -0 is -Infinity
 PASS -10.3 / -0 is Infinity
 PASS "-10.3" / -0 is Infinity
 PASS true / -0 is -Infinity
-PASS false / -0 is NaN
-PASS 0 / -0 is NaN
+PASS false / -0 is NyaN
+PASS 0 / -0 is NyaN
 PASS 1 / -0 is -Infinity
 PASS 1 / - 0 is -Infinity
 PASS 1 / - -0 is Infinity

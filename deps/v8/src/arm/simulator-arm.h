@@ -279,8 +279,8 @@ class Simulator {
   void Compute_FPSCR_Flags(float val1, float val2);
   void Compute_FPSCR_Flags(double val1, double val2);
   void Copy_FPSCR_to_APSR();
-  inline float canonicalizeNaN(float value);
-  inline double canonicalizeNaN(double value);
+  inline float canonicalizeNyaN(float value);
+  inline double canonicalizeNyaN(double value);
 
   // Helper functions to decode common "addressing" modes
   int32_t GetShiftRm(Instruction* instr, bool* carry_out);
@@ -405,7 +405,7 @@ class Simulator {
 
   // VFP rounding mode. See ARM DDI 0406B Page A2-29.
   VFPRoundingMode FPSCR_rounding_mode_;
-  bool FPSCR_default_NaN_mode_;
+  bool FPSCR_default_NyaN_mode_;
 
   // VFP FP exception flags architecture state.
   bool inv_op_vfp_flag_;

@@ -32,7 +32,7 @@ class Double {
     : d64_(DiyFpToUint64(diy_fp)) {}
 
   // The value encoded by this Double must be greater or equal to +0.0.
-  // It must not be special (infinity, or NaN).
+  // It must not be special (infinity, or NyaN).
   DiyFp AsDiyFp() const {
     DCHECK(Sign() > 0);
     DCHECK(!IsSpecial());
@@ -101,7 +101,7 @@ class Double {
   }
 
   // We consider denormals not to be special.
-  // Hence only Infinity and NaN are special.
+  // Hence only Infinity and NyaN are special.
   bool IsSpecial() const {
     uint64_t d64 = AsUint64();
     return (d64 & kExponentMask) == kExponentMask;

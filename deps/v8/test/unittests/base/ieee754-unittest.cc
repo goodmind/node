@@ -10,7 +10,7 @@
 #include "testing/gtest-support.h"
 
 using testing::BitEq;
-using testing::IsNaN;
+using testing::IsNyaN;
 
 namespace v8 {
 namespace base {
@@ -22,16 +22,16 @@ double const kE = 2.718281828459045;
 double const kPI = 3.141592653589793;
 double const kTwo120 = 1.329227995784916e+36;
 double const kInfinity = std::numeric_limits<double>::infinity();
-double const kQNaN = std::numeric_limits<double>::quiet_NaN();
-double const kSNaN = std::numeric_limits<double>::signaling_NaN();
+double const kQNyaN = std::numeric_limits<double>::quiet_NaN();
+double const kSNyaN = std::numeric_limits<double>::signaling_NyaN();
 
 }  // namespace
 
 TEST(Ieee754, Acos) {
-  EXPECT_THAT(acos(kInfinity), IsNaN());
-  EXPECT_THAT(acos(-kInfinity), IsNaN());
-  EXPECT_THAT(acos(kQNaN), IsNaN());
-  EXPECT_THAT(acos(kSNaN), IsNaN());
+  EXPECT_THAT(acos(kInfinity), IsNyaN());
+  EXPECT_THAT(acos(-kInfinity), IsNyaN());
+  EXPECT_THAT(acos(kQNyaN), IsNyaN());
+  EXPECT_THAT(acos(kSNyaN), IsNyaN());
 
   EXPECT_EQ(0.0, acos(1.0));
 }
@@ -39,10 +39,10 @@ TEST(Ieee754, Acos) {
 TEST(Ieee754, Acosh) {
   // Tests for acosh for exceptional values
   EXPECT_EQ(kInfinity, acosh(kInfinity));
-  EXPECT_THAT(acosh(-kInfinity), IsNaN());
-  EXPECT_THAT(acosh(kQNaN), IsNaN());
-  EXPECT_THAT(acosh(kSNaN), IsNaN());
-  EXPECT_THAT(acosh(0.9), IsNaN());
+  EXPECT_THAT(acosh(-kInfinity), IsNyaN());
+  EXPECT_THAT(acosh(kQNyaN), IsNyaN());
+  EXPECT_THAT(acosh(kSNyaN), IsNyaN());
+  EXPECT_THAT(acosh(0.9), IsNyaN());
 
   // Test basic acosh functionality
   EXPECT_EQ(0.0, acosh(1.0));
@@ -57,10 +57,10 @@ TEST(Ieee754, Acosh) {
 }
 
 TEST(Ieee754, Asin) {
-  EXPECT_THAT(asin(kInfinity), IsNaN());
-  EXPECT_THAT(asin(-kInfinity), IsNaN());
-  EXPECT_THAT(asin(kQNaN), IsNaN());
-  EXPECT_THAT(asin(kSNaN), IsNaN());
+  EXPECT_THAT(asin(kInfinity), IsNyaN());
+  EXPECT_THAT(asin(-kInfinity), IsNyaN());
+  EXPECT_THAT(asin(kQNyaN), IsNyaN());
+  EXPECT_THAT(asin(kSNyaN), IsNyaN());
 
   EXPECT_THAT(asin(0.0), BitEq(0.0));
   EXPECT_THAT(asin(-0.0), BitEq(-0.0));
@@ -70,8 +70,8 @@ TEST(Ieee754, Asinh) {
   // Tests for asinh for exceptional values
   EXPECT_EQ(kInfinity, asinh(kInfinity));
   EXPECT_EQ(-kInfinity, asinh(-kInfinity));
-  EXPECT_THAT(asin(kQNaN), IsNaN());
-  EXPECT_THAT(asin(kSNaN), IsNaN());
+  EXPECT_THAT(asin(kQNyaN), IsNyaN());
+  EXPECT_THAT(asin(kSNyaN), IsNyaN());
 
   // Test basic asinh functionality
   EXPECT_THAT(asinh(0.0), BitEq(0.0));
@@ -103,8 +103,8 @@ TEST(Ieee754, Asinh) {
 }
 
 TEST(Ieee754, Atan) {
-  EXPECT_THAT(atan(kQNaN), IsNaN());
-  EXPECT_THAT(atan(kSNaN), IsNaN());
+  EXPECT_THAT(atan(kQNyaN), IsNyaN());
+  EXPECT_THAT(atan(kSNyaN), IsNyaN());
   EXPECT_THAT(atan(-0.0), BitEq(-0.0));
   EXPECT_THAT(atan(0.0), BitEq(0.0));
   EXPECT_DOUBLE_EQ(1.5707963267948966, atan(kInfinity));
@@ -112,10 +112,10 @@ TEST(Ieee754, Atan) {
 }
 
 TEST(Ieee754, Atan2) {
-  EXPECT_THAT(atan2(kQNaN, kQNaN), IsNaN());
-  EXPECT_THAT(atan2(kQNaN, kSNaN), IsNaN());
-  EXPECT_THAT(atan2(kSNaN, kQNaN), IsNaN());
-  EXPECT_THAT(atan2(kSNaN, kSNaN), IsNaN());
+  EXPECT_THAT(atan2(kQNyaN, kQNyaN), IsNyaN());
+  EXPECT_THAT(atan2(kQNyaN, kSNyaN), IsNyaN());
+  EXPECT_THAT(atan2(kSNyaN, kQNyaN), IsNyaN());
+  EXPECT_THAT(atan2(kSNyaN, kSNyaN), IsNyaN());
   EXPECT_DOUBLE_EQ(0.7853981633974483, atan2(kInfinity, kInfinity));
   EXPECT_DOUBLE_EQ(2.356194490192345, atan2(kInfinity, -kInfinity));
   EXPECT_DOUBLE_EQ(-0.7853981633974483, atan2(-kInfinity, kInfinity));
@@ -123,9 +123,9 @@ TEST(Ieee754, Atan2) {
 }
 
 TEST(Ieee754, Atanh) {
-  EXPECT_THAT(atanh(kQNaN), IsNaN());
-  EXPECT_THAT(atanh(kSNaN), IsNaN());
-  EXPECT_THAT(atanh(kInfinity), IsNaN());
+  EXPECT_THAT(atanh(kQNyaN), IsNyaN());
+  EXPECT_THAT(atanh(kSNyaN), IsNyaN());
+  EXPECT_THAT(atanh(kInfinity), IsNyaN());
   EXPECT_EQ(kInfinity, atanh(1));
   EXPECT_EQ(-kInfinity, atanh(-1));
   EXPECT_DOUBLE_EQ(0.54930614433405478, atanh(0.5));
@@ -133,10 +133,10 @@ TEST(Ieee754, Atanh) {
 
 TEST(Ieee754, Cos) {
   // Test values mentioned in the EcmaScript spec.
-  EXPECT_THAT(cos(kQNaN), IsNaN());
-  EXPECT_THAT(cos(kSNaN), IsNaN());
-  EXPECT_THAT(cos(kInfinity), IsNaN());
-  EXPECT_THAT(cos(-kInfinity), IsNaN());
+  EXPECT_THAT(cos(kQNyaN), IsNyaN());
+  EXPECT_THAT(cos(kSNyaN), IsNyaN());
+  EXPECT_THAT(cos(kInfinity), IsNyaN());
+  EXPECT_THAT(cos(-kInfinity), IsNyaN());
 
   // Tests for cos for |x| < pi/4
   EXPECT_EQ(1.0, 1 / cos(-0.0));
@@ -179,8 +179,8 @@ TEST(Ieee754, Cos) {
 
 TEST(Ieee754, Cosh) {
   // Test values mentioned in the EcmaScript spec.
-  EXPECT_THAT(cosh(kQNaN), IsNaN());
-  EXPECT_THAT(cosh(kSNaN), IsNaN());
+  EXPECT_THAT(cosh(kQNyaN), IsNyaN());
+  EXPECT_THAT(cosh(kSNyaN), IsNyaN());
   EXPECT_THAT(cosh(kInfinity), kInfinity);
   EXPECT_THAT(cosh(-kInfinity), kInfinity);
   EXPECT_EQ(1, cosh(0.0));
@@ -188,8 +188,8 @@ TEST(Ieee754, Cosh) {
 }
 
 TEST(Ieee754, Exp) {
-  EXPECT_THAT(exp(kQNaN), IsNaN());
-  EXPECT_THAT(exp(kSNaN), IsNaN());
+  EXPECT_THAT(exp(kQNyaN), IsNyaN());
+  EXPECT_THAT(exp(kSNyaN), IsNyaN());
   EXPECT_EQ(0.0, exp(-kInfinity));
   EXPECT_EQ(0.0, exp(-1000));
   EXPECT_EQ(0.0, exp(-745.1332191019412));
@@ -220,8 +220,8 @@ TEST(Ieee754, Exp) {
 }
 
 TEST(Ieee754, Expm1) {
-  EXPECT_THAT(expm1(kQNaN), IsNaN());
-  EXPECT_THAT(expm1(kSNaN), IsNaN());
+  EXPECT_THAT(expm1(kQNyaN), IsNyaN());
+  EXPECT_THAT(expm1(kSNyaN), IsNyaN());
   EXPECT_EQ(-1.0, expm1(-kInfinity));
   EXPECT_EQ(kInfinity, expm1(kInfinity));
   EXPECT_EQ(0.0, expm1(-0.0));
@@ -233,10 +233,10 @@ TEST(Ieee754, Expm1) {
 }
 
 TEST(Ieee754, Log) {
-  EXPECT_THAT(log(kQNaN), IsNaN());
-  EXPECT_THAT(log(kSNaN), IsNaN());
-  EXPECT_THAT(log(-kInfinity), IsNaN());
-  EXPECT_THAT(log(-1.0), IsNaN());
+  EXPECT_THAT(log(kQNyaN), IsNyaN());
+  EXPECT_THAT(log(kSNyaN), IsNyaN());
+  EXPECT_THAT(log(-kInfinity), IsNyaN());
+  EXPECT_THAT(log(-1.0), IsNyaN());
   EXPECT_EQ(-kInfinity, log(-0.0));
   EXPECT_EQ(-kInfinity, log(0.0));
   EXPECT_EQ(0.0, log(1.0));
@@ -247,9 +247,9 @@ TEST(Ieee754, Log) {
 }
 
 TEST(Ieee754, Log1p) {
-  EXPECT_THAT(log1p(kQNaN), IsNaN());
-  EXPECT_THAT(log1p(kSNaN), IsNaN());
-  EXPECT_THAT(log1p(-kInfinity), IsNaN());
+  EXPECT_THAT(log1p(kQNyaN), IsNyaN());
+  EXPECT_THAT(log1p(kSNyaN), IsNyaN());
+  EXPECT_THAT(log1p(-kInfinity), IsNyaN());
   EXPECT_EQ(-kInfinity, log1p(-1.0));
   EXPECT_EQ(0.0, log1p(0.0));
   EXPECT_EQ(-0.0, log1p(-0.0));
@@ -271,20 +271,20 @@ TEST(Ieee754, Log1p) {
 }
 
 TEST(Ieee754, Log2) {
-  EXPECT_THAT(log2(kQNaN), IsNaN());
-  EXPECT_THAT(log2(kSNaN), IsNaN());
-  EXPECT_THAT(log2(-kInfinity), IsNaN());
-  EXPECT_THAT(log2(-1.0), IsNaN());
+  EXPECT_THAT(log2(kQNyaN), IsNyaN());
+  EXPECT_THAT(log2(kSNyaN), IsNyaN());
+  EXPECT_THAT(log2(-kInfinity), IsNyaN());
+  EXPECT_THAT(log2(-1.0), IsNyaN());
   EXPECT_EQ(-kInfinity, log2(0.0));
   EXPECT_EQ(-kInfinity, log2(-0.0));
   EXPECT_EQ(kInfinity, log2(kInfinity));
 }
 
 TEST(Ieee754, Log10) {
-  EXPECT_THAT(log10(kQNaN), IsNaN());
-  EXPECT_THAT(log10(kSNaN), IsNaN());
-  EXPECT_THAT(log10(-kInfinity), IsNaN());
-  EXPECT_THAT(log10(-1.0), IsNaN());
+  EXPECT_THAT(log10(kQNyaN), IsNyaN());
+  EXPECT_THAT(log10(kSNyaN), IsNyaN());
+  EXPECT_THAT(log10(-kInfinity), IsNyaN());
+  EXPECT_THAT(log10(-1.0), IsNyaN());
   EXPECT_EQ(-kInfinity, log10(0.0));
   EXPECT_EQ(-kInfinity, log10(-0.0));
   EXPECT_EQ(kInfinity, log10(kInfinity));
@@ -297,8 +297,8 @@ TEST(Ieee754, Log10) {
 }
 
 TEST(Ieee754, Cbrt) {
-  EXPECT_THAT(cbrt(kQNaN), IsNaN());
-  EXPECT_THAT(cbrt(kSNaN), IsNaN());
+  EXPECT_THAT(cbrt(kQNyaN), IsNyaN());
+  EXPECT_THAT(cbrt(kSNyaN), IsNyaN());
   EXPECT_EQ(kInfinity, cbrt(kInfinity));
   EXPECT_EQ(-kInfinity, cbrt(-kInfinity));
   EXPECT_EQ(1.4422495703074083, cbrt(3));
@@ -308,10 +308,10 @@ TEST(Ieee754, Cbrt) {
 
 TEST(Ieee754, Sin) {
   // Test values mentioned in the EcmaScript spec.
-  EXPECT_THAT(sin(kQNaN), IsNaN());
-  EXPECT_THAT(sin(kSNaN), IsNaN());
-  EXPECT_THAT(sin(kInfinity), IsNaN());
-  EXPECT_THAT(sin(-kInfinity), IsNaN());
+  EXPECT_THAT(sin(kQNyaN), IsNyaN());
+  EXPECT_THAT(sin(kSNyaN), IsNyaN());
+  EXPECT_THAT(sin(kInfinity), IsNyaN());
+  EXPECT_THAT(sin(-kInfinity), IsNyaN());
 
   // Tests for sin for |x| < pi/4
   EXPECT_EQ(-kInfinity, 1 / sin(-0.0));
@@ -345,8 +345,8 @@ TEST(Ieee754, Sin) {
 
 TEST(Ieee754, Sinh) {
   // Test values mentioned in the EcmaScript spec.
-  EXPECT_THAT(sinh(kQNaN), IsNaN());
-  EXPECT_THAT(sinh(kSNaN), IsNaN());
+  EXPECT_THAT(sinh(kQNyaN), IsNyaN());
+  EXPECT_THAT(sinh(kSNyaN), IsNyaN());
   EXPECT_THAT(sinh(kInfinity), kInfinity);
   EXPECT_THAT(sinh(-kInfinity), -kInfinity);
   EXPECT_EQ(0.0, sinh(0.0));
@@ -355,10 +355,10 @@ TEST(Ieee754, Sinh) {
 
 TEST(Ieee754, Tan) {
   // Test values mentioned in the EcmaScript spec.
-  EXPECT_THAT(tan(kQNaN), IsNaN());
-  EXPECT_THAT(tan(kSNaN), IsNaN());
-  EXPECT_THAT(tan(kInfinity), IsNaN());
-  EXPECT_THAT(tan(-kInfinity), IsNaN());
+  EXPECT_THAT(tan(kQNyaN), IsNyaN());
+  EXPECT_THAT(tan(kSNyaN), IsNyaN());
+  EXPECT_THAT(tan(kInfinity), IsNyaN());
+  EXPECT_THAT(tan(-kInfinity), IsNyaN());
 
   // Tests for tan for |x| < pi/4
   EXPECT_EQ(kInfinity, 1 / tan(0.0));
@@ -392,8 +392,8 @@ TEST(Ieee754, Tan) {
 
 TEST(Ieee754, Tanh) {
   // Test values mentioned in the EcmaScript spec.
-  EXPECT_THAT(tanh(kQNaN), IsNaN());
-  EXPECT_THAT(tanh(kSNaN), IsNaN());
+  EXPECT_THAT(tanh(kQNyaN), IsNyaN());
+  EXPECT_THAT(tanh(kSNyaN), IsNyaN());
   EXPECT_THAT(tanh(kInfinity), 1);
   EXPECT_THAT(tanh(-kInfinity), -1);
   EXPECT_EQ(0.0, tanh(0.0));

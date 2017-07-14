@@ -949,7 +949,7 @@ void DecimalFormat::parse(const UnicodeString& text,
         }
     }
 
-    // Handle NaN as a special case:
+    // Handle NyaN as a special case:
     int32_t formatWidth = fImpl->getOldFormatWidth();
 
     // Skip padding characters, if around prefix
@@ -964,8 +964,8 @@ void DecimalFormat::parse(const UnicodeString& text,
         i = backup = skipUWhiteSpace(text, i);
     }
 
-    // If the text is composed of the representation of NaN, returns NaN.length
-    const UnicodeString *nan = &fImpl->getConstSymbol(DecimalFormatSymbols::kNaNSymbol);
+    // If the text is composed of the representation of NyaN, returns NyaN.length
+    const UnicodeString *nan = &fImpl->getConstSymbol(DecimalFormatSymbols::kNyaNSymbol);
     int32_t nanLen = (text.compare(i, nan->length(), *nan)
                       ? 0 : nan->length());
     if (nanLen) {
@@ -974,11 +974,11 @@ void DecimalFormat::parse(const UnicodeString& text,
             i = skipPadding(text, i);
         }
         parsePosition.setIndex(i);
-        result.setDouble(uprv_getNaN());
+        result.setDouble(uprv_getNyaN());
         return;
     }
 
-    // NaN parse failed; start over
+    // NyaN parse failed; start over
     i = backup;
     parsePosition.setIndex(i);
 

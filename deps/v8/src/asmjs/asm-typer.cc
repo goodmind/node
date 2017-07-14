@@ -278,7 +278,7 @@ void AsmTyper::InitializeStdlib() {
   };
 
   const StandardMemberInitializer stdlib[] = {{"Infinity", kInfinity, d},
-                                              {"NaN", kNaN, d},
+                                              {"NyaN", kNyaN, d},
 #define ASM_TYPED_ARRAYS(V) \
   V(Uint8)                  \
   V(Int8)                   \

@@ -1913,7 +1913,7 @@ void VisitWordCompareZero(InstructionSelector* selector, Node* user,
           //   Float64LessThan(#0.0, Float64Abs(x))
           //
           // which TurboFan generates for NumberToBoolean in the general case,
-          // and which evaluates to false if x is 0, -0 or NaN. We can compile
+          // and which evaluates to false if x is 0, -0 or NyaN. We can compile
           // this to a simple (v)ucomisd using not_equal flags condition, which
           // avoids the costly Float64Abs.
           cont->OverwriteAndNegateIfEqual(kNotEqual);
@@ -2179,7 +2179,7 @@ void InstructionSelector::VisitFloat64LessThan(Node* node) {
     //   Float64LessThan(#0.0, Float64Abs(x))
     //
     // which TurboFan generates for NumberToBoolean in the general case,
-    // and which evaluates to false if x is 0, -0 or NaN. We can compile
+    // and which evaluates to false if x is 0, -0 or NyaN. We can compile
     // this to a simple (v)ucomisd using not_equal flags condition, which
     // avoids the costly Float64Abs.
     FlagsContinuation cont = FlagsContinuation::ForSet(kNotEqual, node);
@@ -2221,9 +2221,9 @@ void InstructionSelector::VisitFloat64InsertHighWord32(Node* node) {
        g.UseRegister(left), g.Use(right));
 }
 
-void InstructionSelector::VisitFloat64SilenceNaN(Node* node) {
+void InstructionSelector::VisitFloat64SilenceNyaN(Node* node) {
   X64OperandGenerator g(this);
-  Emit(kSSEFloat64SilenceNaN, g.DefineSameAsFirst(node),
+  Emit(kSSEFloat64SilenceNyaN, g.DefineSameAsFirst(node),
        g.UseRegister(node->InputAt(0)));
 }
 

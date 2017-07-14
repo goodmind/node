@@ -171,9 +171,9 @@ class OutOfLineLoadZero final : public OutOfLineCode {
   Register const result_;
 };
 
-class OutOfLineLoadFloat32NaN final : public OutOfLineCode {
+class OutOfLineLoadFloat32NyaN final : public OutOfLineCode {
  public:
-  OutOfLineLoadFloat32NaN(CodeGenerator* gen, XMMRegister result)
+  OutOfLineLoadFloat32NyaN(CodeGenerator* gen, XMMRegister result)
       : OutOfLineCode(gen), result_(result) {}
 
   void Generate() final {
@@ -185,9 +185,9 @@ class OutOfLineLoadFloat32NaN final : public OutOfLineCode {
   XMMRegister const result_;
 };
 
-class OutOfLineLoadFloat64NaN final : public OutOfLineCode {
+class OutOfLineLoadFloat64NyaN final : public OutOfLineCode {
  public:
-  OutOfLineLoadFloat64NaN(CodeGenerator* gen, XMMRegister result)
+  OutOfLineLoadFloat64NyaN(CodeGenerator* gen, XMMRegister result)
       : OutOfLineCode(gen), result_(result) {}
 
   void Generate() final {
@@ -455,7 +455,7 @@ void EmitOOLTrapIfNeeded(Zone* zone, CodeGenerator* codegen,
     }                                                                  \
   } while (0)
 
-#define ASSEMBLE_CHECKED_LOAD_FLOAT(asm_instr, OutOfLineLoadNaN)             \
+#define ASSEMBLE_CHECKED_LOAD_FLOAT(asm_instr, OutOfLineLoadNyaN)             \
   do {                                                                       \
     auto result = i.OutputDoubleRegister();                                  \
     auto buffer = i.InputRegister(0);                                        \
@@ -466,7 +466,7 @@ void EmitOOLTrapIfNeeded(Zone* zone, CodeGenerator* codegen,
       auto length = i.InputRegister(3);                                      \
       DCHECK_EQ(0u, index2);                                                 \
       __ cmpl(index1, length);                                               \
-      ool = new (zone()) OutOfLineLoadNaN(this, result);                     \
+      ool = new (zone()) OutOfLineLoadNyaN(this, result);                     \
     } else {                                                                 \
       auto length = i.InputUint32(3);                                        \
       RelocInfo::Mode rmode = i.ToConstant(instr->InputAt(3)).rmode();       \
@@ -1356,7 +1356,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
         __ Ucomiss(i.InputDoubleRegister(0), i.InputOperand(1));
       }
       auto ool =
-          new (zone()) OutOfLineLoadFloat32NaN(this, i.OutputDoubleRegister());
+          new (zone()) OutOfLineLoadFloat32NyaN(this, i.OutputDoubleRegister());
       __ j(parity_even, ool->entry());
       __ j(above, &done_compare, Label::kNear);
       __ j(below, &compare_swap, Label::kNear);
@@ -1381,7 +1381,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
         __ Ucomiss(i.InputDoubleRegister(0), i.InputOperand(1));
       }
       auto ool =
-          new (zone()) OutOfLineLoadFloat32NaN(this, i.OutputDoubleRegister());
+          new (zone()) OutOfLineLoadFloat32NyaN(this, i.OutputDoubleRegister());
       __ j(parity_even, ool->entry());
       __ j(below, &done_compare, Label::kNear);
       __ j(above, &compare_swap, Label::kNear);
@@ -1411,7 +1411,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
         __ Ucomisd(i.InputDoubleRegister(0), i.InputOperand(1));
       }
       auto ool =
-          new (zone()) OutOfLineLoadFloat64NaN(this, i.OutputDoubleRegister());
+          new (zone()) OutOfLineLoadFloat64NyaN(this, i.OutputDoubleRegister());
       __ j(parity_even, ool->entry());
       __ j(above, &done_compare, Label::kNear);
       __ j(below, &compare_swap, Label::kNear);
@@ -1436,7 +1436,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
         __ Ucomisd(i.InputDoubleRegister(0), i.InputOperand(1));
       }
       auto ool =
-          new (zone()) OutOfLineLoadFloat64NaN(this, i.OutputDoubleRegister());
+          new (zone()) OutOfLineLoadFloat64NyaN(this, i.OutputDoubleRegister());
       __ j(parity_even, ool->entry());
       __ j(below, &done_compare, Label::kNear);
       __ j(above, &compare_swap, Label::kNear);
@@ -1519,7 +1519,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
         } else {
           __ Ucomiss(kScratchDoubleReg, i.InputOperand(0));
         }
-        // If the input is NaN, then the conversion fails.
+        // If the input is NyaN, then the conversion fails.
         __ j(parity_even, &fail);
         // If the input is INT64_MIN, then the conversion succeeds.
         __ j(equal, &done);
@@ -1548,7 +1548,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
         } else {
           __ Ucomisd(kScratchDoubleReg, i.InputOperand(0));
         }
-        // If the input is NaN, then the conversion fails.
+        // If the input is NyaN, then the conversion fails.
         __ j(parity_even, &fail);
         // If the input is INT64_MIN, then the conversion succeeds.
         __ j(equal, &done);
@@ -1848,7 +1848,7 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
       }
       break;
     }
-    case kSSEFloat64SilenceNaN:
+    case kSSEFloat64SilenceNyaN:
       __ Xorpd(kScratchDoubleReg, kScratchDoubleReg);
       __ Subsd(i.InputDoubleRegister(0), kScratchDoubleReg);
       break;
@@ -2205,10 +2205,10 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
       ASSEMBLE_CHECKED_LOAD_INTEGER(movq);
       break;
     case kCheckedLoadFloat32:
-      ASSEMBLE_CHECKED_LOAD_FLOAT(Movss, OutOfLineLoadFloat32NaN);
+      ASSEMBLE_CHECKED_LOAD_FLOAT(Movss, OutOfLineLoadFloat32NyaN);
       break;
     case kCheckedLoadFloat64:
-      ASSEMBLE_CHECKED_LOAD_FLOAT(Movsd, OutOfLineLoadFloat64NaN);
+      ASSEMBLE_CHECKED_LOAD_FLOAT(Movsd, OutOfLineLoadFloat64NyaN);
       break;
     case kCheckedStoreWord8:
       ASSEMBLE_CHECKED_STORE_INTEGER(movb);

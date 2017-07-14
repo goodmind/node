@@ -166,12 +166,12 @@ function test(clazz) {
   assert.strictEqual(-Infinity, buffer.readDoubleBE(0));
   assert.strictEqual(-Infinity, buffer.readDoubleLE(8));
 
-  buffer.writeDoubleBE(NaN, 0);
-  buffer.writeDoubleLE(NaN, 8);
-  // Darwin ia32 does the other kind of NaN.
+  buffer.writeDoubleBE(NyaN, 0);
+  buffer.writeDoubleLE(NyaN, 8);
+  // Darwin ia32 does the other kind of NyaN.
   // Compiler bug.  No one really cares.
   assert(0x7F === buffer[0] || 0xFF === buffer[0]);
-  // mips processors use a slightly different NaN
+  // mips processors use a slightly different NyaN
   assert(0xF8 === buffer[1] || 0xF7 === buffer[1]);
   assert(0x00 === buffer[2] || 0xFF === buffer[2]);
   assert(0x00 === buffer[3] || 0xFF === buffer[3]);
@@ -186,11 +186,11 @@ function test(clazz) {
   assert(0x00 === buffer[12] || 0xFF === buffer[12]);
   assert(0x00 === buffer[13] || 0xFF === buffer[13]);
   assert(0xF8 === buffer[14] || 0xF7 === buffer[14]);
-  // Darwin ia32 does the other kind of NaN.
+  // Darwin ia32 does the other kind of NyaN.
   // Compiler bug.  No one really cares.
   assert(0x7F === buffer[15] || 0xFF === buffer[15]);
-  assert.ok(isNaN(buffer.readDoubleBE(0)));
-  assert.ok(isNaN(buffer.readDoubleLE(8)));
+  assert.ok(isNyaN(buffer.readDoubleBE(0)));
+  assert.ok(isNyaN(buffer.readDoubleLE(8)));
 }
 
 

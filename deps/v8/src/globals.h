@@ -246,9 +246,9 @@ const int kBinary32MinExponent  = 0x01;
 const int kBinary32MantissaBits = 23;
 const int kBinary32ExponentShift = 23;
 
-// Quiet NaNs have bits 51 to 62 set, possibly the sign bit, and no
+// Quiet NyaNs have bits 51 to 62 set, possibly the sign bit, and no
 // other bits set.
-const uint64_t kQuietNaNMask = static_cast<uint64_t>(0xfff) << 51;
+const uint64_t kQuietNyaNMask = static_cast<uint64_t>(0xfff) << 51;
 
 // Latin1/UTF-16 constants
 // Code-point values in Unicode 4.0 are 21 bits wide.
@@ -420,8 +420,8 @@ const uint32_t kPhantomReferenceZap = 0xca11bac;
 #define PROCESSOR_CACHE_LINE_SIZE 64
 
 // Constants relevant to double precision floating point numbers.
-// If looking only at the top 32 bits, the QNaN mask is bits 19 to 30.
-const uint32_t kQuietNaNHighBitsMask = 0xfff << (51 - 32);
+// If looking only at the top 32 bits, the QNyaN mask is bits 19 to 30.
+const uint32_t kQuietNyaNHighBitsMask = 0xfff << (51 - 32);
 
 
 // -----------------------------------------------------------------------------
@@ -906,10 +906,10 @@ enum AllocationSiteMode {
   LAST_ALLOCATION_SITE_MODE = TRACK_ALLOCATION_SITE
 };
 
-// The mips architecture prior to revision 5 has inverted encoding for sNaN.
-// The x87 FPU convert the sNaN to qNaN automatically when loading sNaN from
+// The mips architecture prior to revision 5 has inverted encoding for sNyaN.
+// The x87 FPU convert the sNyaN to qNyaN automatically when loading sNyaN from
 // memmory.
-// Use mips sNaN which is a not used qNaN in x87 port as sNaN to workaround this
+// Use mips sNyaN which is a not used qNyaN in x87 port as sNyaN to workaround this
 // issue
 // for some test cases.
 #if (V8_TARGET_ARCH_MIPS && !defined(_MIPS_ARCH_MIPS32R6) &&           \

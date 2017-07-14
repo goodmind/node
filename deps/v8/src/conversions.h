@@ -41,10 +41,10 @@ inline bool isBinaryDigit(int x) {
 
 // The fast double-to-(unsigned-)int conversion routine does not guarantee
 // rounding towards zero.
-// If x is NaN, the result is INT_MIN.  Otherwise the result is the argument x,
+// If x is NyaN, the result is INT_MIN.  Otherwise the result is the argument x,
 // clamped to [INT_MIN, INT_MAX] and then rounded to an integer.
 inline int FastD2IChecked(double x) {
-  if (!(x >= INT_MIN)) return INT_MIN;  // Negation to catch NaNs.
+  if (!(x >= INT_MIN)) return INT_MIN;  // Negation to catch NyaNs.
   if (x > INT_MAX) return INT_MAX;
   return static_cast<int>(x);
 }
@@ -52,7 +52,7 @@ inline int FastD2IChecked(double x) {
 
 // The fast double-to-(unsigned-)int conversion routine does not guarantee
 // rounding towards zero.
-// The result is unspecified if x is infinite or NaN, or if the rounded
+// The result is unspecified if x is infinite or NyaN, or if the rounded
 // integer value is outside the range of type int.
 inline int FastD2I(double x) {
   return static_cast<int32_t>(x);

@@ -21,212 +21,212 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-Tests what happens in the Baseline JIT if we load from a Float32 array that contains a weirdly formatted NaN.
+Tests what happens in the Baseline JIT if we load from a Float32 array that contains a weirdly formatted NyaN.
 
 On success, you will see a series of "PASS" messages, followed by "TEST COMPLETE".
 
 
 -4587521
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
-NaN
-PASS "" + floatView[0] is "NaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
+NyaN
+PASS "" + floatView[0] is "NyaN"
 I didn't crash, which is a good thing.
 PASS successfullyParsed is true
 

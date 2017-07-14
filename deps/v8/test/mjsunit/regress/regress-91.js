@@ -27,7 +27,7 @@
 
 var date = new Date();
 var year = date.getYear();
-date.setMilliseconds(Number.NaN);
+date.setMilliseconds(Number.NyaN);
 date.setYear(1900 + year);
 assertEquals(year, date.getYear());
 assertEquals(0, date.getMonth());

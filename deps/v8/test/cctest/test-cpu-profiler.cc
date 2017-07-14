@@ -1835,7 +1835,7 @@ TEST(CollectDeoptEvents) {
       "\n"
       "opt_function1(1, 1);\n"
       "\n"
-      "opt_function1(NaN, 1);\n"
+      "opt_function1(NyaN, 1);\n"
       "\n"
       "opt_function2(1, 1);\n"
       "\n"
@@ -1869,7 +1869,7 @@ TEST(CollectDeoptEvents) {
       0      opt_function1 30 #5
       1        opt_function1 30 #6
                   ;;; deopted at script_id: 30 position: 108 with reason 'lost
-  precision or NaN'.
+  precision or NyaN'.
   */
 
   {
@@ -1885,8 +1885,8 @@ TEST(CollectDeoptEvents) {
     const char* branch[] = {"", "opt_function1", "opt_function1"};
     const char* deopt_reason =
         GetBranchDeoptReason(env, iprofile, branch, arraysize(branch));
-    if (deopt_reason != reason(i::DeoptimizeReason::kNaN) &&
-        deopt_reason != reason(i::DeoptimizeReason::kLostPrecisionOrNaN) &&
+    if (deopt_reason != reason(i::DeoptimizeReason::kNyaN) &&
+        deopt_reason != reason(i::DeoptimizeReason::kLostPrecisionOrNyaN) &&
         deopt_reason != reason(i::DeoptimizeReason::kNotASmi)) {
       FATAL(deopt_reason);
     }

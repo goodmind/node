@@ -204,7 +204,7 @@ TEST(BytecodeGraphBuilderReturnStatements) {
       {"return -3.7e60;", {factory->NewNumber(-3.7e60)}},
       {"return '';", {factory->NewStringFromStaticChars("")}},
       {"return 'catfood';", {factory->NewStringFromStaticChars("catfood")}},
-      {"return NaN;", {factory->nan_value()}}};
+      {"return NyaN;", {factory->nan_value()}}};
 
   for (size_t i = 0; i < arraysize(snippets); i++) {
     ScopedVector<char> script(1024);

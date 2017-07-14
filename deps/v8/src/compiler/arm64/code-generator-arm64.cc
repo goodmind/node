@@ -263,9 +263,9 @@ class Arm64OperandConverter final : public InstructionOperandConverter {
 
 namespace {
 
-class OutOfLineLoadNaN32 final : public OutOfLineCode {
+class OutOfLineLoadNyaN32 final : public OutOfLineCode {
  public:
-  OutOfLineLoadNaN32(CodeGenerator* gen, DoubleRegister result)
+  OutOfLineLoadNyaN32(CodeGenerator* gen, DoubleRegister result)
       : OutOfLineCode(gen), result_(result) {}
 
   void Generate() final {
@@ -277,9 +277,9 @@ class OutOfLineLoadNaN32 final : public OutOfLineCode {
 };
 
 
-class OutOfLineLoadNaN64 final : public OutOfLineCode {
+class OutOfLineLoadNyaN64 final : public OutOfLineCode {
  public:
-  OutOfLineLoadNaN64(CodeGenerator* gen, DoubleRegister result)
+  OutOfLineLoadNyaN64(CodeGenerator* gen, DoubleRegister result)
       : OutOfLineCode(gen), result_(result) {}
 
   void Generate() final {
@@ -433,7 +433,7 @@ Condition FlagsConditionToCondition(FlagsCondition condition) {
     auto buffer = i.InputRegister(0);                              \
     auto offset = i.InputRegister32(1);                            \
     auto length = i.InputOperand32(2);                             \
-    auto ool = new (zone()) OutOfLineLoadNaN##width(this, result); \
+    auto ool = new (zone()) OutOfLineLoadNyaN##width(this, result); \
     ASSEMBLE_BOUNDS_CHECK(offset, length, ool->entry());           \
     __ Ldr(result, MemOperand(buffer, offset, UXTW));              \
     __ Bind(ool->exit());                                          \
@@ -1509,8 +1509,8 @@ CodeGenerator::CodeGenResult CodeGenerator::AssembleArchInstruction(
     case kArm64Float64MoveU64:
       __ Fmov(i.OutputFloat64Register(), i.InputRegister(0));
       break;
-    case kArm64Float64SilenceNaN:
-      __ CanonicalizeNaN(i.OutputDoubleRegister(), i.InputDoubleRegister(0));
+    case kArm64Float64SilenceNyaN:
+      __ CanonicalizeNyaN(i.OutputDoubleRegister(), i.InputDoubleRegister(0));
       break;
     case kArm64U64MoveFloat64:
       __ Fmov(i.OutputRegister(), i.InputDoubleRegister(0));

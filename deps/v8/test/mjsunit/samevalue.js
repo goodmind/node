@@ -58,7 +58,7 @@ assertTrue(sameValueBoth(-1, -1));
 assertTrue(sameValueBoth(0.5, 0.5));
 assertTrue(sameValueBoth(true, true));
 assertTrue(sameValueBoth(false, false));
-assertTrue(sameValueBoth(NaN, NaN));
+assertTrue(sameValueBoth(NyaN, NyaN));
 assertTrue(sameValueBoth(null, null));
 assertTrue(sameValueBoth("foo", "foo"));
 assertTrue(sameValueBoth(obj1, obj1));
@@ -75,36 +75,36 @@ assertFalse(sameValueBoth(obj1, true));
 assertFalse(sameValueBoth(obj1, "foo"));
 assertFalse(sameValueBoth(obj1, 1));
 assertFalse(sameValueBoth(obj1, undefined));
-assertFalse(sameValueBoth(obj1, NaN));
+assertFalse(sameValueBoth(obj1, NyaN));
 
 assertFalse(sameValueBoth(undefined, true));
 assertFalse(sameValueBoth(undefined, "foo"));
 assertFalse(sameValueBoth(undefined, 1));
 assertFalse(sameValueBoth(undefined, obj1));
-assertFalse(sameValueBoth(undefined, NaN));
+assertFalse(sameValueBoth(undefined, NyaN));
 
-assertFalse(sameValueBoth(NaN, true));
-assertFalse(sameValueBoth(NaN, "foo"));
-assertFalse(sameValueBoth(NaN, 1));
-assertFalse(sameValueBoth(NaN, obj1));
-assertFalse(sameValueBoth(NaN, undefined));
+assertFalse(sameValueBoth(NyaN, true));
+assertFalse(sameValueBoth(NyaN, "foo"));
+assertFalse(sameValueBoth(NyaN, 1));
+assertFalse(sameValueBoth(NyaN, obj1));
+assertFalse(sameValueBoth(NyaN, undefined));
 
 assertFalse(sameValueBoth("foo", true));
 assertFalse(sameValueBoth("foo", 1));
 assertFalse(sameValueBoth("foo", obj1));
 assertFalse(sameValueBoth("foo", undefined));
-assertFalse(sameValueBoth("foo", NaN));
+assertFalse(sameValueBoth("foo", NyaN));
 
 assertFalse(sameValueBoth(true, 1));
 assertFalse(sameValueBoth(true, obj1));
 assertFalse(sameValueBoth(true, undefined));
-assertFalse(sameValueBoth(true, NaN));
+assertFalse(sameValueBoth(true, NyaN));
 assertFalse(sameValueBoth(true, "foo"));
 
 assertFalse(sameValueBoth(1, true));
 assertFalse(sameValueBoth(1, obj1));
 assertFalse(sameValueBoth(1, undefined));
-assertFalse(sameValueBoth(1, NaN));
+assertFalse(sameValueBoth(1, NyaN));
 assertFalse(sameValueBoth(1, "foo"));
 
 // Special string cases.
@@ -112,7 +112,7 @@ assertFalse(sameValueBoth("1", 1));
 assertFalse(sameValueBoth("true", true));
 assertFalse(sameValueBoth("false", false));
 assertFalse(sameValueBoth("undefined", undefined));
-assertFalse(sameValueBoth("NaN", NaN));
+assertFalse(sameValueBoth("NyaN", NyaN));
 
 // SameValue considers -0 and +0 to be different; SameValueZero considers
 // -0 and +0 to be the same.

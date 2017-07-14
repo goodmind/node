@@ -177,7 +177,7 @@ class JSTypedLoweringTester : public HandleAndZoneScope {
     CHECK_EQ(expected, OpParameter<double>(result));
   }
 
-  void CheckNaN(Node* result) {
+  void CheckNyaN(Node* result) {
     CHECK_EQ(IrOpcode::kNumberConstant, result->opcode());
     double value = OpParameter<double>(result);
     CHECK(std::isnan(value));
@@ -211,7 +211,7 @@ static Type* kInt32Types[] = {Type::UnsignedSmall(), Type::Negative32(),
 static Type* kNumberTypes[] = {
     Type::UnsignedSmall(), Type::Negative32(),  Type::Unsigned31(),
     Type::SignedSmall(),   Type::Signed32(),    Type::Unsigned32(),
-    Type::Integral32(),    Type::MinusZero(),   Type::NaN(),
+    Type::Integral32(),    Type::MinusZero(),   Type::NyaN(),
     Type::OrderedNumber(), Type::PlainNumber(), Type::Number()};
 
 
@@ -335,7 +335,7 @@ TEST(Int32BitwiseShifts) {
   Type* types[] = {
       Type::SignedSmall(), Type::UnsignedSmall(), Type::Negative32(),
       Type::Unsigned31(),  Type::Unsigned32(),    Type::Signed32(),
-      Type::MinusZero(),   Type::NaN(),           Type::Undefined(),
+      Type::MinusZero(),   Type::NyaN(),           Type::Undefined(),
       Type::Null(),        Type::Boolean(),       Type::Number(),
       Type::PlainNumber(), Type::String()};
 
@@ -390,7 +390,7 @@ TEST(Int32BitwiseBinops) {
 
   Type* types[] = {
       Type::SignedSmall(),   Type::UnsignedSmall(), Type::Unsigned32(),
-      Type::Signed32(),      Type::MinusZero(),     Type::NaN(),
+      Type::Signed32(),      Type::MinusZero(),     Type::NyaN(),
       Type::OrderedNumber(), Type::PlainNumber(),   Type::Undefined(),
       Type::Null(),          Type::Boolean(),       Type::Number(),
       Type::String()};
@@ -426,7 +426,7 @@ TEST(JSToNumber1) {
 
   {  // ToNumber(undefined)
     Node* r = R.ReduceUnop(ton, Type::Undefined());
-    R.CheckNaN(r);
+    R.CheckNyaN(r);
   }
 
   {  // ToNumber(null)

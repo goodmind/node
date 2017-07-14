@@ -160,7 +160,7 @@ if (this.Worker) {
 
   // Test various infinite timeouts
   TestWaitWithTimeout(undefined);
-  TestWaitWithTimeout(NaN);
+  TestWaitWithTimeout(NyaN);
   TestWaitWithTimeout(Infinity);
 
 

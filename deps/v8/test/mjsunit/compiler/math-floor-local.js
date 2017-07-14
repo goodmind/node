@@ -52,7 +52,7 @@ function test() {
   testFloor(-0, -0);
   testFloor(Infinity, Infinity);
   testFloor(-Infinity, -Infinity);
-  testFloor(NaN, NaN);
+  testFloor(NyaN, NyaN);
 
   // Ensure that a negative zero coming from Math.floor is properly handled
   // by other operations.

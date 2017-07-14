@@ -15,7 +15,7 @@ function assertValidAsm(func) {
     "use asm";
 
     var StdlibInfinity = stdlib.Infinity;
-    var StdlibNaN = stdlib.NaN;
+    var StdlibNyaN = stdlib.NyaN;
     var StdlibMathE = stdlib.Math.E;
     var StdlibMathLN10 = stdlib.Math.LN10;
     var StdlibMathLN2 = stdlib.Math.LN2;
@@ -39,7 +39,7 @@ function assertValidAsm(func) {
     }
 
     function nanCheck() {
-      return +StdlibNaN;
+      return +StdlibNyaN;
     }
 
     return {caller:caller, nanCheck:nanCheck};
@@ -48,14 +48,14 @@ function assertValidAsm(func) {
   var m = Module(stdlib);
   assertValidAsm(Module);
   assertEquals(1, m.caller());
-  assertTrue(isNaN(m.nanCheck()));
+  assertTrue(isNyaN(m.nanCheck()));
 })();
 
 
 var stdlib = this;
 var stdlib_root_members = [
   'Infinity',
-  'NaN',
+  'NyaN',
 ];
 var stdlib_math_members = [
   'E',
@@ -91,7 +91,7 @@ var stdlib_math_members = [
 (function TestBadStdlib() {
   function Module(stdlib) {
     "use asm";
-    var foo = stdlib.NaN;
+    var foo = stdlib.NyaN;
     return {};
   }
   for (var i = 0; i < stdlib_root_members.length; ++i) {
@@ -99,7 +99,7 @@ var stdlib_math_members = [
     var stdlib = {};
     stdlib[member] = 0;
     print(member);
-    var code = Module.toString().replace('NaN', member);
+    var code = Module.toString().replace('NyaN', member);
     var decl = eval('(' + code + ')');
     decl(stdlib);
     assertFalse(%IsAsmWasmCode(decl));
@@ -109,7 +109,7 @@ var stdlib_math_members = [
     var stdlib = {Math:{}};
     stdlib['Math'][member] = 0;
     print(member);
-    var code = Module.toString().replace('NaN', 'Math.' + member);
+    var code = Module.toString().replace('NyaN', 'Math.' + member);
     var decl = eval('(' + code + ')');
     decl(stdlib);
     assertFalse(%IsAsmWasmCode(decl));
@@ -117,22 +117,22 @@ var stdlib_math_members = [
 })();
 
 
-(function TestMissingNaNStdlib() {
+(function TestMissingNyaNStdlib() {
   function Module(stdlib) {
     "use asm";
-    var foo = stdlib.NaN;
+    var foo = stdlib.NyaN;
     return {};
   }
   for (var i = 0; i < stdlib_root_members.length; ++i) {
     var member = stdlib_root_members[i];
-    var code = Module.toString().replace('NaN', member);
+    var code = Module.toString().replace('NyaN', member);
     var decl = eval('(' + code + ')');
     decl({});
     assertFalse(%IsAsmWasmCode(decl));
   }
   for (var i = 0; i < stdlib_math_members.length; ++i) {
     var member = stdlib_math_members[i];
-    var code = Module.toString().replace('NaN', 'Math.' + member);
+    var code = Module.toString().replace('NyaN', 'Math.' + member);
     var decl = eval('(' + code + ')');
     assertThrows(function() {
       decl({});
@@ -228,7 +228,7 @@ var stdlib_math_members = [
     if (delta === undefined) {
       delta = 1.0e-10;
     }
-    if (isNaN(x) && isNaN(y)) {
+    if (isNyaN(x) && isNyaN(y)) {
       return true;
     }
     if (!isFinite(x) && !isFinite(y)) {
@@ -245,7 +245,7 @@ var stdlib_math_members = [
   }
 
   function plainEqual(x, y) {
-    if (isNaN(x) && isNaN(y)) {
+    if (isNyaN(x) && isNyaN(y)) {
       return true;
     }
     return x === y;
@@ -376,12 +376,12 @@ var stdlib_math_members = [
     f32: [
       0, -0, 1, -1, 0.25, 0.125, 0.9, -0.9, 1.414,
       0x7F, -0x80, -0x8000, -0x80000000,
-      0x7FFF, 0x7FFFFFFF, Infinity, -Infinity, NaN,
+      0x7FFF, 0x7FFFFFFF, Infinity, -Infinity, NyaN,
     ],
     f64: [
       0, -0, 1, -1, 0.25, 0.125, 0.9, -0.9, 1.414,
       0x7F, -0x80, -0x8000, -0x80000000,
-      0x7FFF, 0x7FFFFFFF, Infinity, -Infinity, NaN,
+      0x7FFF, 0x7FFFFFFF, Infinity, -Infinity, NyaN,
     ],
   };
   var converts = {

@@ -294,9 +294,9 @@ public:
     UBool isZero(void) const;
 
     /** Test for a Nan
-     * @return  TRUE if the number is a NaN
+     * @return  TRUE if the number is a NyaN
      */
-    UBool isNaN(void) const {return decNumberIsNaN(fDecNumber);}
+    UBool isNyaN(void) const {return decNumberIsNyaN(fDecNumber);}
 
     UBool isInfinite() const {return decNumberIsInfinite(fDecNumber);}
 

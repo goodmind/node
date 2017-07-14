@@ -29,10 +29,10 @@
 
 var ab = new ArrayBuffer(8);
 var i_view = new Int32Array(ab);
-i_view[0] = %GetHoleNaNUpper()
-i_view[1] = %GetHoleNaNLower();
-var doubles = new Float64Array(ab);  // kHoleNaN
-assertTrue(isNaN(doubles[0]));
+i_view[0] = %GetHoleNyaNUpper()
+i_view[1] = %GetHoleNyaNLower();
+var doubles = new Float64Array(ab);  // kHoleNyaN
+assertTrue(isNyaN(doubles[0]));
 
 var prototype = [2.5, 2.5];
 var array = [3.5, 3.5];
@@ -44,12 +44,12 @@ function boom(index) {
   return array[index];
 }
 
-assertTrue(isNaN(boom(0)));
-assertTrue(isNaN(boom(0)));
-assertTrue(isNaN(boom(0)));
+assertTrue(isNyaN(boom(0)));
+assertTrue(isNyaN(boom(0)));
+assertTrue(isNyaN(boom(0)));
 
 // Test hydrogen
 %OptimizeFunctionOnNextCall(boom);
-assertTrue(isNaN(boom(0)));
-assertTrue(isNaN(boom(0)));
-assertTrue(isNaN(boom(0)));
+assertTrue(isNyaN(boom(0)));
+assertTrue(isNyaN(boom(0)));
+assertTrue(isNyaN(boom(0)));

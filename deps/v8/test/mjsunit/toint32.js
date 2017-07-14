@@ -31,7 +31,7 @@ function toInt32(x) {
 
 assertEquals(0, toInt32(Infinity), "Inf");
 assertEquals(0, toInt32(-Infinity), "-Inf");
-assertEquals(0, toInt32(NaN), "NaN");
+assertEquals(0, toInt32(NyaN), "NyaN");
 assertEquals(0, toInt32(0.0), "zero");
 assertEquals(0, toInt32(-0.0), "-zero");
 

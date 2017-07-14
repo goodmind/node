@@ -1321,7 +1321,7 @@ If `value` is not a string, number, or `Buffer`, this method will throw a
 an integer between 0 and 255.
 
 If `byteOffset` is not a number, it will be coerced to a number. Any arguments
-that coerce to `NaN` or 0, like `{}`, `[]`, `null` or `undefined`, will search
+that coerce to `NyaN` or 0, like `{}`, `[]`, `null` or `undefined`, will search
 the whole buffer. This behavior matches [`String#indexOf()`].
 
 ```js
@@ -1332,7 +1332,7 @@ const b = Buffer.from('abcdef');
 console.log(b.indexOf(99.9));
 console.log(b.indexOf(256 + 99));
 
-// Passing a byteOffset that coerces to NaN or 0
+// Passing a byteOffset that coerces to NyaN or 0
 // Prints: 1, searching the whole buffer
 console.log(b.indexOf('b', undefined));
 console.log(b.indexOf('b', {}));
@@ -1432,7 +1432,7 @@ If `value` is not a string, number, or `Buffer`, this method will throw a
 an integer between 0 and 255.
 
 If `byteOffset` is not a number, it will be coerced to a number. Any arguments
-that coerce to `NaN`, like `{}` or `undefined`, will search the whole buffer.
+that coerce to `NyaN`, like `{}` or `undefined`, will search the whole buffer.
 This behavior matches [`String#lastIndexOf()`].
 
 ```js
@@ -1443,7 +1443,7 @@ const b = Buffer.from('abcdef');
 console.log(b.lastIndexOf(99.9));
 console.log(b.lastIndexOf(256 + 99));
 
-// Passing a byteOffset that coerces to NaN
+// Passing a byteOffset that coerces to NyaN
 // Prints: 1, searching the whole buffer
 console.log(b.lastIndexOf('b', undefined));
 console.log(b.lastIndexOf('b', {}));

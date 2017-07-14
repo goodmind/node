@@ -10,8 +10,8 @@ function loader(dst, src, i) {
 
 var ab = new ArrayBuffer(8);
 var i_view = new Int32Array(ab);
-i_view[0] = %GetHoleNaNUpper()
-i_view[1] = %GetHoleNaNLower();
+i_view[0] = %GetHoleNyaNUpper()
+i_view[1] = %GetHoleNyaNLower();
 var f_view = new Float64Array(ab);
 
 var fixed_double_elements = new Float64Array(1);

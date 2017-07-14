@@ -150,7 +150,7 @@ function TestEquality() {
   }
 
   // Symbols should not be equal to any other value (and the test terminates).
-  var values = [347, 1.275, NaN, "string", null, undefined, {}, function() {}]
+  var values = [347, 1.275, NyaN, "string", null, undefined, {}, function() {}]
   for (var i in symbols) {
     for (var j in values) {
       assertFalse(symbols[i] === values[j])

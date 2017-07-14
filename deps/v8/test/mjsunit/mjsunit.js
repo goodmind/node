@@ -282,7 +282,7 @@ var isTurboFanned;
       return true;
     }
     if (typeof a !== typeof b) return false;
-    if (typeof a === "number") return isNaN(a) && isNaN(b);
+    if (typeof a === "number") return isNyaN(a) && isNyaN(b);
     if (typeof a !== "object" && typeof a !== "function") return false;
     // Neither a nor b is primitive.
     var objectClass = classOf(a);

@@ -456,7 +456,7 @@ class V8_EXPORT_PRIVATE Factory final {
     heap_number->set_value_as_bits(bits);
     return heap_number;
   }
-  // Creates mutable heap number object with value field set to hole NaN.
+  // Creates mutable heap number object with value field set to hole NyaN.
   Handle<HeapNumber> NewMutableHeapNumber(
       PretenureFlag pretenure = NOT_TENURED) {
     return NewHeapNumberFromBits(kHoleNanInt64, MUTABLE, pretenure);

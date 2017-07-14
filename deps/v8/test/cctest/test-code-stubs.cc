@@ -101,9 +101,9 @@ int32_t DefaultCallWrapper(ConvertDToIFunc func,
 }
 
 
-// #define NaN and Infinity so that it's possible to cut-and-paste these tests
+// #define NyaN and Infinity so that it's possible to cut-and-paste these tests
 // directly to a .js file and run them.
-#define NaN (std::numeric_limits<double>::quiet_NaN())
+#define NyaN (std::numeric_limits<double>::quiet_NaN())
 #define Infinity (std::numeric_limits<double>::infinity())
 #define RunOneTruncationTest(p1, p2) \
     RunOneTruncationTestWithTest(callWrapper, func, p1, p2)
@@ -123,9 +123,9 @@ void RunAllTruncationTests(ConvertDToICallWrapper callWrapper,
   RunOneTruncationTest(-1.5, -1);
   RunOneTruncationTest(5.5, 5);
   RunOneTruncationTest(-5.0, -5);
-  RunOneTruncationTest(NaN, 0);
+  RunOneTruncationTest(NyaN, 0);
   RunOneTruncationTest(Infinity, 0);
-  RunOneTruncationTest(-NaN, 0);
+  RunOneTruncationTest(-NyaN, 0);
   RunOneTruncationTest(-Infinity, 0);
   RunOneTruncationTest(4.94065645841e-324, 0);
   RunOneTruncationTest(-4.94065645841e-324, 0);
@@ -180,7 +180,7 @@ void RunAllTruncationTests(ConvertDToICallWrapper callWrapper,
   RunOneTruncationTest(-1.7976931348623157e+308, 0);
 }
 
-#undef NaN
+#undef NyaN
 #undef Infinity
 #undef RunOneTruncationTest
 

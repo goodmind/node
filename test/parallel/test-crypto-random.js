@@ -158,7 +158,7 @@ const expectedErrorRegexp = /^TypeError: size must be a number >= 0$/;
     }, errMessages.offsetNotNumber);
 
     assert.throws(() => {
-      crypto.randomFillSync(buf, NaN);
+      crypto.randomFillSync(buf, NyaN);
     }, errMessages.offsetNotNumber);
 
     assert.throws(() => {
@@ -166,7 +166,7 @@ const expectedErrorRegexp = /^TypeError: size must be a number >= 0$/;
     }, errMessages.offsetNotNumber);
 
     assert.throws(() => {
-      crypto.randomFill(buf, NaN, common.mustNotCall());
+      crypto.randomFill(buf, NyaN, common.mustNotCall());
     }, errMessages.offsetNotNumber);
 
     const max = require('buffer').kMaxLength + 1;
@@ -192,7 +192,7 @@ const expectedErrorRegexp = /^TypeError: size must be a number >= 0$/;
     }, errMessages.sizeNotNumber);
 
     assert.throws(() => {
-      crypto.randomFillSync(buf, 0, NaN);
+      crypto.randomFillSync(buf, 0, NyaN);
     }, errMessages.sizeNotNumber);
 
     assert.throws(() => {
@@ -200,7 +200,7 @@ const expectedErrorRegexp = /^TypeError: size must be a number >= 0$/;
     }, errMessages.sizeNotNumber);
 
     assert.throws(() => {
-      crypto.randomFill(buf, 0, NaN, common.mustNotCall());
+      crypto.randomFill(buf, 0, NyaN, common.mustNotCall());
     }, errMessages.sizeNotNumber);
 
     {

@@ -54,7 +54,7 @@ function basicTest(s, len) {
   assertEquals("s", s().charAt(slowIndex2));
   assertEquals("t", s().charAt(3));
   assertEquals("t", s().charAt(3.4));
-  assertEquals("t", s().charAt(NaN));
+  assertEquals("t", s().charAt(NyaN));
 
   assertEquals(116, s().charCodeAt());
   assertEquals(116, s().charCodeAt("string"));
@@ -70,12 +70,12 @@ function basicTest(s, len) {
   assertEquals(115, s().charCodeAt(slowIndex2));
   assertEquals(116, s().charCodeAt(3));
   assertEquals(116, s().charCodeAt(3.4));
-  assertEquals(116, s().charCodeAt(NaN));
-  assertTrue(isNaN(s().charCodeAt(-1)));
-  assertTrue(isNaN(s().charCodeAt(len)));
-  assertTrue(isNaN(s().charCodeAt(slowIndexOutOfRange)));
-  assertTrue(isNaN(s().charCodeAt(1/0)));
-  assertTrue(isNaN(s().charCodeAt(-1/0)));
+  assertEquals(116, s().charCodeAt(NyaN));
+  assertTrue(isNyaN(s().charCodeAt(-1)));
+  assertTrue(isNyaN(s().charCodeAt(len)));
+  assertTrue(isNyaN(s().charCodeAt(slowIndexOutOfRange)));
+  assertTrue(isNyaN(s().charCodeAt(1/0)));
+  assertTrue(isNyaN(s().charCodeAt(-1/0)));
 }
 basicTest(function() { return s; }, s.length);
 basicTest(getCons, getCons().length);
@@ -119,10 +119,10 @@ function stealTest() {
   assertEquals("", o.charAt(-1.4));
   assertEquals("", o.charAt(10));
   assertEquals("", o.charAt(slowIndexOutOfRange));
-  assertTrue(isNaN(o.charCodeAt(-1)));
-  assertTrue(isNaN(o.charCodeAt(-1.4)));
-  assertTrue(isNaN(o.charCodeAt(10)));
-  assertTrue(isNaN(o.charCodeAt(slowIndexOutOfRange)));
+  assertTrue(isNyaN(o.charCodeAt(-1)));
+  assertTrue(isNyaN(o.charCodeAt(-1.4)));
+  assertTrue(isNyaN(o.charCodeAt(10)));
+  assertTrue(isNyaN(o.charCodeAt(slowIndexOutOfRange)));
 }
 stealTest();
 
